@@ -20,38 +20,38 @@ class Content
     /**
      * @ORM\Column(type="text")
      */
-    private $texte;
+    private $text;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $localisation;
+    private $position;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTexte(): ?string
+    public function getText(): ?string
     {
-        return $this->texte;
+        return $this->text;
     }
 
-    public function setTexte(string $texte): self
+    public function setText(string $text): self
     {
-        $this->texte = $texte;
+        $this->text = $text;
 
         return $this;
     }
 
-    public function getLocalisation(): ?string
+    public function getPosition(): ?string
     {
-        return $this->localisation;
+        return $this->position;
     }
 
-    public function setLocalisation(string $localisation): self
+    public function setPosition(string $position): self
     {
-        $this->localisation = $localisation;
+        $this->position = $position;
 
         return $this;
     }

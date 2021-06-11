@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}Prestations
+{% endblock %}
+{# Avoir les prestations par types #}
+{# Gérer affichage sur un template pr chq type #}
+{# Tester si nb de prestations est nulle #}
+{# Afficher sur ce template tous les types #}
+{% block body %}
+
+	{% include 'header.twig' with {"pageActive" : page }%}
+	
+	<div id="prestation-wrapper"> 
+		<div class="container">
+			<div class="col-12">
+				{% if listeTypePrestations is null %}
+					<div class="container mt-5 mb-5">
+						<div class="row gtr-200">
+							<div class="col-12 col-12-medium imp-medium text-center ">
+								
+								<p class="maintenance">La visualisation des prestations est en cours de maintenance</p>
+						
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<h2>Nos prestations :</h2>
+					{# affichage par type de prestation #}
+					{% for typePrestation in listeTypePrestations %}
+							{# nom type prestation #}
+							{% set monTypePresta = typePrestation.typePrestation %}
+
+							<h3 class="mt-5">{{monTypePresta}} : </h3>
+						
+							{% include 'vue_typePresta.twig' with {"prestations_par_type" : prestations, "monTypePresta" : typePrestation} %}
+														
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% include 'footer.twig' with {"contenu" : contenuContact }%}
+
+{% endblock %}

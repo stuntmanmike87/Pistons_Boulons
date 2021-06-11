@@ -3,35 +3,36 @@
 {% block title %}Content index{% endblock %}
 
 {% block body %}
-    <h1>Content index</h1>
-
-    <table class="table">
+    <h1>Liste des contenus du site</h1>
+    <div class="container mt-5">
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Texte</th>
-                <th>Localisation</th>
-                <th>actions</th>
+                <th>Position</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
         {% for content in contents %}
             <tr>
                 <td>{{ content.id }}</td>
-                <td>{{ content.texte }}</td>
-                <td>{{ content.localisation }}</td>
+                <td>{{ content.text }}</td>
+                <td>{{ content.position }}</td>
                 <td>
-                    <a href="{{ path('content_show', {'id': content.id}) }}">show</a>
-                    <a href="{{ path('content_edit', {'id': content.id}) }}">edit</a>
+                    <a href="{{ path('content_show', {'id': content.id}) }}">Voir</a>
+                    <a href="{{ path('content_edit', {'id': content.id}) }}">Éditer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun contenu trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('content_new') }}">Create new</a>
+    <a  href="{{ path('content_new') }}">Créer nouveau</a>
+    </div>
 {% endblock %}

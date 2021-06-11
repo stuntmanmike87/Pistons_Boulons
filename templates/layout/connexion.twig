@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+{% include 'header.twig' with {"pageActive" : page }%}
+
+<div id="connexion-wrapper">
+
+{% include "form_connexion.php" %}
+
+</div>
+
+{% include 'footer.twig' with {"contenu" : contenuContact }%}
+
+{% endblock %}

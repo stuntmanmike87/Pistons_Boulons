@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Pistons & boulons{% endblock %}
+
+{% block body %}
+
+<pre>
+    {{ dump(contenu_contact) }}
+</pre>
+
+
+{% include 'layout/banniere.php' %}
+
+{% include 'layout/images.html.twig' %}
+
+
+{# on initialise les données affichées sur cette pages que l'on souhaite#}
+{# {% set texte_ad = contenuAccueil.texte_ad %} 
+{% set texte_presentation = contenuAccueil.texte_presentation %}  #}
+
+
+
+
+{% include 'layout/texte_presentation.twig' %}
+
+{% include 'layout/texte_ad.twig'  %}
+
+
+
+
+
+{% endblock %}

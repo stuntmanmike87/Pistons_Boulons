@@ -12,8 +12,8 @@ class ContentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('texte')
-            ->add('localisation')
+            ->add('text')
+            ->add('position')
         ;
     }
 
