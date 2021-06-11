@@ -3,45 +3,47 @@
 {% block title %}Client index{% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
+    <div class="container mt-5">
+        <h1>Client index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Date de première saisie</th>
-                <th>Adresse</th>
-                <th>Type de vehicule</th>
-                <th>Plaque d'immatriculation</th>
-                <th>Est actif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.nom }}</td>
-                <td>{{ client.prenom }}</td>
-                <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('Y-m-d') : '' }}</td>
-                <td>{{ client.adresse }}</td>
-                <td>{{ client.typeVehicule }}</td>
-                <td>{{ client.plaqueImmat }}</td>
-                <td>{{ client.isActif ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aucune donnée n'est trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de première saisie</th>
+                    <th>Adresse</th>
+                    <th>Type de vehicule</th>
+                    <th>Plaque d'immatriculation</th>
+                    <th>Est actif</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('Y-m-d') : '' }}</td>
+                        <td>{{ client.adresse }}</td>
+                        <td>{{ client.typeVehicule }}</td>
+                        <td>{{ client.plaqueImmat }}</td>
+                        <td>{{ client.isActif ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
+                            <a href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">Aucun client</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('client_new') }}">Créer un nouveau client</a>
+        <a href="{{ path('client_new') }}">Créer un nouveau client</a>
+    </div>
 {% endblock %}
