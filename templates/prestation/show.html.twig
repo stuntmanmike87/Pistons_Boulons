@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste prestations
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>Liste des prestations</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Nom</th>
+					<td>{{ prestation.nom }}</td>
+				</tr>
+				<tr>
+					<th>TempsRealisation</th>
+					<td>{{ prestation.tempsRealisation }}</td>
+				</tr>
+				<tr>
+					<th>CoutHT</th>
+					<td>{{ prestation.coutHT }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ prestation.description }}</td>
+				</tr>
+				<tr>
+					<th>TypePrestation</th>
+					<td>{{ prestation.typePrestation }}</td>
+				</tr>
+				<tr>
+					<th>IsActive</th>
+					<td>{{ prestation.isActive ? 'Yes' : 'No' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('prestation_index') }}">back to list</a>
+
+		<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">edit</a>
+
+		{{ include('prestation/_delete_form.html.twig') }}
+	</div>
+
+{% endblock %}

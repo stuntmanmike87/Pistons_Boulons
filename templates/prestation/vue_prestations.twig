@@ -7,12 +7,10 @@
 {# Afficher sur ce template tous les types #}
 {% block body %}
 
-	{% include 'header.twig' with {"pageActive" : page }%}
-	
 	<div id="prestation-wrapper"> 
 		<div class="container">
 			<div class="col-12">
-				{% if listeTypePrestations is null %}
+				{% if typesPrestation is null %}
 					<div class="container mt-5 mb-5">
 						<div class="row gtr-200">
 							<div class="col-12 col-12-medium imp-medium text-center ">
@@ -25,13 +23,13 @@
 				{% else %}
 					<h2>Nos prestations :</h2>
 					{# affichage par type de prestation #}
-					{% for typePrestation in listeTypePrestations %}
+					{% for type in typesPrestation %}
 							{# nom type prestation #}
-							{% set monTypePresta = typePrestation.typePrestation %}
+							{% set monTypePresta = type.typePrestation %}
 
 							<h3 class="mt-5">{{monTypePresta}} : </h3>
 						
-							{% include 'vue_typePresta.twig' with {"prestations_par_type" : prestations, "monTypePresta" : typePrestation} %}
+							{% include 'prestation/vue_typePrestation.twig' with {"prestations_par_type" : prestations, "monTypePresta" : monTypePresta} %}
 														
 					{% endfor %}
 				{% endif %}
@@ -39,6 +37,5 @@
 		</div>
 	</div>
 
-{% include 'footer.twig' with {"contenu" : contenuContact }%}
 
 {% endblock %}

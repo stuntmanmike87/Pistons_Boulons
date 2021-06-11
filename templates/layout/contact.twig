@@ -4,7 +4,28 @@
 
 {% block body %}
 
+{% set  contact_adresse = "" %}
+{% set  contact_telephone = "" %}
+{% set  contact_email = "" %}
+	
+{% for contenu in contenu_contact %}
+    {% set  position = contenu.position %}
 
+        {% if position == 'contact_adresse' %}
+           
+            {% set  contact_adresse = contenu.text %}
+        
+        {% elseif position == 'contact_telephone' %}
+      
+            {% set  contact_telephone = contenu.text %}
+
+		{% elseif position == 'contact_email' %}
+      
+            {% set  contact_email = contenu.text %}
+          
+        {% endif %}
+
+{% endfor %}
 
 	<div id="contact-wrapper">
 		<div class="container">
@@ -17,15 +38,11 @@
 			<div class="row mt-3">
 
 				
-				{% include 'layout/vue_info_garage.twig'%}
+				{% include 'layout/vue_info_garage.twig' with{ 'adresse' : contact_adresse , 'telephone' : contact_telephone , 'email': contact_email }%}
 
 				{% include 'layout/form_contact.php' %}
 
 			</div>
 		</div>
 	</div>
-
-*
-
-
 {% endblock %}

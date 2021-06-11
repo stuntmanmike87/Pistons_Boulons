@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Content index{% endblock %}
+{% block title %}Listing contenu{% endblock %}
 
 {% block body %}
     <h1>Liste des contenus du site</h1>
@@ -8,7 +8,6 @@
     <table class="table mt-3">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Texte</th>
                 <th>Position</th>
                 <th>Action</th>
@@ -17,7 +16,6 @@
         <tbody>
         {% for content in contents %}
             <tr>
-                <td>{{ content.id }}</td>
                 <td>{{ content.text }}</td>
                 <td>{{ content.position }}</td>
                 <td>

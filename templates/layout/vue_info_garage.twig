@@ -1,9 +1,7 @@
-{# C #}
-
 
 <div class="col-lg-6 col-md-12">
 	<div class="text-center mt-3 ">
-		<img src="./public/css/images/libelle.png" alt="" class="libelleDesktop"/>
+		<img src="{{asset('images/libelle.png')}}" alt="" class="libelleDesktop"/>
 	</div>
 	<h1>Nos informations de contact :</h1>
 	<form class="" method="post" action="" role="form">
@@ -11,7 +9,7 @@
 			<div class="form-group">
 				<label for="">Adresse :</label>
                 	{# Condition d'affichage #}
-				{# {% if adresse is null %}
+				{% if adresse is null %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseignée</p>
 					</div>
@@ -20,12 +18,12 @@
 
 					{{ adresse }}
 
-				{% endif %} #}
+				{% endif %}
 			</div>
 			<div class="form-group">
 				<label for="">Télephone :</label>
                 {# Condition d'affichage #}
-				{# {% if telephone is null %}
+				{% if telephone is null %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseigné</p>
 					</div>
@@ -34,12 +32,12 @@
 
 					{{ telephone }}
 
-				{% endif %} #}
+				{% endif %}
 			</div>
 			<div class="form-group">
 				<label for="">Email :</label>
                 	{# Condition d'affichage #}
-				{# {% if email is null %}
+				{% if email is null %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseigné</p>
 					</div>
@@ -48,14 +46,12 @@
 
 					{{ email }}
 
-				{% endif %} #}
+				{% endif %}
 			</div>
 		</div>
 	</form>
 	<div class="text-center mt-5">
 
-		<img src="./public/css/images/logo.png" alt="" class="logoDesktop"/>
+		<img src="{{asset('images/logo.png')}}" alt="" class="logoDesktop"/>
 	</div>
-
-
 </div>

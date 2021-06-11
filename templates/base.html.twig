@@ -6,16 +6,7 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-		{# Run `composer require symfony/webpack-encore-bundle`
-		           and uncomment the following Encore helpers to start using Symfony UX #}
 
-		{% block stylesheets %}
-			{#{{ encore_entry_link_tags('app') }}#}
-		{% endblock %}
-
-		{% block javascripts %}
-			{#{{ encore_entry_script_tags('app') }}#}
-		{% endblock %}
 
 		<!-- CSS Bootstrap -->
 		<link
@@ -29,30 +20,40 @@
 
 		<!-- SASS compilé -->
 		<link
-		rel="stylesheet" href="../css/style.min.css"/>
+		rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
 
 
 		<!-- Scripts JS -->
-		<script src="../js/jquery.min.js" defer></script>
-		<script src="../js/jquery.dropotron.min.js" defer></script>
-		<script src="../js/browser.min.js" defer></script>
-		<script src="../js/breakpoints.min.js" defer></script>
-		<script src="../js/util.js" defer></script>
-		<script src="../js/main_tp.js" defer></script>
+		<script src="{{ asset('js/jquery.min.js') }}" defer></script>
+
+		<script src="{{ asset('js/jquery.dropotron.min.js') }}" defer></script>
+
+		<script src="{{ asset('js/browser.min.js') }}" defer></script>
+
+		<script src="{{ asset('js/breakpoints.min.js') }}" defer></script>
+
+		<script src="{{ asset('js/util.js') }}" defer></script>
+
+		<script src="{{ asset('js/main_tp.js') }}" defer></script>
+
 
 	</head>
 	<body class="is-preload homepage">
+
+
 	
 
-		<div id="page-wrapper">
-
 			{% include 'layout/header.twig' %}
-			<div class="container">
-				{% block body %}{% endblock %}
-			</div>
-			{% include 'layout/footer.twig' %}
 
-		
-	</div>
+			<div id="page-wrapper">
+			
+			{% block body %}
+			
+			{% endblock %}
+
+			<div>
+
+
+		</divW>
 	</body>
 </html>
