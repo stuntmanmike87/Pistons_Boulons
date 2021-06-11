@@ -1,0 +1,65 @@
+
+/* Forms */
+
+form {
+	label {
+		display: block;
+		font-weight: 800;
+		margin: 0 0 1em 0;
+		font-size: 0.8em;
+		color: #444;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	select,
+	textarea {
+		-webkit-appearance: none;
+		display: block;
+		width: 100%;
+		border-radius: 8px;
+		border: solid 1px #eee;
+
+		&:focus {
+			border-color: $couleur_bleu;
+		}
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"] {
+		line-height: 3em;
+		padding: 0 1em;
+	}
+
+	select {
+		line-height: 3em;
+		padding: 0 1em;
+	}
+
+	textarea {
+		min-height: 9em;
+		padding: 1em;
+	}
+
+	::-webkit-input-placeholder {
+		color: #555 !important;
+	}
+
+	:-moz-placeholder {
+		color: #555 !important;
+	}
+
+	::-moz-placeholder {
+		color: #555 !important;
+	}
+
+	:-ms-input-placeholder {
+		color: #555 !important;
+	}
+
+	::-moz-focus-inner {
+		border: 0;
+	}
+}

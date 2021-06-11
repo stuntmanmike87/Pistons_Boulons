@@ -10,15 +10,46 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function PHPUnit\Framework\equalTo;
+
 /**
- * @Route("/")
+ * @Route("/content")
  */
 class ContentController extends AbstractController
 {
-    /**
-     * @Route("/", name="content_index", methods={"GET"})
+
+     /**
+     * @Route("/", name="home", methods={"GET"})
      */
     public function index(ContentRepository $contentRepository): Response
+    {   
+
+
+
+        return $this->render('content/home.html.twig', [
+         
+            'controller_name' => 'ContentController',
+            'contenu_contact' => $contentRepository->findByPosition('contact'),
+        ]);
+    }
+
+    /**
+    * @Route("/contact", name="contact", methods={"GET"})
+    */
+    public function contact(): Response
+    {   
+        
+        return $this->render('layout/contact.twig', [
+            'controller_name' => 'ContentController',
+            
+        ]);
+    }
+
+
+    /**
+     * @Route("/index", name="content_index", methods={"GET"})
+     */
+    public function view(ContentRepository $contentRepository): Response
     {
         return $this->render('content/index.html.twig', [
             'contents' => $contentRepository->findAll(),
@@ -91,4 +122,11 @@ class ContentController extends AbstractController
 
         return $this->redirectToRoute('content_index');
     }
+
+
+    
+
+
+
+    
 }

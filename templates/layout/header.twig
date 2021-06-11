@@ -1,0 +1,65 @@
+<!-- Header -->
+<div id="header-wrapper">
+	<header id="header" class="container">
+
+		<a id="logo" href="{{path("home")}}">
+			<img src="{{ asset('images/logo.png') }}" alt="" class="logoDesktop"/>
+			<img src="{{ asset('images/libelle.png') }}" alt="" class="libelleDesktop"/>
+		</a>
+
+
+		<nav id="nav">
+			<ul id="menu">
+				<li>
+					<a class="" href="">Accueil</a>
+				</li>
+				<li>
+					<a class="" href="">Prestations</a>
+				</li>
+				<!--
+				                <li>
+				                    <a  class="" href="#">Gestion</a>
+				                    <ul>
+				                        <li><a href="#">Nos clients</a></li>
+				                        <li><a href="#">Mes collaborateurs</a></li>
+				                        <li><a href="#">Nos prestations</a></li>
+				                        <li><a href="#">Contenu du site</a></li>
+				                        <li><a href="#">Dernières connexions</a></li>
+				                        <li><a href="#">Mon compte</a></li>
+				                    </ul>
+				                </li>-->
+				<li>
+					<a class="" href="">Contact</a>
+				</li>
+				<!--<li class=""><a href="index.html">Agenda</a></li>-->
+				<li class="current">
+					<a class="" href="#">Connexion</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+</div>
+
+{# <script>
+	const hiddenInput = document.getElementById('pageActive')
+    const pageActive = hiddenInput.value
+
+
+const lis = document.querySelectorAll('li');
+
+lis.forEach((li) => {
+ 
+    const link = li.getElementsByTagName("a");
+
+    var menu = link[0].innerHTML
+
+    if (menu == pageActive ){
+        link[0].className += "actif";
+        console.log("actif")
+    }else{
+        console.log("non actif")
+    }
+    
+});
+
+</script> #}
