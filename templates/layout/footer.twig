@@ -2,10 +2,28 @@
 	<footer id="footer" class="container">
 		<div class="row">
 
-			{# {% set horaires = contenu.horaires %}
-			{% set adresse = contenu.adresse %}
-			{% set telephone = contenu.telephone %} #}
+		{% set  horaires = "" %}
+		{% set  adresse = "" %}
+		{% set  telephone = "" %}	
 
+			{% for contenu in contenuFooter %}
+				{% set  position = contenu.position %}
+
+					{% if position == 'contact_horaires' %}
+					
+						{% set  horaires = contenu.text %}
+					
+					{% elseif position == 'contact_adresse' %}
+				
+						{% set  adresse = contenu.text %}
+					
+					{% elseif position == 'contact_telephone' %}
+				
+						{% set  telephone = contenu.text %}
+					
+					{% endif %}
+
+			{% endfor %}
 
 			<div
 				class="col-lg-4 col-md-4 col-sm-12">
@@ -13,7 +31,7 @@
 				<section class="widget links">
 					<h3>Nos horaires :</h3>
 					{# Condition d'affichage #}
-					{# {% if horaires is null %}
+					{% if horaires is null %}
 						<div class="container mt-1">
 							<p class="maintenance">Non renseignées</p>
 						</div>
@@ -22,20 +40,20 @@
 
 						{# on découpe notre string horaires a partir du caractère ';' #}
 						{# on obtient un tableau avec une itération correspond a un jour #}
-						{# {% set horaires_découpées= horaires|split(';') %}
+						 {% set horaires_découpées= horaires|split(';') %}
 
-							<ul
-							class="style2"> {# on boucle sur notre tableau horaires #}
-							{# {% for horaires_jour in horaires_découpées %}
+							<ul class="style2"> 
+							{# on boucle sur notre tableau horaires #}
+							{% for horaires_jour in horaires_découpées %}
 								{# on affiche l'horaire #}
 								<li>
-									{# {{horaires_jour}} #}
+									{{horaires_jour}}
 								</li>
 
-							{# {% endfor %}
+							{% endfor %}
 						</ul>
 
-					{% endif %}  #}
+					{% endif %} 
 
 
 				</section>
@@ -64,18 +82,18 @@
 					<p>
 						<strong>PISTONS & BOULONS</strong><br/>
 
-						{# {% if adresse is null %}
+						{% if adresse is null %}
 							<div class="container">
 								<p class="maintenance">Adresse non renseignée</p>
 							</div>
-						{% else %} #}
+						{% else %}
 							{# on découpe notre string adresse a partir du caractère ',' #}
 							{# on obtient un tableau #}
-							{# {% set adresse_découpée= adresse|split(',') %} #}
+							{% set adresse_découpée= adresse|split(',') %}
 							{# on boucle sur notre tableau adresse #}
-								{# {% for adresse in adresse_découpée %}
+								{% for adresse in adresse_découpée %}
 								{# on affiche l'adresse #}
-								{# {{adresse}}
+								{{adresse}}
 							<br/>
 
 						{% endfor %}
@@ -87,7 +105,7 @@
 
 							<a href="tel:{{telephone}}">
 								{{telephone}}</a> 
-						{% endif %} #}
+						{% endif %} 
 
 					</p>
 				</section>

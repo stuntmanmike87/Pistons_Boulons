@@ -7,7 +7,7 @@
 					<div class="col-12">
 						<h2>Texte présentation modifiable entreprise </h2>
 								{# Condition d'affichage #}
-							{# {% if texte is null %}
+							{% if contenuPresentation is null %}
 							<div class="container mt-5 mb-5">
 								<div class="row gtr-200">
 									<div class="col-12 col-12-medium imp-medium text-center ">
@@ -19,14 +19,14 @@
 							</div>
 						{% else %}
 							
-							<p>{{ texte }}</p>
+							<p>{{ contenuPresentation }}</p>
 
-						{% endif %} #}
+						{% endif %}
 					</div>
 				</div>
 			</div>
 			<div class="bonton_contact col text-center">
-				<a href="index.php?p=contact" class="button">Nous contacter</a>
+				<a href="{{path("contact")}}" class="button">Nous contacter</a>
 			</div>
 		</div>
 	</div>

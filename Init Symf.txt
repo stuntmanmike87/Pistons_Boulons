@@ -15,4 +15,4 @@ composer req maker annotations twig orm form validator apache-pack profiler-pack
 
 apt install php7.4-sqlite3
 php bin/console make:migration
- php bin/console doctrine:migrations:migrate
+php bin/console doctrine:migrations:migrate

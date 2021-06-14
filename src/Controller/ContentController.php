@@ -24,30 +24,40 @@ class ContentController extends AbstractController
     public function index(ContentRepository $contentRepository): Response
     {   
 
-
-
         return $this->render('content/home.html.twig', [
          
             'controller_name' => 'ContentController',
             'contenu_contact' => $contentRepository->findByPosition('contact'),
+            'contenu_accueil' => $contentRepository->findByPosition('texte'),
         ]);
     }
 
     /**
     * @Route("/contact", name="contact", methods={"GET"})
     */
-    public function contact(): Response
+    public function contact(ContentRepository $contentRepository): Response
     {   
         
         return $this->render('layout/contact.twig', [
             'controller_name' => 'ContentController',
-            
+            'contenu_contact' => $contentRepository->findByPosition('contact'),
+        ]);
+    }
+
+    /**
+    * @Route("/connexion", name="connexion", methods={"GET"})
+    */
+    public function connexion(): Response
+    {   
+        
+        return $this->render('layout/connexion.twig', [
+            'controller_name' => 'ContentController',
         ]);
     }
 
 
     /**
-     * @Route("/index", name="content_index", methods={"GET"})
+     * @Route("/view", name="content_view", methods={"GET"})
      */
     public function view(ContentRepository $contentRepository): Response
     {

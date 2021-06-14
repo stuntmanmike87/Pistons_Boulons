@@ -1,29 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}Pistons & boulons{% endblock %}
+{% block titre %}Pistons & boulons
+{% endblock %}
 
 {% block body %}
 
 
+	{% set  texte_presentation = "" %}
+	{% set  texte_ad = "" %}
 
-{% include 'layout/banniere.php' %}
-
-{% include 'layout/images.html.twig' %}
-
-
-{# on initialise les données affichées sur cette pages que l'on souhaite#}
-{# {% set texte_ad = contenuAccueil.texte_ad %} 
-{% set texte_presentation = contenuAccueil.texte_presentation %}  #}
+	{# On boucle sur le contenu #}
+	{# on regarde la position du contenu si cela correspond avec  #}
+	{# nos affichages on change les valeurs des vars texte_presentation et texte_ad #}
 
 
+		{% for contenu in contenu_accueil %}
+		{% set  position = contenu.position %}
+
+			{% if position == 'texte_presentation' %}
+
+			{% set  texte_presentation = contenu.text %}
+
+		{% elseif position == 'texte_affiliation' %}
+
+			{% set  texte_ad = contenu.text %}
+
+		{% endif %}
+
+	{% endfor %}
 
 
-{% include 'layout/texte_presentation.twig' %}
-
-{% include 'layout/texte_ad.twig'  %}
+	{% include 'layout/banniere.php' %}
 
 
+	
+		{% include 'layout/images.html.twig' %}
+
+		{% include 'layout/texte_presentation.twig' with {'contenuPresentation' : texte_presentation} %}
+
+		{% include 'layout/texte_ad.twig' with {'contenuAffiliation' : texte_ad} %}
 
 
+
+	{% include 'layout/footer.twig' with {'contenuFooter' : contenu_contact} %}
+    	
 
 {% endblock %}

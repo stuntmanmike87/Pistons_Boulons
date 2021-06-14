@@ -33,7 +33,6 @@ class ContentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     /*
     public function findOneBySomeField($value): ?Content
     {

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing prestation
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>Liste des prestations</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>TempsRealisation</th>
+					<th>CoutHT</th>
+					<th>Description</th>
+					<th>TypePrestation</th>
+					<th>IsActive</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for prestation in prestations %}
+					<tr>
+						<td>{{ prestation.id }}</td>
+						<td>{{ prestation.nom }}</td>
+						<td>{{ prestation.tempsRealisation }}</td>
+						<td>{{ prestation.coutHT }}</td>
+						<td>{{ prestation.description }}</td>
+						<td>{{ prestation.typePrestation }}</td>
+						<td>{{ prestation.isActive ? 'Yes' : 'No' }}</td>
+						<td>
+							<a href="{{ path('prestation_show', {'id': prestation.id}) }}">Voir</a>
+							<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">Éditer</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucune prestation</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('prestation_new') }}">Créer nouvelle prestation</a>
+	</div>
+
+{% endblock %}
