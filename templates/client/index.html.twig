@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1>Client index</h1>
+        <h1>Liste des clients</h1>
 
         <table class="table">
             <thead>
@@ -16,7 +16,6 @@
                     <th>Adresse</th>
                     <th>Type de vehicule</th>
                     <th>Plaque d'immatriculation</th>
-                    <th>Est actif</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -30,7 +29,7 @@
                         <td>{{ client.adresse }}</td>
                         <td>{{ client.typeVehicule }}</td>
                         <td>{{ client.plaqueImmat }}</td>
-                        <td>{{ client.isActif ? 'Yes' : 'No' }}</td>
+                        
                         <td>
                             <a href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
                             <a href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
