@@ -1,36 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listing contenu{% endblock %}
+{% block title %}Listing contenu
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des contenus du site</h1>
-    <div class="container mt-5">
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th>Texte</th>
-                <th>Position</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for content in contents %}
-            <tr>
-                <td>{{ content.text }}</td>
-                <td>{{ content.position }}</td>
-                <td>
-                    <a href="{{ path('content_show', {'id': content.id}) }}">Voir</a>
-                    <a href="{{ path('content_edit', {'id': content.id}) }}">Éditer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun contenu trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-2">Liste des contenus du site :</h1>
 
-    <a  href="{{ path('content_new') }}">Créer nouveau</a>
-    </div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Texte</th>
+						<th>Position</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for content in contents %}
+						<tr>
+							<td>{{ content.text }}</td>
+							<td>{{ content.position }}</td>
+							<td>
+								<a href="{{ path('content_show', {'id': content.id}) }}">Voir</a>
+								<a href="{{ path('content_edit', {'id': content.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">Aucun contenu trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+
+						<button class="button" href="{{ path('content_new') }}">Créer nouveau contenu</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

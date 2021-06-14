@@ -4,13 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1>Modification des prestation</h1>
+	<div id="prestation-wrapper">
+		<div class="container">
 
-		{{ include('prestation/_form.html.twig', {'button_label': 'Modifier'}) }}
+			<h1 class="mb-2">Modification d'une prestation :</h1>
 
-		<a href="{{ path('prestation_index') }}">Retour</a>
+			{{ include('prestation/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-		{{ include('prestation/_delete_form.html.twig') }}
+
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-lg-6 col-6  text-center">
+					{{ include('prestation/_delete_form.html.twig') }}
+
+				</div>
+				<div class="col-lg-6 col-6 text-center">
+					<button class="button" href="{{ path('prestation_index') }}">Retour</button>
+
+				</div>
+			</div>
+			
+		</div>
 	</div>
 {% endblock %}

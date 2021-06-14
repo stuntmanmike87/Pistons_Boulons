@@ -17,7 +17,6 @@ class PrestationType extends AbstractType
             ->add('coutHT')
             ->add('description')
             ->add('typePrestation')
-            ->add('isActive')
         ;
     }
 

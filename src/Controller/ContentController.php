@@ -21,7 +21,7 @@ class ContentController extends AbstractController
      /**
      * @Route("/", name="home", methods={"GET"})
      */
-    public function index(ContentRepository $contentRepository): Response
+    public function home(ContentRepository $contentRepository): Response
     {   
 
         return $this->render('content/home.html.twig', [
@@ -57,9 +57,9 @@ class ContentController extends AbstractController
 
 
     /**
-     * @Route("/view", name="content_view", methods={"GET"})
+     * @Route("/index", name="content_index", methods={"GET"})
      */
-    public function view(ContentRepository $contentRepository): Response
+    public function index(ContentRepository $contentRepository): Response
     {
         return $this->render('content/index.html.twig', [
             'contents' => $contentRepository->findAll(),

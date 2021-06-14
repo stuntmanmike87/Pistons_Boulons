@@ -4,12 +4,16 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1>Création de nouveau contenu
-		</h1>
+	<div id="main-wrapper">
+		
+		<div class="container">
 
-		{{ include('content/_form.html.twig') }}
+			<h1 class="mb-2">Création de nouveau contenu</h1>
 
-		<a href="{{ path('content_index') }}"><button class="mt-2">Retour</button></a>
+			{{ include('content/_form.html.twig') }}
+
+			<a class="button mt-2 float-right" href="{{ path('content_index') }}">Retour</a>
+		
+		</div>
 	</div>
 {% endblock %}
