@@ -9,7 +9,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Date de première saisie</th>
@@ -22,7 +21,6 @@
             <tbody>
                 {% for client in clients %}
                     <tr>
-                        <td>{{ client.id }}</td>
                         <td>{{ client.nom }}</td>
                         <td>{{ client.prenom }}</td>
                         <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('Y-m-d') : '' }}</td>
@@ -43,6 +41,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('client_new') }}">Créer un nouveau client</a>
+        <a  href="{{ path('client_new') }}">Créer un nouveau client</a>
     </div>
 {% endblock %}

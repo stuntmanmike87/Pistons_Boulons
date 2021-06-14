@@ -39,6 +39,9 @@ class ClientController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
+            
+            $this->addFlash('success', 'Le client a bien été ajouté');
+
             return $this->redirectToRoute('client_index');
         }
 
@@ -69,6 +72,9 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+
+            $this->addFlash('success', 'Le client a bien été modifié');
+
             return $this->redirectToRoute('client_index');
         }
 
@@ -88,6 +94,9 @@ class ClientController extends AbstractController
             $entityManager->remove($client);
             $entityManager->flush();
         }
+
+
+        $this->addFlash('success', 'Le client a bien été effacé');
 
         return $this->redirectToRoute('client_index');
     }

@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ClientType extends AbstractType
 {
@@ -15,7 +16,9 @@ class ClientType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('datePremiereSaisie')
+            ->add('datePremiereSaisie' , DateType::class , [
+                'years' => range(1960 ,date('Y')+50)
+            ])
             ->add('adresse')
             ->add('typeVehicule' , ChoiceType::class, [
                 'choices' => [
