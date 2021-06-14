@@ -71,6 +71,8 @@ class ContentController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
+        
         $content = new Content();
         $form = $this->createForm(ContentType::class, $content);
         $form->handleRequest($request);
@@ -79,7 +81,7 @@ class ContentController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
-
+            $this->addFlash('success', "Le contenu a bien été ajouté");
             return $this->redirectToRoute('content_index');
         }
 
@@ -109,7 +111,7 @@ class ContentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', "Le contenu a bien été modifié");
             return $this->redirectToRoute('content_index');
         }
 
@@ -128,8 +130,9 @@ class ContentController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($content);
             $entityManager->flush();
+            
         }
-
+        $this->addFlash('success', "Le contenu a bien été supprimé");
         return $this->redirectToRoute('content_index');
     }
 
