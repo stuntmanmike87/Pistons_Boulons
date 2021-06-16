@@ -6,23 +6,18 @@
 {% block body %}
 	<div id="prestation-wrapper">
 		<div class="container">
-
 			<h1 class="mb-2">Modification d'une prestation :</h1>
 
 			{{ include('prestation/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-
 			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
-				<div class="col-lg-6 col-6  text-center">
+				<div class="col-lg-6 col-6 text-center">
 					{{ include('prestation/_delete_form.html.twig') }}
-
 				</div>
 				<div class="col-lg-6 col-6 text-center">
-					<button class="button" href="{{ path('prestation_index') }}">Retour</button>
-
+					<a class="button float-right" href="{{ path('prestation_index') }}">Retour</a>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 {% endblock %}

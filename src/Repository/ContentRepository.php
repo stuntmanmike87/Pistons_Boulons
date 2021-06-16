@@ -20,7 +20,11 @@ class ContentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Content[] Returns an array of Content objects
+     * @param $value : correspond au champs Position de la table CONTENT
+     * Cette fonction permet de récuperer tous les enregistrements sur la table CONTENT avec comme condition
+     * que la position de l'enregistrement correspond (LIKE) au paramètre placé en entrée.
+     * (on trie par ordre croissant sur l'id)
+     * @return Array[] : correspond au tableau des enregistrements de type Content trouvé en fonction du param $value
      */
 
     public function findByPosition($value)
@@ -33,15 +37,22 @@ class ContentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /*
-    public function findOneBySomeField($value): ?Content
+ 
+
+     /**
+     * @param $value : correspond au champs Position de la table CONTENT
+     * Cette fonction permet de récuperer l'enregistrement sur la table CONTENT avec comme condition
+     * que la position de l'enregistrement est équivalente au paramètre placé en entrée
+     * @return Array[] : correspond au tableau de l'enregistrement avec comme position $value
+     */
+    public function findOneByPosition($value)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.position = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

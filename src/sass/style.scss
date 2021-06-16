@@ -38,19 +38,28 @@
 			1280px,
 		),
 		medium: (
-			737px,
+			// 737px,
+			751px,
 			980px,
 		),
 		small: (
 			null,
-			736px,
+			// 736px,
+			750px,
 		),
 	)
 );
 
 /* Nos styles */
-.bloc_boutons_modifier_crud{
-	padding-right: 30px;padding-left: 15px;
+
+.contact_coordonnees {
+	text-align: center;
+}
+
+
+.bloc_boutons_modifier_crud {
+	padding-right: 30px;
+	padding-left: 15px;
 }
 
 /* affichage mot de passe */
@@ -74,8 +83,6 @@
 
 /* gestion logo */
 
-
-
 #logo {
 	text-decoration: none;
 }
@@ -90,8 +97,6 @@
 	margin-bottom: 20px;
 	margin-left: 30px;
 }
-
-
 
 .mt-10px {
 	margin-top: 10px;
@@ -220,6 +225,13 @@ header {
 
 footer {
 	margin: 2.5em 0 0 0;
+
+	iframe {
+		
+		width: 90%;
+    display: block;
+    margin: 0 auto;
+	}
 }
 
 /* Button */
@@ -243,7 +255,6 @@ button,
 	cursor: pointer;
 	font-size: 1.35em;
 	padding: 0.6em 1.5em;
-	
 
 	&.icon:before {
 		position: relative;
@@ -279,8 +290,6 @@ button,
 		font-size: 2.25em;
 		padding: 0.8em 0.9em;
 	}
-
-
 }
 
 /* Widgets */
@@ -822,6 +831,12 @@ button,
 /* Small */
 
 @include breakpoint("<=small") {
+	.contact_horaires {
+		list-style: none;
+		text-align: center;
+	}
+	
+
 	/* Basic */
 
 	body,
@@ -1044,6 +1059,6 @@ button,
 	}
 
 	#copyright {
-		text-align: left;
+		text-align: center;
 	}
 }

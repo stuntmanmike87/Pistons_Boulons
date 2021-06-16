@@ -12,10 +12,6 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>Id</th>
-						<td>{{ content.id }}</td>
-					</tr>
-					<tr>
 						<th>Texte</th>
 						<td>{{ content.text }}</td>
 					</tr>
@@ -39,9 +35,8 @@
 
 					</div>
 					<div class="col-lg-4 col-md-12 text-center">
-						<a href="{{ path('content_index') }}">
-							<button class="">Retour</button>
-						</a>
+						<a class="button" href="{{ path('content_index') }}">Retour</a>
+
 					</div>
 				</div>
 			</div>

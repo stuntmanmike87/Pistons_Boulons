@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Nouvelle prestation
 {% endblock %}
-
 {% block body %}
 	<div id="prestation-wrapper">
-
 		<div class="container mt-5">
-
 			<h1 class="mb-2">Créer une nouvelle prestation :</h1>
 
 			{{ include('prestation/_form.html.twig') }}
 
-			<a class="button mt-2 float-right" href="{{ path('prestation_index') }}">Retour</a>
-
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center">
+					<a class="button float-right" href="{{ path('prestation_index') }}">Retour</a>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}

@@ -2,36 +2,36 @@
 	<footer id="footer" class="container">
 		<div class="row">
 
-		{% set  horaires = "" %}
-		{% set  adresse = "" %}
-		{% set  telephone = "" %}	
 
-			{% for contenu in contenuFooter %}
-				{% set  position = contenu.position %}
+			{% set  horaires = "" %}
+			{% set  adresse = "" %}
+			{% set  telephone = "" %}
 
-					{% if position == 'contact_horaires' %}
-					
-						{% set  horaires = contenu.text %}
-					
-					{% elseif position == 'contact_adresse' %}
-				
-						{% set  adresse = contenu.text %}
-					
-					{% elseif position == 'contact_telephone' %}
-				
-						{% set  telephone = contenu.text %}
-					
-					{% endif %}
 
-			{% endfor %}
+			{% if appConfig.getGarageHoraires() is not null %}
+
+				{% set horaires = appConfig.getGarageHoraires().text %}
+
+			{% endif %}
+
+			{% if appConfig.getGarageAdresse() is not null %}
+
+				{% set adresse = appConfig.getGarageAdresse().text %}
+
+			{% endif %}
+
+			{% if appConfig.getGarageTelephone() is not null %}
+
+				{% set telephone = appConfig.getGarageTelephone().text %}
+
+			{% endif %}
 
 			<div
 				class="col-lg-4 col-md-4 col-sm-12">
 				<!-- Horaires -->
 				<section class="widget links">
 					<h3>Nos horaires :</h3>
-					{# Condition d'affichage #}
-					{% if horaires is null %}
+					{% if horaires == "" %}
 						<div class="container mt-1">
 							<p class="maintenance">Non renseignées</p>
 						</div>
@@ -40,10 +40,10 @@
 
 						{# on découpe notre string horaires a partir du caractère ';' #}
 						{# on obtient un tableau avec une itération correspond a un jour #}
-						 {% set horaires_découpées= horaires|split(';') %}
+						{% set horaires_découpées= horaires|split(';') %}
 
-							<ul class="style2"> 
-							{# on boucle sur notre tableau horaires #}
+							<ul
+							class="contact_horaires"> {# on boucle sur notre tableau horaires #}
 							{% for horaires_jour in horaires_découpées %}
 								{# on affiche l'horaire #}
 								<li>
@@ -53,36 +53,36 @@
 							{% endfor %}
 						</ul>
 
-					{% endif %} 
-
+					{% endif %}
 
 				</section>
 			</div>
 
 			<div
-				class="col-lg-5 col-md-5 col-sm-12">
+				class="col-lg-5 col-md-4 col-sm-12">
 				<!-- Google Maps -->
 				<h3>Nous trouver :</h3>
-				<section class="widget links">
+				<section class="widget links text-center">
 					<div class="row">
-						<iframe style="border: 0;width:80%; height:100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.524861016064!2d0.8928858155714564!3d45.88081487910814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47feeae01b44ee35%3A0xacd2a2158e62af8!2s1%20Quai%20des%20M%C3%A9gisseries%2C%2087200%20Saint-Junien!5e0!3m2!1sfr!2sfr!4v1622712287228!5m2!1sfr!2sfr"></iframe>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.524861016064!2d0.8928858155714564!3d45.88081487910814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47feeae01b44ee35%3A0xacd2a2158e62af8!2s1%20Quai%20des%20M%C3%A9gisseries%2C%2087200%20Saint-Junien!5e0!3m2!1sfr!2sfr!4v1622712287228!5m2!1sfr!2sfr"></iframe>
 					</div>
 				</section>
 			</div>
 
 			<div
-				class="col-lg-3 col-md-3 col-sm-12">
+				class="col-lg-3 col-md-4 col-sm-12">
 				<!-- Contact -->
 				<section class="widget contact last">
-					<a href="index.php?p=contact">
+					<a href="{{path("contact")}}">
 						<h3>Nous contacter :</h3>
 					</a>
 
 
-					<p>
+					<p class="contact_coordonnees">
 						<strong>PISTONS & BOULONS</strong><br/>
 
-						{% if adresse is null %}
+
+						{% if adresse == "" %}
 							<div class="container">
 								<p class="maintenance">Adresse non renseignée</p>
 							</div>
@@ -98,14 +98,14 @@
 
 						{% endfor %}
 						{% endif %}
-							{% if telephone is null %}
+							{% if telephone == "" %}
 								<div class="container"> <p class="maintenance">Téléphone non renseigné</p>
 							</div>
 						{% else %}
 
 							<a href="tel:{{telephone}}">
-								{{telephone}}</a> 
-						{% endif %} 
+								{{telephone}}</a>
+						{% endif %}
 
 					</p>
 				</section>
@@ -119,7 +119,7 @@
 						</li>
 						<li>Tous droits réservés</li>
 						<li>Design:
-							<a href="https://html5up.net/verti">Verti</a>
+							<a href="https://html5up.net/verti" target="_blank">Verti</a>
 						</li>
 					</ul>
 				</div>

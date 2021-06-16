@@ -9,7 +9,7 @@ vim /etc/apache2/sites-available/000-default.conf
 service apache2 reload
 
 
-composer req maker annotations twig orm form validator apache-pack profiler-pack
+composer req maker annotations twig orm form validator apache-pack profiler-pack orm-fixtures
 
 
 

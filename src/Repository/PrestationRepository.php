@@ -19,12 +19,13 @@ class PrestationRepository extends ServiceEntityRepository
         parent::__construct($registry, Prestation::class);
     }
 
-    // // /**
-    // //  * @return Prestation[] Returns an array of Prestation objects
-    // //  */
-    // /*
-     // SELECT DISTINCT typePrestation  FROM Prestation WHERE  estActive = 1 ORDER BY typePrestation ASC
-
+  
+    /**
+     *
+     * Cette fonction permet de récuperer tous les types de prestations sur la table PRESTATION avec comme condition
+     * que l'enregistrement soit actif 
+     * @return Array[] : retourne un tableau avec les types de prestations distincts 
+     */
     public function findByAllTypePrestation()
     {
         return $this->createQueryBuilder('p')
@@ -37,8 +38,14 @@ class PrestationRepository extends ServiceEntityRepository
         ;
     }
     
-//SELECT * FROM Prestation WHERE typePrestation IN ('".$type."') AND estActive= 1
+
     
+    /**
+     * @param $type : correspond au type de prestation présent dans le champ typePrestation
+     * Cette fonction permet de récuperer toutes de prestations sur la table PRESTATION avec comme condition
+     * que l'enregistrement soit actif et que le type de prestation correspond avec  celui placé en paramètre ($type)
+     * @return Array[] : retourne un tableau avec les prestations pour le type en question 
+     */
     public function findByAllPrestationParTypePrestation($type)
     {
         return $this->createQueryBuilder('p')
