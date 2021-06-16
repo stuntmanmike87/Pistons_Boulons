@@ -49,6 +49,9 @@
 );
 
 /* Nos styles */
+.bloc_boutons_modifier_crud{
+	padding-right: 30px;padding-left: 15px;
+}
 
 /* affichage mot de passe */
 .icone_oeil {
@@ -70,6 +73,9 @@
 }
 
 /* gestion logo */
+
+
+
 #logo {
 	text-decoration: none;
 }
@@ -85,12 +91,12 @@
 	margin-left: 30px;
 }
 
+
+
 .mt-10px {
 	margin-top: 10px;
 }
-#bouton_contact_droit {
-	float: right;
-}
+
 .maintenance {
 	font-weight: 600;
 	font-size: large;
@@ -237,6 +243,7 @@ button,
 	cursor: pointer;
 	font-size: 1.35em;
 	padding: 0.6em 1.5em;
+	
 
 	&.icon:before {
 		position: relative;
@@ -272,6 +279,8 @@ button,
 		font-size: 2.25em;
 		padding: 0.8em 0.9em;
 	}
+
+
 }
 
 /* Widgets */

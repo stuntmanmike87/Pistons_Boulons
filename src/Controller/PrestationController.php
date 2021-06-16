@@ -68,7 +68,7 @@ class PrestationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($prestation);
             $entityManager->flush();
-
+            $this->addFlash('success', "La prestation a bien été ajoutée");
             return $this->redirectToRoute('prestation_index');
         }
 
@@ -98,6 +98,7 @@ class PrestationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "La prestation a bien été modifiée");
 
             return $this->redirectToRoute('prestation_index');
         }
@@ -117,8 +118,9 @@ class PrestationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($prestation);
             $entityManager->flush();
+           
         }
-
+        $this->addFlash('success', "La prestation a bien été supprimée");
         return $this->redirectToRoute('prestation_index');
     }
 }

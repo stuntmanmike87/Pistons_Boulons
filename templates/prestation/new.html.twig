@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}nouvelle prestation
+{% block title %}Nouvelle prestation
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1>Créer une nouvelle prestation</h1>
+	<div id="prestation-wrapper">
 
-		{{ include('prestation/_form.html.twig') }}
+		<div class="container mt-5">
 
-		<a href="{{ path('prestation_index') }}">Retour</a>
+			<h1 class="mb-2">Créer une nouvelle prestation :</h1>
+
+			{{ include('prestation/_form.html.twig') }}
+
+			<a class="button mt-2 float-right" href="{{ path('prestation_index') }}">Retour</a>
+
+		</div>
 	</div>
-
 {% endblock %}

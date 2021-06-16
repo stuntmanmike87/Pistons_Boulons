@@ -24,7 +24,7 @@
                 <strong>*</strong> Ces champs sont obligatoires.
             </p>
 
-            <a href="#" type="submit" class="button" id="bouton_contact_droit" data-toggle="modal" data-target="#myModal">Nous contacter</a>
+            <a href="#" type="submit" class="button float-right"  data-toggle="modal" data-target="#myModal">Nous contacter</a>
         </div>
     </form>
 </div>

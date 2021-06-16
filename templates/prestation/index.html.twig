@@ -4,46 +4,52 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1>Liste des prestations</h1>
+	<div id="prestation-wrapper">
+		<div class="container">
+			<h1 class="mb-2">Liste des prestations :</h1>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nom</th>
-					<th>TempsRealisation</th>
-					<th>CoutHT</th>
-					<th>Description</th>
-					<th>TypePrestation</th>
-					<th>IsActive</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for prestation in prestations %}
+			<table class="table">
+				<thead>
 					<tr>
-						<td>{{ prestation.id }}</td>
-						<td>{{ prestation.nom }}</td>
-						<td>{{ prestation.tempsRealisation }}</td>
-						<td>{{ prestation.coutHT }}</td>
-						<td>{{ prestation.description }}</td>
-						<td>{{ prestation.typePrestation }}</td>
-						<td>{{ prestation.isActive ? 'Yes' : 'No' }}</td>
-						<td>
-							<a href="{{ path('prestation_show', {'id': prestation.id}) }}">Voir</a>
-							<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">Éditer</a>
-						</td>
+						<th>Nom</th>
+						<th>Temps</th>
+						<th>Coût (HT)</th>
+						<th>Description</th>
+						<th>Type prestation</th>
+						<th>Action</th>
 					</tr>
-				{% else %}
-					<tr>
-						<td colspan="8">Aucune prestation</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for prestation in prestations %}
+						<tr>
+							<td>{{ prestation.nom }}</td>
+							<td>{{ prestation.tempsRealisation }}</td>
+							<td>{{ prestation.coutHT }}</td>
+							<td>{{ prestation.description }}</td>
+							<td>{{ prestation.typePrestation }}</td>
+							<td>
+								<a href="{{ path('prestation_show', {'id': prestation.id}) }}">Voir</a>
+								<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8">Aucune prestation</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
 
-		<a href="{{ path('prestation_new') }}">Créer nouvelle prestation</a>
+						<button class="button" href="{{ path('prestation_new') }}">Créer nouvelle prestation</button>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 {% endblock %}
