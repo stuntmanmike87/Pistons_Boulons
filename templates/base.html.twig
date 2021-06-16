@@ -24,29 +24,26 @@
 
 
 		<!-- Scripts JS -->
-		<script src="{{ asset('js/jquery.min.js') }}" defer></script>
-
-		<script src="{{ asset('js/jquery.dropotron.min.js') }}" defer></script>
-
-		<script src="{{ asset('js/browser.min.js') }}" defer></script>
-
-		<script src="{{ asset('js/breakpoints.min.js') }}" defer></script>
-
-		<script src="{{ asset('js/util.js') }}" defer></script>
-
-		<script src="{{ asset('js/main_tp.js') }}" defer></script>
-
+		<script src={{ asset('js/jquery.min.js') }} defer></script>
+		<script src={{asset('js/jquery.dropotron.min.js') }} defer></script>
+		<script src={{asset('/js/browser.min.js') }} defer></script>
+		<script src={{asset('js/breakpoints.min.js') }} defer></script>
+		<script src={{asset('../js/util.js') }} defer></script>
+		<script src={{asset('../js/main_tp.js') }} defer></script>
 
 	</head>
 	<body class="is-preload homepage">
 
+		
+	
+
 			{% include 'layout/header.twig' %}
 
 			{% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{message}}
-            </div>
-            {% endfor %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+			{% endfor %}
 
 			<div id="page-wrapper">
 			
