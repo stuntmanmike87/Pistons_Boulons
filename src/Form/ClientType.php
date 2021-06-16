@@ -17,7 +17,7 @@ class ClientType extends AbstractType
      * Cette fonction a pour but de créer la mise en place des éléments du formulaire du client, ces données sont son nom ; son prénom ; la date de première saisie (qui est sur le format d'une date) ;
      * son adresse ; son type de véhicule (on a une liste qui permet de faire le choix des véhicules cette liste est établi par le garage); et enfin sa plaque d'immatriculation.
      * 
-     *  @param FormBuilderInterace $ une variable qui permet la création d'un formulaire
+     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
      *  @param array $options un tableau qui permet de lister les champs du formulaire.
      * 
      * @return void
