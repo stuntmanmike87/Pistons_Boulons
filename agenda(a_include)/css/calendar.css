@@ -1,8 +1,9 @@
+/*  Style du tableau */
 .calendar__table {
     width: 100%;
     height: calc(100vh -120px);
 }
-
+/*  Style des cases du tableau */
 .calendar__table td {
     border: 1px solid #CCC;
     padding: 10px;
@@ -10,21 +11,21 @@
     width: 14.29%;
     height: 145px;
 }
-
+/*  Style des semaines */
 .calendar__weekday {
     font-weight: bold;
     color: #000;
     font-size: 1.2em;
 }
-
+/*  Style des jours */
 .calendar__day {
     font-size: 1.3em;
 }
-
+/*  Styles des mois précédent et suivant */
 .calendar__othermonth {
     opacity: 0.3;
 }
-
+/* Styles des events qui ne sont pas dans le mois actuel */
 .calendar__event__othermonth {
     opacity: 0.5;
 }

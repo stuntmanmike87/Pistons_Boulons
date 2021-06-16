@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Client{% endblock %}
+{% block title %}Nouveau client
+{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1>Créer un nouveau Client</h1>
+	<div id="prestation-wrapper">
+		<div class="container mt-5">
+			<h1 class="mb-2">Créer un nouveau client : </h1>
 
-        {{ include('client/_form.html.twig') }}
+			{{ include('client/_form.html.twig') }}
 
-        <a href="{{ path('client_index') }}">Retour</a>
-    </div>
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center">
+					<a class="button float-right" href="{{ path('client_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

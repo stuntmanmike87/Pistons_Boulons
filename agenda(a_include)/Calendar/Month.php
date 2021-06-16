@@ -9,6 +9,9 @@ class Month {
     public $month;
     public $year;
    /**
+     * Cette fonction permet de créer une occurence d'un mois 
+     * @param int $month : correspond au mois
+     * @param int $year  : correspond à l'année
      * 
      */
     public function __construct(?int $month = null ,?int $year = null){
@@ -21,17 +24,23 @@ class Month {
         $this->month = $month;
         $this->year = $year;
     }
+
+
+     /**
+     * Cette fonction permet de visualiser notre occurence
+     * 
+     */
     public function toString(): string{
         return $this->months[$this->month -1]. ' '. $this->year;
     }
     /**
-     * 
+     * Cette fonction permet de connaitre le premier jour du mois en question
      */
     public function getStartingDay(): \DateTime{
         return new \DateTime("{$this->year}-{$this->month}-01");
     }
-    /**
-     * 
+   /**
+     * Cette fonction permet de connaitre le nombre de semaines dans le mois
      */
     public function getWeeks (): int {
         $start = $this->getStartingDay();
@@ -42,15 +51,18 @@ class Month {
         }
         return $weeks;
     }
-    /**
-     * 
+  
+     /**
+     * Cette fonction permet de savoir si le jour placé en paramètre est dans le mois actuel
+     * @param DateTime $date : date 
      */
     public function withinMonth (\DateTime $date):bool {
         return $this->getStartingDay()->format('Y-m') === $date->format('Y-m');
     }
 
-    /**
-     * 
+     /**
+     * Cette fonction créer le mois suivant 
+     * @return Month
      */
     public function nextMonth() :Month{
         $month = $this->month +1;
@@ -61,8 +73,9 @@ class Month {
         }
         return new Month($month,$year);
     }
-       /**
-     * 
+    /**
+     * Cette fonction créer le mois précedent 
+     * @return Month
      */
     public function previousMonth() :Month{
         $month = $this->month -1;

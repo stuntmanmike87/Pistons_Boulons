@@ -55,7 +55,7 @@ class PrestationController extends AbstractController
     }
 
     /**
-     * @Route("/", name="prestation_index", methods={"GET"})
+     * @Route("/index", name="prestation_index", methods={"GET"})
      * 
      * Fonction qui permet l'affichage de la page index de prestation
      * 

@@ -1,46 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listing client{% endblock %}
+{% block title %}Listing client
+{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1>Liste des clients</h1>
+	<div id="prestation-wrapper">
+		<div class="container">
+			<h1 class="mb-2">Liste des clients :</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Date de première saisie</th>
+						<th>Adresse</th>
+						<th>Type de véhicule</th>
+						<th>Plaque d'immatriculation</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for client in clients %}
+						<tr>
+							<td>{{ client.nom }}</td>
+							<td>{{ client.prenom }}</td>
+							<td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
+							<td>{{ client.adresse }}</td>
+							<td>{{ client.typeVehicule }}</td>
+							<td>{{ client.plaqueImmat }}</td>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Date de première saisie</th>
-                    <th>Adresse</th>
-                    <th>Type de vehicule</th>
-                    <th>Plaque d'immatriculation</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in clients %}
-                    <tr>
-                        <td>{{ client.nom }}</td>
-                        <td>{{ client.prenom }}</td>
-                        <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('Y-m-d') : '' }}</td>
-                        <td>{{ client.adresse }}</td>
-                        <td>{{ client.typeVehicule }}</td>
-                        <td>{{ client.plaqueImmat }}</td>
-                        
-                        <td>
-                            <a href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
-                            <a href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="9">Aucun client</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+							<td>
+								<a href="{{ path('client_show', {'id': client.id}) }}">Voir</a>
+								<a href="{{ path('client_edit', {'id': client.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="9">Aucun client</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('prestation_new') }}">
+							<a class="button" href="{{ path('client_new') }}">Créer un nouveau client</a>
+						</a>
+					</div>
+				</div>
+			</div>
 
-        <a  href="{{ path('client_new') }}">Créer un nouveau client</a>
-    </div>
+		</div>
+	</div>
 {% endblock %}
