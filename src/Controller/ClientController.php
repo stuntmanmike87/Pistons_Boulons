@@ -131,7 +131,7 @@ class ClientController extends AbstractController
      * 
      * Fonction qui permet le delete de client
      * 
-     * Cette fonction est aussi sur la page edit avec le boutton supprimer 
+     * Cette fonction est aussi sur la page edit avec le bouton supprimer 
      * 
      * @param Request $request qui permet de faire la requete de la suppression
      * 
