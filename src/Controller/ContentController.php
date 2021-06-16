@@ -57,6 +57,41 @@ class ContentController extends AbstractController
             'contenu_contact' => $contentRepository->findByPosition('contact'),
         ]);
     }
+      /**
+     * @Route("/mentions", name="mentions_legales", methods={"GET"})
+     * 
+     * Fonction qui permet l'affichage de la page est la page mentions légales du site
+     * 
+     * 
+     * @param ContentRepository $contentRepository
+     * 
+     * @return layout/mentions.twig 
+     */
+    public function mentions(ContentRepository $contentRepository): Response
+    {
+
+        return $this->render('layout/mentions.twig', [
+            'controller_name' => 'ContentController',
+            'contenu_contact' => $contentRepository->findByPosition('contact'),
+        ]);
+    }
+     /**
+     * @Route("/politique_confidentialite", name="politique_conf", methods={"GET"})
+     * 
+     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
+     * 
+     * @param ContentRepository $contentRepository
+     * 
+     * @return layout/mentions.twig 
+     */
+    public function politiqueConfidentialité(ContentRepository $contentRepository): Response
+    {
+
+        return $this->render('layout/mentions.twig', [
+            'controller_name' => 'ContentController',
+            'contenu_contact' => $contentRepository->findByPosition('contact'),
+        ]);
+    }
 
     /**
      * @Route("/connexion", name="connexion", methods={"GET"})

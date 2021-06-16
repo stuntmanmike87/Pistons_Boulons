@@ -1,6 +1,28 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+{# texte #}
+
+{# label #}
+{{ form_label(form.text, 'Texte :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.text) }}
+
+{# position #}
+
+{# label #}
+{{ form_label(form.position, 'Position :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.position) }}
+
+
 <div class="col-md-12  text-center">
-	<button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
+    <button class="mt-5">
+        {{ button_label|default('Enregistrer') }}
+    </button>
 </div>
+
+
+
 {{ form_end(form) }}

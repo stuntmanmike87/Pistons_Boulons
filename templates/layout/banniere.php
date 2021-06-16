@@ -3,7 +3,7 @@
 	<div id="banner" class="box container">
 		<div class="row">
 			<div class="col-12 col-12-medium">
-				<h2>Bienvenue sur le site de votre garage Pistons & Boulons</h2>
+				<h2>Pistons & Boulons votre référent Dacia</h2>
 				<!--<p>It's a free responsive site template by HTML5 UP</p>-->
 			</div>
 			<!--<div class="col-5 col-12-medium">

@@ -37,5 +37,11 @@ class ConfigService
         return $this->configRepository->findOneByPosition('contact_adresse');
         
     }
+    public function getGarageEmail()
+    {
+       
+        return $this->configRepository->findOneByPosition('contact_email');
+        
+    }
 
 }
