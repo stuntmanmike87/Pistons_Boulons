@@ -29,6 +29,7 @@ class ClientType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('datePremiereSaisie' , DateType::class , [
+                'widget' => 'single_text',
                 'years' => range(1960 ,date('Y')+50)
             ])
             ->add('adresse')
