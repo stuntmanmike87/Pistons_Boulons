@@ -6,6 +6,7 @@ use App\Entity\Collaborateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CollaborateurType extends AbstractType
 {
@@ -14,11 +15,16 @@ class CollaborateurType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance')
-            ->add('dateEntreeEntreprise')
+            ->add('dateNaissance', DateType::class , [
+                'widget' => 'single_text',
+                'years' => range(1960 ,date('Y')+50)
+            ])
+            ->add('dateEntreeEntreprise', DateType::class , [
+                'widget' => 'single_text',
+                'years' => range(1960 ,date('Y')+50)
+            ])
             ->add('numSecuriteSocial')
             ->add('typeContrat')
-            ->add('dateHeureDerniereConnexion')
             ->add('dureeTravailHebdo')
             ->add('login')
             ->add('motDePasse')

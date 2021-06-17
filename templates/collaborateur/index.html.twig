@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>DateNaissance</th>
@@ -26,7 +25,6 @@
         <tbody>
         {% for collaborateur in collaborateurs %}
             <tr>
-                <td>{{ collaborateur.id }}</td>
                 <td>{{ collaborateur.nom }}</td>
                 <td>{{ collaborateur.prenom }}</td>
                 <td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('Y-m-d') : '' }}</td>

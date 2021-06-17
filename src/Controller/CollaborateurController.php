@@ -39,6 +39,8 @@ class CollaborateurController extends AbstractController
             $entityManager->persist($collaborateur);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le collaborateur a bien été ajouté');
+
             return $this->redirectToRoute('collaborateur_index');
         }
 
@@ -69,6 +71,8 @@ class CollaborateurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Le collaborateur a bien été modifié');
+
             return $this->redirectToRoute('collaborateur_index');
         }
 
@@ -88,6 +92,8 @@ class CollaborateurController extends AbstractController
             $entityManager->remove($collaborateur);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Le collaborateur a bien été effacé');
 
         return $this->redirectToRoute('collaborateur_index');
     }
