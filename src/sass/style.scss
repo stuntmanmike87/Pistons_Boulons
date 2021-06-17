@@ -11,6 +11,7 @@
 
 @import "libs/banners";
 @import "libs/box";
+@import "libs/calendar";
 @import "libs/forms";
 @import "libs/html-elements";
 @import "libs/icons";
@@ -51,7 +52,15 @@
 );
 
 /* Nos styles */
-
+.clr_rouge_prim{
+	color : $couleur_premier_rouge;
+}
+.clr_rouge_second{
+	color : $couleur_second_rouge;
+}
+.clr_bleu{
+	color : $couleur_bleu;
+}
 .contact_coordonnees {
 	text-align: center;
 }
@@ -148,7 +157,7 @@ body {
 	background-repeat: repeat-x, repeat;
 	background-size: 100% 30em, auto;
 	font-family: "Open Sans", sans-serif;
-	font-size: 13pt;
+	// font-size: 13pt;
 	color: #696969;
 	font-weight: 300;
 	line-height: 2.25em;
@@ -522,6 +531,7 @@ button,
 	textarea {
 		font-size: 12pt;
 	}
+
 }
 
 /* Large */
@@ -535,6 +545,7 @@ button,
 	textarea {
 		font-size: 11pt;
 	}
+
 }
 
 /* Medium */
@@ -846,6 +857,7 @@ button,
 		line-height: 2em;
 	}
 
+	
 	h2,
 	h3,
 	h4,
@@ -998,7 +1010,8 @@ button,
 	#info_garage-wrapper,
 	#contact-wrapper,
 	#connexion-wrapper,
-	#prestation-wrapper {
+	#prestation-wrapper,
+	#mentions-wrapper {
 		padding: 40px 30px 40px 30px;
 	}
 

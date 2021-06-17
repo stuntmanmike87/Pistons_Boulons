@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Events;
+use App\Controller\Month;
 
 use function PHPUnit\Framework\equalTo;
 
@@ -17,7 +19,6 @@ use function PHPUnit\Framework\equalTo;
  */
 class ContentController extends AbstractController
 {
-
     /**
      * @Route("/", name="home", methods={"GET"})
      * Fonction qui permet l'affichage de la page Home qui sera visible en public
@@ -37,7 +38,6 @@ class ContentController extends AbstractController
             'contenu_accueil' => $contentRepository->findByPosition('texte'),
         ]);
     }
-
     /**
      * @Route("/contact", name="contact", methods={"GET"})
      * 
@@ -51,48 +51,39 @@ class ContentController extends AbstractController
      */
     public function contact(ContentRepository $contentRepository): Response
     {
-
         return $this->render('layout/contact.twig', [
             'controller_name' => 'ContentController',
             'contenu_contact' => $contentRepository->findByPosition('contact'),
         ]);
     }
-      /**
+    /**
      * @Route("/mentions", name="mentions_legales", methods={"GET"})
      * 
      * Fonction qui permet l'affichage de la page est la page mentions légales du site
      * 
      * 
-     * @param ContentRepository $contentRepository
-     * 
      * @return layout/mentions.twig 
      */
-    public function mentions(ContentRepository $contentRepository): Response
+    public function mentions(): Response
     {
-
         return $this->render('layout/mentions.twig', [
             'controller_name' => 'ContentController',
-            'contenu_contact' => $contentRepository->findByPosition('contact'),
         ]);
     }
-     /**
-     * @Route("/politique_confidentialite", name="politique_conf", methods={"GET"})
+    /**
+     * @Route("/politique_conf", name="politique_conf", methods={"GET"})
      * 
      * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
      * 
-     * @param ContentRepository $contentRepository
      * 
-     * @return layout/mentions.twig 
+     * @return layout/politiqueConfidentialite.twig 
      */
-    public function politiqueConfidentialité(ContentRepository $contentRepository): Response
+    public function politiqueConfidentialité(): Response
     {
-
-        return $this->render('layout/mentions.twig', [
+        return $this->render('layout/politiqueConfidentialite.twig', [
             'controller_name' => 'ContentController',
-            'contenu_contact' => $contentRepository->findByPosition('contact'),
         ]);
     }
-
     /**
      * @Route("/connexion", name="connexion", methods={"GET"})
      *  
@@ -108,8 +99,6 @@ class ContentController extends AbstractController
             'controller_name' => 'ContentController',
         ]);
     }
-
-
     /**
      * @Route("/index", name="content_index", methods={"GET"})
      * 
@@ -127,7 +116,6 @@ class ContentController extends AbstractController
             'contents' => $contentRepository->findAll(),
         ]);
     }
-
     /**
      * @Route("/new", name="content_new", methods={"GET","POST"})
      * Fonction qui permet l'affichage de la page new de content
@@ -161,7 +149,6 @@ class ContentController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="content_show", methods={"GET"})
      * 
@@ -233,5 +220,32 @@ class ContentController extends AbstractController
         }
         $this->addFlash('success', "Le contenu a bien été supprimé");
         return $this->redirectToRoute('content_index');
+    }
+
+
+
+    /**
+     * @Route("/calendar", name="calendar", methods={"GET"})
+     *  
+     */
+    public function agenda(): Response
+    {
+        $mois_actuel =date('m');
+        $annee_actuelle = date('Y');
+        $events = new Events();
+        // $month = new Month($_GET['month'] ?? null, $_GET['year'] ?? null);
+        $month = new Month($mois_actuel,$annee_actuelle);
+        $start = $month->getStartingDay();
+        $weeks = $month->getWeeks();
+        $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify("last monday");
+        $end = (clone $start)->modify('+' . (6 + 7 * $weeks - 1) . 'days');
+        //$events = $events->getEventsBetweenByDay($start, $end);
+        return $this->render('layout/agenda.twig', [
+            'controller_name' => 'ContentController',
+            'month'=>'month',
+            'weeks'=>'weeks',
+            'start'=>'start',
+            'end'=>'end',
+        ]);
     }
 }

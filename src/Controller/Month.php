@@ -1,5 +1,5 @@
 <?php
-namespace Calendar;
+namespace App\Controller;
 
 class Month {
 
