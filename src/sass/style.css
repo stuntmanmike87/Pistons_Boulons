@@ -308,7 +308,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.25em;
+  font-size: 1.9em;
   margin: 0 0 1.1em 0;
   line-height: 1em;
 }
@@ -529,7 +529,10 @@ table thead {
 }
 
 #main-wrapper,
-#info_garage-wrapper, #prestation-wrapper, #connexion-wrapper, #contact-wrapper {
+#info_garage-wrapper,
+#prestation-wrapper,
+#connexion-wrapper,
+#contact-wrapper {
   background: #fff;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
   padding: 5em 0 5em 0;
@@ -554,6 +557,16 @@ table thead {
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 /* Nos styles */
+h2 {
+  font-size: 1.9em;
+  margin: 0 0 1.1em 0;
+  line-height: 1em;
+}
+
+.clr_rouge_prim {
+  color: #DC241F;
+}
+
 .contact_coordonnees {
   text-align: center;
 }
@@ -642,7 +655,6 @@ body {
   background-repeat: repeat-x, repeat;
   background-size: 100% 30em, auto;
   font-family: "Open Sans", sans-serif;
-  font-size: 13pt;
   color: #696969;
   font-weight: 300;
   line-height: 2.25em;
@@ -2312,7 +2324,8 @@ button.icon:before,
 #info_garage-wrapper,
 #contact-wrapper,
 #connexion-wrapper,
-#prestation-wrapper {
+#prestation-wrapper,
+#mentions-wrapper {
     padding: 40px 30px 40px 30px;
   }
 
