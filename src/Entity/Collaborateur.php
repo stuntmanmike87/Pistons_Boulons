@@ -19,31 +19,64 @@ class Collaborateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide.")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le nom ne doit pas comporter plus de  {{ limit }} caractères"
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le nom ne peut pas contenir de chiffre"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide.")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50,
+     *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le prénom ne doit pas comporter plus de  {{ limit }} caractères"
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le prénom ne peut pas contenir de chiffre"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="La date de naissance ne peut pas être vide.")
      */
     private $dateNaissance;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="La date d'entrée en entreprise ne peut pas être vide.")
      */
     private $dateEntreeEntreprise;
 
     /**
      * @ORM\Column(type="bigint")
+     * @Assert\NotBlank(message="Le numéro de sécurité sociale ne peut pas être vide.")
      */
     private $numSecuriteSocial;
+    //regex = '/^                # début de chaîne
+    // [12]                      # 1 ou 2 pour le sexe
+    // [0-9]{2}[0-1][0-9]        # ça je me rappelle plus
+    // (2[AB]|[0-9]{2})          # le département
+    // [0-9]{3}[0-9]{3}[0-9]{2}  # ça non plus je ne sais plus
+    // $                         # fin de chaîne
+    // /x'
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le type de contrat ne peut pas être vide.")
      */
     private $typeContrat;
 
@@ -54,16 +87,19 @@ class Collaborateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La durée de travail hebdomadaire ne peut pas être vide.")
      */
     private $dureeTravailHebdo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'identifiant ne peut pas être vide.")
      */
     private $login;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le mot de passe ne peut pas être vide.")
      */
     private $motDePasse;
 

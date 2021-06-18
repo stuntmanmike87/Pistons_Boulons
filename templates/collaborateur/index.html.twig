@@ -8,7 +8,16 @@
 		<div class="container">
 			<h1 class="">Liste des collaborateurs :</h1>
 
-			<table class="table_responsive_mobile mt-3">
+				<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('collaborateur_new') }}">
+							<button class="button">Créer nouveau collaborateur</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<table class="table_responsive_mobile mt-5">
 				<thead>
 					<tr>
 						<th>Nom</th>
@@ -50,15 +59,7 @@
 				</tbody>
 			</table>
 
-			<div class="container mt-5">
-				<div class=" d-flex flex-row row align-items-start">
-					<div class="col text-center">
-						<a href="{{ path('collaborateur_new') }}">
-							<button class="button">Créer nouveau collaborateur</button>
-						</a>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 {% endblock %}

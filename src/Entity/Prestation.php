@@ -19,7 +19,7 @@ class Prestation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide.")
      * @Assert\Length(
      *      min = 3,
      *      max = 50,
@@ -31,19 +31,19 @@ class Prestation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le temps de réalisation ne peut pas être vide.")
      */
     private $tempsRealisation;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le coût HT ne peut pas être vide.")
      */
     private $coutHT;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="La description ne peut pas être vide.")
      * @Assert\Length(
      *      min = 3,
      *      max = 50,
@@ -55,7 +55,7 @@ class Prestation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le type de prestation ne peut pas être vide.")
      *
      */
     private $typePrestation;

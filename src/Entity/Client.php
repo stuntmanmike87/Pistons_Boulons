@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,63 +23,76 @@ class Client
 
     /**
      *@ORM\Column(type="string", length=255)
-     *@Assert\NotBlank
+     *@Assert\NotBlank(message="Le nom ne peut pas être vide.")
      * @Assert\Length(
      *      min = 1,
      *      max = 50,
      *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères ",
      *      maxMessage = "Le nom ne doit pas comporter plus de  {{ limit }} caractères"
      * )
+      * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le nom ne peut pas contenir de chiffre"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide.")
      * @Assert\Length(
      *      min = 1,
      *      max = 50,
      *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères ",
      *      maxMessage = "Le prénom ne doit pas comporter plus de  {{ limit }} caractères"
+     *  )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le prénom ne peut pas contenir de chiffre"
      * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="La date de première saisie ne peut pas être vide.")
      */
     private $datePremiereSaisie;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="L'adresse ne peut pas être vide.")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le type de véhicule ne peut pas être vide.")
      */
     private $typeVehicule;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="La plaque d'immatriculation ne peut pas être vide.")
      * @Assert\Regex(
-     *     pattern=	"/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/i",
+     *     pattern="/\d/",
      *     match=false,
      *     message="La plaque d'immatriculation n'est pas valide"
      * )
      */
     private $plaqueImmat;
 
+        // /[A-Z]{1,2}+\d{1.4}+[A-Z]{1,2}|\d{1,4}+[A-Z]{1,4}+\d{1,2}/
+
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * 
      */
     private $isActif;
-
+    
+    // GETTERS / SETTERS
     /**
      * Fonction qui permet de récupérer l'id du client
      * 
@@ -255,4 +270,7 @@ class Client
 
         return $this;
     }
+
+
+    
 }
