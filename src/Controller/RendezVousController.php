@@ -38,7 +38,7 @@ class RendezVousController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($rendezVou);
             $entityManager->flush();
-
+            $this->addFlash('success', "Le rendez-vous a bien été ajoutée");
             return $this->redirectToRoute('rendez_vous_index');
         }
 
@@ -68,7 +68,7 @@ class RendezVousController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', "Le rendez-vous a bien été modifié");
             return $this->redirectToRoute('rendez_vous_index');
         }
 
@@ -88,7 +88,7 @@ class RendezVousController extends AbstractController
             $entityManager->remove($rendezVou);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', "Le rendez-vous a bien été effacé");
         return $this->redirectToRoute('rendez_vous_index');
     }
 }
