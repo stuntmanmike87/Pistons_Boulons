@@ -255,4 +255,14 @@ class Client
 
         return $this;
     }
+
+    
+    /**
+     * Fonction qui permet de récupérer le client avec son nom , son prénom et sa plaque d'immatriculation
+     * 
+     * @return Client
+     */
+    public function getClient(){
+        return $this->nom .' '. $this->prenom .' '. $this->plaqueImmat;
+    }
 }

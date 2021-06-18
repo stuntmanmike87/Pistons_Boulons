@@ -208,4 +208,8 @@ class Collaborateur
 
         return $this;
     }
+
+    public function getCollaborateur(){
+        return $this->nom .' '. $this->prenom;
+    }
 }

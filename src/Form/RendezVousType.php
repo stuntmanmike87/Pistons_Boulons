@@ -24,7 +24,7 @@ class RendezVousType extends AbstractType
                     return $er->createQueryBuilder('cl')
                         ->orderBy('cl.nom', 'ASC');
                 },
-                'choice_label' => 'nom',
+                'choice_label' => 'client',
             ])
             ->add('idCollaborateur', EntityType::class , [
                 'class' => Collaborateur::class,
@@ -32,7 +32,7 @@ class RendezVousType extends AbstractType
                     return $er->createQueryBuilder('co')
                         ->orderBy('co.nom', 'ASC');
                 },
-                'choice_label' => 'nom',
+                'choice_label' => 'collaborateur',
             ])
             ->add('idPrestation', EntityType::class , [
                 'class' => Prestation::class,
