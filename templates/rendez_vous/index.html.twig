@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>DateRendezVous</th>
                 <th>actions</th>
             </tr>
@@ -16,7 +15,6 @@
         <tbody>
         {% for rendez_vou in rendez_vouses %}
             <tr>
-                <td>{{ rendez_vou.id }}</td>
                 <td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">show</a>

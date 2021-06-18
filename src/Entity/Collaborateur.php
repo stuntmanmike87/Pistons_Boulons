@@ -38,7 +38,7 @@ class Collaborateur
     private $dateEntreeEntreprise;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="string", length=255)
      */
     private $numSecuriteSocial;
 
