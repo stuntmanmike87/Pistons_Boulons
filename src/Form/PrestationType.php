@@ -6,6 +6,7 @@ use App\Entity\Prestation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PrestationType extends AbstractType
 {
@@ -13,8 +14,16 @@ class PrestationType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('tempsRealisation')
-            ->add('coutHT')
+            ->add('tempsRealisation', TextType::class, [
+                'attr' => [
+                    'placeholder' => '3h30'
+                ]
+            ])
+            ->add('coutHT', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'En euros'
+                ]
+            ])
             ->add('description')
             ->add('typePrestation')
         ;

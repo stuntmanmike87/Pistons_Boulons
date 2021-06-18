@@ -22,14 +22,14 @@ class Content
     /**
      * @ORM\Column(type="text")
      * 
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Le texte ne peut pas être vide.")
      */
     private $text;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="La position ne peut pas être vide.")
      */
     private $position;
 

@@ -6,6 +6,7 @@ use App\Entity\Content;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ContentType extends AbstractType
 {
@@ -23,7 +24,11 @@ class ContentType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('position')
+            ->add('position', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'texte_contact'
+                ]
+            ])
             ;
     }
 
