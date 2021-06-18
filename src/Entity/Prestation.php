@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PrestationRepository::class)
@@ -36,8 +37,12 @@ class Prestation
     private $tempsRealisation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le coût HT ne peut pas être vide.")
+     * @Assert\Range(
+     *      min = 0,
+     *      minMessage = "Le coût HT ne peux pas être égale à zéro"
+     * )
      */
     private $coutHT;
 
@@ -46,9 +51,7 @@ class Prestation
      * @Assert\NotBlank(message="La description ne peut pas être vide.")
      * @Assert\Length(
      *      min = 3,
-     *      max = 50,
      *      minMessage = "La description doit comporter au moins {{ limit }} caractères ",
-     *      maxMessage = "La description ne doit pas comporter plus de  {{ limit }} caractères"
      * )
      */
     private $description;
@@ -56,7 +59,10 @@ class Prestation
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le type de prestation ne peut pas être vide.")
-     *
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Le type de prestation doit comporter au moins {{ limit }} caractères ",
+     * )
      */
     private $typePrestation;
 

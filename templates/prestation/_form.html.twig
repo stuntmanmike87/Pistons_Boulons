@@ -1,10 +1,12 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
 
 {# nom #}
 
 {# label #}
 {{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.nom) }}
 {# input #}
 {{ form_widget(form.nom) }}
 
@@ -13,6 +15,8 @@
 {# label #}
 {{ form_label(form.tempsRealisation, 'Temps de réalisation :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.tempsRealisation) }}
 {# input #}
 {{ form_widget(form.tempsRealisation) }}
 
@@ -21,6 +25,8 @@
 {# label #}
 {{ form_label(form.coutHT, 'Coût (Hors Taxe) (€) :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.coutHT) }}
 {# input #}
 {{ form_widget(form.coutHT) }}
 
@@ -29,6 +35,8 @@
 {# label #}
 {{ form_label(form.description, 'Description :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.description) }}
 {# input #}
 {{ form_widget(form.description) }}
 
@@ -37,6 +45,8 @@
 {# label #}
 {{ form_label(form.typePrestation, 'Type de prestation :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.typePrestation) }}
 {# input #}
 {{ form_widget(form.typePrestation) }}
 

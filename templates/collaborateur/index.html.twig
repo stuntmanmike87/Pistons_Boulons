@@ -6,9 +6,7 @@
 {% block body %}
 	<div id="main-wrapper">
 		<div class="container">
-			<h1 class="">Liste des collaborateurs :</h1>
-
-				<div class="container mt-5">
+			<div class="container ">
 				<div class=" d-flex flex-row row align-items-start">
 					<div class="col text-center">
 						<a href="{{ path('collaborateur_new') }}">
@@ -17,6 +15,9 @@
 					</div>
 				</div>
 			</div>
+			<h1 class="mt-5">Liste des collaborateurs :</h1>
+
+
 			<table class="table_responsive_mobile mt-5">
 				<thead>
 					<tr>
@@ -59,8 +60,7 @@
 				</tbody>
 			</table>
 
-		
+
 		</div>
 	</div>
 {% endblock %}
-

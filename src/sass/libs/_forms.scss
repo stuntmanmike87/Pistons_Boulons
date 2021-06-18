@@ -1,6 +1,23 @@
 /* Forms */
 
 form {
+
+		.required:after 
+		{ 
+			content: " *" ;
+			color : $couleur_premier_rouge;
+		}
+
+		li {
+			color: $couleur_premier_rouge;
+			font-weight: 600;
+			list-style:none;
+		}
+	
+		ul {
+			margin-bottom: 1em;
+		}
+	
 	label {
 		display: block;
 		font-weight: 800;

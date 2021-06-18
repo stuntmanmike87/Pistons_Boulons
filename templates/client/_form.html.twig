@@ -1,11 +1,13 @@
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
 
 {# NOM #}
 
 {# label #}
 {{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.nom) }}
 {# input #}
 {{ form_widget(form.nom) }}
 
@@ -15,6 +17,8 @@
 {# label #}
 {{ form_label(form.prenom, 'Prénom :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.prenom) }}
 {# input #}
 {{ form_widget(form.prenom) }}
 
@@ -22,10 +26,12 @@
 {# DATEPREMIERESAISIE #}
 
 {# label #}
-{{ form_label(form.datePremiereSaisie, 'Date de première saisie :', {'label_attr': {'class': 'foo' }}
+{{ form_label(form.datePremiereSaisie, 'Date de première saisie :', {'label_attr': {'class': 'foo'}}
 ) }}
+{# erreur #}
+{{ form_errors(form.datePremiereSaisie) }}
 {# input #}
-{{ form_widget(form.datePremiereSaisie) }}
+{{ form_widget(form.datePremiereSaisie)}}
 
 
 {# adresse #}
@@ -33,6 +39,8 @@
 {# label #}
 {{ form_label(form.adresse, 'Adresse :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.adresse) }}
 {# input #}
 {{ form_widget(form.adresse) }}
 
@@ -42,14 +50,19 @@
 {# label #}
 {{ form_label(form.typeVehicule, 'Type de véhicule :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.typeVehicule) }}
 {# input #}
 {{ form_widget(form.typeVehicule) }}
 
-
 {# plaqueImmat #}
 
-{# label #} {{ form_label(form.plaqueImmat, "Plaque d'immatriculation :", {'label_attr': {'class': 'foo' }}) }}
-{# input #}{{ form_widget(form.plaqueImmat) }}
+{# label #} 
+{{ form_label(form.plaqueImmat, "Plaque d'immatriculation :", {'label_attr': {'class': 'foo' }}) }}
+{# erreur #}
+{{ form_errors(form.plaqueImmat) }}
+{# input #}
+{{ form_widget(form.plaqueImmat) }}
     
     
     <div class="col-md-12  text-center"><button class="mt-5">

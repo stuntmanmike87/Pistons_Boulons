@@ -70,6 +70,7 @@ class ClientController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+ 
 
     /**
      * @Route("/{id}", name="client_show", methods={"GET"})

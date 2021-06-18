@@ -1,10 +1,12 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
 
 {# Nom #}
 
 {# label #}
 {{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.nom) }}
 {# input #}
 {{ form_widget(form.nom) }}
 
@@ -13,6 +15,8 @@
 {# label #}
 {{ form_label(form.prenom, 'Prénom :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.prenom) }}
 {# input #}
 {{ form_widget(form.prenom) }}
 
@@ -21,6 +25,8 @@
 {# label #}
 {{ form_label(form.dateNaissance, 'Date de naissance :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.dateNaissance) }}
 {# input #}
 {{ form_widget(form.dateNaissance) }}
 
@@ -29,6 +35,8 @@
 {# label #}
 {{ form_label(form.dateEntreeEntreprise, "Date d'entrée dans l'entreprise :", {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.dateEntreeEntreprise) }}
 {# input #}
 {{ form_widget(form.dateEntreeEntreprise) }}
 
@@ -37,6 +45,8 @@
 {# label #}
 {{ form_label(form.numSecuriteSocial, 'Numéro de sécurité sociale :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.numSecuriteSocial) }}
 {# input #}
 {{ form_widget(form.numSecuriteSocial) }}
 
@@ -45,6 +55,8 @@
 {# label #}
 {{ form_label(form.typeContrat, 'Type de contrat :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.typeContrat) }}
 {# input #}
 {{ form_widget(form.typeContrat) }}
 
@@ -53,6 +65,8 @@
 {# label #}
 {{ form_label(form.dureeTravailHebdo, 'Durée de travail hebdomadaire :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.dureeTravailHebdo) }}
 {# input #}
 {{ form_widget(form.dureeTravailHebdo) }}
 
@@ -61,6 +75,8 @@
 {# label #}
 {{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.login) }}
 {# input #}
 {{ form_widget(form.login) }}
 
@@ -69,6 +85,8 @@
 {# label #}
 {{ form_label(form.motDePasse, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
 ) }}
+{# erreur #}
+{{ form_errors(form.motDePasse) }}
 {# input #}
 {{ form_widget(form.motDePasse) }}
 

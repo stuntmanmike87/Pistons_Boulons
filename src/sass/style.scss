@@ -7,11 +7,11 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Oleo+Script:400|Open+Sans:300,300italic,600,600italic,800");
 
-@import "libs/reset";
+@import "libs/reset"; 
 
 @import "libs/banners";
 @import "libs/box";
-@import "libs/calendar";
+@import "libs/calendar"; 
 @import "libs/forms";
 @import "libs/html-elements";
 @import "libs/icons";
@@ -29,7 +29,7 @@
 // Breakpoints.
 
 @include breakpoints(
-	(
+	( 
 		xlarge: (
 			1281px,
 			1680px,
