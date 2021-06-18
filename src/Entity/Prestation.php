@@ -41,7 +41,7 @@ class Prestation
      * @Assert\NotBlank(message="Le coût HT ne peut pas être vide.")
      * @Assert\Range(
      *      min = 0,
-     *      minMessage = "Le coût HT ne peux pas être égale à zéro"
+     *      minMessage = "Le coût HT ne peux pas être égale à zéro."
      * )
      */
     private $coutHT;
