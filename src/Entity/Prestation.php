@@ -19,31 +19,49 @@ class Prestation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Le nom de la prestation doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le nom de la prestation ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $tempsRealisation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $coutHT;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "La description doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "La description ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     *
      */
     private $typePrestation;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $isActive;
 

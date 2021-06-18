@@ -1,62 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Collaborateur{% endblock %}
+{% block title %}Collaborateur
+{% endblock %}
 
 {% block body %}
-    <h1>Collaborateur</h1>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="">Collaborateur :</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ collaborateur.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ collaborateur.prenom }}</td>
-            </tr>
-            <tr>
-                <th>DateNaissance</th>
-                <td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateEntreeEntreprise</th>
-                <td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NumSecuriteSocial</th>
-                <td>{{ collaborateur.numSecuriteSocial }}</td>
-            </tr>
-            <tr>
-                <th>TypeContrat</th>
-                <td>{{ collaborateur.typeContrat }}</td>
-            </tr>
-            <tr>
-                <th>DateHeureDerniereConnexion</th>
-                <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DureeTravailHebdo</th>
-                <td>{{ collaborateur.dureeTravailHebdo }}</td>
-            </tr>
-            <tr>
-                <th>Login</th>
-                <td>{{ collaborateur.login }}</td>
-            </tr>
-            <tr>
-                <th>MotDePasse</th>
-                <td>{{ collaborateur.motDePasse }}</td>
-            </tr>
-            <tr>
-                <th>IsAdmin</th>
-                <td>{{ collaborateur.isAdmin ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+			<table class="table mt-3">
+				<tbody>
+					<tr>
+						<th>Nom</th>
+						<td>{{ collaborateur.nom }}</td>
+					</tr>
+					<tr>
+						<th>Prénom</th>
+						<td>{{ collaborateur.prenom }}</td>
+					</tr>
+					<tr>
+						<th>Date de naissance</th>
+						<td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y') : '' }}</td>
+					</tr>
+					<tr>
+						<th>Date d'entrée dans l'entreprise</th>
+						<td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y') : '' }}</td>
+					</tr>
+					<tr>
+						<th>N° s"curité sociale</th>
+						<td>{{ collaborateur.numSecuriteSocial }}</td>
+					</tr>
+					<tr>
+						<th>Type de contrat</th>
+						<td>{{ collaborateur.typeContrat }}</td>
+					</tr>
+					<tr>
+						<th>Durée de travail hebdomadaire</th>
+						<td>{{ collaborateur.dureeTravailHebdo }}</td>
+					</tr>
+					<tr>
+						<th>Identifiant</th>
+						<td>{{ collaborateur.login }}</td>
+					</tr>
+					<tr>
+						<th>Mot de passe</th>
+						<td>{{ collaborateur.motDePasse }}</td>
+					</tr>
+				</tbody>
+			</table>
 
-    <a href="{{ path('collaborateur_index') }}">back to list</a>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col-lg-4 col-md-12  text-center">
+						<a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">
+							<button class="mt-1">Modifier</button>
+						</a>
+					</div>
+					<div class="col-lg-4 col-md-12  text-center">
+						{{ include('collaborateur/_delete_form.html.twig') }}
+					</div>
+					<div class="col-lg-4 col-md-12 text-center">
+						<a class="button" href="{{ path('collaborateur_index') }}">Retour</a>
 
-    <a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
+					</div>
+				</div>
+			</div>
 
-    {{ include('collaborateur/_delete_form.html.twig') }}
+		</div>
+
+
+	</div>
 {% endblock %}

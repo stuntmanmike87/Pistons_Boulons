@@ -1,4 +1,82 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+{# Nom #}
+
+{# label #}
+{{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.nom) }}
+
+{# Prénom #}
+
+{# label #}
+{{ form_label(form.prenom, 'Prénom :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.prenom) }}
+
+{# dateNaissance #}
+
+{# label #}
+{{ form_label(form.dateNaissance, 'Date de naissance :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.dateNaissance) }}
+
+{# dateEntreeEntreprise #}
+
+{# label #}
+{{ form_label(form.dateEntreeEntreprise, "Date d'entrée dans l'entreprise :", {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.dateEntreeEntreprise) }}
+
+{# numSecuriteSocial #}
+
+{# label #}
+{{ form_label(form.numSecuriteSocial, 'Numéro de sécurité sociale :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.numSecuriteSocial) }}
+
+{# typeContrat #}
+
+{# label #}
+{{ form_label(form.typeContrat, 'Type de contrat :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.typeContrat) }}
+
+{# dureeTravailHebdo #}
+
+{# label #}
+{{ form_label(form.dureeTravailHebdo, 'Durée de travail hebdomadaire :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.dureeTravailHebdo) }}
+
+{# login #}
+
+{# label #}
+{{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.login) }}
+
+{# motDePasse #}
+
+{# label #}
+{{ form_label(form.motDePasse, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
+) }}
+{# input #}
+{{ form_widget(form.motDePasse) }}
+
+
+	<div class="col-md-12  text-center"> 
+    <button class="mt-5">
+		{{ button_label|default('Enregistrer') }}
+	</button>
+
+</div>
 {{ form_end(form) }}

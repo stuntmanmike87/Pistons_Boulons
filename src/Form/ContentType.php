@@ -23,7 +23,7 @@ class ContentType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('position',null, array('disabled' => true))
+            ->add('position')
             ;
     }
 

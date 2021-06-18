@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Collaborateur{% endblock %}
+{% block title %}Édition collaborateur
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Collaborateur</h1>
-
-    {{ include('collaborateur/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('collaborateur_index') }}">back to list</a>
-
-    {{ include('collaborateur/_delete_form.html.twig') }}
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Modification d'un collaborateur :</h1>
+			{{ include('collaborateur/_form.html.twig', {'button_label': 'Modifier'}) }}
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-lg-6 col-6  text-center float-left">
+					{{ include('collaborateur/_delete_form.html.twig') }}
+				</div>
+				<div class="col-lg-6 col-6 text-center float-right">
+					<a class="button" href="{{ path('collaborateur_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

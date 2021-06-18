@@ -28,7 +28,6 @@ class CollaborateurType extends AbstractType
             ->add('dureeTravailHebdo')
             ->add('login')
             ->add('motDePasse')
-            ->add('isAdmin')
         ;
     }
 

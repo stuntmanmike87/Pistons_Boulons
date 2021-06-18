@@ -99,6 +99,67 @@ class ContentController extends AbstractController
             'controller_name' => 'ContentController',
         ]);
     }
+
+    /**
+     * @Route("/agenda", name="agenda")
+     *  
+     */
+    public function agenda(): Response
+    {
+        // test
+        $mois_actuel = date('m');
+        $annee_actuelle = date('Y');
+
+        $events = new Events();
+        $month = new Month($mois_actuel, $annee_actuelle);
+        // $month = new Month($_GET['month'] ?? null, $_GET['year'] ?? null);
+
+        // début du mois et le nombre de semaines
+        $start = $month->getStartingDay();
+        $weeks = $month->getWeeks();
+
+        $mois_precedent = $month->previousMonth()->month;
+        $annee_precedente = $month->previousMonth()->year;
+        $mois_suivant = $month->nextMonth()->month;
+        $annee_suivante = $month->nextMonth()->year;
+
+        $toString = $month->toString();
+
+        $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify("last monday");
+
+        //Fin du mois
+        $end = (clone $start)->modify('+' . (6 + 7 * $weeks - 1) . 'days');
+
+        $tab_asso_jour_events = array("1"=>"","2"=>"","3"=>"","4"=>"","1"=>"","5"=>"","6"=>"","7"=>"","8"=>"","9"=>"","10"=>"","11"=>"","12"=>"");
+
+        //Procédure pour initialiser un tableau associatif (Jour/Event)
+        for ($i = 0; $i < $weeks; $i++) :
+            foreach ($month->days as $k => $day) :
+                //on se place sur le jour en question
+                //$date = (clone $start)->modify("+" . ($k + $i * 7) . "days");
+                //on cherche les events du jours
+                // $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
+                // on place dans notre tableau associatif
+                // $tab_asso_jour_events[$k] = $eventsForDay;
+            endforeach;
+        endfor;
+
+        //$events = $events->getEventsBetweenByDay($start, $end);
+        return $this->render('layout/agenda.twig', [
+            'controller_name' => 'ContentController',
+            'month' => $month,
+            'semaines' => $weeks,
+            'start' => $start,
+            'end' => $end,
+            'weeks' => $weeks,
+            'mois_precedent'=>$mois_precedent,
+            'annee_precedente'=>$annee_precedente,
+            'mois_suivant'=>$mois_suivant,
+            'annee_suivante'=>$annee_suivante,
+            'toString'=>$toString,
+            'tab_asso_jour_events'=>$tab_asso_jour_events,
+        ]);
+    }
     /**
      * @Route("/index", name="content_index", methods={"GET"})
      * 
@@ -220,32 +281,5 @@ class ContentController extends AbstractController
         }
         $this->addFlash('success', "Le contenu a bien été supprimé");
         return $this->redirectToRoute('content_index');
-    }
-
-
-
-    /**
-     * @Route("/calendar", name="calendar", methods={"GET"})
-     *  
-     */
-    public function agenda(): Response
-    {
-        $mois_actuel =date('m');
-        $annee_actuelle = date('Y');
-        $events = new Events();
-        // $month = new Month($_GET['month'] ?? null, $_GET['year'] ?? null);
-        $month = new Month($mois_actuel,$annee_actuelle);
-        $start = $month->getStartingDay();
-        $weeks = $month->getWeeks();
-        $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify("last monday");
-        $end = (clone $start)->modify('+' . (6 + 7 * $weeks - 1) . 'days');
-        //$events = $events->getEventsBetweenByDay($start, $end);
-        return $this->render('layout/agenda.twig', [
-            'controller_name' => 'ContentController',
-            'month'=>'month',
-            'weeks'=>'weeks',
-            'start'=>'start',
-            'end'=>'end',
-        ]);
     }
 }
