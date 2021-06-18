@@ -6,8 +6,8 @@
 {% block body %}
 	<div id="prestation-wrapper">
 		<div class="container">
-			<h1 class="mb-2">Liste des clients :</h1>
-			<table class="table">
+			<h1 class="">Liste des clients :</h1>
+			<table class="table_responsive_mobile mt-3">
 				<thead>
 					<tr>
 						<th>Nom</th>
@@ -22,14 +22,14 @@
 				<tbody>
 					{% for client in clients %}
 						<tr>
-							<td>{{ client.nom }}</td>
-							<td>{{ client.prenom }}</td>
-							<td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
-							<td>{{ client.adresse }}</td>
-							<td>{{ client.typeVehicule }}</td>
-							<td>{{ client.plaqueImmat }}</td>
+							<td data-label="Nom">{{ client.nom }}</td>
+							<td data-label="Prénom">{{ client.prenom }}</td>
+							<td data-label="Date de première saisie">{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
+							<td data-label="Adresse">{{ client.adresse }}</td>
+							<td data-label="Type de véhicule">{{ client.typeVehicule }}</td>
+							<td data-label="Plaque d'immatriculation">{{ client.plaqueImmat }}</td>
 
-							<td>
+							<td data-label="Action">
 								<a href="{{ path('client_show', {'id': client.id}) }}">Voir</a>
 								<a href="{{ path('client_edit', {'id': client.id}) }}">Éditer</a>
 							</td>

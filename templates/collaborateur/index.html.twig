@@ -1,53 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Collaborateur index{% endblock %}
+{% block title %}Listing collaborateur
+{% endblock %}
 
 {% block body %}
-    <h1>Collaborateur index</h1>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="">Liste des collaborateurs :</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>DateNaissance</th>
-                <th>DateEntreeEntreprise</th>
-                <th>NumSecuriteSocial</th>
-                <th>TypeContrat</th>
-                <th>DateHeureDerniereConnexion</th>
-                <th>DureeTravailHebdo</th>
-                <th>Login</th>
-                <th>MotDePasse</th>
-                <th>IsAdmin</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for collaborateur in collaborateurs %}
-            <tr>
-                <td>{{ collaborateur.nom }}</td>
-                <td>{{ collaborateur.prenom }}</td>
-                <td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('Y-m-d') : '' }}</td>
-                <td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('Y-m-d') : '' }}</td>
-                <td>{{ collaborateur.numSecuriteSocial }}</td>
-                <td>{{ collaborateur.typeContrat }}</td>
-                <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ collaborateur.dureeTravailHebdo }}</td>
-                <td>{{ collaborateur.login }}</td>
-                <td>{{ collaborateur.motDePasse }}</td>
-                <td>{{ collaborateur.isAdmin ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('collaborateur_show', {'id': collaborateur.id}) }}">show</a>
-                    <a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+			<table class="table_responsive_mobile mt-3">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Date de naissance</th>
+						<th>Entrée en entreprise</th>
+						<th>N° Sécu. Sociale</th>
+						<th>Type de contrat</th>
+						{# <th>DateHeureDerniereConnexion</th> #}
+						<th>Durée travail hebdo.</th>
+						{# <th>Identifiant</th> #}
+						{# <th>MotDePasse</th> #}
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for collaborateur in collaborateurs %}
+						<tr>
+							<td data-label="Nom">{{ collaborateur.nom }}</td>
+							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
+							<td data-label="Date de naissance">{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y') : '' }}</td>
+							<td data-label="Entrée en entreprise">{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y') : '' }}</td>
+							<td data-label="N° Sécu. Sociale">{{ collaborateur.numSecuriteSocial }}</td>
+							<td data-label="Type de contrat">{{ collaborateur.typeContrat }}</td>
+							{# <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s') : '' }}</td> #}
+							<td data-label="Durée travail hebdo.">{{ collaborateur.dureeTravailHebdo }}</td>
+							{# <td>{{ collaborateur.login }}</td> #}
+							{# <td>{{ collaborateur.motDePasse }}</td> #}
+							<td data-label="Action">
+								<a href="{{ path('collaborateur_show', {'id': collaborateur.id}) }}">Voir</a>
+								<a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="13">Aucun collaborateur</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-    <a href="{{ path('collaborateur_new') }}">Create new</a>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('collaborateur_new') }}">
+							<button class="button">Créer nouveau collaborateur</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
+

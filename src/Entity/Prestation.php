@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\PrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PrestationRepository::class)
@@ -19,31 +22,49 @@ class Prestation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Le nom de la prestation doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le nom de la prestation ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $tempsRealisation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $coutHT;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "La description doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "La description ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     *
      */
     private $typePrestation;
 
     /**
-     * @ORM\Column(type="boolean" , nullable=true)
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $isActive;
 

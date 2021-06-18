@@ -8,26 +8,26 @@
 		<div class="container">
 			<h1 class="mb-2">Liste des prestations :</h1>
 
-			<table class="table">
+			<table class="table_responsive_mobile mt-3">
 				<thead>
 					<tr>
 						<th>Nom</th>
 						<th>Temps</th>
 						<th>Coût (HT)</th>
 						<th>Description</th>
-						<th>Type prestation</th>
+						<th>Type de prestation</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for prestation in prestations %}
 						<tr>
-							<td>{{ prestation.nom }}</td>
-							<td>{{ prestation.tempsRealisation }}</td>
-							<td>{{ prestation.coutHT }}</td>
-							<td>{{ prestation.description }}</td>
-							<td>{{ prestation.typePrestation }}</td>
-							<td>
+							<td data-label="Nom">{{ prestation.nom }}</td>
+							<td data-label="Temps">{{ prestation.tempsRealisation }}</td>
+							<td data-label="Coût (HT)">{{ prestation.coutHT }}</td>
+							<td data-label="Description">{{ prestation.description }}</td>
+							<td data-label="Type de prestation">{{ prestation.typePrestation }}</td>
+							<td data-label="Action">
 								<a href="{{ path('prestation_show', {'id': prestation.id}) }}">Voir</a>
 								<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">Éditer</a>
 							</td>

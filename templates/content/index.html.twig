@@ -6,9 +6,9 @@
 {% block body %}
 	<div id="main-wrapper">
 		<div class="container">
-			<h1 class="mb-2">Liste des contenus du site :</h1>
+			<h1 class="">Liste des contenus du site :</h1>
 
-			<table class="table">
+			<table class="table mt-3">
 				<thead>
 					<tr>
 						<th>Texte</th>
@@ -19,9 +19,9 @@
 				<tbody>
 					{% for content in contents %}
 						<tr>
-							<td>{{ content.text }}</td>
-							<td>{{ content.position }}</td>
-							<td>
+							<td data-label="Texte">{{ content.text }}</td>
+							<td data-label="Position">{{ content.position }}</td>
+							<td data-label="Action">
 								<a href="{{ path('content_show', {'id': content.id}) }}">Voir</a>
 								<a href="{{ path('content_edit', {'id': content.id}) }}">Éditer</a>
 							</td>

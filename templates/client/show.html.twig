@@ -5,9 +5,9 @@
 {% block body %}
    	<div id="prestation-wrapper">
 		<div class="container">
-			<h1 class="mb-2">Client</h1>
+			<h1 class="">Client</h1>
 
-        <table class="table">
+        <table class="table mt-3">
             <tbody>
                 <tr>
                     <th>Nom</th>
@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <th>Date de première saisie</th>
-                    <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d- m-Y') : '' }}</td>
+                    <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
                 </tr>
                 <tr>
                     <th>Adresse</th>

@@ -8,6 +8,9 @@ class Month {
     private $months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre',"Novembre","Décembre"];
     public $month;
     public $year;
+    public $toString;
+    public $start;
+
    /**
      * Cette fonction permet de créer une occurence d'un mois 
      * @param int $month : correspond au mois

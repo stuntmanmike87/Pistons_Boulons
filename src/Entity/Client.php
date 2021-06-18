@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -17,38 +18,63 @@ class Client
      */
     private $id;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
+     *@ORM\Column(type="string", length=255)
+     *@Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50,
+     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le nom ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50,
+     *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères ",
+     *      maxMessage = "Le prénom ne doit pas comporter plus de  {{ limit }} caractères"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank
      */
     private $datePremiereSaisie;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $typeVehicule;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern=	"/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/i",
+     *     match=false,
+     *     message="La plaque d'immatriculation n'est pas valide"
+     * )
      */
     private $plaqueImmat;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * 
      */
     private $isActif;
 
@@ -72,7 +98,7 @@ class Client
         return $this->nom;
     }
 
-     /**
+    /**
      * Fonction qui permet de changer la valeur du nom du client
      * 
      * @param string $nom 
@@ -110,7 +136,7 @@ class Client
         return $this;
     }
 
-     /**
+    /**
      * Fonction qui permet de récupérer la date de première saisie du client
      * 
      * @return datePremiereSaisie
@@ -134,7 +160,7 @@ class Client
         return $this;
     }
 
-     /**
+    /**
      * Fonction qui permet de récupérer l'adresse du client
      * 
      * @return adresse
@@ -157,8 +183,8 @@ class Client
 
         return $this;
     }
-    
-     /**
+
+    /**
      * Fonction qui permet de récupérer le type de véhicule du client
      * 
      * @return typeVehicule
@@ -182,7 +208,7 @@ class Client
         return $this;
     }
 
-     /**
+    /**
      * Fonction qui permet de récupérer la plaque d'immatriculation du client
      * 
      * @return plaqueImmat
@@ -205,8 +231,8 @@ class Client
 
         return $this;
     }
-    
-     /**
+
+    /**
      * Fonction qui permet de récupérer si le client est actif ou pas
      * 
      * @return isActif

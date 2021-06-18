@@ -4,13 +4,13 @@
 {% block body %}
 	<div id="prestation-wrapper">
 		<div class="container mt-5">
-			<h1 class="mb-2">Créer une nouvelle prestation :</h1>
+			<h1 class="mb-4">Créer une nouvelle prestation :</h1>
 
 			{{ include('prestation/_form.html.twig') }}
 
-			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+			<div class=" d-flex row align-items-start bloc_boutons_modifier_crud">
 				<div class="col-6"></div>
-				<div class="col-6 col-6 text-center">
+				<div class="col-6 col-6 text-center mt-1">
 					<a class="button float-right" href="{{ path('prestation_index') }}">Retour</a>
 				</div>
 			</div>

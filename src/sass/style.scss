@@ -556,6 +556,28 @@ button,
 }
 
 @include breakpoint("<=medium") {
+
+	.table_responsive_mobile thead {
+		display: none;
+	}
+
+	.table_responsive_mobile tr {
+		display: block;
+		margin-bottom: 40px;
+	}
+
+	.table_responsive_mobile td {
+		display: block;
+		text-align: right;
+	}
+
+	.table_responsive_mobile td:before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+	}
+
+	
 	/* Basic */
 
 	html,

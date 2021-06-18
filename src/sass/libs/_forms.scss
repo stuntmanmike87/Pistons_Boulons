@@ -1,4 +1,3 @@
-
 /* Forms */
 
 form {
@@ -13,6 +12,8 @@ form {
 	input[type="text"],
 	input[type="email"],
 	input[type="password"],
+	 input[type="date"],
+	input[type="number"],
 	select,
 	textarea {
 		-webkit-appearance: none;
@@ -32,7 +33,7 @@ form {
 		line-height: 3em;
 		padding: 0 1em;
 	}
-
+	
 	select {
 		line-height: 3em;
 		padding: 0 1em;
