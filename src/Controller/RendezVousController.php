@@ -83,6 +83,22 @@ class RendezVousController extends AbstractController
             'events' => $liste_events
         ]);
     }
+    /**
+     * @Route("/agenda_quotidien/{day}", name="agenda_quotidien", methods={"GET","POST"})
+     * 
+     * @param RendezVousRepository $rendezVousRepository 
+     * @return rendez_vous/agenda.twig avec les données des rendez-vous dans la base de données
+     */
+    public function agenda_quotidien(\DateTime $day,RendezVousRepository $rendezVousRepository): Response
+    {
+        $date = $day->format('d/m/Y');
+        $events = $rendezVousRepository->findByDateRendezVous($day);
+        return $this->render('rendez_vous/agenda_quotidien.twig', [
+            'controller_name' => 'ContentController',
+            'events' => $events,
+            'date'=> $date
+        ]);
+    }
 
     public function getMonth()
     {

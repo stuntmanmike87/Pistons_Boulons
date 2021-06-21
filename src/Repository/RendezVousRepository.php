@@ -47,6 +47,26 @@ class RendezVousRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+   /**
+     * Cette Fonction permet de récupérer les rendez vous entre deux dates
+     * @param DateTime $debut 
+     * @param DateTime $fin
+     * @return RendezVous[] Returns an array of RendezVous objects
+     */
+    
+    // SELECT * FROM RendezVous WHERE dateRendezVous BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND  '{$end->format('Y-m-d 23:59:59')}' 
+    public function findByDateRendezVous($jour)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere("r.dateRendezVous BETWEEN :deb AND :fin")
+            ->setParameter('deb', $jour->format("Y-m-d 00:00:00"))
+            ->setParameter('fin', $jour->format("Y-m-d 23:59:59"))
+            ->orderBy('r.dateRendezVous', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*

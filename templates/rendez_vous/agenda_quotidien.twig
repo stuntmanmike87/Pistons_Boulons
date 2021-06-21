@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agenda du jour
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+
+			<h1 class="">Rendez-vous du
+				{{ date }}
+				:</h1>
+
+			{% for event in events %}
+
+				<table class="table mt-5">
+					<tbody>
+						<tr>
+							<th>Heure</th>
+							<td>{{ event.dateRendezVous|date("H:i") }}</td>
+						</tr>
+						<tr>
+							<th>Client</th>
+							<td>{{ event.idClient.getClient()}}</td>
+						</tr>
+						<tr>
+							<th>Collaborateur</th>
+							<td>{{event.idCollaborateur.getCollaborateur()}}</td>
+						</tr>
+						<tr>
+							<th>Prestation</th>
+							<td>{{event.idPrestation.getPrestation()}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				{# {{ include('rendez_vous/show.twig', {'id': event.id }) }} #}
+
+			{% endfor %}
+			<div class=" d-flex row align-items-start">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('agendaMensuel') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

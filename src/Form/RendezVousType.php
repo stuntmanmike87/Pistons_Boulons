@@ -31,6 +31,7 @@ class RendezVousType extends AbstractType
             ->add('dateRendezVous', DateTimeType::class , [
                 'widget' => 'single_text',
                 'view_timezone' => 'Europe/Paris',
+                'data' => new \DateTime("now")
             ])
             ->add('idClient' , EntityType::class , [
                 'class' => Client::class,

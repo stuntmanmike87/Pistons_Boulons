@@ -19,9 +19,11 @@ class AgendaService
   
     public function __construct(RendezVousController $myControlleur)
     {
-        // $month = $_POST["month"];
-        // $year = $_POST["year"];
-        $this->month = $myControlleur->getMonth();
+        if(is_null($myControlleur->getMonth())){
+            $this->month = new Month();
+        }else{
+            $this->month = $myControlleur->getMonth();
+        }
     }
     public function toString():string
     {
