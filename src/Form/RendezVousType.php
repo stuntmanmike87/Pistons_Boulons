@@ -14,7 +14,17 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RendezVousType extends AbstractType
-{
+{   
+    /**
+     * Fonction de création du formulaire rendez-vous
+     * 
+     * Cette fonction a pour but de créer la mise en place des éléments du formulaire du rendez-vous, ces données sont sa date de rendez-vous; son client ; son collaborateur et sa prestation.
+     * 
+     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     *  @param array $options un tableau qui permet de lister les champs du formulaire.
+     * 
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
