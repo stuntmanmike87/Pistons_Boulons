@@ -18,16 +18,12 @@ class CollaborateurType extends AbstractType
             ->add('prenom')
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'placeholder' => [
-                    'year' => 2012, 'month' => 12, 'day' => 12,
-                ]
+                'data' => new \DateTime("now")
 
             ])
             ->add('dateEntreeEntreprise', DateType::class, [
                 'widget' => 'single_text',
-                'placeholder' => [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                ]
+                'data' => new \DateTime("now")
             ])
             ->add('numSecuriteSocial')
             ->add('typeContrat')
@@ -37,7 +33,6 @@ class CollaborateurType extends AbstractType
                 ]
             ])
             ->add('login', TextType::class, [
-               
                 'attr' => [
                     'placeholder' => 'nomPrénom'
                 ]

@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ClientType extends AbstractType
 {
@@ -30,11 +31,8 @@ class ClientType extends AbstractType
             ->add('prenom')
             ->add('datePremiereSaisie' , DateType::class , [
                 'widget' => 'single_text',
-                'placeholder' => [
-                    'year' => date('Y'), 
-                    'month' => date('m'), 
-                    'day' => date('d'),
-                ]])
+                'data' => new \DateTime("now")
+            ])
             ->add('adresse')
             ->add('typeVehicule' , ChoiceType::class, [
                 'choices' => [
@@ -47,8 +45,9 @@ class ClientType extends AbstractType
                     'Non gérable' => 'Non gérable',
                 ]
             ])
-            ->add('plaqueImmat')
-
+            ->add('plaqueImmat', TextType::class ,   ['attr' => [
+                'placeholder' => 'AZ-123-AZ ou 1234-AZ-12'
+            ]])
         ;
     }
 

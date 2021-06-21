@@ -80,18 +80,23 @@ class Client
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="La plaque d'immatriculation ne peut pas être vide.")
-     * @Assert\Regex(
-     * pattern="/^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/",
-     * htmlPattern = "[A-Z]{2}[-]\d{3}[-][A-Z]{2}",
-     * match=false,
-     * message="La plaque d'immatriculation n'est pas valide"
-     *) 
-     * */
-    private $plaqueImmat;
+     * @Assert\Length(
+     *      min = "9",
+     *      max = "10",
+     *      maxMessage="La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères.",
+     *      minMessage="La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères."
+     * )
+     */
+    private $plaqueImmat;    
+    //  * @Assert\Regex(
+    //  * pattern="/^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/",
+    //  * match=false,
+    //  * message="La plaque d'immatriculation n'est pas valide"
+    //  * ) 
+
     // /[A-Z]{1,2}+\d{1.4}+[A-Z]{1,2}|\d{1,4}+[A-Z]{1,4}+\d{1,2}/
     // |\d{1,4}[A-Z]{1,4}\d{1,2}
     // /^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/
-
 
     /**
      * @ORM\Column(type="boolean", nullable=true)

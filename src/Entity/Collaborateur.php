@@ -80,8 +80,8 @@ class Collaborateur
     * @ORM\Column(type="string", length=255)
     * @Assert\NotBlank(message="Le numéro de sécurité sociale ne peut pas être vide.")
     * @Assert\Length(
-     *      min = 15,
-     *      max = 15,
+     *      min = 13,
+     *      max = 13,
      *      exactMessage = "Le numéro de sécurité sociale est incorrecte, il ne comprend pas 15 caractères.",
      *  )
     */
