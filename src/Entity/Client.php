@@ -292,4 +292,12 @@ class Client
     public function getClient(){
         return $this->nom .' '. $this->prenom .' '. $this->plaqueImmat;
     }
+      /**
+     * Fonction qui permet de récupérer le client avec son nom , son prénom
+     * 
+     * @return Client
+     */
+    public function getIdentiteClient(){
+        return $this->nom .' '. $this->prenom;
+    }
 }

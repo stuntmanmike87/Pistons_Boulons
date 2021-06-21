@@ -23,7 +23,10 @@
 }
 /*  Styles des mois précédent et suivant */
 .calendar__othermonth {
-    opacity: 0.3;
+   /*  Style des jours */
+    .calendar__day {
+        opacity  :0.3;
+    }
 }
 /* Styles des events qui ne sont pas dans le mois actuel */
 .calendar__event__othermonth {

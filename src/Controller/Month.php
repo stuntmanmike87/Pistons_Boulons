@@ -27,8 +27,7 @@ class Month {
         $this->month = $month;
         $this->year = $year;
     }
-
-
+ 
      /**
      * Cette fonction permet de visualiser notre occurence
      * 

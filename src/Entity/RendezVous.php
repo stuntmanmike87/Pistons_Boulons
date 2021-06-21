@@ -158,6 +158,15 @@ class RendezVous
     public function getClient(){
         return $this->Client.getClient();
     }
+    /**
+     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
+     * 
+     * @return Client.getClient()
+     */
+    public function getIdentiteClient(){
+        return $this->Client.getIdentiteClient();
+    }
+
 
     /**
      * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
