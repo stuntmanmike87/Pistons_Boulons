@@ -4,4 +4,5 @@ twig:
     strict_variables: '%kernel.debug%'
     exception_controller: null
     globals:
-        appConfig: '@App\Service\ConfigService'
+        appConfig: '@App\Service\FooterService'
+        agenda : '@App\Service\AgendaService'

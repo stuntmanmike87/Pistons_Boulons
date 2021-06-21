@@ -1,21 +1,15 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Agenda
-{% endblock %}
-
-{% block body %}
 
 	<div class="container">
     <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
 
-        <h1>{{ agenda.toString() }}</h1>
-        {# <div>
+        <h1><?= $month->toString(); ?></h1>
+        <div>
             <a href="index.php?month=<?= $month->previousMonth()->month ?>&year=<?= $month->previousMonth()->year; ?>" class="btn btn-primary">&lt;</a>
             <a href="index.php?month=<?= $month->nextMonth()->month ?>&year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a>
-        </div> #}
+        </div>
 
     </div>
-    {# <table class="calendar__table calendar__table--<?= $weeks; ?>weeks">
+    <table class="calendar__table calendar__table--<?= $weeks; ?>weeks">
         <?php for ($i = 0; $i < $weeks; $i++) : ?>
             <tr>
                 <?php foreach ($month->days as $k => $day) :
@@ -36,5 +30,4 @@
                 <?php endforeach; ?>
             </tr>
         <?php endfor; ?>
-    </table> #}
-{% endblock %}
+    </table>
