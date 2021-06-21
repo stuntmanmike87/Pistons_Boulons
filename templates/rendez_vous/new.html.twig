@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New RendezVous{% endblock %}
+{% block title %}Nouveau rendez-vous
+{% endblock %}
+
 
 {% block body %}
-    <h1>Create new RendezVous</h1>
+	<div id="prestation-wrapper">
+		<div class="container mt-5">
+			<h1 class="mb-4">Créer un rendez-vous :</h1>
 
-    {{ include('rendez_vous/_form.html.twig') }}
+			{{ include('rendez_vous/_form.html.twig') }}
 
-    <a href="{{ path('rendez_vous_index') }}">back to list</a>
+			<div class=" d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('rendez_vous_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

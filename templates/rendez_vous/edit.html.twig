@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit RendezVous{% endblock %}
+{% block title %}Édition rendez-vous
+{% endblock %}
 
 {% block body %}
-    <h1>Edit RendezVous</h1>
 
-    {{ include('rendez_vous/_form.html.twig', {'button_label': 'Update'}) }}
+	<div id="prestation-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Modification d'un rendez-vous :</h1>
 
-    <a href="{{ path('rendez_vous_index') }}">back to list</a>
+			{{ include('rendez_vous/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    {{ include('rendez_vous/_delete_form.html.twig') }}
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-lg-6 col-6 text-center float-left">
+					{{ include('rendez_vous/_delete_form.html.twig') }}
+				</div>
+				<div class="col-lg-6 col-6 text-center  float-right">
+					<a class="button" href="{{ path('rendez_vous_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

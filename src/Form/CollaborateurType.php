@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CollaborateurType extends AbstractType
 {
@@ -15,20 +16,28 @@ class CollaborateurType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', DateType::class , [
+            ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'years' => range(1960 ,date('Y')+50)
+                'data' => new \DateTime("now")
+
             ])
-            ->add('dateEntreeEntreprise', DateType::class , [
+            ->add('dateEntreeEntreprise', DateType::class, [
                 'widget' => 'single_text',
-                'years' => range(1960 ,date('Y')+50)
+                'data' => new \DateTime("now")
             ])
             ->add('numSecuriteSocial')
             ->add('typeContrat')
-            ->add('dureeTravailHebdo')
-            ->add('login')
-            ->add('motDePasse')
-        ;
+            ->add('dureeTravailHebdo', TextType::class, [
+                'attr' => [
+                    'placeholder' => '35h'
+                ]
+            ])
+            ->add('login', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'nomPrénom'
+                ]
+            ])
+            ->add('motDePasse');
     }
 
     public function configureOptions(OptionsResolver $resolver)

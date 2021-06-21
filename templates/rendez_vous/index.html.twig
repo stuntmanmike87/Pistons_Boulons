@@ -1,39 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RendezVous index{% endblock %}
+{% block title %}Listing rendez-vous
+{% endblock %}
 
 {% block body %}
-    <h1>RendezVous index</h1>
+	<div id="prestation-wrapper">
+		<div class="container">
+			<h1 class="mb-2">Liste des rendez-vous :</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date du rendez-vous</th>
-                <th>Client</th>
-                <th>Collaborateur</th>
-                <th>Prestation</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for rendez_vou in rendez_vouses %}
-            <tr>
-                <td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{rendez_vou.idClient.getClient()}}</td>
-                <td>{{rendez_vou.idCollaborateur.getCollaborateur()}}</td>
-                <td>{{rendez_vou.idPrestation.getPrestation()}}</td>
-                <td>
-                    <a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">show</a>
-                    <a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('rendez_vous_new') }}">Create new</a>
+			<table class="table_responsive_mobile mt-3">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Client</th>
+						<th>Collaborateur</th>
+						<th>Prestation</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for rendez_vou in rendez_vouses %}
+						<tr>
+							<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ rendez_vou.idClient.getClient() }}</td>
+							<td>{{ rendez_vou.idCollaborateur.getCollaborateur() }}</td>
+							<td>{{ rendez_vou.idPrestation.getPrestation() }}</td>
+							<td>
+								<a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">Voir</a>
+								<a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5" class="text-center maintenance mt-3">Aucun rendez-vous</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('rendez_vous_new') }}">
+							<button class="button">Créer rendez-vous</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
