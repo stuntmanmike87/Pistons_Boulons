@@ -8,14 +8,20 @@
     <table class="table">
         <thead>
             <tr>
-                <th>DateRendezVous</th>
-                <th>actions</th>
+                <th>Date du rendez-vous</th>
+                <th>Client</th>
+                <th>Collaborateur</th>
+                <th>Prestation</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for rendez_vou in rendez_vouses %}
             <tr>
                 <td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{rendez_vou.idClient.getClient()}}</td>
+                <td>{{rendez_vou.idCollaborateur.getCollaborateur()}}</td>
+                <td>{{rendez_vou.idPrestation.getPrestation()}}</td>
                 <td>
                     <a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">show</a>
                     <a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">edit</a>

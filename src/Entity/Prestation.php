@@ -222,4 +222,8 @@ class Prestation
 
         return $this;
     }
+
+    public function getPrestation(){
+        return $this->nom;
+    }
 }

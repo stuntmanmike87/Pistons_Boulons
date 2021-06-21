@@ -11,13 +11,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RendezVousType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateRendezVous')
+            ->add('dateRendezVous', DateTimeType::class , [
+                'widget' => 'single_text',
+                'view_timezone' => 'Europe/Paris'
+            ])
             ->add('idClient' , EntityType::class , [
                 'class' => Client::class,
                 'query_builder' => function (EntityRepository $er) {

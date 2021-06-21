@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\RendezVousRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Client;
+use App\Entity\Collaborateur;
+use App\Entity\Prestation;
 
 /**
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
@@ -91,5 +94,17 @@ class RendezVous
         $this->dateRendezVous = $dateRendezVous;
 
         return $this;
+    }
+
+    public function getClient(){
+        return $this->Client.getClient();
+    }
+
+    public function getCollaborateur(){
+        return $this->Collaborateur.getCollaborateur();
+    }
+
+    public function getPrestation(){
+        return $this->Prestation.getPrestation();
     }
 }
