@@ -4,17 +4,23 @@ namespace App\Controller;
 
 use App\Entity\RendezVous;
 use App\Form\RendezVousType;
+use App\Service\AgendaService;
 use App\Repository\RendezVousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Events;
+use App\Controller\Month;
 
 /**
  * @Route("/rendez/vous")
  */
 class RendezVousController extends AbstractController
 {
+
+    private $month;
+
     /**
      * @Route("/", name="rendez_vous_index", methods={"GET"})
      * 
@@ -28,9 +34,75 @@ class RendezVousController extends AbstractController
      */
     public function index(RendezVousRepository $rendezVousRepository): Response
     {
+        $this->month = new Month();
         return $this->render('rendez_vous/index.html.twig', [
             'rendez_vouses' => $rendezVousRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/agenda", name="agendaMensuel")
+     * 
+     * @param RendezVousRepository $rendezVousRepository 
+     * @return rendez_vous/agenda.twig avec les données des rendez-vous dans la base de données
+     */
+    public function agendaMensuel(RendezVousRepository $rendezVousRepository): Response
+    {
+       
+        $this->month = new Month();
+        $debut =  $this->month->getStartingDay();
+        $mois = $debut->format('m');
+        $annee = $debut->format('Y');
+        $moisSuivant = mktime(0, 0, 0, $mois+1, 1, $annee);
+        $dernierJour = date('Y-m-d',$moisSuivant--); 
+        $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut,$dernierJour);
+        return $this->render('rendez_vous/agenda.twig', [
+            'controller_name' => 'ContentController',
+            'events' => $liste_events
+        ]);
+    }
+    /**
+     * @Route("/agenda/{month}-{year}", name="agenda", methods={"GET","POST"})
+     * 
+     * @param RendezVousRepository $rendezVousRepository 
+     * @return rendez_vous/agenda.twig avec les données des rendez-vous dans la base de données
+     */
+    public function agenda(RendezVousRepository $rendezVousRepository,$year,$month): Response
+    {
+       
+        $this->month = new Month($month,$year);
+        
+        $debut =  $this->month->getStartingDay();
+        $mois = $debut->format('m');
+        $annee = $debut->format('Y');
+        $moisSuivant = mktime(0, 0, 0, $mois+1, 1, $annee);
+        $dernierJour = date('Y-m-d',$moisSuivant--); 
+        $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut,$dernierJour);
+        return $this->render('rendez_vous/agenda.twig', [
+            'controller_name' => 'ContentController',
+            'events' => $liste_events
+        ]);
+    }
+    /**
+     * @Route("/agenda_quotidien/{day}", name="agenda_quotidien", methods={"GET","POST"})
+     * 
+     * @param RendezVousRepository $rendezVousRepository 
+     * @return rendez_vous/agenda.twig avec les données des rendez-vous dans la base de données
+     */
+    public function agenda_quotidien(\DateTime $day,RendezVousRepository $rendezVousRepository): Response
+    {
+        $date = $day->format('d/m/Y');
+        $events = $rendezVousRepository->findByDateRendezVous($day);
+        return $this->render('rendez_vous/agenda_quotidien.twig', [
+            'controller_name' => 'ContentController',
+            'events' => $events,
+            'date'=> $date
+        ]);
+    }
+
+    public function getMonth()
+    {
+        return $this->month;
     }
 
     /**
@@ -50,6 +122,7 @@ class RendezVousController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->month = new Month();
         $rendezVou = new RendezVous();
         $form = $this->createForm(RendezVousType::class, $rendezVou);
         $form->handleRequest($request);
@@ -81,6 +154,7 @@ class RendezVousController extends AbstractController
      */
     public function show(RendezVous $rendezVou): Response
     {
+        $this->month = new Month();
         return $this->render('rendez_vous/show.html.twig', [
             'rendez_vou' => $rendezVou,
         ]);
@@ -105,6 +179,7 @@ class RendezVousController extends AbstractController
      */
     public function edit(Request $request, RendezVous $rendezVou): Response
     {
+        $this->month = new Month();
         $form = $this->createForm(RendezVousType::class, $rendezVou);
         $form->handleRequest($request);
 
@@ -135,7 +210,8 @@ class RendezVousController extends AbstractController
      */
     public function delete(Request $request, RendezVous $rendezVou): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$rendezVou->getId(), $request->request->get('_token'))) {
+        $this->month = new Month();
+        if ($this->isCsrfTokenValid('delete' . $rendezVou->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($rendezVou);
             $entityManager->flush();

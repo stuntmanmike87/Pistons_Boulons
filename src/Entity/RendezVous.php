@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
@@ -23,24 +24,32 @@ class RendezVous
     /**
      * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Vous devez choisir un client.")
      */
     private $idClient;
 
     /**
      * @ORM\ManyToOne(targetEntity=Collaborateur::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Vous devez choisir un collaborateur.")
      */
     private $idCollaborateur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Prestation::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false)   
+     * @Assert\NotBlank(message="Vous devez choisir une prestation.")
      */
     private $idPrestation;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
+    * @ORM\Column(type="datetime")
+    * @Assert\NotBlank(message="La date de rendez-vous ne peut pas être vide.")
+    * @Assert\Range(
+    *      min = "now",
+    *      minMessage="La date du rendez-vous ne peut pas être inférieure à la date du jour."
+    * )
+    */
     private $dateRendezVous;
 
     /**
@@ -158,6 +167,15 @@ class RendezVous
     public function getClient(){
         return $this->Client.getClient();
     }
+    /**
+     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
+     * 
+     * @return Client.getClient()
+     */
+    public function getIdentiteClient(){
+        return $this->Client.getIdentiteClient();
+    }
+
 
     /**
      * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom

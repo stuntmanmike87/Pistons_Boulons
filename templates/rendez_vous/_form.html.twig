@@ -1,5 +1,47 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+{# dateRendezVous #}
+
+{# label #}
+{{ form_label(form.dateRendezVous, 'Date du rendez-vous :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.dateRendezVous) }}
+{# input #}
+{{ form_widget(form.dateRendezVous) }}
+
+   {# idClient #}
+
+{# label #}
+{{ form_label(form.idClient, 'Client :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.idClient) }}
+{# input #}
+{{ form_widget(form.idClient) }}
+
+   {# idCollaborateur #}
+
+{# label #}
+{{ form_label(form.idCollaborateur, 'Collaborateur :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.idCollaborateur) }}
+{# input #}
+{{ form_widget(form.idCollaborateur) }}
+
+
+   {# idPrestation #}
+
+{# label #}
+{{ form_label(form.idPrestation, 'Prestation :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.idPrestation) }}
+{# input #}
+{{ form_widget(form.idPrestation) }}
+
+
+
 
     <div class="col-md-12  text-center">
 	<button class="mt-5">{{ button_label|default('Enregistrer') }}</button>

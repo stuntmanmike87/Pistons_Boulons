@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agenda
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+			<div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+				<h1>{{ agenda.toString() }}</h1>
+				<div>
+					<a href="{{path("agenda", {'month': agenda.getPreviousMonth().month , 'year' : agenda.getPreviousMonth().year } ) }}" class="btn btn-primary">&lt;</a>
+					<a href="{{path("agenda", {'month': agenda.getNextMonth().month , 'year' : agenda.getNextMonth().year } ) }}" class="btn btn-primary">&gt;</a>
+				</div> 		
+			</div>
+			
+			<table class="calendar__table calendar__table--{{ agenda.getWeeks() }}weeks">
+				{# on récupère le premier jour du mois #}
+				{% set dateDebut = agenda.getStartingDay() | date_modify('monday this week') %}
+			
+				{# on boucle sur le nombre de semaines pour avoir nos lignes #}
+				{% for i in 0..agenda.getWeeks()-1 %}
+					<tr>
+						{% set k = 0 %}
+						{% for jour in agenda.getMonth.days %}
+							{# on calcule la position du jour dan la boucle #}
+							{% set calculDate = k + i * 7 %}
+					
+							{% set date = dateDebut|date_modify("+ " ~ calculDate ~ " days") %}
+
+							
+							{% set eventsForDay = [] %}
+							{% for event in events %}
+								{% set dateRdv = event.dateRendezVous|date('d/m/Y')  %}
+								{% set dateJour = date|date('d/m/Y')  %}
+							
+								{% if dateRdv == dateJour %}
+									{% set eventsForDay = eventsForDay|merge({(event.id): event}) %}
+								{% endif %}
+							{% endfor %}
+						
+							
+
+
+							
+							<td class="{% if agenda.withinMonth(date) == '' %} {{ 'calendar__othermonth' }} {% endif %}">
+
+							
+								{% if i == 0 %}
+									<div class="calendar__weekday mb-2">{{jour}}</div>
+								{% endif %}
+								<div class="calendar__day">{{ date|date('d') }}</div>
+								<pre>
+									{{ dump(date) }}
+								</pre>
+								{% if eventsForDay|length != 0 %}
+									<p class="text-center">{{ eventsForDay|length }} prestations aujourd'hui <a href="{{path("agenda_quotidien", {'day': date|date("Y-m-d")}) }}" class="text-center">Voir</a><p>
+								
+								{% endif %}
+							</td>
+							{% set k = k + 1 %}
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}

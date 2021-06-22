@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agenda du jour
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+
+			<h1 class="">Rendez-vous du
+				{{ date }}
+				:</h1>
+
+			{% if events|length != 0 %}
+
+			{% for event in events %}
+
+				<table class="table mt-5">
+					<tbody>
+						<tr>
+							<th>Heure</th>
+							<td>{{ event.dateRendezVous|date("H:i") }}</td>
+						</tr>
+						<tr>
+							<th>Client</th>
+							<td>{{ event.idClient.getIdentiteClient()}}</td>
+						</tr>
+						<tr>
+							<th>Collaborateur</th>
+							<td>{{event.idCollaborateur.getCollaborateur()}}</td>
+						</tr>
+						<tr>
+							<th>Prestation</th>
+							<td>{{event.idPrestation.getPrestation()}}</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td><a class="float-right button" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				{# {{ include('rendez_vous/show.twig', {'id': event.id }) }} #}
+
+			{% endfor %}
+			{% else %}
+				<p class="maintenance">Aucune prestation pour ce jour</p>
+			{% endif %}
+
+			<div class=" d-flex row align-items-start">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-3">
+					<a class="button float-right" href="{{ path('agendaMensuel') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
