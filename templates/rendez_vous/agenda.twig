@@ -55,15 +55,8 @@
 								</pre>
 								{% if eventsForDay|length != 0 %}
 									<p class="text-center">{{ eventsForDay|length }} prestations aujourd'hui <a href="{{path("agenda_quotidien", {'day': date|date("Y-m-d")}) }}" class="text-center">Voir</a><p>
-								{% else %}
-									{# <p class="text-center maintenance">Aucune prestations aujourd'hui.<p> #}
-								{% endif %}
-								{# {% for event in eventsForDay %}
-									<div class="{% if agenda.withinMonth(date) == '' %} {{ 'calendar__othermonth' }} {% endif %} calendar__event">
-										<a href="{{ path('rendez_vous_show', {'id': event.id}) }}">{{event.dateRendezVous|date("H:i")}} <br> {{event.idClient.getIdentiteClient()}}</a>
-									</div>
-								{% endfor %}  #}
 								
+								{% endif %}
 							</td>
 							{% set k = k + 1 %}
 						{% endfor %}
