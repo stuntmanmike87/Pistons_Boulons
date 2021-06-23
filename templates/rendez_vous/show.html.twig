@@ -12,7 +12,11 @@
 				<tbody>
 					<tr>
 						<th>Date</th>
-						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y H:i:s') : '' }}</td>
+						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y') : '' }}</td>
+					</tr>
+					<tr>
+						<th>Heure</th>
+						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}</td>
 					</tr>
 					<tr>
 						<th>Client</th>
@@ -31,18 +35,18 @@
 
 			<div class="container mt-5">
 				<div class=" d-flex flex-row row align-items-start">
-					<div class="col-lg-4 col-md-12  text-center">
+					<div class="col-lg-3 col-md-12  text-center">
 						<a class="button" href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">Modifier</a>
 
 					</div>
-					<div class="col-lg-4 col-md-12  text-center">
+					<div class="col-lg-3 col-md-12  text-center">
 						{{ include('rendez_vous/_delete_form.html.twig') }}
 
 					</div>
-					<div class="col-lg-4 col-md-12 text-center">
-						<a class="float-right button" href="{{ path('rendez_vous_pdf', {'id': event.id}) }}">Exporter PDF</a>
+					<div class="col-lg-3 col-md-12 text-center">
+						<a class="float-right button" href="{{ path('rendez_vous_pdf', {'id': rendez_vou.id}) }}">Exporter PDF</a>
 					</div>
-					<div class="col-lg-4 col-md-12 text-center">
+					<div class="col-lg-3 col-md-12 text-center">
 						<a class="button" href="{{ path('rendez_vous_index') }}">Retour</a>
 					</div>
 				</div>

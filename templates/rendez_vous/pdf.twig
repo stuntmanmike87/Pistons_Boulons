@@ -1,14 +1,87 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Title of the PDF</title>
-    </head>
-        {% block body %}
-            <h4>{{ title }}</h4>
-            <p>Lorem Ipsum</p>
-            <p>{{event.dateRendezVous|date("H:i")}}</p>
-            <p>{{event.idClient.getClient()}}</p>
-            <p>{{event.idCollaborateur.getCollaborateur()}}</p>
-            <p>{{event.idPrestation.getPrestation()}}</p>
-        {% endblock %}
-</html>
+{% extends 'base_pdf.html.twig' %}
+
+{% block title %}PDF
+{% endblock %}
+
+{% block body %}
+
+
+	{% set  contact_adresse = "" %}
+	{% set  contact_telephone = "" %}
+	{% set  contact_email = "" %}
+
+	{% for contenu in contenu_contact %}
+		{% set  position = contenu.position %}
+
+		{% if position == 'contact_adresse' %}
+
+			{% set  contact_adresse = contenu.text %}
+
+		{% elseif position == 'contact_telephone' %}
+
+			{% set  contact_telephone = contenu.text %}
+
+		{% elseif position == 'contact_email' %}
+
+			{% set  contact_email = contenu.text %}
+
+		{% endif %}
+
+	{% endfor %}
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<p>LOGO</p>
+				{# <img src="{{asset('images/logo.png') }}" alt="" class="logoDesktop"/> #}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<p>LIBELLE</p>
+
+				{# <img src="{{asset('images/libelle.png')}}" alt="" class="libelleDesktop"/> #}
+				<p class="maintenance">Pistons et Boulons</p>
+				{% if contact_adresse is null %}
+					<div class="container mt-1">
+						<p class="maintenance">Non renseignée</p>
+					</div>
+				{% else %}
+					<p>{{ contact_adresse }}</p>
+				{% endif %}
+
+				{% if contact_telephone is null %}
+					<div class="container mt-1">
+						<p class="maintenance">Non renseignée</p>
+					</div>
+				{% else %}
+					<p>{{ contact_telephone }}</p>
+				{% endif %}
+
+				{% if contact_email is null %}
+					<div class="container mt-1">
+						<p class="maintenance">Non renseignée</p>
+					</div>
+				{% else %}
+					<p>{{ contact_email }}</p>
+				{% endif %}
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+
+				<h2>Rendez-vous</h2>
+				<p>Date :
+					{{event.dateRendezVous|date("d-m-Y")}}</p>
+				<p>Heure :
+					{{event.dateRendezVous|date("H:i")}}</p>
+				<p>Client :
+					{{event.idClient.getIdentiteClient()}}</p>
+				<p>Collaborateur :
+					{{event.idCollaborateur.getCollaborateur()}}</p>
+				<p>Prestation :
+					{{event.idPrestation.getPrestation()}}</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

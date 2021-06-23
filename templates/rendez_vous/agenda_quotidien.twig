@@ -6,52 +6,64 @@
 {% block body %}
 	<div id="main-wrapper">
 		<div class="container">
-
-			<h1 class="">Rendez-vous du
-				{{ date }}
-				:</h1>
+			<div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+				<h1 class="">Rendez-vous du
+					{{ date }}
+					:</h1>
+				<div>
+					<a href="{{path("agenda_quotidien", {'day': hier|date("Y-m-d")}) }}" class="btn btn-primary mt-1">&lt;</a>
+					<a href="{{path("agenda_quotidien", {'day': demain|date("Y-m-d")}) }}" class="btn btn-primary mt-1">&gt;</a>
+				</div>
+			</div>
 
 			{% if events|length != 0 %}
 
-			{% for event in events %}
+				{% for event in events %}
 
-				<table class="table mt-5">
-					<tbody>
-						<tr>
-							<th>Heure</th>
-							<td>{{ event.dateRendezVous|date("H:i") }}</td>
-						</tr>
-						<tr>
-							<th>Client</th>
-							<td>{{ event.idClient.getIdentiteClient()}}</td>
-						</tr>
-						<tr>
-							<th>Collaborateur</th>
-							<td>{{event.idCollaborateur.getCollaborateur()}}</td>
-						</tr>
-						<tr>
-							<th>Prestation</th>
-							<td>{{event.idPrestation.getPrestation()}}</td>
-						</tr>
-						<tr>
-							<th></th>
-							<td><a class="float-right button" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a></td>
-							<td><a class="float-right button" href="{{ path('rendez_vous_pdf', {'id': event.id}) }}">Exporter PDF</a></td>
-						</tr>
-					</tbody>
-				</table>
+					<table class="table table-striped mt-5">
+						<tbody>
+							<tr>
+								<th>Heure</th>
+								<td>{{ event.dateRendezVous|date("H:i") }}</td>
+							</tr>
+							<tr>
+								<th>Client</th>
+								<td>{{ event.idClient.getIdentiteClient()}}</td>
+							</tr>
+							<tr>
+								<th>Collaborateur</th>
+								<td>{{event.idCollaborateur.getCollaborateur()}}</td>
+							</tr>
+							<tr>
+								<th>Prestation</th>
+								<td>{{event.idPrestation.getPrestation()}}</td>
+							</tr>
+							<tr>
+								<th>
+									<a class="button mt-1" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a>
+
+								</th>
+								<td>
+
+									<a class="button mt-1" href="{{ path('rendez_vous_pdf', {'id': event.id}) }}">PDF</a>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
 
 
-				{# {{ include('rendez_vous/show.twig', {'id': event.id }) }} #}
+					{# {{ include('rendez_vous/show.twig', {'id': event.id }) }} #}
 
-			{% endfor %}
+				{% endfor %}
+
 			{% else %}
 				<p class="maintenance">Aucune prestation pour ce jour</p>
 			{% endif %}
 
 			<div class=" d-flex row align-items-start">
 				<div class="col-6"></div>
-				<div class="col-6 col-6 text-center mt-3">
+				<div class="col-6 text-center mt-3">
 					<a class="button float-right" href="{{ path('agendaMensuel') }}">Retour</a>
 				</div>
 			</div>

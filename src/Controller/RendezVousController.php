@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Controller\Events;
+use App\Repository\ContentRepository;
 use App\Controller\Month;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -93,11 +93,15 @@ class RendezVousController extends AbstractController
     public function agenda_quotidien(\DateTime $day,RendezVousRepository $rendezVousRepository): Response
     {
         $date = $day->format('d/m/Y');
+        $demain  = mktime(0, 0, 0, $day->format('m')  , $day->format('d') +1, $day->format('Y') );
+        $hier = mktime(0, 0, 0, $day->format('m')  , $day->format('d') -1, $day->format('Y') );
         $events = $rendezVousRepository->findByDateRendezVous($day);
         return $this->render('rendez_vous/agenda_quotidien.twig', [
             'controller_name' => 'ContentController',
             'events' => $events,
-            'date'=> $date
+            'date'=> $date,
+            'demain'=>$demain,
+            'hier'=>$hier
         ]);
     }
 
@@ -108,24 +112,29 @@ class RendezVousController extends AbstractController
     /**
      * @Route("/pdf/{id}", name="rendez_vous_pdf")
      */
-    public function pdf(int $id , RendezVousRepository $rendezVousRepository): Response
+    public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $contentRepository): Response
     {
         $this->month = new Month();
+
+
+
         $rv = new RendezVous();
         $rv = $rendezVousRepository->findOneBy(['id' => $id]);
          // Configure Dompdf according to your needs
          $pdfOptions = new Options();
          $pdfOptions->set('defaultFont', 'Arial');
-         
+         $pdfOptions->set('isRemoteEnabled', true);
          // Instantiate Dompdf with our options
          $dompdf = new Dompdf($pdfOptions);
-         
+         $nomPdf = "RDV de ".$rv->getIdClient()->getIdentiteClient()." le ". $rv->getDateRendezVous()->format("d-m-Y"); 
+       
          // Retrieve the HTML generated in our twig file
          $html = $this->renderView('rendez_vous/pdf.twig', [
-             'title' => "Welcome to our PDF Test",
+             'title' => $nomPdf,
              'event' => $rv,
+             'contenu_contact' => $contentRepository->findByPosition('contact')
          ]);
-         
+         $html .= '<link type="text/css" href="{{ asset("css/style.min.css") }}>';
          // Load HTML to Dompdf
          $dompdf->loadHtml($html);
          
@@ -136,7 +145,7 @@ class RendezVousController extends AbstractController
          $dompdf->render();
  
          // Output the generated PDF to Browser (inline view)
-         $dompdf->stream("mypdf.pdf", [
+         $dompdf->stream($nomPdf, [
              "Attachment" => false
          ]);
     }
