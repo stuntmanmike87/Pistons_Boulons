@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210623151200 extends AbstractMigration
+final class Version20210623152134 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,11 +20,6 @@ final class Version20210623151200 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TEMPORARY TABLE __temp__collaborateur AS SELECT id, nom, prenom, date_naissance, date_entree_entreprise, type_contrat, date_heure_derniere_connexion, duree_travail_hebdo, login, mot_de_passe, is_admin, num_securite_social FROM collaborateur');
-        $this->addSql('DROP TABLE collaborateur');
-        $this->addSql('CREATE TABLE collaborateur (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nom VARCHAR(255) NOT NULL COLLATE BINARY, prenom VARCHAR(255) NOT NULL COLLATE BINARY, date_naissance DATE NOT NULL, date_entree_entreprise DATE NOT NULL, type_contrat VARCHAR(255) NOT NULL COLLATE BINARY, date_heure_derniere_connexion DATETIME DEFAULT NULL, duree_travail_hebdo VARCHAR(255) NOT NULL COLLATE BINARY, login VARCHAR(255) NOT NULL COLLATE BINARY, mot_de_passe VARCHAR(255) NOT NULL COLLATE BINARY, is_admin BOOLEAN DEFAULT NULL, num_securite_social VARCHAR(255) NOT NULL COLLATE BINARY)');
-        $this->addSql('INSERT INTO collaborateur (id, nom, prenom, date_naissance, date_entree_entreprise, type_contrat, date_heure_derniere_connexion, duree_travail_hebdo, login, mot_de_passe, is_admin, num_securite_social) SELECT id, nom, prenom, date_naissance, date_entree_entreprise, type_contrat, date_heure_derniere_connexion, duree_travail_hebdo, login, mot_de_passe, is_admin, num_securite_social FROM __temp__collaborateur');
-        $this->addSql('DROP TABLE __temp__collaborateur');
         $this->addSql('DROP INDEX IDX_65E8AA0A99DED506');
         $this->addSql('DROP INDEX IDX_65E8AA0A4BC2B660');
         $this->addSql('DROP INDEX IDX_65E8AA0A206D1431');
@@ -41,7 +36,6 @@ final class Version20210623151200 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE collaborateur ADD COLUMN is_actif BOOLEAN DEFAULT NULL');
         $this->addSql('DROP INDEX IDX_65E8AA0A99DED506');
         $this->addSql('DROP INDEX IDX_65E8AA0A4BC2B660');
         $this->addSql('DROP INDEX IDX_65E8AA0A206D1431');

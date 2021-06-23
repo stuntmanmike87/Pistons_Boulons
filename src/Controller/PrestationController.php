@@ -68,7 +68,7 @@ class PrestationController extends AbstractController
     public function index(PrestationRepository $prestationRepository): Response
     {
         return $this->render('prestation/index.html.twig', [
-            'prestations' => $prestationRepository->findAll(),
+            'prestations' => $prestationRepository->findByIsActif(),
         ]);
     }
 
@@ -94,6 +94,10 @@ class PrestationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+           
+
+
+            $prestation->setIsActive(true);
             $entityManager->persist($prestation);
             $entityManager->flush();
             $this->addFlash('success', "La prestation a bien été ajoutée");
@@ -174,7 +178,7 @@ class PrestationController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $prestation->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($prestation);
+            $prestation->setIsActive(false);
             $entityManager->flush();
         }
         $this->addFlash('success', "La prestation a bien été supprimée");

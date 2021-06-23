@@ -29,6 +29,16 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
+    public function findByIsActif()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isActif = 1')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

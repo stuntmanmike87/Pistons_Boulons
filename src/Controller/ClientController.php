@@ -29,7 +29,7 @@ class ClientController extends AbstractController
     public function index(ClientRepository $clientRepository): Response
     {
         return $this->render('client/index.html.twig', [
-            'clients' => $clientRepository->findAll(),
+            'clients' => $clientRepository->findByIsActif(),
         ]);
     }
 
@@ -56,6 +56,7 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $client->setIsActif(true);
             $entityManager->persist($client);
             $entityManager->flush();
 
@@ -144,7 +145,7 @@ class ClientController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($client);
+            $client->setIsActif(false);
             $entityManager->flush();
         }
 

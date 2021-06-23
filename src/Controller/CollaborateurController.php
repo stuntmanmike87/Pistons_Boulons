@@ -21,7 +21,7 @@ class CollaborateurController extends AbstractController
     public function index(CollaborateurRepository $collaborateurRepository): Response
     {
         return $this->render('collaborateur/index.html.twig', [
-            'collaborateurs' => $collaborateurRepository->findAll(),
+            'collaborateurs' => $collaborateurRepository->findByIsActif(),
         ]);
     }
 
@@ -36,6 +36,7 @@ class CollaborateurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $collaborateur->setIsActif(true);
             $entityManager->persist($collaborateur);
             $entityManager->flush();
 
@@ -89,7 +90,7 @@ class CollaborateurController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$collaborateur->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($collaborateur);
+            $collaborateur->setIsActif(false);
             $entityManager->flush();
         }
 

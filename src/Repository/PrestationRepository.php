@@ -19,7 +19,18 @@ class PrestationRepository extends ServiceEntityRepository
         parent::__construct($registry, Prestation::class);
     }
 
-  
+    /**
+     * @return Content[] Returns an array of Collaborateur objects
+     */
+    public function findByIsActif()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isActive = 1')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      *
      * Cette fonction permet de récuperer tous les types de prestations sur la table PRESTATION avec comme condition
@@ -34,12 +45,11 @@ class PrestationRepository extends ServiceEntityRepository
             ->orderBy('p.typePrestation', 'ASC')
             ->distinct('p.typePrestation')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
 
-    
+
+
     /**
      * @param $type : correspond au type de prestation présent dans le champ typePrestation
      * Cette fonction permet de récuperer toutes de prestations sur la table PRESTATION avec comme condition
@@ -50,12 +60,10 @@ class PrestationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.typePrestation = :val')
-            ->andWhere ('p.isActive = 1')
+            ->andWhere('p.isActive = 1')
             ->setParameter('val', $type)
             ->orderBy('p.nom', 'ASC')
             ->getQuery()
-            ->getArrayResult()
-        ;
+            ->getArrayResult();
     }
-    
 }

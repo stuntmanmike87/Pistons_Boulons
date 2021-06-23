@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContentRepository;
 use App\Controller\Month;
-use App\Repository\ContentRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 /**
@@ -113,48 +112,11 @@ class RendezVousController extends AbstractController
     /**
      * @Route("/pdf/{id}", name="rendez_vous_pdf")
      */
-<<<<<<< HEAD
-    public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $contentRepository): Response
-=======
     public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $content): Response
->>>>>>> 161cc73911caa7b95bfd2224fbae010d34a4aea6
     {
         $this->month = new Month();
-
-
-
         $rv = new RendezVous();
         $rv = $rendezVousRepository->findOneBy(['id' => $id]);
-<<<<<<< HEAD
-         // Configure Dompdf according to your needs
-         $pdfOptions = new Options();
-         $pdfOptions->set('defaultFont', 'Arial');
-         $pdfOptions->set('isRemoteEnabled', true);
-         // Instantiate Dompdf with our options
-         $dompdf = new Dompdf($pdfOptions);
-         $nomPdf = "RDV de ".$rv->getIdClient()->getIdentiteClient()." le ". $rv->getDateRendezVous()->format("d-m-Y"); 
-       
-         // Retrieve the HTML generated in our twig file
-         $html = $this->renderView('rendez_vous/pdf.twig', [
-             'title' => $nomPdf,
-             'event' => $rv,
-             'contenu_contact' => $contentRepository->findByPosition('contact')
-         ]);
-         $html .= '<link type="text/css" href="{{ asset("css/style.min.css") }}>';
-         // Load HTML to Dompdf
-         $dompdf->loadHtml($html);
-         
-         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-         $dompdf->setPaper('A4', 'portrait');
- 
-         // Render the HTML as PDF
-         $dompdf->render();
- 
-         // Output the generated PDF to Browser (inline view)
-         $dompdf->stream($nomPdf, [
-             "Attachment" => false
-         ]);
-=======
         $titre = "RDV du ".$rv->getDateRendezVous()->format("d-m-Y"). " à ". $rv->getDateRendezVous()->format("H:i");
        
          return $this->render('rendez_vous/pdf.twig', [
@@ -163,7 +125,6 @@ class RendezVousController extends AbstractController
             'event' => $rv,
             'contenu_contact' => $content->findByPosition('contact'),
         ]);
->>>>>>> 161cc73911caa7b95bfd2224fbae010d34a4aea6
     }
 
     /**
