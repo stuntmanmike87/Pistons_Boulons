@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\Events;
 use App\Controller\Month;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 /**
  * @Route("/rendez/vous")
  */
@@ -103,6 +104,41 @@ class RendezVousController extends AbstractController
     public function getMonth()
     {
         return $this->month;
+    }
+    /**
+     * @Route("/pdf/{id}", name="rendez_vous_pdf")
+     */
+    public function pdf(int $id , RendezVousRepository $rendezVousRepository): Response
+    {
+        $this->month = new Month();
+        $rv = new RendezVous();
+        $rv = $rendezVousRepository->findOneBy(['id' => $id]);
+         // Configure Dompdf according to your needs
+         $pdfOptions = new Options();
+         $pdfOptions->set('defaultFont', 'Arial');
+         
+         // Instantiate Dompdf with our options
+         $dompdf = new Dompdf($pdfOptions);
+         
+         // Retrieve the HTML generated in our twig file
+         $html = $this->renderView('rendez_vous/pdf.twig', [
+             'title' => "Welcome to our PDF Test",
+             'event' => $rv,
+         ]);
+         
+         // Load HTML to Dompdf
+         $dompdf->loadHtml($html);
+         
+         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+         $dompdf->setPaper('A4', 'portrait');
+ 
+         // Render the HTML as PDF
+         $dompdf->render();
+ 
+         // Output the generated PDF to Browser (inline view)
+         $dompdf->stream("mypdf.pdf", [
+             "Attachment" => false
+         ]);
     }
 
     /**

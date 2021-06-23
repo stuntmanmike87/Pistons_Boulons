@@ -50,9 +50,6 @@
 									<div class="calendar__weekday mb-2">{{jour}}</div>
 								{% endif %}
 								<div class="calendar__day">{{ date|date('d') }}</div>
-								<pre>
-									{{ dump(date) }}
-								</pre>
 								{% if eventsForDay|length != 0 %}
 									<p class="text-center">{{ eventsForDay|length }} prestations aujourd'hui <a href="{{path("agenda_quotidien", {'day': date|date("Y-m-d")}) }}" class="text-center">Voir</a><p>
 								
