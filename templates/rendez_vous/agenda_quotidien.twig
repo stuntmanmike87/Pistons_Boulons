@@ -28,15 +28,30 @@
 						</tr>
 						<tr>
 							<th>Client</th>
-							<td>{{ event.idClient.getIdentiteClient()}}</td>
+							<td>
+								{{ event.idClient.getIdentiteClient()}}
+								{% if event.idClient.getIsActif() == false %}
+								(Client supprimé)
+								{% endif %}
+							</td>
 						</tr>
 						<tr>
 							<th>Collaborateur</th>
-							<td>{{event.idCollaborateur.getCollaborateur()}}</td>
+							<td>
+								{{event.idCollaborateur.getCollaborateur()}}
+								{% if event.idCollaborateur.getIsActif() == false %}
+								(Collaborateur supprimé)
+								{% endif %}	
+							</td>
 						</tr>
 						<tr>
 							<th>Prestation</th>
-							<td>{{event.idPrestation.getPrestation()}}</td>
+							<td>
+								{{event.idPrestation.getPrestation()}}
+								{% if event.idPrestation.getIsActive() == false %}
+								(Prestation supprimée)
+								{% endif %}	
+							</td>
 						</tr>
 						<tr>
 							<th><a class="button" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a></th>

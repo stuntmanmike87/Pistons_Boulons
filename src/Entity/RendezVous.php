@@ -43,13 +43,13 @@ class RendezVous
     private $idPrestation;
 
     /**
-    * @ORM\Column(type="datetime")
-    * @Assert\NotBlank(message="La date de rendez-vous ne peut pas être vide.")
-    * @Assert\Range(
-    *      min = "now",
-    *      minMessage="La date du rendez-vous ne peut pas être inférieure à la date du jour."
-    * )
-    */
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="La date de rendez-vous ne peut pas être vide.")
+     * @Assert\Range(
+     *      min = "now",
+     *      minMessage="La date du rendez-vous ne peut pas être inférieure à la date du jour."
+     * )
+     */
     private $dateRendezVous;
 
     /**
@@ -164,16 +164,18 @@ class RendezVous
      * 
      * @return Client.getClient()
      */
-    public function getClient(){
-        return $this->Client.getClient();
+    public function getClient()
+    {
+        return $this->Client->getClient();
     }
     /**
      * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
      * 
      * @return Client.getClient()
      */
-    public function getIdentiteClient(){
-        return $this->Client.getIdentiteClient();
+    public function getIdentiteClient()
+    {
+        return $this->Client->getIdentiteClient();
     }
 
 
@@ -182,8 +184,9 @@ class RendezVous
      * 
      * @return Collaborateur.getCollaborateur()
      */
-    public function getCollaborateur(){
-        return $this->Collaborateur.getCollaborateur();
+    public function getCollaborateur()
+    {
+        return $this->Collaborateur->getCollaborateur();
     }
 
     /**
@@ -191,7 +194,8 @@ class RendezVous
      * 
      * @return Prestation.getPrestation()
      */
-    public function getPrestation(){
-        return $this->Prestation.getPrestation();
+    public function getPrestation()
+    {
+        return $this->Prestation->getPrestation();
     }
 }

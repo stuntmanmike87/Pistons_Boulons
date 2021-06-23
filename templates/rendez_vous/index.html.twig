@@ -24,9 +24,24 @@
 						<tr>
 							<td data-label="Date">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d') : '' }}</td>
 							<td data-label="Heure">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}</td>
-							<td data-label="Client">{{ rendez_vou.idClient.getClient() }}</td>
-							<td data-label="Collaborateur">{{ rendez_vou.idCollaborateur.getCollaborateur() }}</td>
-							<td data-label="Prestation">{{ rendez_vou.idPrestation.getPrestation() }}</td>
+							<td data-label="Client">{{ rendez_vou.idClient.getClient() }}
+								{% if rendez_vou.idClient.getIsActif() == false %}
+									(Client supprimé)
+								{% endif %}
+
+							</td>
+							<td data-label="Collaborateur">{{ rendez_vou.idCollaborateur.getCollaborateur() }}
+								{% if rendez_vou.idCollaborateur.getIsActif() == false %}
+									(Collaborateur supprimé)
+								{% endif %}
+
+							</td>
+							<td data-label="Prestation">{{ rendez_vou.idPrestation.getPrestation() }}
+
+								{% if rendez_vou.idPrestation.getIsActive() == false %}
+									(Prestation supprimée)
+								{% endif %}
+							</td>
 							<td data-label="Action">
 								<a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">Voir</a>
 								<a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">Éditer</a>

@@ -37,6 +37,7 @@ class RendezVousType extends AbstractType
                 'class' => Client::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('cl')
+                       ->andWhere('cl.isActif = 1')
                         ->orderBy('cl.nom', 'ASC');
                 },
                 'choice_label' => 'client',
@@ -45,6 +46,7 @@ class RendezVousType extends AbstractType
                 'class' => Collaborateur::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('co')
+                        ->andWhere('co.isActif = 1')
                         ->orderBy('co.nom', 'ASC');
                 },
                 'choice_label' => 'collaborateur',
@@ -53,6 +55,7 @@ class RendezVousType extends AbstractType
                 'class' => Prestation::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
+                    ->andWhere('p.isActive = 1')
                         ->orderBy('p.nom', 'ASC');
                 },
                 'choice_label' => 'nom',

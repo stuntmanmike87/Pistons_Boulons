@@ -12,23 +12,42 @@
 				<tbody>
 					<tr>
 						<th>Date</th>
-						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y') : '' }}</td>
+						<td>
+							{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y') : '' }}
+							{% if rendez_vou.idClient.getIsActif() == false %}
+								(Client supprimé)
+							{% endif %}
+						</td>
 					</tr>
 					<tr>
 						<th>Heure</th>
-						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}</td>
+						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}
+							{% if rendez_vou.idCollaborateur.getIsActif() == false %}
+								(Collaborateur supprimé)
+							{% endif %}
+						</td>
 					</tr>
 					<tr>
 						<th>Client</th>
-						<td>{{ rendez_vou.idClient.getClient()}}</td>
+						<td>{{ rendez_vou.idClient.getClient()}}
+
+						</td>
 					</tr>
 					<tr>
 						<th>Collaborateur</th>
-						<td>{{rendez_vou.idCollaborateur.getCollaborateur()}}</td>
+						<td>{{rendez_vou.idCollaborateur.getCollaborateur()}}
+
+
+						</td>
 					</tr>
 					<tr>
 						<th>Prestation</th>
-						<td>{{rendez_vou.idPrestation.getPrestation()}}</td>
+						<td>{{rendez_vou.idPrestation.getPrestation()}}
+							{% if rendez_vou.idPrestation.getIsActive() == false %}
+								(Prestation supprimée)
+							{% endif %}
+
+						</td>
 					</tr>
 				</tbody>
 			</table>
