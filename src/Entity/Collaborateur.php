@@ -128,6 +128,11 @@ class Collaborateur
      */
     private $isAdmin;
 
+       /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isActif;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -261,6 +266,18 @@ class Collaborateur
     public function setIsAdmin(bool $isAdmin): self
     {
         $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    public function getIsActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setIsActif(bool $isActif): self
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }
