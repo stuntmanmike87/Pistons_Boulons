@@ -15,7 +15,7 @@
 
 			{% for event in events %}
 
-				<table class="table mt-5">
+				<table class="table mt-5 table-striped">
 					<tbody>
 						<tr>
 							<th>Heure</th>
@@ -34,9 +34,8 @@
 							<td>{{event.idPrestation.getPrestation()}}</td>
 						</tr>
 						<tr>
-							<th></th>
-							<td><a class="float-right button" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a></td>
-							<td><a class="float-right button" href="{{ path('rendez_vous_pdf', {'id': event.id}) }}">Exporter PDF</a></td>
+							<th><a class="button" href="{{ path('rendez_vous_show', {'id': event.id}) }}">Voir</a></th>
+							<td><a class="button" href="{{ path('rendez_vous_pdf', {'id': event.id}) }}">PDF</a></td>
 						</tr>
 					</tbody>
 				</table>
