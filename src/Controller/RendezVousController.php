@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContentRepository;
 use App\Controller\Month;
+use App\Repository\ContentRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 /**
@@ -112,7 +113,11 @@ class RendezVousController extends AbstractController
     /**
      * @Route("/pdf/{id}", name="rendez_vous_pdf")
      */
+<<<<<<< HEAD
     public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $contentRepository): Response
+=======
+    public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $content): Response
+>>>>>>> 161cc73911caa7b95bfd2224fbae010d34a4aea6
     {
         $this->month = new Month();
 
@@ -120,6 +125,7 @@ class RendezVousController extends AbstractController
 
         $rv = new RendezVous();
         $rv = $rendezVousRepository->findOneBy(['id' => $id]);
+<<<<<<< HEAD
          // Configure Dompdf according to your needs
          $pdfOptions = new Options();
          $pdfOptions->set('defaultFont', 'Arial');
@@ -148,6 +154,16 @@ class RendezVousController extends AbstractController
          $dompdf->stream($nomPdf, [
              "Attachment" => false
          ]);
+=======
+        $titre = "RDV du ".$rv->getDateRendezVous()->format("d-m-Y"). " à ". $rv->getDateRendezVous()->format("H:i");
+       
+         return $this->render('rendez_vous/pdf.twig', [
+            'controller_name' => 'ContentController',
+            'title' => $titre,
+            'event' => $rv,
+            'contenu_contact' => $content->findByPosition('contact'),
+        ]);
+>>>>>>> 161cc73911caa7b95bfd2224fbae010d34a4aea6
     }
 
     /**

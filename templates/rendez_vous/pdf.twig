@@ -1,86 +1,131 @@
-{% extends 'base_pdf.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}PDF
+{% block title %}
+	{{ title }}
 {% endblock %}
 
+{% block script %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script type="text/javascript">
+		function ToPDF() {
+html2canvas(document.getElementById('exportPdf'), {
+onrendered: function (canvas) {
+let dateJour = document.getElementById('dateJour').value;
+let client = document.getElementById('client').value;
+let data = canvas.toDataURL();
+let docDefinition = {
+content: [
+{
+image: data,
+width: 600,
+}
+]
+};
+pdfMake.createPdf(docDefinition).download("Rendez-vous de " + client + " le " + dateJour + ".pdf");
+}
+});
+}
+	</script>
+{% endblock %}
+
+{% set  contact_adresse = "" %}
+{% set  contact_telephone = "" %}
+{% set  contact_email = "" %}
+
+
+{% for contenu in contenu_contact %}
+	{% set  position = contenu.position %}
+
+	{% if position == 'contact_adresse' %}
+
+		{% set  contact_adresse = contenu.text %}
+
+	{% elseif position == 'contact_telephone' %}
+
+		{% set  contact_telephone = contenu.text %}
+
+	{% elseif position == 'contact_email' %}
+
+		{% set  contact_email = contenu.text %}
+
+	{% endif %}
+
+{% endfor %}
+
+
 {% block body %}
+	<div id="main-wrapper">
 
+		<div class="container">
+			<h2>Prévisualisation du PDF :</h2>
+			<div id="exportPdf" class="p-5">
 
-	{% set  contact_adresse = "" %}
-	{% set  contact_telephone = "" %}
-	{% set  contact_email = "" %}
-
-	{% for contenu in contenu_contact %}
-		{% set  position = contenu.position %}
-
-		{% if position == 'contact_adresse' %}
-
-			{% set  contact_adresse = contenu.text %}
-
-		{% elseif position == 'contact_telephone' %}
-
-			{% set  contact_telephone = contenu.text %}
-
-		{% elseif position == 'contact_email' %}
-
-			{% set  contact_email = contenu.text %}
-
-		{% endif %}
-
-	{% endfor %}
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<p>LOGO</p>
-				{# <img src="{{asset('images/logo.png') }}" alt="" class="logoDesktop"/> #}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<p>LIBELLE</p>
-
-				{# <img src="{{asset('images/libelle.png')}}" alt="" class="libelleDesktop"/> #}
-				<p class="maintenance">Pistons et Boulons</p>
-				{% if contact_adresse is null %}
-					<div class="container mt-1">
-						<p class="maintenance">Non renseignée</p>
+				<div class="row">
+					<div class="col text-center">
+						<img src="{{ asset('images/logo.png') }}" alt="" class="logoDesktop mt-3"/>
+						<img src="{{ asset('images/libelle.png') }}" alt="" class="libelleDesktop mt-3"/>
 					</div>
-				{% else %}
-					<p>{{ contact_adresse }}</p>
-				{% endif %}
-
-				{% if contact_telephone is null %}
-					<div class="container mt-1">
-						<p class="maintenance">Non renseignée</p>
+					<div class="col text-center mt-3">
+						<p>
+							{% if contact_adresse is not null %}
+								{% set adresse_dec = contact_adresse|split(',') %}
+								{% for adr in adresse_dec %}
+									{{adr}}<br>
+								{% endfor %}
+							{% endif %}
+							{% if contact_telephone is not null %}
+								{{ contact_telephone }}<br>
+							{% endif %}
+							{% if contact_email is not null %}
+								{{ contact_email }}<br>
+							{% endif %}
+						</p>
 					</div>
-				{% else %}
-					<p>{{ contact_telephone }}</p>
-				{% endif %}
+				</div>
 
-				{% if contact_email is null %}
-					<div class="container mt-1">
-						<p class="maintenance">Non renseignée</p>
-					</div>
-				{% else %}
-					<p>{{ contact_email }}</p>
-				{% endif %}
 
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
+				<input id="dateJour" type="hidden" value="{{event.dateRendezVous|date("d-m-Y")}}"/>
+				<input id="client" type="hidden" value="{{event.idClient.getIdentiteClient()}}"/>
 
-				<h2>Rendez-vous</h2>
-				<p>Date :
-					{{event.dateRendezVous|date("d-m-Y")}}</p>
-				<p>Heure :
+				<p>
+					<span class="font-weight-bold">Date :
+					</span>
+					{{event.dateRendezVous|date("d/m/Y")}}</p>
+				<p>
+					<span class="font-weight-bold">Heure :
+					</span>
 					{{event.dateRendezVous|date("H:i")}}</p>
-				<p>Client :
+				<p>
+					<span class="font-weight-bold">Client :
+					</span>
 					{{event.idClient.getIdentiteClient()}}</p>
-				<p>Collaborateur :
+                <p>
+					<span class="font-weight-bold">Véhicule :
+					</span>
+					{{event.idClient.getPlaqueImmat()}}</p>
+				<p>
+					<span class="font-weight-bold">Collaborateur :
+					</span>
 					{{event.idCollaborateur.getCollaborateur()}}</p>
-				<p>Prestation :
+				<p>
+					<span class="font-weight-bold">Prestation :
+					</span>
 					{{event.idPrestation.getPrestation()}}</p>
+
+
+                
+				<div class="row mt-3">
+					<div class="col-4 text-center">
+					</div>
+					<div class="col-8 text-center ">
+                    <p><span class="font-weight-bold">Signature</span></p>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-12 text-center mt-3">
+				<button class="text-center" onclick="ToPDF()">Exporter PDF</button>
 			</div>
 		</div>
 	</div>
