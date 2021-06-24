@@ -250,4 +250,8 @@ class Collaborateur
 
         return $this;
     }
+
+    public function getUserLog(){
+        return $this->user.getUserLog();
+    }
 }

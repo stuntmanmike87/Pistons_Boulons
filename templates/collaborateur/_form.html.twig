@@ -69,6 +69,13 @@
 {{ form_errors(form.dureeTravailHebdo) }}
 {# input #}
 {{ form_widget(form.dureeTravailHebdo) }}
+{# label #}
+{{ form_label(form.user, 'Utilisateur :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.user) }}
+{# input #}
+{{ form_widget(form.user) }}
 
 	<div class="col-md-12  text-center"> 
     <button class="mt-5">

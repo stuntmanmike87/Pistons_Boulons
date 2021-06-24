@@ -158,4 +158,8 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getUserLog(){
+        return $this->login;
+    }
 }
