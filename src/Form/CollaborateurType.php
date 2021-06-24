@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Collaborateur;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CollaborateurType extends AbstractType
 {
@@ -31,13 +33,15 @@ class CollaborateurType extends AbstractType
                 'attr' => [
                     'placeholder' => '35h'
                 ]
-            ])
-            ->add('login', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'nomPrénom'
-                ]
-            ])
-            ->add('motDePasse');
+                ])
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'query_builder' => function ($er) {
+                    return $er->createQueryBuilder('us')
+                        ->orderBy('us.login', 'ASC');
+                },
+                'choice_label' => 'userlog',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

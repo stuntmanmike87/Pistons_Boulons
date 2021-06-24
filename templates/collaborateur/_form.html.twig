@@ -69,27 +69,13 @@
 {{ form_errors(form.dureeTravailHebdo) }}
 {# input #}
 {{ form_widget(form.dureeTravailHebdo) }}
-
-{# login #}
-
 {# label #}
-{{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
+{{ form_label(form.user, 'Utilisateur :', {'label_attr': {'class': 'foo' }}
 ) }}
 {# erreur #}
-{{ form_errors(form.login) }}
+{{ form_errors(form.user) }}
 {# input #}
-{{ form_widget(form.login) }}
-
-{# motDePasse #}
-
-{# label #}
-{{ form_label(form.motDePasse, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
-) }}
-{# erreur #}
-{{ form_errors(form.motDePasse) }}
-{# input #}
-{{ form_widget(form.motDePasse) }}
-
+{{ form_widget(form.user) }}
 
 	<div class="col-md-12  text-center"> 
     <button class="mt-5">

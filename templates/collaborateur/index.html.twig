@@ -29,8 +29,6 @@
 						<th>Type de contrat</th>
 						{# <th>DateHeureDerniereConnexion</th> #}
 						<th>Durée travail hebdo.</th>
-						{# <th>Identifiant</th> #}
-						{# <th>MotDePasse</th> #}
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -45,8 +43,6 @@
 							<td data-label="Type de contrat">{{ collaborateur.typeContrat }}</td>
 							{# <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s') : '' }}</td> #}
 							<td data-label="Durée travail hebdo.">{{ collaborateur.dureeTravailHebdo }}</td>
-							{# <td>{{ collaborateur.login }}</td> #}
-							{# <td>{{ collaborateur.motDePasse }}</td> #}
 							<td data-label="Action">
 								<a href="{{ path('collaborateur_show', {'id': collaborateur.id}) }}">Voir</a>
 								<a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">Éditer</a>
