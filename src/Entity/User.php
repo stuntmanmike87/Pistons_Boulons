@@ -39,6 +39,11 @@ class User implements UserInterface
      */
     private $admin;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Collaborateur::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $collaborateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -133,6 +138,23 @@ class User implements UserInterface
         }
 
         $this->admin = $admin;
+
+        return $this;
+    }
+
+    public function getCollaborateur(): ?Collaborateur
+    {
+        return $this->collaborateur;
+    }
+
+    public function setCollaborateur(Collaborateur $collaborateur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($collaborateur->getUser() !== $this) {
+            $collaborateur->setUser($this);
+        }
+
+        $this->collaborateur = $collaborateur;
 
         return $this;
     }
