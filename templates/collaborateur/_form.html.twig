@@ -70,27 +70,6 @@
 {# input #}
 {{ form_widget(form.dureeTravailHebdo) }}
 
-{# login #}
-
-{# label #}
-{{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
-) }}
-{# erreur #}
-{{ form_errors(form.login) }}
-{# input #}
-{{ form_widget(form.login) }}
-
-{# motDePasse #}
-
-{# label #}
-{{ form_label(form.motDePasse, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
-) }}
-{# erreur #}
-{{ form_errors(form.motDePasse) }}
-{# input #}
-{{ form_widget(form.motDePasse) }}
-
-
 	<div class="col-md-12  text-center"> 
     <button class="mt-5">
 		{{ button_label|default('Enregistrer') }}

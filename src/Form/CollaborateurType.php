@@ -31,13 +31,7 @@ class CollaborateurType extends AbstractType
                 'attr' => [
                     'placeholder' => '35h'
                 ]
-            ])
-            ->add('login', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'nomPrénom'
-                ]
-            ])
-            ->add('motDePasse');
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

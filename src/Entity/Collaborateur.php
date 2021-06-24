@@ -111,23 +111,6 @@ class Collaborateur
      */
     private $dureeTravailHebdo;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'identifiant ne peut pas être vide.")
-     */
-    private $login;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le mot de passe ne peut pas être vide.")
-     */
-    private $motDePasse;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $isAdmin;
-
        /**
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -230,42 +213,6 @@ class Collaborateur
     public function setDureeTravailHebdo(string $dureeTravailHebdo): self
     {
         $this->dureeTravailHebdo = $dureeTravailHebdo;
-
-        return $this;
-    }
-
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function setMotDePasse(string $motDePasse): self
-    {
-        $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
-
-    public function getIsAdmin(): ?bool
-    {
-        return $this->isAdmin;
-    }
-
-    public function setIsAdmin(bool $isAdmin): self
-    {
-        $this->isAdmin = $isAdmin;
 
         return $this;
     }
