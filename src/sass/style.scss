@@ -11,7 +11,8 @@
 
 @import "libs/banners";
 @import "libs/box";
-@import "libs/calendar"; 
+@import "libs/calendar";
+@import "libs/cookies"; 
 @import "libs/forms";
 @import "libs/html-elements";
 @import "libs/icons";
@@ -52,6 +53,11 @@
 );
 
 /* Nos styles */
+
+
+.back_color_bleu{
+	background-color: $couleur_bleu;
+}
 .clr_rouge_prim{
 	color : $couleur_premier_rouge;
 }
@@ -557,6 +563,32 @@ button,
 
 @include breakpoint("<=medium") {
 
+	.calendar__table {
+		width: 80%;
+	margin:0 auto;
+	}
+	
+	.calendar__weekday_mobile{
+		display: flex;
+	}
+	.calendar__weekday {
+		display: none;
+	}
+	
+	/*  Style des cases du tableau */
+	.calendar__table td {
+		border: 1px solid #CCC;
+		padding: 10px;
+		vertical-align: top;
+		width: inherit;
+		
+	}
+
+	.calendar__day{
+		float: left;
+	}
+
+
 	.table_responsive_mobile thead {
 		display: none;
 	}
@@ -646,7 +678,7 @@ button,
 	input[type="reset"],
 	button,
 	.button {
-		width: 100%;
+		width: 50%;
 		text-align: center;
 		font-size: 1.35em;
 		padding: 0.85em 0 !important;
@@ -942,7 +974,7 @@ button,
 	input[type="reset"],
 	button,
 	.button {
-		width: 100%;
+		width: 80%;
 		text-align: center;
 		font-size: 1.25em !important;
 		padding: 0.65em 0 !important;

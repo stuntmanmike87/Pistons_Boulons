@@ -11,24 +11,46 @@
     width: 14.29%;
     height: 145px;
 }
+
+.calendar__weekday_mobile{
+    display: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 /*  Style des semaines */
 .calendar__weekday {
     font-weight: bold;
     color: #000;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 /*  Style des jours */
 .calendar__day {
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
-/*  Styles des mois précédent et suivant */
+/*  Styles des mois précédent et suivant */ 
 .calendar__othermonth {
    /*  Style des jours */
     .calendar__day {
         opacity  :0.3;
     }
+
+    .calendar__weekday_mobile{
+        opacity: 0.3;
+    }
 }
 /* Styles des events qui ne sont pas dans le mois actuel */
 .calendar__event__othermonth {
     opacity: 0.5;
+}
+
+
+/*  Style des jours */
+.calendar__today {
+
+    .calendar__day {
+        color: $couleur_premier_rouge;
+        font-weight: 600;
+    }
+    
 }

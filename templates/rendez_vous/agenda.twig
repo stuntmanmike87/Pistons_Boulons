@@ -9,12 +9,12 @@
 			<div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
 				<h1>{{ agenda.toString() }}</h1>
 				<div>
-					<a href="{{path("agenda", {'month': agenda.getPreviousMonth().month , 'year' : agenda.getPreviousMonth().year } ) }}" class="btn btn-primary mt-1">&lt;</a>
-					<a href="{{path("agenda", {'month': agenda.getNextMonth().month , 'year' : agenda.getNextMonth().year } ) }}" class="btn btn-primary mt-1">&gt;</a>
+					<a href="{{path("agenda", {'month': agenda.getPreviousMonth().month , 'year' : agenda.getPreviousMonth().year } ) }}" class=" back_color_bleu btn btn-primary mt-1">&lt;</a>
+					<a href="{{path("agenda", {'month': agenda.getNextMonth().month , 'year' : agenda.getNextMonth().year } ) }}"  class=" back_color_bleu btn btn-primary mt-1">&gt;</a>
 				</div> 		
 			</div>
 			
-			<table class="calendar__table calendar__table--{{ agenda.getWeeks() }}weeks">
+			<table class="table_responsive_mobile  calendar__table calendar__table--{{ agenda.getWeeks() }}weeks">
 				{# on récupère le premier jour du mois #}
 				{% set dateDebut = agenda.getStartingDay() | date_modify('monday this week') %}
 			
@@ -43,16 +43,26 @@
 
 
 							
-							<td class="{% if agenda.withinMonth(date) == '' %} {{ 'calendar__othermonth' }} {% endif %}">
+							<td class="{% if date|date("m/d/Y") == "now"|date("m/d/Y")  %} {{ 'calendar__today' }} {% endif %}{% if agenda.withinMonth(date) == '' %} {{ 'calendar__othermonth' }} {% endif %}">
 
 							
 								{% if i == 0 %}
-									<div class="calendar__weekday mb-2">{{jour}}</div>
+									<div class="calendar__weekday mb-2 clr_bleu">{{jour}}</div>
 								{% endif %}
+
+								<div class="calendar__weekday_mobile mb-2 clr_bleu">{{jour}}</div>
+								
 								<div class="calendar__day">{{ date|date('d') }}</div>
 								{% if eventsForDay|length != 0 %}
-									<p class="text-center">{{ eventsForDay|length }} prestations aujourd'hui <a href="{{path("agenda_quotidien", {'day': date|date("Y-m-d")}) }}" class="text-center">Voir</a><p>
-								
+									<p class="text-center">{{ eventsForDay|length }} 
+									{% if eventsForDay|length == 1 %}
+										prestation
+									{% else %}
+										prestations
+									{% endif %}
+									<br>
+									<a href="{{path("agenda_quotidien", {'day': date|date("Y-m-d")}) }}" class="text-center">Voir</a><p>
+									
 								{% endif %}
 							</td>
 							{% set k = k + 1 %}
