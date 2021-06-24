@@ -22,9 +22,7 @@
 					<tr>
 						<th>Heure</th>
 						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}
-							{% if rendez_vou.idCollaborateur.getIsActif() == false %}
-								(Collaborateur supprimé)
-							{% endif %}
+							
 						</td>
 					</tr>
 					<tr>
@@ -37,7 +35,9 @@
 						<th>Collaborateur</th>
 						<td>{{rendez_vou.idCollaborateur.getCollaborateur()}}
 
-
+							{% if rendez_vou.idCollaborateur.getIsActif() == false %}
+								(Collaborateur supprimé)
+							{% endif %}
 						</td>
 					</tr>
 					<tr>

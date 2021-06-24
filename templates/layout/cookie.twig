@@ -1,35 +1,11 @@
-<style>
-.cookie-disclaimer {
-  background: #000000;
-  color: #FFF;
-  opacity: 0.8;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  height: 150px;
-  position: fixed;
-  padding-bottom : 5px;
-}
-.cookie-disclaimer .container {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 
-.cookie-disclaimer .cookie-close{
-  float: right;
-  padding: 10px;
-  cursor: pointer;
-}
-</style>
 
 <div class="cookie-disclaimer toast bg-dark text-white w-100 mw-100">
   <div class="cookie-close accept-cookie"><i class="fa fa-times"></i></div>
   <div class="container">
-    <p>Afin d’optimiser votre expérience, ce site utilise des cookies, que vous acceptez en poursuivant votre navigation. <a href="{{ path("politique_conf") }}">En savoir plus.</a></p>
-    <button type="button" class="btn btn-success accept-cookie">Tout accepter</button>
-    <button type="button" class="btn btn-success refuse-cookie">Tout refuser</button>
+    <p>Afin d’optimiser votre expérience, ce site utilise des cookies, que vous acceptez en poursuivant votre navigation.<br><a href="{{ path("politique_conf") }}">En savoir plus.</a></p>
+    <button type="button" class="btn mt-1 accept-cookie">Tout accepter</button>
+    <button type="button" class="btn  mt-1 refuse-cookie">Tout refuser</button>
   </div>
 </div>
 

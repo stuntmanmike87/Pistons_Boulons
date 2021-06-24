@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Édition utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Édition d'un utilisateur :</h1>
 
-    {{ include('user_control/_form.html.twig', {'button_label': 'Update'}) }}
+    	{{ include('user_control/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('user_control_index') }}">back to list</a>
-
-    {{ include('user_control/_delete_form.html.twig') }}
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-lg-6 col-6 text-center float-left">
+					{{ include('user_control/_delete_form.html.twig') }}
+				</div>
+				<div class="col-lg-6 col-6 text-center  float-right">
+					<a class="button" href="{{ path('user_control_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
