@@ -73,4 +73,8 @@ class Admin
 
         return $this;
     }
+
+    public function getAdmin(){
+        return $this->nom .' '. $this->prenom;
+    }
 }

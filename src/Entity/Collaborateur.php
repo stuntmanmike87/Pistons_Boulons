@@ -252,6 +252,6 @@ class Collaborateur
     }
 
     public function getUserLog(){
-        return $this->user.getUserLog();
+        return $this->user->getUserLog();
     }
 }

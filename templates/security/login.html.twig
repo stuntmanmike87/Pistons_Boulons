@@ -1,42 +1,94 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion
+{% endblock %}
+
+{% block  script %}
+
+<script>
+	$(document).ready(function () {
+
+$('.affichage_mdp').click(function () {
+if ($(this).prev('input').prop('type') == 'password') { // Si c'est un input de type password
+$(this).prev('input').prop('type', 'text');
+} else { // Sinon
+$(this).prev('input').prop('type', 'password');
+
+}
+});
+
+});
+</script>
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<div id="main-wrapper">
+		<div class="row">
+			<div class="col-lg-3 col-md-2"></div>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+			<div class="col-lg-6 col-md-8">
+				<form method="post">
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous :</h1>
-    <label for="inputLogin">Login</label>
-    <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+					{% if app.user %}
+						<div class="mb-3">
+							Bonjour
+							{{ app.user.username }},
+							<a href="{{ path('app_logout') }}">Déconnexion</a>
+						</div>
+					{% endif %}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+					<h1 class="h3 mb-3 font-weight-normal">Connectez-vous :</h1>
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+					<div
+						class="">
+						<!-- Identifiant -->
+						<label for="inputLogin">Identifiant :</label>
+						<div class="">
+							<input type="text" value="{{ last_username }}" placeholder="Entrez votre identifiant" name="login" id="inputLogin" class="form-control" autocomplete="username" required autofocus>
+						</div>
+					</div>
+					<div
+						class="mt-2">
+						<!-- mot de passe -->
+						<label for="inputPassword">Mot de passe :</label>
+						<div class="d-flex">
+							<input type="password" name="password" placeholder="Entrez votre mot de passe" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+							<div class="affichage_mdp" title="Voir mot de passe">
+								<i class="fa fa-eye text-center icone_oeil"></i>
+								<span class="lib_icone_oeil text-center">VOIR</span>
+							</div>
+						</div>
+					</div>
+					<div class=" mt-5">
+						<div class="bonton_contact col text-center">
+							<input type="submit" href="" value="Connexion" class="">
+						</div>
+					</div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
-</form>
+					<input
+					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				{#
+														        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+														        See https://symfony.com/doc/current/security/remember_me.html
+														
+														        <div class="checkbox mb-3">
+														            <label>
+														                <input type="checkbox" name="_remember_me"> Remember me
+														            </label>
+														        </div>
+														    #}
+
+
+				</form>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-2"></div>
+
+	</div>
+</div>
 {% endblock %}

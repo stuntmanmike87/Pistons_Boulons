@@ -70,7 +70,7 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => $credentials['login']]);
 
         if (!$user) {
-            throw new UsernameNotFoundException('Login could not be found.');
+            throw new UsernameNotFoundException("L'identifiant n'a pas été trouvé.");
         }
 
         return $user;
