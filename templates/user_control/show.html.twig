@@ -3,28 +3,47 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="">Utilisateur :</h1>
 
-    <table class="table">
+			<table class="table mt-3">
         <tbody>
             <tr>
-                <th>Login</th>
+                <th>Identifiant</th>
                 <td>{{ user.login }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>Rôles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('user_control_index') }}">back to list</a>
+    
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col-lg-3 col-md-12  text-center">
+						<a class="button" href="{{ path('user_control_edit', {'id': rendez_vou.id}) }}">Modifier</a>
 
-    <a href="{{ path('user_control_edit', {'id': user.id}) }}">edit</a>
+					</div>
+					<div class="col-lg-3 col-md-12  text-center">
+						{{ include('user_control/_delete_form.html.twig') }}
 
-    {{ include('user_control/_delete_form.html.twig') }}
+					</div>
+				
+					<div class="col-lg-3 col-md-12 text-center">
+						<a class="button" href="{{ path('user_control_index') }}">Retour</a>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
 {% endblock %}

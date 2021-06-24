@@ -1,4 +1,36 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+
+{# login #}
+
+{# label #}
+{{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.login) }}
+{# input #}
+{{ form_widget(form.login) }}
+
+{# roles #}
+
+{# label #}
+{{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.roles) }}
+{# input #}
+{{ form_widget(form.roles) }}
+
+{# password #}
+
+{# label #}
+{{ form_label(form.password, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.password) }}
+{# input #}
+{{ form_widget(form.password) }}
+
+
+	<div class="col-md-12  text-center"> <button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
+</div>
 {{ form_end(form) }}

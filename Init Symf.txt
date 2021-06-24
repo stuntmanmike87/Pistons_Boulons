@@ -1,6 +1,7 @@
 docker exec -it PistonsEtBoulons bin/bash
-composer self-update
 cd /var/www/html
+composer self-update
+
 composer create-project symfony/website-skeleton:"^4.4" .
 
 apt update && apt install vim

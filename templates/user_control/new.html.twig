@@ -3,9 +3,18 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+	<div id="main-wrapper">
+		<div class="container mt-5">
+			<h1 class="mb-4">Créer un utilisateur :</h1>
 
-    {{ include('user_control/_form.html.twig') }}
+			{{ include('user_control/_form.html.twig') }}
 
-    <a href="{{ path('user_control_index') }}">back to list</a>
+			<div class=" d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('user_control_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
