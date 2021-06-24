@@ -84,6 +84,20 @@ class ContentController extends AbstractController
         ]);
     }
     /**
+     * @Route("/plan_du_site", name="plan_site", methods={"GET"})
+     * 
+     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
+     * 
+     * 
+     * @return layout/politiqueConfidentialite.twig 
+     */
+    public function planDuSite(): Response
+    {
+        return $this->render('layout/plandusite.twig', [
+            'controller_name' => 'ContentController',
+        ]);
+    }
+    /**
      * @Route("/connexion", name="connexion", methods={"GET"})
      *  
      * Fonction qui permet l'affichage de la page Connexion qui sera visible en public
