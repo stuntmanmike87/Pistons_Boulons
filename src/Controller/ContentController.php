@@ -37,6 +37,22 @@ class ContentController extends AbstractController
             'contenu_accueil' => $contentRepository->findByPosition('texte'),
         ]);
     }
+    
+    /**
+     * @Route("/error404", name="error404", methods={"GET"})
+     * 
+     * Fonction qui permet l'affichage de la page erreur 404
+     * 
+     * 
+     * @return layout/error404.twig 
+     */
+    public function error404(): Response
+    {
+        return $this->render('layout/error404.twig', [
+            'controller_name' => 'ContentController'
+        ]);
+    }
+    
     /**
      * @Route("/contact", name="contact", methods={"GET"})
      * 
@@ -235,4 +251,6 @@ class ContentController extends AbstractController
         $this->addFlash('success', "Le contenu a bien été supprimé");
         return $this->redirectToRoute('content_index');
     }
+
+
 }

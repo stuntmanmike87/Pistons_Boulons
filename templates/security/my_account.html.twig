@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau collaborateur
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Mes informations de connexion :</h1>
+			<form method="post">
+				<div
+					class="">
+					<!-- Identifiant -->
+					<label for="inputLogin">Ancien mot de passe :</label>
+					<div class="d-flex">
+						<input type="password" name="password" placeholder="Entrez ancien nouveau mot de passe" id="inputPassword" class="form-control" required>
+
+						<div class="affichage_mdp" title="Voir mot de passe">
+							<i class="fa fa-eye text-center icone_oeil"></i>
+							<span class="lib_icone_oeil text-center">VOIR</span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="mt-2">
+					<!-- mot de passe -->
+					<label for="inputPassword">Nouveau mot de passe :</label>
+					<div class="d-flex">
+						<input type="password" name="password" placeholder="Entrez votre nouveau mot de passe" id="inputPassword" class="form-control" required>
+
+						<div class="affichage_mdp" title="Voir mot de passe">
+							<i class="fa fa-eye text-center icone_oeil"></i>
+							<span class="lib_icone_oeil text-center">VOIR</span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="mt-2">
+					<!-- mot de passe -->
+					<label for="inputPassword">Confirmer nouveau mot de passe :</label>
+					<div class="d-flex">
+						<input type="password" name="password" placeholder="Confirmer votre nouveau mot de passe" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+						<div class="affichage_mdp" title="Voir mot de passe">
+							<i class="fa fa-eye text-center icone_oeil"></i>
+							<span class="lib_icone_oeil text-center">VOIR</span>
+						</div>
+					</div>
+				</div>
+				<div class=" mt-5">
+					<div class="bonton_contact col text-center">
+						<input type="submit" href="" value="Changer de mot de passe" class="">
+					</div>
+				</div>
+				{{motDePasse}}
+			</form>
+			<div class="d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('collaborateur_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
