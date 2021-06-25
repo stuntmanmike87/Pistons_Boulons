@@ -33,6 +33,28 @@ class UserControlController extends AbstractController
         ]);
     }
 
+
+    
+    /**
+     * @Route("/editPassword", name="user_control_edit_password", methods={"GET","POST"})
+     */
+    public function editPassword(Request $request, User $user): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_control_index');
+        }
+
+        return $this->render('user_control/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="user_control_new", methods={"GET","POST"})
      */

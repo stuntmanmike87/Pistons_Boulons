@@ -27,6 +27,37 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/myaccount", name="app_myaccount")
+     */
+    public function myAccount()
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('error404');
+        } else {
+            $user = $this->getUser();
+            $motDePasse = $user->getPassword();
+
+            return $this->render('security/my_account.html.twig', ['motDePasse' => $motDePasse]);
+        }
+    }
+
+
+     /**
+     * @Route("/changePassword", name="app_change_password")
+     */
+    public function changePassword()
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('error404');
+        } else {
+            $user = $this->getUser();
+            $ancienMotDePasse = $user->getPassword();
+            
+            
+        }
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
