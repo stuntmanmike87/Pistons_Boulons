@@ -6,11 +6,12 @@
 {# Tester si nb de prestations est nulle #}
 {# Afficher sur ce template tous les types #}
 {% block body %}
+		{% set typesPrestation = "" %}
 
 	<div id="prestation-wrapper"> 
 		<div class="container">
 			<div class="col-12">
-				{% if typesPrestation is null %}
+				{% if typesPrestation == "" %}
 					<div class="container mt-5 mb-5">
 						<div class="row gtr-200">
 							<div class="col-12 col-12-medium imp-medium text-center ">

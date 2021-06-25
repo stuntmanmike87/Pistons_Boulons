@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<label for="">Adresse :</label>
                 	{# Condition d'affichage #}
-				{% if adresse is null %}
+				{% if adresse == "" %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseignée</p>
 					</div>
@@ -23,7 +23,7 @@
 			<div class="form-group">
 				<label for="">Télephone :</label>
                 {# Condition d'affichage #}
-				{% if telephone is null %}
+				{% if telephone == "" %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseigné</p>
 					</div>
@@ -37,7 +37,7 @@
 			<div class="form-group">
 				<label for="">Email :</label>
                 	{# Condition d'affichage #}
-				{% if email is null %}
+				{% if email == "" %}
 					<div class="container mt-1">
 						<p class="maintenance">Non renseigné</p>
 					</div>

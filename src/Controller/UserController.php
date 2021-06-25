@@ -14,9 +14,9 @@ class UserController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -25,22 +25,6 @@ class UserController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-
-    /**
-     * @Route("/myaccount", name="app_myaccount")
-     */
-    public function myAccount()
-    {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('error404');
-        } else {
-            $user = $this->getUser();
-            $motDePasse = $user->getPassword();
-
-            return $this->render('security/my_account.html.twig', ['motDePasse' => $motDePasse]);
-        }
-    }
-
 
      /**
      * @Route("/changePassword", name="app_change_password")

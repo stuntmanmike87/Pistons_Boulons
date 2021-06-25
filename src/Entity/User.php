@@ -7,12 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Admin;
 use App\Entity\Collaborateur;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
 {
+   
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -181,4 +182,5 @@ class User implements UserInterface
        return false;
 
     }
+
 }
