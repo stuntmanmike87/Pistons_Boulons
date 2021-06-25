@@ -39,9 +39,10 @@
 	</head>
 	<body class="is-preload homepage">
 
-		
-			{% include 'layout/cookie.twig'%}
-
+			{% if app.user is null %}
+				{% include 'layout/cookie.twig'%}
+			{% else %}
+			{% endif %}
 			{% include 'layout/header.twig' %}
 
 			{% for message in app.flashes('success') %}
