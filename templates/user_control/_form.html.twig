@@ -9,16 +9,18 @@
 {{ form_errors(form.login) }}
 {# input #}
 {{ form_widget(form.login) }}
-
 {# roles #}
 
 {# label #}
 {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'foo' }}
 ) }}
-{# erreur #}
-{{ form_errors(form.roles) }}
-{# input #}
-{{ form_widget(form.roles) }}
+{% for roles in form.roles %}
+    <li>
+        {{ form_errors(roles) }}
+        {{ form_widget(roles) }}
+    </li>
+{% endfor %}
+
 
 {# password #}
 
@@ -31,6 +33,8 @@
 {{ form_widget(form.password) }}
 
 
-	<div class="col-md-12  text-center"> <button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
-</div>
+
+	<div class="col-md-12  text-center"> 
+		<button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
+	</div>
 {{ form_end(form) }}

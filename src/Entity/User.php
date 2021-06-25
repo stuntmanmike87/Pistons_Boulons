@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Admin;
+use App\Entity\Collaborateur;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -24,7 +26,7 @@ class User implements UserInterface
     private $login;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private $roles = [];
 
@@ -125,9 +127,9 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdmin(): ?Admin
+    public function getAdmin()
     {
-        return $this->admin;
+        return $this->Admin->getAdmin();
     }
 
     public function setAdmin(Admin $admin): self
@@ -142,9 +144,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCollaborateur(): ?Collaborateur
+   /**
+     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
+     * 
+     * @return Collaborateur.getCollaborateur()
+     */
+    public function getCollaborateur()
     {
-        return $this->collaborateur;
+        return $this->Collaborateur->getCollaborateur();
     }
 
     public function setCollaborateur(Collaborateur $collaborateur): self
@@ -161,5 +168,17 @@ class User implements UserInterface
 
     public function getUserLog(){
         return $this->login;
+    }
+
+    public function isAdmin(){
+       $roles = $this->getRoles();
+
+       foreach ($roles as $key => $value) {
+           if($value=="ROLE_ADMIN"){
+               return true;
+           }
+       }
+       return false;
+
     }
 }

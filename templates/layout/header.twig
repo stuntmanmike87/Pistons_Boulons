@@ -10,34 +10,65 @@
 
 		<nav id="nav">
 			<ul id="menu">
-				<li>
-					<a class="" href="{{path("home")}}">Accueil</a>
-				</li>
-				<li>
-					<a class="" href="{{path("nos_prestations")}}">Prestations</a>
-				</li>
-				
-				{# <li>
-					<a  class="" href="#">Gestion</a>
-					<ul>
-						<li><a href="#">Nos clients</a></li>
-						<li><a href="#">Mes collaborateurs</a></li>
-						<li><a href="{{path("prestation_index")}}">Nos prestations</a></li>
-						<li><a href="{{path("content_index")}}">Contenu du site</a></li>
-						<li><a href="#">Dernières connexions</a></li>
-						<li><a href="#">Mon compte</a></li>
-					</ul>
-				</li> #}
 
-				<li>
-					<a class="" href="{{path("contact")}}">Contact</a>
-				</li>
-				{# <li class="">
-						<a href="{{path("contact")}}">Agenda</a>
-					</li> #}
-				<li class="current">
-					<a class="" href="{{path("app_login")}}">Connexion</a>
-				</li>
+				{% if app.user is null  %}
+					<li>
+						<a class="" href="{{path("home")}}">Accueil</a>
+					</li>
+					<li>
+						<a class="" href="{{path("nos_prestations")}}">Prestations</a>
+					</li>
+					<li>
+						<a class="" href="{{path("contact")}}">Contact</a>
+					</li>
+					<li class="current">
+						<a class="" href="{{path("app_login")}}">Connexion</a>
+					</li>
+
+
+				{% else %}
+					<li>
+						<a class="" href="{{path("home")}}">Accueil</a>
+					</li>
+					<li>
+						<a class="" href="#">Gestion</a>
+						<ul>
+							<li>
+								<a href="{{path("client_index")}}">Nos clients</a>
+							</li>
+							{% if app.user.isAdmin()  %}
+							<li>
+								<a href="{{path("collaborateur_index")}}">Mes collaborateurs</a>
+							</li>
+							{% endif %}
+							<li>
+								<a href="{{path("prestation_index")}}">Nos prestations</a>
+							</li>
+							<li>
+								<a href="{{path("content_index")}}">Contenu du site</a>
+							</li>
+							{% if app.user.isAdmin()  %}
+							<li>
+								<a href="#">Dernières connexions</a>
+							</li>
+								{% endif %}
+							<li>
+								<a href="#">Mon compte</a>
+							</li>
+						</ul>
+					</li>
+					<li class="current">
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
+					</li>
+					<li class="">
+						<a href="#">Utilisateur : {{ app.user.username }}</a>
+					</li>
+					
+
+
+				{% endif %}
+
+
 			</ul>
 		</nav>
 	</header>
