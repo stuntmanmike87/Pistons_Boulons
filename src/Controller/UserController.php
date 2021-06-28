@@ -15,6 +15,13 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * Fonction d'afficher la page de connexion
+     * 
+     * @param AuthenticationUtils $authenticationUtils
+     * @param UserRepository $repoUser
+     * @param CollaborateurRepository $repoCollabo
+     * 
+     * @return security/login.html.twig
      */
     public function login(AuthenticationUtils $authenticationUtils, CollaborateurRepository $repoCollabo,UserRepository $repoUser): Response
     {
@@ -48,6 +55,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/logout", name="app_logout")
+     * 
      */
     public function logout()
     {

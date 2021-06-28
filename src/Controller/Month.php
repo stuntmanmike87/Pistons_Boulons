@@ -30,19 +30,21 @@ class Month {
  
      /**
      * Cette fonction permet de visualiser notre occurence
-     * 
+     * @return String
      */
     public function toString(): string{
         return $this->months[$this->month -1]. ' '. $this->year;
     }
     /**
      * Cette fonction permet de connaitre le premier jour du mois en question
+     * @return DateTime
      */
     public function getStartingDay(): \DateTime{
         return new \DateTime("{$this->year}-{$this->month}-01");
     }
    /**
      * Cette fonction permet de connaitre le nombre de semaines dans le mois
+     *  @return Int
      */
     public function getWeeks (): int {
         $start = $this->getStartingDay();
@@ -57,6 +59,7 @@ class Month {
      /**
      * Cette fonction permet de savoir si le jour placé en paramètre est dans le mois actuel
      * @param DateTime $date : date 
+     * @return Boolean
      */
     public function withinMonth (\DateTime $date):bool {
         return $this->getStartingDay()->format('Y-m') === $date->format('Y-m');

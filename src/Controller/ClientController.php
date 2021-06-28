@@ -148,10 +148,7 @@ class ClientController extends AbstractController
             $client->setIsActif(false);
             $entityManager->flush();
         }
-
-
         $this->addFlash('success', 'Le client a bien été effacé');
-
         return $this->redirectToRoute('client_index');
     }
 }
