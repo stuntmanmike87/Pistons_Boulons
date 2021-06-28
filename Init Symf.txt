@@ -1,19 +1,25 @@
-docker exec -it PistonsEtBoulons bin/bash
+environnement :
+php : 7.4
+bdd : sqlite3
+
+#docker exec -it PistonsEtBoulons bin/bash#
 cd /var/www/html
 composer self-update
+composer install
 
-composer create-project symfony/website-skeleton:"^4.4" .
-
-apt update && apt install vim
+apt update && apt install vim 
+apt install php7.4-sqlite3
 vim /etc/apache2/sites-available/000-default.conf
 *edit* Document Root Ajouter /public
 service apache2 reload
 
 
-composer req maker annotations twig orm form validator apache-pack profiler-pack orm-fixtures
-
-
-
-apt install php7.4-sqlite3
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
+
+#composer req maker annotations twig orm form validator apache-pack profiler-pack orm-fixtures#
+
+entre diese : ne pas mettre dans le Read Me
+
+
+
