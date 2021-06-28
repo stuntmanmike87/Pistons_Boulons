@@ -25,6 +25,16 @@ class CollaborateurController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/lastConnexion", name="collaborateur_derniere_connexion", methods={"GET"})
+     */
+    public function derniereConnexion(CollaborateurRepository $collaborateurRepository): Response
+    {
+        return $this->render('collaborateur/derniere_connexion.html.twig', [
+            'collaborateurs' => $collaborateurRepository->findByDerniereConnexion(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="collaborateur_new", methods={"GET","POST"})
      */

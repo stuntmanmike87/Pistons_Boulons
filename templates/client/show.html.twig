@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <th>Date de première saisie</th>
-                    <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
+                    <td>{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y', "Europe/Paris") : '' }}</td>
                 </tr>
                 <tr>
                     <th>Adresse</th>

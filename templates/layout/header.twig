@@ -59,7 +59,7 @@
 							{% endif %}
 							{% if app.user.isAdmin()  %}
 								<li>
-									<a href="#">Dernières connexions</a>
+									<a href="{{path("collaborateur_derniere_connexion")}}">Dernières connexions</a>
 								</li>
 							{% endif %}
 						</ul>

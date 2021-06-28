@@ -20,11 +20,11 @@
 					</tr>
 					<tr>
 						<th>Date de naissance</th>
-						<td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y') : '' }}</td>
+						<td>{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y', "Europe/Paris") : '' }}</td>
 					</tr>
 					<tr>
 						<th>Date d'entrée dans l'entreprise</th>
-						<td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y') : '' }}</td>
+						<td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y', "Europe/Paris") : '' }}</td>
 					</tr>
 					<tr>
 						<th>N° s"curité sociale</th>

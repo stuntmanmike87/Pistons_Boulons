@@ -22,8 +22,8 @@
 				<tbody>
 					{% for rendez_vou in rendez_vouses %}
 						<tr>
-							<td data-label="Date">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d') : '' }}</td>
-							<td data-label="Heure">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}</td>
+							<td data-label="Date">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('Y-m-d', "Europe/Paris") : '' }}</td>
+							<td data-label="Heure">{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i', "Europe/Paris") : '' }}</td>
 							<td data-label="Client">{{ rendez_vou.idClient.getClient() }}
 								{% if rendez_vou.idClient.getIsActif() == false %}
 									(Client supprimé)

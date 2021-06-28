@@ -38,7 +38,7 @@
 						<tr>
 							<td data-label="Nom">{{ client.nom }}</td>
 							<td data-label="Prénom">{{ client.prenom }}</td>
-							<td data-label="Date de première saisie">{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y') : '' }}</td>
+							<td data-label="Date de première saisie">{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y', "Europe/Paris") : '' }}</td>
 							<td data-label="Adresse">{{ client.adresse }}</td>
 							<td data-label="Type de véhicule">{{ client.typeVehicule }}</td>
 							<td data-label="Plaque d'immatriculation">{{ client.plaqueImmat }}</td>
