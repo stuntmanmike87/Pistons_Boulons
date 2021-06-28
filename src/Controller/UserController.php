@@ -7,54 +7,43 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use App\Repository\CollaborateurRepository;
+use App\Repository\UserRepository;
+use DateTime;
+
 class UserController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, CollaborateurRepository $repoCollabo,UserRepository $repoUser): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+              //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
+            $today = new DateTime();  
+      
+          //On pointe sur le login de l'utilisateur
+          $user_login= $this->getUser()->getLogin();
+          //on récupère le collaborateur en fonction de son nom d'utilisateur
+          $collab = $repoCollabo->findOneBy([
+              'user' => $repoUser->findOneBy([
+                  'login'=>$user_login,
+              ]),
+          ]);
+          //on met a jour le chp derniereConnexion  de collabo
+          $entityManager = $this->getDoctrine()->getManager();
+          $collab->setDateHeureDerniereConnexion($today);
+          $entityManager->flush();
+        
+          return $this->redirectToRoute('home');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
+            
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-    }
-
-    /**
-     * @Route("/myaccount", name="app_myaccount")
-     */
-    public function myAccount()
-    {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('error404');
-        } else {
-            $user = $this->getUser();
-            $motDePasse = $user->getPassword();
-
-            return $this->render('security/my_account.html.twig', ['motDePasse' => $motDePasse]);
-        }
-    }
-
-
-     /**
-     * @Route("/changePassword", name="app_change_password")
-     */
-    public function changePassword()
-    {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('error404');
-        } else {
-            $user = $this->getUser();
-            $ancienMotDePasse = $user->getPassword();
-            
-            
-        }
     }
 
     /**

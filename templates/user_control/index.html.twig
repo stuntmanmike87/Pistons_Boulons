@@ -13,7 +13,7 @@
             <tr>
                 <th>Identifiant</th>
                 <th>Rôles</th>
-                <th>Mot de passe</th>
+                {# <th>Mot de passe</th> #}
                 <th>Action</th>
             </tr>
         </thead>
@@ -22,7 +22,7 @@
             <tr>
                 <td  data-label="Identifiant">{{ user.login }}</td>
                 <td  data-label="Rôles">{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td  data-label="Mot de passe">{{ user.password }}</td>
+                {# <td  data-label="Mot de passe">{{ user.password }}</td> #}
                 <td data-label="Action">
                     <a href="{{ path('user_control_show', {'id': user.id}) }}">Voir</a>
                     <a href="{{ path('user_control_edit', {'id': user.id}) }}">Éditer</a>

@@ -85,17 +85,17 @@ pdfMake.createPdf(docDefinition).download("Rendez-vous de " + client + " le " + 
 				</div>
 
 
-				<input id="dateJour" type="hidden" value="{{event.dateRendezVous|date("d-m-Y")}}"/>
+				<input id="dateJour" type="hidden" value="{{event.dateRendezVous|date("d-m-Y", "Europe/Paris")}}"/>
 				<input id="client" type="hidden" value="{{event.idClient.getIdentiteClient()}}"/>
 
 				<p>
 					<span class="font-weight-bold">Date :
 					</span>
-					{{event.dateRendezVous|date("d/m/Y")}}</p>
+					{{event.dateRendezVous|date("d/m/Y", "Europe/Paris")}}</p>
 				<p>
 					<span class="font-weight-bold">Heure :
 					</span>
-					{{event.dateRendezVous|date("H:i")}}</p>
+					{{event.dateRendezVous|date("H:i", "Europe/Paris")}}</p>
 				<p>
 					<span class="font-weight-bold">Client :
 					</span>

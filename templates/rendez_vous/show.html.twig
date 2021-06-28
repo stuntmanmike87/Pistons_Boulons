@@ -13,7 +13,7 @@
 					<tr>
 						<th>Date</th>
 						<td>
-							{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y') : '' }}
+							{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('d-m-Y', "Europe/Paris") : '' }}
 							{% if rendez_vou.idClient.getIsActif() == false %}
 								(Client supprimé)
 							{% endif %}
@@ -21,7 +21,7 @@
 					</tr>
 					<tr>
 						<th>Heure</th>
-						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i') : '' }}
+						<td>{{ rendez_vou.dateRendezVous ? rendez_vou.dateRendezVous|date('H:i', "Europe/Paris") : '' }}
 							
 						</td>
 					</tr>

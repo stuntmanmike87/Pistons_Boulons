@@ -38,11 +38,11 @@
 						<tr>
 							<td data-label="Nom">{{ collaborateur.nom }}</td>
 							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
-							<td data-label="Date de naissance">{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y') : '' }}</td>
-							<td data-label="Entrée en entreprise">{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y') : '' }}</td>
+							<td data-label="Date de naissance">{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y', "Europe/Paris") : '' }}</td>
+							<td data-label="Entrée en entreprise">{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y', "Europe/Paris") : '' }}</td>
 							<td data-label="N° Sécu. Sociale">{{ collaborateur.numSecuriteSocial }}</td>
 							<td data-label="Type de contrat">{{ collaborateur.typeContrat }}</td>
-							{# <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s') : '' }}</td> #}
+							{# <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s', "Europe/Paris") : '' }}</td> #}
 							<td data-label="Durée travail hebdo.">{{ collaborateur.dureeTravailHebdo }}</td>
 							<td data-label="login">{{ collaborateur.user.getUserLog() }}
 							<td data-label="Action">

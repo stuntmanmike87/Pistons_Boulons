@@ -31,39 +31,43 @@
 						<a class="" href="{{path("home")}}">Accueil</a>
 					</li>
 					<li>
+						<a class="" href="{{path("agendaMensuel")}}">Agenda</a>
+					</li>
+					<li>
 						<a class="" href="#">Gestion</a>
 						<ul>
+
 							<li>
 								<a href="{{path("client_index")}}">Nos clients</a>
 							</li>
 							{% if app.user.isAdmin()  %}
-							<li>
-								<a href="{{path("collaborateur_index")}}">Mes collaborateurs</a>
-							</li>
+								<li>
+									<a href="{{path("collaborateur_index")}}">Mes collaborateurs</a>
+								</li>
 							{% endif %}
-							<li>
-								<a href="{{path("prestation_index")}}">Nos prestations</a>
-							</li>
-							<li>
-								<a href="{{path("content_index")}}">Contenu du site</a>
-							</li>
+
+
 							{% if app.user.isAdmin()  %}
-							<li>
-								<a href="#">Dernières connexions</a>
-							</li>
-								{% endif %}
-							<li>
-								<a href="{{ path('app_myaccount') }}">Mon compte</a>
-							</li>
+								<li>
+									<a href="{{path("content_index")}}">Contenu du site</a>
+								</li>
+							{% endif %}
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("user_control_index")}}">Mes utilisateurs</a>
+								</li>
+							{% endif %}
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("collaborateur_derniere_connexion")}}">Dernières connexions</a>
+								</li>
+							{% endif %}
 						</ul>
 					</li>
+
 					<li class="current">
 						<a href="{{ path('app_logout') }}">Déconnexion</a>
 					</li>
-					<li class="">
-						<a href="{{ path('app_myaccount') }}">Utilisateur : {{ app.user.username }}</a>
-					</li>
-					
 
 
 				{% endif %}

@@ -6,6 +6,9 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class UserType extends AbstractType
 {
@@ -13,7 +16,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('login')
-            ->add('roles')
+            ->add('roles',CollectionType::class, [
+                'entry_type' => TextType::class,
+                'entry_options' => [
+                    'attr' => ['value' => "ROLE_COLLABORATEUR"] ,
+                ],
+            ])
             ->add('password')
         ;
     }
