@@ -48,6 +48,7 @@ class CollaborateurType extends AbstractType
                 'query_builder' => function ($er) {
                     return $er->createQueryBuilder('us')
                         ->andWhere("us.admin is null")
+                        ->andWhere("us.collaborateur is null")
                         ->orderBy('us.login', 'ASC');
                 },
                 'choice_label' => 'userlog',
