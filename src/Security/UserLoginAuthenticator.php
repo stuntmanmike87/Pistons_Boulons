@@ -30,7 +30,12 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-
+/**
+     * @param EntityManagerInterface $entityManager
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param  CsrfTokenManagerInterface $csrfTokenManager
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     */
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
@@ -38,13 +43,18 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
-
+ 
+    /**
+     * @param Request $request
+     */
     public function supports(Request $request)
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
-
+/**
+     * @param Request $request
+     */
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -59,7 +69,10 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         return $credentials;
     }
-
+/**
+     * @param $credentials
+     * @param UserProviderInterface $userProvider
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);

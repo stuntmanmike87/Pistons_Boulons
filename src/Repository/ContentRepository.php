@@ -14,6 +14,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ContentRepository extends ServiceEntityRepository
 {
+     /**
+     * Fonction qui est le constructeur de la classe ContentRepository
+     * 
+     * Cette fonction permet de contruire l'objet ContentRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
+     * 
+     * @param ManagerRegistry $registry 
+     * 
+     * @return void
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Content::class);

@@ -27,15 +27,18 @@ class UserFixtures
         $user->setLogin('piston')
             ->setPassword($this->encoder->encodePassword($user, 'boulon'))
             ->setRoles(['ROLE_ADMIN']);
-        $manager->persist($user);
+      
 
 
         // Default admin account
         $admin = new admin();
         $admin->setNom('Piston');
         $admin->setPrenom('Boulon')
+              ->setUser($user);
 
-            ->setUser($user);
+        $user->setAdmin($admin);
+
+        $manager->persist($user);
         $manager->persist($admin);
 
         // Flush to DB

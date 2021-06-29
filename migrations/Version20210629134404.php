@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210625153834 extends AbstractMigration
+final class Version20210629134404 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,6 @@ final class Version20210625153834 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE change_password (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, old_password VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL)');
         $this->addSql('DROP INDEX UNIQ_880E0D76A76ED395');
         $this->addSql('CREATE TEMPORARY TABLE __temp__admin AS SELECT id, user_id, nom, prenom FROM admin');
         $this->addSql('DROP TABLE admin');
@@ -35,31 +34,34 @@ final class Version20210625153834 extends AbstractMigration
         $this->addSql('INSERT INTO collaborateur (id, user_id, nom, prenom, date_naissance, date_entree_entreprise, num_securite_social, type_contrat, date_heure_derniere_connexion, duree_travail_hebdo, is_actif) SELECT id, user_id, nom, prenom, date_naissance, date_entree_entreprise, num_securite_social, type_contrat, date_heure_derniere_connexion, duree_travail_hebdo, is_actif FROM __temp__collaborateur');
         $this->addSql('DROP TABLE __temp__collaborateur');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_770CBCD3A76ED395 ON collaborateur (user_id)');
-        $this->addSql('DROP INDEX IDX_65E8AA0A99DED506');
-        $this->addSql('DROP INDEX IDX_65E8AA0A4BC2B660');
         $this->addSql('DROP INDEX IDX_65E8AA0A206D1431');
+        $this->addSql('DROP INDEX IDX_65E8AA0A4BC2B660');
+        $this->addSql('DROP INDEX IDX_65E8AA0A99DED506');
         $this->addSql('CREATE TEMPORARY TABLE __temp__rendez_vous AS SELECT id, id_client_id, id_collaborateur_id, id_prestation_id, date_rendez_vous FROM rendez_vous');
         $this->addSql('DROP TABLE rendez_vous');
         $this->addSql('CREATE TABLE rendez_vous (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, id_client_id INTEGER NOT NULL, id_collaborateur_id INTEGER NOT NULL, id_prestation_id INTEGER NOT NULL, date_rendez_vous DATETIME NOT NULL, CONSTRAINT FK_65E8AA0A99DED506 FOREIGN KEY (id_client_id) REFERENCES client (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_65E8AA0A4BC2B660 FOREIGN KEY (id_collaborateur_id) REFERENCES collaborateur (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_65E8AA0A206D1431 FOREIGN KEY (id_prestation_id) REFERENCES prestation (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('INSERT INTO rendez_vous (id, id_client_id, id_collaborateur_id, id_prestation_id, date_rendez_vous) SELECT id, id_client_id, id_collaborateur_id, id_prestation_id, date_rendez_vous FROM __temp__rendez_vous');
         $this->addSql('DROP TABLE __temp__rendez_vous');
-        $this->addSql('CREATE INDEX IDX_65E8AA0A99DED506 ON rendez_vous (id_client_id)');
-        $this->addSql('CREATE INDEX IDX_65E8AA0A4BC2B660 ON rendez_vous (id_collaborateur_id)');
         $this->addSql('CREATE INDEX IDX_65E8AA0A206D1431 ON rendez_vous (id_prestation_id)');
+        $this->addSql('CREATE INDEX IDX_65E8AA0A4BC2B660 ON rendez_vous (id_collaborateur_id)');
+        $this->addSql('CREATE INDEX IDX_65E8AA0A99DED506 ON rendez_vous (id_client_id)');
+        $this->addSql('DROP INDEX UNIQ_8D93D649642B8210');
         $this->addSql('DROP INDEX UNIQ_8D93D649AA08CB10');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__user AS SELECT id, login, roles, password FROM user');
+        $this->addSql('DROP INDEX UNIQ_8D93D649A848E3B1');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__user AS SELECT id, collaborateur_id, admin_id, login, password, roles FROM user');
         $this->addSql('DROP TABLE user');
-        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, login VARCHAR(180) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, roles CLOB NOT NULL --(DC2Type:array)
-        )');
-        $this->addSql('INSERT INTO user (id, login, roles, password) SELECT id, login, roles, password FROM __temp__user');
+        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, collaborateur_id INTEGER DEFAULT NULL, admin_id INTEGER DEFAULT NULL, login VARCHAR(180) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, roles CLOB NOT NULL COLLATE BINARY --(DC2Type:array)
+        , CONSTRAINT FK_8D93D649642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_8D93D649A848E3B1 FOREIGN KEY (collaborateur_id) REFERENCES collaborateur (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('INSERT INTO user (id, collaborateur_id, admin_id, login, password, roles) SELECT id, collaborateur_id, admin_id, login, password, roles FROM __temp__user');
         $this->addSql('DROP TABLE __temp__user');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649642B8210 ON user (admin_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649AA08CB10 ON user (login)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649A848E3B1 ON user (collaborateur_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE change_password');
         $this->addSql('DROP INDEX UNIQ_880E0D76A76ED395');
         $this->addSql('CREATE TEMPORARY TABLE __temp__admin AS SELECT id, user_id, nom, prenom FROM admin');
         $this->addSql('DROP TABLE admin');
@@ -86,12 +88,16 @@ final class Version20210625153834 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_65E8AA0A4BC2B660 ON rendez_vous (id_collaborateur_id)');
         $this->addSql('CREATE INDEX IDX_65E8AA0A206D1431 ON rendez_vous (id_prestation_id)');
         $this->addSql('DROP INDEX UNIQ_8D93D649AA08CB10');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__user AS SELECT id, login, roles, password FROM user');
+        $this->addSql('DROP INDEX UNIQ_8D93D649642B8210');
+        $this->addSql('DROP INDEX UNIQ_8D93D649A848E3B1');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__user AS SELECT id, admin_id, collaborateur_id, login, roles, password FROM user');
         $this->addSql('DROP TABLE user');
-        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, login VARCHAR(180) NOT NULL, password VARCHAR(255) NOT NULL, roles CLOB NOT NULL COLLATE BINARY --(DC2Type:json)
-        )');
-        $this->addSql('INSERT INTO user (id, login, roles, password) SELECT id, login, roles, password FROM __temp__user');
+        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, admin_id INTEGER DEFAULT NULL, collaborateur_id INTEGER DEFAULT NULL, login VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:array)
+        , password VARCHAR(255) NOT NULL)');
+        $this->addSql('INSERT INTO user (id, admin_id, collaborateur_id, login, roles, password) SELECT id, admin_id, collaborateur_id, login, roles, password FROM __temp__user');
         $this->addSql('DROP TABLE __temp__user');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649AA08CB10 ON user (login)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649642B8210 ON user (admin_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649A848E3B1 ON user (collaborateur_id)');
     }
 }

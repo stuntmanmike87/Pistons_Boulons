@@ -87,7 +87,7 @@ class Client
      *      minMessage="La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères."
      * )
      */
-    private $plaqueImmat;    
+    private $plaqueImmat;
     //  * @Assert\Regex(
     //  * pattern="/^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/",
     //  * match=false,
@@ -258,7 +258,6 @@ class Client
 
         return $this;
     }
-
     /**
      * Fonction qui permet de récupérer si le client est actif ou pas
      * 
@@ -268,7 +267,6 @@ class Client
     {
         return $this->isActif;
     }
-
     /**
      * Fonction qui permet de changer la valeur de l'activité du client du client
      * 
@@ -282,22 +280,22 @@ class Client
 
         return $this;
     }
-
-    
     /**
      * Fonction qui permet de récupérer le client avec son nom , son prénom et sa plaque d'immatriculation
      * 
-     * @return Client
+     * @return String
      */
-    public function getClient(){
-        return $this->nom .' '. $this->prenom .' - Véhicule : '. $this->typeVehicule." - Immatriculation : ".$this->plaqueImmat;
+    public function getClient()
+    {
+        return $this->nom . ' ' . $this->prenom . ' - Véhicule : ' . $this->typeVehicule . " - Immatriculation : " . $this->plaqueImmat;
     }
-      /**
+    /**
      * Fonction qui permet de récupérer le client avec son nom , son prénom
      * 
-     * @return Client
+     * @return String
      */
-    public function getIdentiteClient(){
-        return $this->nom .' '. $this->prenom;
+    public function getIdentiteClient()
+    {
+        return $this->nom . ' ' . $this->prenom;
     }
 }

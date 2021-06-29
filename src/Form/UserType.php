@@ -12,6 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserType extends AbstractType
 {
+     /**
+     * Fonction de création du formulaire user
+     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     *  @param array $options un tableau qui permet de lister les champs du formulaire.
+     * 
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

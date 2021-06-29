@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Collaborateur;
+use App\Entity\User;
 use App\Form\CollaborateurType;
 use App\Repository\CollaborateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,12 +53,21 @@ class CollaborateurController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $u = new User();
         $collaborateur = new Collaborateur();
         $form = $this->createForm(CollaborateurType::class, $collaborateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form['user']->getData();
+            
             $entityManager = $this->getDoctrine()->getManager();
+
+            if($user!=null){
+                $u->setCollaborateur($collaborateur);
+                $entityManager->persist($u);
+            }
+
             $collaborateur->setIsActif(true);
             $entityManager->persist($collaborateur);
             $entityManager->flush();
@@ -114,6 +124,17 @@ class CollaborateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $u = new User();
+
+            $user = $form['user']->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            if($user!=null){
+                $u->setCollaborateur($collaborateur);
+                $entityManager->persist($u);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Le collaborateur a bien été modifié');

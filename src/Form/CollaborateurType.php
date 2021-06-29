@@ -13,6 +13,13 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CollaborateurType extends AbstractType
 {
+    /**
+     * Fonction de création du formulaire collaborateur
+     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     *  @param array $options un tableau qui permet de lister les champs du formulaire.
+     * 
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -31,16 +38,20 @@ class CollaborateurType extends AbstractType
             ->add('typeContrat')
             ->add('dureeTravailHebdo', TextType::class, [
                 'attr' => [
-                    'placeholder' => '35h'
+                    'placeholder' => ''
                 ]
                 ])
             ->add('user', EntityType::class, [
                 'class' => User::class,
+                'placeholder' => 'Choisir un identifiant',
+                'required' => false,
                 'query_builder' => function ($er) {
                     return $er->createQueryBuilder('us')
+                        ->andWhere("us.admin is null")
                         ->orderBy('us.login', 'ASC');
                 },
                 'choice_label' => 'userlog',
+                'empty_data' => null
             ]);
     }
 

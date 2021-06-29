@@ -14,12 +14,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PrestationRepository extends ServiceEntityRepository
 {
+    /**
+     * Fonction qui est le constructeur de la classe PrestationRepository
+     * 
+     * Cette fonction permet de contruire l'objet PrestationRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
+     * 
+     * @param ManagerRegistry $registry 
+     * 
+     * @return void
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Prestation::class);
     }
 
     /**
+     * Cette fonction permet de récuperer tous enregistrements actifs
      * @return Content[] Returns an array of Collaborateur objects
      */
     public function findByIsActif()
@@ -32,7 +42,6 @@ class PrestationRepository extends ServiceEntityRepository
     }
 
     /**
-     *
      * Cette fonction permet de récuperer tous les types de prestations sur la table PRESTATION avec comme condition
      * que l'enregistrement soit actif 
      * @return Array[] : retourne un tableau avec les types de prestations distincts 

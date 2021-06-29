@@ -28,7 +28,10 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
-
+   /**
+     * Cette fonction permet de récuperer tous enregistrements actifs
+     * @return Content[] Returns an array of Client objects
+     */
     public function findByIsActif()
     {
         return $this->createQueryBuilder('c')
