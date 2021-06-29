@@ -27,7 +27,7 @@
 						<td>{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y', "Europe/Paris") : '' }}</td>
 					</tr>
 					<tr>
-						<th>N° s"curité sociale</th>
+						<th>N° sécurité sociale</th>
 						<td>{{ collaborateur.numSecuriteSocial }}</td>
 					</tr>
 					<tr>
@@ -37,6 +37,14 @@
 					<tr>
 						<th>Durée de travail hebdomadaire</th>
 						<td>{{ collaborateur.dureeTravailHebdo }}</td>
+					</tr>
+					<tr>
+						<th>Identifiant</th>
+						<td>{% if collaborateur.user is not null %}
+									{{ collaborateur.user.getUserLog() }}
+								{% else %}
+									Aucun
+								{% endif %}</td>
 					</tr>
 				</tbody>
 			</table>

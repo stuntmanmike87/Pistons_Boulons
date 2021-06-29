@@ -38,12 +38,16 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\JoinColumn(nullable=true)
      * @ORM\OneToOne(targetEntity=Admin::class, mappedBy="user", cascade={"persist", "remove"})
+     * 
      */
     private $admin;
 
     /**
+     *  @ORM\JoinColumn(nullable=true)
      * @ORM\OneToOne(targetEntity=Collaborateur::class, mappedBy="user", cascade={"persist", "remove"})
+     *
      */
     private $collaborateur;
 
@@ -51,12 +55,23 @@ class User implements UserInterface
     {
         return $this->id;
     }
-
+ /**
+     * Fonction qui permet de récuperer le login
+     * 
+     * @return String
+     */
     public function getLogin(): ?string
     {
         return $this->login;
     }
 
+    /**
+     * Fonction qui permet de changer la valeur du login
+     * 
+     * @param String $login
+     * 
+     * @return String $login
+     */
     public function setLogin(string $login): self
     {
         $this->login = $login;
@@ -85,7 +100,13 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
-
+ /**
+     * Fonction qui permet de changer la valeur de l'array Roles
+     * 
+     * @param Array $roles
+     * 
+     * @return Array $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -100,7 +121,13 @@ class User implements UserInterface
     {
         return $this->password;
     }
-
+ /**
+     * Fonction qui permet de changer la valeur du mot de passe
+     * 
+     * @param String $password
+     * 
+     * @return String $password
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -127,12 +154,22 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
+ /**
+     * Fonction qui permet de récuperer le champ admin
+     * 
+     * @return Admin
+     */
     public function getAdmin()
     {
         return $this->Admin->getAdmin();
     }
-
+     /**
+     * Fonction qui permet de changer la valeur de admin
+     * 
+     * @param Admin $admin
+     * 
+     * @return Admin $admin
+     */
     public function setAdmin(Admin $admin): self
     {
         // set the owning side of the relation if necessary
@@ -154,7 +191,13 @@ class User implements UserInterface
     {
         return $this->Collaborateur->getCollaborateur();
     }
-
+      /**
+     * Fonction qui permet de changer la valeur de collaborateur
+     * 
+     * @param Collaborateur $collaborateur
+     * 
+     * @return Collaborateur $collaborateur
+     */
     public function setCollaborateur(Collaborateur $collaborateur): self
     {
         // set the owning side of the relation if necessary
@@ -166,11 +209,18 @@ class User implements UserInterface
 
         return $this;
     }
-
+ /**
+     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
+     * 
+     * @return Collaborateur.getCollaborateur()
+     */
     public function getUserLog(){
         return $this->login;
     }
-
+/**
+     * Fonction qui permet de savoir si le user est admin ou non
+     * @return Boolean 
+     */
     public function isAdmin(){
        $roles = $this->getRoles();
 

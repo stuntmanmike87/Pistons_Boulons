@@ -98,7 +98,7 @@ class Prestation
      * 
      * @param string $nom 
      * 
-     * @return $nom
+     * @return string $nom
      */
     public function setNom(string $nom): self
     {
@@ -110,7 +110,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer le temps de réalisation de la prestation
      * 
-     * @return tempsRealisation
+     * @return string tempsRealisation
      */
     public function getTempsRealisation(): ?string
     {
@@ -122,7 +122,7 @@ class Prestation
      * 
      * @param string $tempsRealisation 
      * 
-     * @return tempsRealisation
+     * @return string tempsRealisation
      */
     public function setTempsRealisation(string $tempsRealisation): self
     {
@@ -134,7 +134,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer le cout HT de la prestation
      * 
-     * @return coutHT
+     * @return string coutHT
      */
     public function getCoutHT(): ?string
     {
@@ -146,7 +146,7 @@ class Prestation
      * 
      * @param string $coutHT 
      * 
-     * @return coutHT
+     * @return string coutHT
      */
     public function setCoutHT(string $coutHT): self
     {
@@ -158,7 +158,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer la description de la prestation
      * 
-     * @return description
+     * @return string description
      */
     public function getDescription(): ?string
     {
@@ -170,7 +170,7 @@ class Prestation
      * 
      * @param string $description 
      * 
-     * @return description
+     * @return string description
      */
     public function setDescription(string $description): self
     {
@@ -182,7 +182,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer le type de prestation de la prestation
      * 
-     * @return typePrestation
+     * @return string typePrestation
      */
     public function getTypePrestation(): ?string
     {
@@ -194,7 +194,7 @@ class Prestation
      * 
      * @param string $typePrestation 
      * 
-     * @return typePrestation
+     * @return string typePrestation
      */
     public function setTypePrestation(string $typePrestation): self
     {
@@ -206,7 +206,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer le boolean estActif de la prestation
      * 
-     * @return isActive
+     * @return boolean isActive
      */
     public function getIsActive(): ?bool
     {
@@ -216,9 +216,9 @@ class Prestation
     /**
      * Fonction qui permet de changer la valeur du boolean estActif de la prestation
      * 
-     * @param boolean $isActive 
+     * @param Boolean $isActive 
      * 
-     * @return isActive
+     * @return Boolean isActive
      */
     public function setIsActive(bool $isActive): self
     {
@@ -226,7 +226,10 @@ class Prestation
 
         return $this;
     }
-
+    /**
+     * Fonction GETTER permettant de retourner des information sur la prestation  
+     * @return String
+     */
     public function getPrestation()
     {
         return $this->nom;

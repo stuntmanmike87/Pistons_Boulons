@@ -104,13 +104,20 @@ class RendezVousController extends AbstractController
             'hier'=>$hier
         ]);
     }
-
+    /**
+     * @Route("/pdf/{id}", name="rendez_vous_pdf")
+     * @return Month month retourne un mois correspondant au Service
+     */
     public function getMonth()
     {
         return $this->month;
     }
     /**
      * @Route("/pdf/{id}", name="rendez_vous_pdf")
+     * @param RendezVousRepository $rendezVousRepository 
+     * @param Int $id
+     * @param ContentRepository $content   
+     * @return rendez_vous/pdf.twig avec les données du rendez-vous dans la base de données
      */
     public function pdf(int $id , RendezVousRepository $rendezVousRepository, ContentRepository $content): Response
     {

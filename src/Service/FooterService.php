@@ -13,35 +13,45 @@ class FooterService
      * @var $footerRepository
      */
     private $footerRepository;
-
+    /**
+     * Constructeur du service
+     * @param ContentRepository $footerRepository
+     */
     public function __construct(ContentRepository $footerRepository)
     {
         $this->footerRepository = $footerRepository;
     }
-
+    /**
+     * Fonction permettant de récupérer le contenu de contact_horaires
+     * @return Array 
+     */
     public function getGarageHoraires()
     {
-       
-        return $this->footerRepository->findOneByPosition('contact_horaires');
-        
+        return $this->footerRepository->findOneByPosition('contact_horaires');   
     }
+    /**
+     * Fonction permettant de récupérer le contenu de contact_telephone
+     * @return Array 
+     */
     public function getGarageTelephone()
     {
-       
-        return $this->footerRepository->findOneByPosition('contact_telephone');
-        
+        return $this->footerRepository->findOneByPosition('contact_telephone');   
     }
+       /**
+     * Fonction permettant de récupérer le contenu de contact_adresse
+     * @return Array 
+     */
     public function getGarageAdresse()
     {
-       
-        return $this->footerRepository->findOneByPosition('contact_adresse');
-        
+        return $this->footerRepository->findOneByPosition('contact_adresse'); 
     }
+       /**
+     * Fonction permettant de récupérer le contenu de contact_email
+     * @return Array 
+     */
     public function getGarageEmail()
-    {
-       
-        return $this->footerRepository->findOneByPosition('contact_email');
-        
+    {  
+        return $this->footerRepository->findOneByPosition('contact_email');   
     }
 
 }

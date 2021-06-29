@@ -43,7 +43,6 @@ class ContentController extends AbstractController
      * 
      * Fonction qui permet l'affichage de la page erreur 404
      * 
-     * 
      * @return layout/error404.twig 
      */
     public function error404(): Response
