@@ -6,6 +6,7 @@ use App\Entity\Collaborateur;
 use App\Entity\User;
 use App\Form\CollaborateurType;
 use App\Repository\CollaborateurRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,25 +54,28 @@ class CollaborateurController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $u = new User();
         $collaborateur = new Collaborateur();
         $form = $this->createForm(CollaborateurType::class, $collaborateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form['user']->getData();
-            
+  
             $entityManager = $this->getDoctrine()->getManager();
-
-            if($user!=null){
-                $u->setCollaborateur($collaborateur);
-                $entityManager->persist($u);
-            }
-
+          
             $collaborateur->setIsActif(true);
             $entityManager->persist($collaborateur);
             $entityManager->flush();
 
+            $login = $form['user']->getData();
+
+            if($login!=null){
+                $user = $collaborateur->getUser();
+                $user->setCollaborateur($collaborateur);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+            
+            
             $this->addFlash('success', 'Le collaborateur a bien été ajouté');
 
             return $this->redirectToRoute('collaborateur_index');
@@ -124,15 +128,16 @@ class CollaborateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $u = new User();
-
-            $user = $form['user']->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            if($user!=null){
-                $u->setCollaborateur($collaborateur);
-                $entityManager->persist($u);
+            $login = $form['user']->getData();
+
+            if($login!=null){
+                $user = $collaborateur->getUser();
+                $user->setCollaborateur($collaborateur);
+                $entityManager->persist($user);
+                $entityManager->flush();
             }
 
             $this->getDoctrine()->getManager()->flush();
