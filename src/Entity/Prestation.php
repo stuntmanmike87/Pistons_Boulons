@@ -59,10 +59,6 @@ class Prestation
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le type de prestation ne peut pas être vide.")
-     * @Assert\Length(
-     *      min = 3,
-     *      minMessage = "Le type de prestation doit comporter au moins {{ limit }} caractères ",
-     * )
      */
     private $typePrestation;
 

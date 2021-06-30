@@ -31,7 +31,19 @@
 						<a class="" href="{{path("home")}}">Accueil</a>
 					</li>
 					<li>
-						<a class="" href="{{path("agendaMensuel")}}">Agenda</a>
+						<a class="" href="{{path("agenda_quotidien", {'day': "now"|date("Y-m-d")}) }}">Agenda</a>
+						<ul>
+							
+							<li>
+								<a href="{{path("rendez_vous_new")}}">Ajouter rendez-vous</a>
+							</li>
+							<li>
+								<a href="{{path("agendaMensuel")}}">Agenda mensuel</a>
+							</li>
+							<li>
+								<a href="{{path("rendez_vous_index")}}">Voir les rendez-vous</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a class="" href="#">Gestion</a>
@@ -42,9 +54,6 @@
 							</li>
 							<li>
 								<a href="{{path("prestation_index")}}">Nos prestations</a>
-							</li>
-							<li>
-								<a href="{{path("rendez_vous_index")}}">Voir les rendez-vous</a>
 							</li>
 							{% if app.user.isAdmin()  %}
 								<li>

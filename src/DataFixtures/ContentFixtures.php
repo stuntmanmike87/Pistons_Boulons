@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class UserFixtures
+class ContentFixtures
 extends Fixture
 implements OrderedFixtureInterface
 {
@@ -15,9 +15,8 @@ implements OrderedFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        // Client administrator account
         $tel = new Content();
-        $tel->setText('(+33)607060706')
+        $tel->setText('(+33)6-07-06-07-06')
             ->setPosition('contact_telephone');
         $adresse = new Content();
         $adresse->setText('1 Quai des Mégisseries, 87200 Saint Junien, France')
@@ -28,14 +27,9 @@ implements OrderedFixtureInterface
         $email = new Content();
         $email->setText('pistons&boulons@mail.com')
             ->setPosition('contact_email');
-
-
-
-
         $texte_affiliation= new Content();
         $texte_affiliation->setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales sollicitudin ipsum. Curabitur tellus justo, volutpat in accumsan nec, euismod in ipsum. Quisque pellentesque enim condimentum, vestibulum augue sed, finibus enim. Integer varius metus ac leo euismod facilisis. Ut tempus faucibus consectetur. Curabitur non lacus nec justo vestibulum mattis. Cras lobortis malesuada lacinia.')
             ->setPosition('texte_affiliation');
-
         $texte_presentation= new Content();
         $texte_presentation->setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales sollicitudin ipsum. Curabitur tellus justo, volutpat in accumsan nec, euismod in ipsum. Quisque pellentesque enim condimentum, vestibulum augue sed, finibus enim. Integer varius metus ac leo euismod facilisis. Ut tempus faucibus consectetur. Curabitur non lacus nec justo vestibulum mattis. Cras lobortis malesuada lacinia.')
             ->setPosition('texte_presentation');

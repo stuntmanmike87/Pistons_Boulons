@@ -31,10 +31,11 @@ class RendezVousType extends AbstractType
             ->add('dateRendezVous', DateTimeType::class , [
                 'widget' => 'single_text',
                 'view_timezone' => 'Europe/Paris',
-                'data' => new \DateTime("now")
+                'data' => new \DateTime("now"),
             ])
             ->add('idClient' , EntityType::class , [
                 'class' => Client::class,
+                'placeholder' => 'Choisir un client',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('cl')
                        ->andWhere('cl.isActif = 1')
@@ -44,6 +45,7 @@ class RendezVousType extends AbstractType
             ])
             ->add('idCollaborateur', EntityType::class , [
                 'class' => Collaborateur::class,
+                'placeholder' => 'Choisir un collaborateur',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('co')
                         ->andWhere('co.isActif = 1')
@@ -53,6 +55,7 @@ class RendezVousType extends AbstractType
             ])
             ->add('idPrestation', EntityType::class , [
                 'class' => Prestation::class,
+                'placeholder' => 'Choisir une prestation',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                     ->andWhere('p.isActive = 1')
