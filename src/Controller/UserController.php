@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Collaborateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,11 +24,11 @@ class UserController extends AbstractController
      * 
      * @return security/login.html.twig
      */
-    public function login(AuthenticationUtils $authenticationUtils, CollaborateurRepository $repoCollabo, UserRepository $repoUser): Response
+    public function login(AuthenticationUtils $authenticationUtils, CollaborateurRepository $repoCollabo,UserRepository $repoUser): Response
     {
         if ($this->getUser()) {
             //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
-            $today = new DateTime();
+            $today = new \DateTime('now');
 
             //On pointe sur le login de l'utilisateur
             $user_login = $this->getUser()->getLogin();
@@ -37,13 +38,11 @@ class UserController extends AbstractController
                     'login' => $user_login,
                 ]),
             ]);
-            if ($collab != null) {
-                //on met a jour le chp derniereConnexion  de collabo
-                $entityManager = $this->getDoctrine()->getManager();
-                $collab->setDateHeureDerniereConnexion($today);
-                $entityManager->flush();
-            }
-
+            //on met a jour le chp derniereConnexion  de collabo
+            $entityManager = $this->getDoctrine()->getManager();
+            $collab->setDateHeureDerniereConnexion($today);
+            $entityManager->persist($collab);
+            $entityManager->flush();
 
             return $this->redirectToRoute('home');
         }
@@ -55,6 +54,9 @@ class UserController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+
+
 
     /**
      * @Route("/logout", name="app_logout")

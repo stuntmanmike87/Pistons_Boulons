@@ -6,7 +6,21 @@
 {% block body %}
 	<div id="main-wrapper">
 		<div class="container">
-			<h1 class="">Liste des contenus du site :</h1>
+
+
+		<div class="container">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('content_new') }}">
+							<button class="button">Créer nouveau contenu</button>
+						</a>
+
+					</div>
+
+				</div>
+			</div>
+
+			<h1 class=" mt-5">Liste des contenus du site :</h1>
 
 			<table class="table mt-3">
 				<thead>
@@ -33,17 +47,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<div class="container mt-5">
-				<div class=" d-flex flex-row row align-items-start">
-					<div class="col text-center">
-						<a href="{{ path('content_new') }}">
-							<button class="button">Créer nouveau contenu</button>
-						</a>
-
-					</div>
-
-				</div>
-			</div>
+			
 		</div>
 	</div>
 {% endblock %}

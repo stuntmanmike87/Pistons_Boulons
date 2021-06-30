@@ -161,7 +161,10 @@ class User implements UserInterface
      */
     public function getAdmin()
     {
-        return $this->Admin->getAdmin();
+        if($this->admin!=null){
+            return $this->admin->getAdmin();
+        }
+        return null;
     }
      /**
      * Fonction qui permet de changer la valeur de admin
@@ -183,13 +186,17 @@ class User implements UserInterface
     }
 
    /**
-     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
+     * Fonction qui permet de récuperer l'id d'un collaborateur
      * 
      * @return Collaborateur.getCollaborateur()
      */
     public function getCollaborateur()
     {
-        return $this->Collaborateur->getCollaborateur();
+        if($this->collaborateur!=null){
+            return $this->collaborateur->getId();
+
+        }
+        return null;
     }
       /**
      * Fonction qui permet de changer la valeur de collaborateur
