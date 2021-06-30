@@ -24,16 +24,16 @@ class UserFixtures
     {
         // Client administrator account
         $user = new User();
-        $user->setLogin('piston')
-            ->setPassword($this->encoder->encodePassword($user, 'boulon'))
+        $user->setLogin('pistons')
+            ->setPassword($this->encoder->encodePassword($user, 'boulons'))
             ->setRoles(['ROLE_ADMIN']);
       
 
 
         // Default admin account
         $admin = new admin();
-        $admin->setNom('Piston');
-        $admin->setPrenom('Boulon')
+        $admin->setNom('Pistons');
+        $admin->setPrenom('Boulons')
               ->setUser($user);
 
         $user->setAdmin($admin);
