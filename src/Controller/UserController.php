@@ -26,7 +26,7 @@ class UserController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, CollaborateurRepository $repoCollabo, UserRepository $repoUser): Response
     {
         if ($this->getUser()) {
-            //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
+            //on génère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
             $today = new DateTime();
 
             //On pointe sur le login de l'utilisateur
@@ -45,7 +45,7 @@ class UserController extends AbstractController
             }
 
 
-            return $this->redirectToRoute('home');
+            return new RedirectResponse($this->urlGenerator->generate('/rendez/vous/agenda'));
         }
 
         // get the login error if there is one
