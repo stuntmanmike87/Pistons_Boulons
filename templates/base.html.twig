@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<!-- FavIcon -->
+		<link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}" />
+		<!-- CSS Bootstrap -->
+		<link
+		rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" defer>
+		<!-- Scripts Boostrap -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+		<!-- JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		<!-- SASS compilé -->
+		<link
+		rel="stylesheet" href="{{ asset('css/style.min.css') }}"/>
+
+
+		<!-- Scripts JS -->
+		<script src={{ asset('js/jquery.min.js') }} defer></script>
+		<script src={{asset('js/jquery.dropotron.min.js') }} defer></script>
+		<script src={{asset('js/browser.min.js') }} defer></script>
+		<script src={{asset('js/breakpoints.min.js') }} defer></script>
+		<script src={{asset('js/util.js') }} defer></script>
+		<script src={{asset('js/main_tp.js') }} defer></script>
+
+		
+			{% block script %}
+			
+			{% endblock %}
+
+	</head>
+	<body class="is-preload homepage">
+
+			{% if app.user is null %}
+				{% include 'layout/cookie.twig'%}
+			{% else %}
+			{% endif %}
+			{% include 'layout/header.twig' %}
+
+			{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+			{% endfor %}
+
+			<div id="page-wrapper">
+			
+			{% block body %}
+			
+			{% endblock %}
+
+			</div>
+
+			{% include 'layout/footer.twig' %}
+	</body>
 </html>

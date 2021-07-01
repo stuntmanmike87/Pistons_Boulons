@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pistons & boulons
+{% endblock %}
+
+{% block body %}
+
+
+	{% set  texte_presentation = "" %}
+	{% set  texte_ad = "" %}
+
+	{# On boucle sur le contenu #}
+	{# on regarde la position du contenu si cela correspond avec  #}
+	{# nos affichages on change les valeurs des vars texte_presentation et texte_ad #}
+
+
+		{% for contenu in contenu_accueil %}
+		{% set  position = contenu.position %}
+
+			{% if position == 'texte_presentation' %}
+
+			{% set  texte_presentation = contenu.text %}
+
+		{% elseif position == 'texte_affiliation' %}
+
+			{% set  texte_ad = contenu.text %}
+
+		{% endif %}
+
+	{% endfor %}
+
+
+	{% include 'layout/banniere.php' %}
+
+
+	{% include 'layout/images.html.twig' %}
+
+	{% include 'layout/texte_presentation.twig' with {'contenuPresentation' : texte_presentation} %}
+
+	{% include 'layout/texte_ad.twig' with {'contenuAffiliation' : texte_ad} %}
+
+
+
+
+
+{% endblock %}

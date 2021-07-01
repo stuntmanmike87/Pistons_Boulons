@@ -1,0 +1,86 @@
+{{ form_start(form) }}
+
+{# Nom #}
+
+{# label #}
+{{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.nom) }}
+{# input #}
+{{ form_widget(form.nom) }}
+
+{# Prénom #}
+
+{# label #}
+{{ form_label(form.prenom, 'Prénom :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.prenom) }}
+{# input #}
+{{ form_widget(form.prenom) }}
+
+{# dateNaissance #}
+
+{# label #}
+{{ form_label(form.dateNaissance, 'Date de naissance :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.dateNaissance) }}
+{# input #}
+{{ form_widget(form.dateNaissance) }}
+
+{# dateEntreeEntreprise #}
+
+{# label #}
+{{ form_label(form.dateEntreeEntreprise, "Date d'entrée dans l'entreprise :", {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.dateEntreeEntreprise) }}
+{# input #}
+{{ form_widget(form.dateEntreeEntreprise) }}
+
+{# numSecuriteSocial #}
+
+{# label #}
+{{ form_label(form.numSecuriteSocial, 'Numéro de sécurité sociale :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.numSecuriteSocial) }}
+{# input #}
+{{ form_widget(form.numSecuriteSocial) }}
+
+{# typeContrat #}
+
+{# label #}
+{{ form_label(form.typeContrat, 'Type de contrat :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.typeContrat) }}
+{# input #}
+{{ form_widget(form.typeContrat) }}
+
+{# dureeTravailHebdo #}
+
+{# label #}
+{{ form_label(form.dureeTravailHebdo, 'Durée de travail hebdomadaire :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.dureeTravailHebdo) }}
+{# input #}
+{{ form_widget(form.dureeTravailHebdo) }}
+{# label #}
+{{ form_label(form.user, 'Utilisateur :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.user) }}
+{# input #}
+{{ form_widget(form.user) }}
+
+	<div class="col-md-12  text-center"> 
+    <button class="mt-5">
+		{{ button_label|default('Enregistrer') }}
+	</button>
+
+</div>
+{{ form_end(form) }}

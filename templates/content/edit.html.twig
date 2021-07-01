@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Content{% endblock %}
+{% block title %}Édition contenu
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Content</h1>
+	<div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Modification d'un contenu :</h1>
 
-    {{ include('content/_form.html.twig', {'button_label': 'Update'}) }}
+			{{ include('content/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('content_index') }}">back to list</a>
-
-    {{ include('content/_delete_form.html.twig') }}
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-lg-6 col-6  text-center float-left">
+					{{ include('content/_delete_form.html.twig') }}
+				</div>
+				<div class="col-lg-6 col-6 text-center float-right">
+					<a class="button" href="{{ path('content_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

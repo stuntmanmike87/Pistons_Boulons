@@ -1,0 +1,40 @@
+{{ form_start(form) }}
+
+{# login #}
+
+{# label #}
+{{ form_label(form.login, 'Identifiant :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.login) }}
+{# input #}
+{{ form_widget(form.login) }}
+{# roles #}
+
+{# label #}
+{{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'foo'}}
+) }}
+{% for roles in form.roles %}
+    <li>
+        {{ form_errors(roles) }}
+        {{ form_widget(roles) }}
+    </li>
+{% endfor %}
+
+
+{# password #}
+
+{# label #}
+{{ form_label(form.password, 'Mot de passe :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.password) }}
+{# input #}
+{{ form_widget(form.password) }}
+
+
+
+	<div class="col-md-12  text-center"> 
+		<button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
+	</div>
+{{ form_end(form) }}

@@ -1,0 +1,117 @@
+<!-- Header -->
+<div id="header-wrapper">
+	<header id="header" class="container">
+
+		<a id="logo" href="{{path("home")}}">
+			<img src="{{ asset('images/logo.png') }}" alt="" class="logoDesktop"/>
+			<img src="{{ asset('images/libelle.png') }}" alt="" class="libelleDesktop"/>
+		</a>
+
+
+		<nav id="nav">
+			<ul id="menu">
+
+				{% if app.user is null  %}
+					<li>
+						<a class="" href="{{path("home")}}">Accueil</a>
+					</li>
+					<li>
+						<a class="" href="{{path("nos_prestations")}}">Prestations</a>
+					</li>
+					<li>
+						<a class="" href="{{path("contact")}}">Contact</a>
+					</li>
+					<li class="current">
+						<a class="" href="{{path("app_login")}}">Connexion</a>
+					</li>
+
+
+				{% else %}
+					<li>
+						<a class="" href="{{path("home")}}">Accueil</a>
+					</li>
+					<li>
+						<a class="" href="#">Agenda</a>
+						<ul>
+							<li>
+								<a class="" href="{{path("agenda_quotidien", {'day': "now"|date("Y-m-d")}) }}">Agenda du jour</a>
+							</li>
+							<li>
+								<a href="{{path("rendez_vous_new")}}">Ajouter rendez-vous</a>
+							</li>
+							<li>
+								<a href="{{path("agendaMensuel")}}">Agenda mensuel</a>
+							</li>
+							<li>
+								<a href="{{path("rendez_vous_index")}}">Voir les rendez-vous</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a class="" href="#">Gestion</a>
+						<ul>
+
+							<li>
+								<a href="{{path("client_index")}}">Nos clients</a>
+							</li>
+							<li>
+								<a href="{{path("prestation_index")}}">Nos prestations</a>
+							</li>
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("collaborateur_index")}}">Mes collaborateurs</a>
+								</li>
+							{% endif %}
+
+
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("content_index")}}">Contenu du site</a>
+								</li>
+							{% endif %}
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("user_control_index")}}">Mes utilisateurs</a>
+								</li>
+							{% endif %}
+							{% if app.user.isAdmin()  %}
+								<li>
+									<a href="{{path("collaborateur_derniere_connexion")}}">Dernières connexions</a>
+								</li>
+							{% endif %}
+						</ul>
+					</li>
+
+					<li class="current">
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
+					</li>
+
+
+				{% endif %}
+
+
+			</ul>
+		</nav>
+	</header>
+</div>
+
+{# <script>
+	const hiddenInput = document.getElementById('pageActive')
+    const pageActive = hiddenInput.value
+	const lis = document.querySelectorAll('li');
+
+lis.forEach((li) => {
+
+    const link = li.getElementsByTagName("a");
+
+    var menu = link[0].innerHTML
+
+    if (menu == pageActive ){
+        link[0].className += "actif";
+        console.log("actif")
+    }else{
+        console.log("non actif")
+    }
+    
+});
+</script> #}

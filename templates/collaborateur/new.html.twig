@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau collaborateur{% endblock %}
+
+{% block body %}
+    <div id="main-wrapper">
+		<div class="container">
+			<h1 class="mb-4">Création de collaborateur :</h1>
+			    {{ include('collaborateur/_form.html.twig') }}
+
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('collaborateur_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

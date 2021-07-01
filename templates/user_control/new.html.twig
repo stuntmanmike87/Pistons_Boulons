@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau utilisateur{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container mt-5">
+			<h1 class="mb-4">Créer un utilisateur :</h1>
+
+			{{ include('user_control/_form.html.twig') }}
+
+			<div class="mt-1 d-flex row align-items-start bloc_boutons_modifier_crud">
+				<div class="col-6"></div>
+				<div class="col-6 col-6 text-center mt-1">
+					<a class="button float-right" href="{{ path('user_control_index') }}">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

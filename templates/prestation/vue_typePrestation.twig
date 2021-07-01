@@ -1,0 +1,41 @@
+{# POUR L'AFICHAGE DES PRESTATIONS ON TRAVAILLE SUR LE TABLEAU PLACE EN PARAM : prestations #}
+{# on pointe sur les types de prestations de notre tableau prestations #}
+{% for index in prestations_par_type %}
+{# on initialise un compteur #}
+{# il permettra de savoir cb de prestations on été traitées pour le type en cours #}
+{% set cpt = 1 %}
+{# on initialise une var avec la longueur de la liste des prestations par type #}
+{# elle permettra de connaitre la derniere occurence du tableaux de nos prestations pr le type actuel #}
+{% set nb_presta_par_type = index|length %}
+
+{# si le reste de la division du cpt par 2 est impair on ouvre une ligne  #}
+	{% if  (cpt % 2 == 1 ) %}
+	<div class="row mt-1"> 
+	{% endif %}
+
+	{#on choisi nos prestations avec un foreach #}
+	{% for prestation in index %}
+	
+
+		{#on regarde si le type de prestations correspond avec celui actuel#}
+		{% if prestation.typePrestation is same as(monTypePresta) %}
+	
+				
+				{% include 'prestation/vue_prestation.twig' with {"maPrestation" : prestation } %}
+
+		
+		{% endif %}
+
+		{# si on est sur la derniere ocurrence du tableau on ferme notre ligne #}
+		{% if (nb_presta_par_type - cpt == 0 )  %}
+			</div>
+		{% endif %}
+
+	{# on incrémente notre conteur#}
+	{% set cpt = cpt + 1 %}
+
+	{# fin foreach des prestations du types#}
+	{% endfor %}
+
+{# fin foreach des types de prestations #}
+{% endfor %}

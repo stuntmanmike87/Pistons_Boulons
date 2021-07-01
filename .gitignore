@@ -20,3 +20,6 @@
 ###< phpunit/phpunit ###
 
 .vscode
+.phpdoc
+
+DocumentationPHPDOC

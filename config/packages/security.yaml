@@ -1,14 +1,29 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: sodium
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: login
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: users_in_memory
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\UserLoginAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -21,3 +36,19 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/client/, roles: ROLE_COLLABORATEUR }
+        - { path: ^/prestation/index, roles: ROLE_COLLABORATEUR }
+        - { path: ^/prestation/new, roles: ROLE_COLLABORATEUR }
+        - { path: ^/prestation/id, roles: ROLE_COLLABORATEUR }
+        - { path: ^/prestationid/edit, roles: ROLE_COLLABORATEUR }
+        - { path: ^/rendez/vous/, roles: ROLE_COLLABORATEUR }
+        - { path: ^/logout/ , roles: ROLE_COLLABORATEUR }
+        - { path: ^/content/index, roles: ROLE_ADMIN }
+        - { path: ^/content/new, roles: ROLE_ADMIN }
+        - { path: ^/content/id, roles: ROLE_ADMIN }
+        - { path: ^/content/id/edit, roles: ROLE_ADMIN }
+        - { path: ^/collaborateur/, roles: ROLE_ADMIN }
+        - { path: ^/user/control/, roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_COLLABORATEUR

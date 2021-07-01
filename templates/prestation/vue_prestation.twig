@@ -1,0 +1,19 @@
+<div class="col-lg-6 col-md-12 col-sm-12">
+	<section class="box feature border">
+		<div class="inner">
+			<header>
+				<h2>{{ maPrestation.nom }}</h2>
+				<p>
+					Prix :
+					{{ maPrestation.coutHT }}
+					€</p>
+			</header>
+			<p>Description :
+				{{ maPrestation.description }}
+			</p>
+			<div class="bonton_contact  mt-5 col text-center">
+				<a href="{{path("contact")}}" class="button">Nous contacter</a>
+			</div>
+		</div>
+	</section>
+</div>

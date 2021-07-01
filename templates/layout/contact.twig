@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+{% set  contact_adresse = "" %}
+{% set  contact_telephone = "" %}
+{% set  contact_email = "" %}
+	
+{% for contenu in contenu_contact %}
+    {% set  position = contenu.position %}
+
+        {% if position == 'contact_adresse' %}
+           
+            {% set  contact_adresse = contenu.text %}
+        
+        {% elseif position == 'contact_telephone' %}
+      
+            {% set  contact_telephone = contenu.text %}
+
+		{% elseif position == 'contact_email' %}
+      
+            {% set  contact_email = contenu.text %}
+          
+        {% endif %}
+
+{% endfor %}
+
+	<div id="contact-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<iframe style="border: 0 ;width:100%; height:100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.524861016064!2d0.8928858155714564!3d45.88081487910814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47feeae01b44ee35%3A0xacd2a2158e62af8!2s1%20Quai%20des%20M%C3%A9gisseries%2C%2087200%20Saint-Junien!5e0!3m2!1sfr!2sfr!4v1622712287228!5m2!1sfr!2sfr" frameborder="0"></iframe>
+
+				</div>
+			</div>
+			<div class="row mt-3">
+
+				
+				{% include 'layout/vue_info_garage.twig' with{ 'adresse' : contact_adresse , 'telephone' : contact_telephone , 'email': contact_email }%}
+
+				{% include 'layout/form_contact.php' %}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

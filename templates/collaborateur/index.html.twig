@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing collaborateur
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+			<div class="container ">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('collaborateur_new') }}">
+							<button class="button">Créer nouveau collaborateur</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<h1 class="mt-5">Liste des collaborateurs :</h1>
+
+
+			<table class="table_responsive_mobile mt-5">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Date de naissance</th>
+						<th>Entrée en entreprise</th>
+						<th>N° Sécu. Sociale</th>
+						<th>Type de contrat</th>
+						{# <th>DateHeureDerniereConnexion</th> #}
+						<th>Durée travail hebdo.</th>
+						<th>Identifiant</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for collaborateur in collaborateurs %}
+						<tr>
+							<td data-label="Nom">{{ collaborateur.nom }}</td>
+							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
+							<td data-label="Date de naissance">{{ collaborateur.dateNaissance ? collaborateur.dateNaissance|date('d-m-Y', "Europe/Paris") : '' }}</td>
+							<td data-label="Entrée en entreprise">{{ collaborateur.dateEntreeEntreprise ? collaborateur.dateEntreeEntreprise|date('d-m-Y', "Europe/Paris") : '' }}</td>
+							<td data-label="N° Sécu. Sociale">{{ collaborateur.numSecuriteSocial }}</td>
+							<td data-label="Type de contrat">{{ collaborateur.typeContrat }}</td>
+							{# <td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('Y-m-d H:i:s', "Europe/Paris") : '' }}</td> #}
+							<td data-label="Durée travail hebdo.">{{ collaborateur.dureeTravailHebdo }}</td>
+							<td data-label="Identifiant">
+								{% if collaborateur.user is not null %}
+									{{ collaborateur.user.getUserLog() }}
+								{% else %}
+									Aucun
+								{% endif %}
+							</td>
+							<td data-label="Action">
+								<a href="{{ path('collaborateur_show', {'id': collaborateur.id}) }}">Voir</a>
+								<a href="{{ path('collaborateur_edit', {'id': collaborateur.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8" class="text-center maintenance mt-3">Aucun collaborateur</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+{% endblock %}
