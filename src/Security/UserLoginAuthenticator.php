@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\CollaborateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,8 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+
+
 class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
@@ -29,21 +32,24 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
-    private $passwordEncoder;
-/**
+    private $repositoryCollabo;
+
+    /**
      * @param EntityManagerInterface $entityManager
      * @param UrlGeneratorInterface $urlGenerator
      * @param  CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, CollaborateurRepository $repColla)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->repositoryCollabo = $repColla;
+
     }
- 
+
     /**
      * @param Request $request
      */
@@ -52,7 +58,7 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
-/**
+    /**
      * @param Request $request
      */
     public function getCredentials(Request $request)
@@ -69,7 +75,7 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         return $credentials;
     }
-/**
+    /**
      * @param $credentials
      * @param UserProviderInterface $userProvider
      */
@@ -85,9 +91,9 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         if (!$user) {
             throw new UsernameNotFoundException("L'identifiant n'a pas été trouvé.");
         }
-
         return $user;
     }
+     
 
     public function checkCredentials($credentials, UserInterface $user)
     {
@@ -102,11 +108,28 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials['password'];
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey) 
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        $user = $token->getUser();
+         //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
+         $today = new \DateTime('now');
+         //On pointe sur l'id de l'utilisateur
+         //on récupère le collaborateur en fonction de son id d'utilisateur
+         $collab = $this->repositoryCollabo->findOneBy([
+             'user' => $user,
+         ]);
+
+         if($collab){
+             //on met a jour le chp derniereConnexion  de collabo
+             $collab->setDateHeureDerniereConnexion($today);
+             $this->entityManager->persist($collab);
+             $this->entityManager->flush();
+         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         return new RedirectResponse($this->urlGenerator->generate('agendaMensuel'));

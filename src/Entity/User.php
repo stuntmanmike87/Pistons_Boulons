@@ -193,7 +193,7 @@ class User implements UserInterface
     public function getCollaborateur()
     {
         if($this->collaborateur!=null){
-            return $this->collaborateur->getId();
+            return $this->collaborateur;
 
         }
         return null;
@@ -239,5 +239,4 @@ class User implements UserInterface
        return false;
 
     }
-
 }
