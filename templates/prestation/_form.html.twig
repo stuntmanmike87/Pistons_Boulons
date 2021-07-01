@@ -1,0 +1,63 @@
+{{ form_start(form) }}
+
+{# nom #}
+
+{# label #}
+{{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.nom) }}
+{# input #}
+{{ form_widget(form.nom) }}
+
+{# tempsRealisation #}
+
+{# label #}
+{{ form_label(form.tempsRealisation, 'Temps de réalisation :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.tempsRealisation) }}
+{# input #}
+{{ form_widget(form.tempsRealisation) }}
+
+{# coutHT #}
+
+{# label #}
+{{ form_label(form.coutHT, 'Coût (Hors Taxe) (€) :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.coutHT) }}
+{# input #}
+{{ form_widget(form.coutHT) }}
+
+{# description #}
+
+{# label #}
+{{ form_label(form.description, 'Description :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.description) }}
+{# input #}
+{{ form_widget(form.description) }}
+
+{# typePrestation #}
+
+{# label #}
+{{ form_label(form.typePrestation, 'Type de prestation :', {'label_attr': {'class': 'foo' }}
+) }}
+{# erreur #}
+{{ form_errors(form.typePrestation) }}
+{# input #}
+{{ form_widget(form.typePrestation) }}
+
+
+
+
+
+
+
+
+<div class="col-md-12  text-center">
+	<button class="mt-5">{{ button_label|default('Enregistrer') }}</button>
+</div>
+{{ form_end(form) }}

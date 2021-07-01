@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing prestation
+{% endblock %}
+
+{% block body %}
+	<div id="prestation-wrapper">
+		<div class="container">
+			<h1 class="mb-2">Liste des prestations :</h1>
+
+			<table class="table_responsive_mobile mt-3">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Temps</th>
+						<th>Coût (HT)</th>
+						<th>Description</th>
+						<th>Type de prestation</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for prestation in prestations %}
+						<tr>
+							<td data-label="Nom">{{ prestation.nom }}</td>
+							<td data-label="Temps">{{ prestation.tempsRealisation }}</td>
+							<td data-label="Coût (HT)">{{ prestation.coutHT }}</td>
+							<td data-label="Description">{{ prestation.description }}</td>
+							<td data-label="Type de prestation">{{ prestation.typePrestation }}</td>
+							<td data-label="Action">
+								<a href="{{ path('prestation_show', {'id': prestation.id}) }}">Voir</a>
+								<a href="{{ path('prestation_edit', {'id': prestation.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6" class="text-center maintenance mt-3">Aucune prestation</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="container mt-5">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+							<a href="{{ path('prestation_new') }}">
+						<button class="button">Créer nouvelle prestation</button>
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing client
+{% endblock %}
+
+{% block body %}
+	<div id="prestation-wrapper">
+		<div class="container">
+
+		
+
+			<div class="container">
+				<div class=" d-flex flex-row row align-items-start">
+					<div class="col text-center">
+						<a href="{{ path('prestation_new') }}">
+							<a class="button" href="{{ path('client_new') }}">Créer un nouveau client</a>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<h1 class="mt-5">Liste des clients :</h1>
+
+			<table class="table_responsive_mobile mt-5">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Date de première saisie</th>
+						<th>Adresse</th>
+						<th>Type de véhicule</th>
+						<th>Plaque d'immatriculation</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for client in clients %}
+						<tr>
+							<td data-label="Nom">{{ client.nom }}</td>
+							<td data-label="Prénom">{{ client.prenom }}</td>
+							<td data-label="Date de première saisie">{{ client.datePremiereSaisie ? client.datePremiereSaisie|date('d-m-Y', "Europe/Paris") : '' }}</td>
+							<td data-label="Adresse">{{ client.adresse }}</td>
+							<td data-label="Type de véhicule">{{ client.typeVehicule }}</td>
+							<td data-label="Plaque d'immatriculation">{{ client.plaqueImmat }}</td>
+
+							<td data-label="Action">
+								<a href="{{ path('client_show', {'id': client.id}) }}">Voir</a>
+								<a href="{{ path('client_edit', {'id': client.id}) }}">Éditer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="7" class="text-center maintenance mt-3">Aucun client</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+{% endblock %}

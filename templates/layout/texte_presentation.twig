@@ -1,0 +1,33 @@
+<div id="info_garage-wrapper">
+	<div class="container">
+		<div class="row gtr-200">
+			<div class="col-12">
+				<!-- Content -->
+				<div id="row">
+					<div class="col-12">
+						<h2>Votre garage :</h2>
+								{# Condition d'affichage #}
+							{% if contenuPresentation == "" %}
+							<div class="container mt-5 mb-5">
+								<div class="row gtr-200">
+									<div class="col-12 col-12-medium imp-medium text-center ">
+
+										<p class="maintenance mt-5">Section en cours de maintenance</p>
+
+									</div>
+								</div>
+							</div>
+						{% else %}
+							
+							<p>{{ contenuPresentation }}</p>
+
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="bonton_contact col text-center">
+				<a href="{{path("contact")}}" class="button">Nous contacter</a>
+			</div>
+		</div>
+	</div>
+</div>

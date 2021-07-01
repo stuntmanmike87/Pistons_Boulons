@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dernières connexions collaborateurs
+{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+			
+			<h1 class="mt-5">Liste des dernières connexions des collaborateurs :</h1>
+
+			<table class="table_responsive_mobile mt-5">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Contrat</th>
+						<th>Date</th>
+						<th>Heure</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for collaborateur in collaborateurs %}
+						<tr>
+							<td data-label="Nom">{{ collaborateur.nom }}</td>
+							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
+							<td data-label="Contrat">{{ collaborateur.typeContrat }}</td>
+							<td data-label="Date">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('d-m-Y') : '' }}</td>
+							<td data-label="Prénom">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('H:i') : '' }}</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8" class="text-center maintenance mt-3">Aucun collaborateur</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+{% endblock %}
