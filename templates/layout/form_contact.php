@@ -1,7 +1,7 @@
 <div class="col">
-    <h1>Formulaire de contact</h1>
+    <h1>Formulaire de contact :</h1>
     <form class="" method="POST" action="" role="form">
-        <div class="col-md-12 col-sm-12 col-6">
+        <div class="col-12">
             <div class="form-group">
                 <label for="form_name">Nom : *
                 </label>

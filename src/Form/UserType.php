@@ -30,8 +30,9 @@ class UserType extends AbstractType
             ->add('roles',CollectionType::class, [
                 'entry_type' => TextType::class,
                 'entry_options' => [
-                    'attr' => ['placeholder' => "ROLE_COLLABORATEUR"] ,
+                    'attr' => ['value' => "ROLE_COLLABORATEUR"] ,
                 ],
+                'required'=> true,
             ])
             ->add('password')
         ;

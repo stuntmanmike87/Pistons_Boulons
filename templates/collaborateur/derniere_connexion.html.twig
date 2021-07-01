@@ -26,7 +26,7 @@
 							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
 							<td data-label="Contrat">{{ collaborateur.typeContrat }}</td>
 							<td data-label="Date">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('d-m-Y') : '' }}</td>
-							<td data-label="Prénom">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('H:i') : '' }}</td>
+							<td data-label="Heure">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('H:i') : '' }}</td>
 						</tr>
 					{% else %}
 						<tr>

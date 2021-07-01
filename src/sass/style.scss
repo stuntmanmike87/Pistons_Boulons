@@ -55,7 +55,6 @@
 
 /* Nos styles */
 
-
 .back_color_bleu{
 	background-color: $couleur_bleu;
 }
@@ -107,11 +106,18 @@
 	max-height: 5em;
 }
 
-.libelleDesktop {
+.libelleTopDesktop {
 	max-height: 250px;
 	max-width: 300px;
 	margin-bottom: 20px;
 	margin-left: 30px;
+}
+
+
+.libelleDesktop {
+	max-height: 250px;
+	max-width: 300px;
+	margin-bottom: 20px;
 }
 
 .mt-10px {
@@ -900,6 +906,10 @@ button,
 	.contact_horaires {
 		list-style: none;
 		text-align: center;
+	}
+
+	.libelleDesktop {
+		display: none;
 	}
 	
 
