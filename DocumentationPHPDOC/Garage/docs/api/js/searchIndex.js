@@ -1063,7 +1063,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetCollaborateur\u0028\u0029",
             "name": "getCollaborateur",
-            "summary": "Fonction\u0020qui\u0020permet\u0020de\u0020r\u00E9cuperer\u0020les\u0020donn\u00E9es\u0020d\u0027un\u0020collaborateur\u0020qui\u0020sont\u0020son\u0020nom\u0020et\u0020son\u0020pr\u00E9nom",
+            "summary": "Fonction\u0020qui\u0020permet\u0020de\u0020r\u00E9cuperer\u0020l\u0027id\u0020d\u0027un\u0020collaborateur",
             "url": "classes/App-Entity-User.html#method_getCollaborateur"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AsetCollaborateur\u0028\u0029",
@@ -1421,10 +1421,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Security-UserLoginAuthenticator.html#property_csrfTokenManager"
         },                {
-            "fqsen": "\\App\\Security\\UserLoginAuthenticator\u003A\u003A\u0024passwordEncoder",
-            "name": "passwordEncoder",
+            "fqsen": "\\App\\Security\\UserLoginAuthenticator\u003A\u003A\u0024repositoryCollabo",
+            "name": "repositoryCollabo",
             "summary": "",
-            "url": "classes/App-Security-UserLoginAuthenticator.html#property_passwordEncoder"
+            "url": "classes/App-Security-UserLoginAuthenticator.html#property_repositoryCollabo"
         },                {
             "fqsen": "\\App\\Service\\AgendaService",
             "name": "AgendaService",
@@ -1520,6 +1520,36 @@ Search.appendIndex(
             "name": "footerRepository",
             "summary": "",
             "url": "classes/App-Service-FooterService.html#property_footerRepository"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\ContentFixtures",
+            "name": "ContentFixtures",
+            "summary": "",
+            "url": "classes/App-DataFixtures-ContentFixtures.html"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\ContentFixtures\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/App-DataFixtures-ContentFixtures.html#method_load"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\ContentFixtures\u003A\u003AgetOrder\u0028\u0029",
+            "name": "getOrder",
+            "summary": "",
+            "url": "classes/App-DataFixtures-ContentFixtures.html#method_getOrder"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\PrestationsFixtures",
+            "name": "PrestationsFixtures",
+            "summary": "",
+            "url": "classes/App-DataFixtures-PrestationsFixtures.html"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\PrestationsFixtures\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/App-DataFixtures-PrestationsFixtures.html#method_load"
+        },                {
+            "fqsen": "\\App\\DataFixtures\\PrestationsFixtures\u003A\u003AgetOrder\u0028\u0029",
+            "name": "getOrder",
+            "summary": "",
+            "url": "classes/App-DataFixtures-PrestationsFixtures.html#method_getOrder"
         },                {
             "fqsen": "\\",
             "name": "\\",
