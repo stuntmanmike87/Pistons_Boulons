@@ -14,8 +14,9 @@
 					<tr>
 						<th>Nom</th>
 						<th>Prénom</th>
+						<th>Contrat</th>
 						<th>Date</th>
-								<th>Heure</th>
+						<th>Heure</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,9 +24,9 @@
 						<tr>
 							<td data-label="Nom">{{ collaborateur.nom }}</td>
 							<td data-label="Prénom">{{ collaborateur.prenom }}</td>
-							<td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('d-m-Y', "Europe/Paris") : '' }}</td>
-							<td>{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('H:i:s') : '' }}</td>
-
+							<td data-label="Contrat">{{ collaborateur.typeContrat }}</td>
+							<td data-label="Date">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('d-m-Y') : '' }}</td>
+							<td data-label="Prénom">{{ collaborateur.dateHeureDerniereConnexion ? collaborateur.dateHeureDerniereConnexion|date('H:i') : '' }}</td>
 						</tr>
 					{% else %}
 						<tr>

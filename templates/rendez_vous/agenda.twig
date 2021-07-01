@@ -13,7 +13,6 @@
 					<a href="{{path("agenda", {'month': agenda.getNextMonth().month , 'year' : agenda.getNextMonth().year } ) }}"  class=" back_color_bleu btn btn-primary mt-1">&gt;</a>
 				</div> 		
 			</div>
-			
 			<table class="table_responsive_mobile  calendar__table calendar__table--{{ agenda.getWeeks() }}weeks">
 				{# on récupère le premier jour du mois #}
 				{% set dateDebut = agenda.getStartingDay() | date_modify('monday this week') %}

@@ -50,7 +50,6 @@ class CollaborateurRepository extends ServiceEntityRepository
     public function findByDerniereConnexion()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.dateHeureDerniereConnexion is not null')
             ->andWhere('c.isActif = 1')
             ->orderBy('c.dateHeureDerniereConnexion', 'DESC')
             ->getQuery()

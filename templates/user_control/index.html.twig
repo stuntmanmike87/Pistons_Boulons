@@ -20,6 +20,7 @@
         <tbody>
         {% for user in users %}
             <tr>
+
                 <td  data-label="Identifiant">{{ user.login }}</td>
                 <td  data-label="Rôles">{{ user.roles ? user.roles|json_encode : '' }}</td>
                 {# <td  data-label="Mot de passe">{{ user.password }}</td> #}

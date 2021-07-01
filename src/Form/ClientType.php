@@ -36,13 +36,13 @@ class ClientType extends AbstractType
             ->add('adresse')
             ->add('typeVehicule' , ChoiceType::class, [
                 'choices' => [
+                    'Non gérable' => 'Non gérable',
                     'Véhicule ancien' => 'Véhicule ancien',
                     'SUV' => 'SUV',
                     'Cabriolet' => 'Cabriolet',
                     'Véhicule coupé' => 'Véhicule coupé',
                     'Berline' => 'Berline',
                     '4x4' => '4x4',
-                    'Non gérable' => 'Non gérable',
                 ]
             ])
             ->add('plaqueImmat', TextType::class ,   ['attr' => [

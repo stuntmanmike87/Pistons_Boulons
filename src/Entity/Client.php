@@ -83,8 +83,8 @@ class Client
      * @Assert\Length(
      *      min = "9",
      *      max = "10",
-     *      maxMessage="La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères.",
-     *      minMessage="La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères."
+     *      maxMessage="La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères.",
+     *      minMessage="La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères."
      * )
      */
     private $plaqueImmat;

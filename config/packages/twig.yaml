@@ -3,6 +3,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
+    date:
+        timezone: Europe/Paris
     globals:
         appConfig: '@App\Service\FooterService'
         agenda : '@App\Service\AgendaService'

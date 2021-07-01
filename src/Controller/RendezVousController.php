@@ -11,7 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContentRepository;
+use App\Repository\CollaborateurRepository;
+
 use App\Controller\Month;
+use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 /**
@@ -47,9 +50,8 @@ class RendezVousController extends AbstractController
      * @param RendezVousRepository $rendezVousRepository 
      * @return rendez_vous/agenda.twig avec les données des rendez-vous dans la base de données
      */
-    public function agendaMensuel(RendezVousRepository $rendezVousRepository): Response
+    public function agendaMensuel(RendezVousRepository $rendezVousRepository, CollaborateurRepository $repoCollabo): Response
     {
-       
         $this->month = new Month();
         $debut =  $this->month->getStartingDay();
         $mois = $debut->format('m');
@@ -59,7 +61,7 @@ class RendezVousController extends AbstractController
         $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut,$dernierJour);
         return $this->render('rendez_vous/agenda.twig', [
             'controller_name' => 'ContentController',
-            'events' => $liste_events
+            'events' => $liste_events,
         ]);
     }
     /**
@@ -70,7 +72,7 @@ class RendezVousController extends AbstractController
      */
     public function agenda(RendezVousRepository $rendezVousRepository,$year,$month): Response
     {
-       
+
         $this->month = new Month($month,$year);
         
         $debut =  $this->month->getStartingDay();
@@ -81,7 +83,8 @@ class RendezVousController extends AbstractController
         $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut,$dernierJour);
         return $this->render('rendez_vous/agenda.twig', [
             'controller_name' => 'ContentController',
-            'events' => $liste_events
+            'events' => $liste_events,
+            
         ]);
     }
     /**
