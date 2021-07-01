@@ -40,12 +40,11 @@ $ git clone https://github.com/nmiton/PistonsEtBoulons.git .
 ```
 
 Faire une copie du .env dans le dossier du site qui s'appellera env.local et modifier le fichier, il faut que ce soit sur sqlite et non sur le postgresql (mettre un # devant la ligne postgresql et enlever le # devant la ligne sqlite) :
-
+```
 DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
-
 "#"DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
-
 "#"DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&charset=utf8"
+```
 
 Mise à jour de l'environnement du site :
 ```
