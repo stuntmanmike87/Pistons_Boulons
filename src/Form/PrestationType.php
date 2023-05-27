@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Prestation;
@@ -8,16 +10,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class PrestationType extends AbstractType
+final class PrestationType extends AbstractType
 {
      /**
      * Fonction de création du formulaire prestation
-     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
-     *  @param array $options un tableau qui permet de lister les champs du formulaire.
-     * 
+     * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     * param array $options un tableau qui permet de lister les champs du formulaire.
+     *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom')
@@ -36,7 +38,7 @@ class PrestationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Prestation::class,

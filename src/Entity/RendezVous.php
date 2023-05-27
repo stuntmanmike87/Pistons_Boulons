@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Repository\RendezVousRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
@@ -10,6 +11,7 @@ use App\Entity\Prestation;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @final
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
  */
 class RendezVous
@@ -19,43 +21,38 @@ class RendezVous
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Vous devez choisir un client.")
      */
-    private $idClient;
+    #[Assert\NotBlank(message: 'Vous devez choisir un client.')]
+    private ?\App\Entity\Client $idClient = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Collaborateur::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Vous devez choisir un collaborateur.")
      */
-    private $idCollaborateur;
+    #[Assert\NotBlank(message: 'Vous devez choisir un collaborateur.')]
+    private ?\App\Entity\Collaborateur $idCollaborateur = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Prestation::class)
-     * @ORM\JoinColumn(nullable=false)   
-     * @Assert\NotBlank(message="Vous devez choisir une prestation.")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idPrestation;
+    #[Assert\NotBlank(message: 'Vous devez choisir une prestation.')]
+    private ?\App\Entity\Prestation $idPrestation = null;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(message="La date de rendez-vous ne peut pas être vide.")
-     * @Assert\Range(
-     *      min = "now",
-     *      minMessage="La date du rendez-vous ne peut pas être inférieure à la date du jour."
-     * )
      */
-    private $dateRendezVous;
+    #[Assert\NotBlank(message: 'La date de rendez-vous ne peut pas être vide.')]
+    #[Assert\Range(min: 'now', minMessage: 'La date du rendez-vous ne peut pas être inférieure à la date du jour.')]
+    private ?\DateTimeInterface $dateRendezVous = null;
 
     /**
      * Fonction qui permet de récupérer l'id du rendez-vous
-     * 
-     * @return id
      */
     public function getId(): ?int
     {
@@ -64,8 +61,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de récupérer l'id du client
-     * 
-     * @return idClient
      */
     public function getIdClient(): ?Client
     {
@@ -74,10 +69,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de changer la valeur de l'id du client
-     * 
-     * @param ?Client $idClient
-     * 
-     * @return idClient
      */
     public function setIdClient(?Client $idClient): self
     {
@@ -86,11 +77,8 @@ class RendezVous
         return $this;
     }
 
-
     /**
      * Fonction qui permet de récupérer l'id du collaborateur
-     * 
-     * @return idCollaborateur  
      */
     public function getIdCollaborateur(): ?Collaborateur
     {
@@ -99,10 +87,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de changer la valeur de l'id du collaborateur
-     * 
-     * @param ?Collaborateur $idCollaborateur 
-     * 
-     * @return idCollaborateur
      */
     public function setIdCollaborateur(?Collaborateur $idCollaborateur): self
     {
@@ -113,8 +97,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de récupérer l'id de prestation
-     * 
-     * @return idPrestation
      */
     public function getIdPrestation(): ?Prestation
     {
@@ -123,10 +105,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de changer la valeur de l'id de la prestation
-     * 
-     * @param ?Prestation $idPrestation
-     * 
-     * @return idPrestation
      */
     public function setIdPrestation(?Prestation $idPrestation): self
     {
@@ -137,8 +115,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de récupérer la date du rendez-vous
-     * 
-     * @return dateRendezVous
      */
     public function getDateRendezVous(): ?\DateTimeInterface
     {
@@ -147,10 +123,6 @@ class RendezVous
 
     /**
      * Fonction qui permet de changer la valeur de la date du rendez-vous
-     * 
-     * @param \DateTimeInterface $dateRendezVous
-     * 
-     * @return dateRendezVous
      */
     public function setDateRendezVous(\DateTimeInterface $dateRendezVous): self
     {
@@ -161,41 +133,41 @@ class RendezVous
 
     /**
      * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
-     * 
+     *
      * @return Client.getClient()
      */
     public function getClient()
     {
-        return $this->Client->getClient();
+        return $this->getClient();
     }
+
     /**
      * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
-     * 
+     *
      * @return Client.getClient()
      */
     public function getIdentiteClient()
     {
-        return $this->Client->getIdentiteClient();
+        return $this->getIdentiteClient();
     }
-
 
     /**
      * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
-     * 
+     *
      * @return Collaborateur.getCollaborateur()
      */
     public function getCollaborateur()
     {
-        return $this->Collaborateur->getCollaborateur();
+        return $this->getCollaborateur();
     }
 
     /**
      * Fonction qui permet de récuperer la donnée d'une prestation qui est son nom 
-     * 
+     *
      * @return Prestation.getPrestation()
      */
     public function getPrestation()
     {
-        return $this->Prestation->getPrestation();
+        return $this->getPrestation();
     }
 }

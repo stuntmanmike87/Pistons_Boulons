@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/client")
  */
-class ClientController extends AbstractController
+final class ClientController extends AbstractController
 {
+    public function __construct(private ManagerRegistry $em) {}
+    
     /**
      * @Route("/", name="client_index", methods={"GET"})
      * 
@@ -24,7 +29,7 @@ class ClientController extends AbstractController
      * 
      * @param ClientRepository $clientRepository
      * 
-     * @return client/index.html.twig avec les données des clients dans la base de données
+     * return client/index.html.twig avec les données des clients dans la base de données
      */
     public function index(ClientRepository $clientRepository): Response
     {
@@ -43,10 +48,10 @@ class ClientController extends AbstractController
      * @param Request $request qui est la requete d'ajout du client
      * 
      * Si l'ajout est validé :
-     * @return client_index qui est la page avec la liste des clients et donc aussi du client qui a été ajouté.
+     * return client_index qui est la page avec la liste des clients et donc aussi du client qui a été ajouté.
      * 
      * Si l'ajout n'est pas validé :
-     * @return client/new.html.twig avec l'erreur affiché dans le champ en question
+     * return client/new.html.twig avec l'erreur affiché dans le champ en question
      */
     public function new(Request $request): Response
     {
@@ -55,7 +60,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->em->getManager();
             $client->setIsActif(true);
             $entityManager->persist($client);
             $entityManager->flush();
@@ -82,7 +87,7 @@ class ClientController extends AbstractController
      * 
      * @param Client $client cette variable permet de savoir quel client nous avons choisi
      * 
-     * @return client/show.html.twig qui est la page qui affiche les données du client choisi
+     * return client/show.html.twig qui est la page qui affiche les données du client choisi
      */
     public function show(Client $client): Response
     {
@@ -103,10 +108,10 @@ class ClientController extends AbstractController
      * @param Client $client qui permet de savoir le client choisi
      * 
      * si la modification est validée :
-     * @return client_index qui est donc la liste des clients avec le client qui a bien été modifié
+     * return client_index qui est donc la liste des clients avec le client qui a bien été modifié
      * 
      * si la modification n'est pas validée :
-     * @return client/edit.html.twig avec l'erreur dans le champ en question
+     * return client/edit.html.twig avec l'erreur dans le champ en question
      */
     public function edit(Request $request, Client $client): Response
     {
@@ -114,7 +119,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->getManager()->flush();
 
 
             $this->addFlash('success', 'Le client a bien été modifié');
@@ -139,12 +144,12 @@ class ClientController extends AbstractController
      * 
      * @param Client $client cette variable permet de savoir quel client nous avons choisi
      * 
-     * @return client_index avec la liste des clients sans le client qui a été supprimé
+     * return client_index avec la liste des clients sans le client qui a été supprimé
      */
     public function delete(Request $request, Client $client): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete'.$client->getId(), (string)$request->request->get('_token'))) {
+            $entityManager = $this->em->getManager();
             $client->setIsActif(false);
             $entityManager->flush();
         }

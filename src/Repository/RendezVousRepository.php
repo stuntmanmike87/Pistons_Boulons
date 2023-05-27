@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\RendezVous;
@@ -12,15 +14,15 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RendezVous[]    findAll()
  * @method RendezVous[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RendezVousRepository extends ServiceEntityRepository
+final class RendezVousRepository extends ServiceEntityRepository
 {   
     /**
      * Fonction qui est le constructeur de la classe RendezVousRepository
-     * 
+     *
      * Cette fonction permet de contruire l'objet RendezVousRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
-     * 
+     *
      * @param ManagerRegistry $registry 
-     * 
+     *
      * @return void
      */
     public function __construct(ManagerRegistry $registry)
@@ -30,13 +32,14 @@ class RendezVousRepository extends ServiceEntityRepository
 
     /**
      * Cette Fonction permet de récupérer les rendez vous entre deux dates
-     * @param DateTime $debut 
-     * @param DateTime $fin
-     * @return RendezVous[] Returns an array of RendezVous objects
+     * @param \DateTime $debut 
+     * @param \DateTime $fin
+     * return RendezVous[] Returns an array of RendezVous objects
      */
-    
+
     // SELECT * FROM RendezVous WHERE dateRendezVous BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND  '{$end->format('Y-m-d 23:59:59')}' 
-    public function findAllByDateRendezVous($debut,$fin)
+    /** return array<string> */
+    public function findAllByDateRendezVous(mixed $debut, mixed $fin): mixed
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.dateRendezVous BETWEEN :deb AND :fin')
@@ -50,14 +53,16 @@ class RendezVousRepository extends ServiceEntityRepository
 
    /**
      * Cette Fonction permet de récupérer les rendez vous entre deux dates
-     * @param DateTime $debut 
-     * @param DateTime $fin
-     * @return RendezVous[] Returns an array of RendezVous objects
+     * param DateTime $debut 
+     * param DateTime $fin
+     * return RendezVous[] Returns an array of RendezVous objects
      */
-    
+
     // SELECT * FROM RendezVous WHERE dateRendezVous BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND  '{$end->format('Y-m-d 23:59:59')}' 
-    public function findByDateRendezVous($jour)
+    /** return array<string> */
+    public function findByDateRendezVous(mixed $jour): mixed
     {
+        /** @var \DateTime $jour */
         return $this->createQueryBuilder('r')
             ->andWhere("r.dateRendezVous BETWEEN :deb AND :fin")
             ->setParameter('deb', $jour->format("Y-m-d 00:00:00"))
@@ -67,7 +72,6 @@ class RendezVousRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
 
     /*
     public function findOneBySomeField($value): ?RendezVous

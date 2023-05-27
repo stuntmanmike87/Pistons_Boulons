@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Admin;
@@ -12,9 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Admin[]    findAll()
  * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdminRepository extends ServiceEntityRepository
+final class AdminRepository extends ServiceEntityRepository
 {
-    
     /**
      * Fonction qui est le constructeur de la classe AdminRepository
      * 

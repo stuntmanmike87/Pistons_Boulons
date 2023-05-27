@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -9,17 +11,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-
-class UserType extends AbstractType
+final class UserType extends AbstractType
 {
      /**
      * Fonction de création du formulaire user
-     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
-     *  @param array $options un tableau qui permet de lister les champs du formulaire.
-     * 
+     * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     * param array $options un tableau qui permet de lister les champs du formulaire.
+     *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('login', TextType::class, [
@@ -38,7 +39,7 @@ class UserType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,

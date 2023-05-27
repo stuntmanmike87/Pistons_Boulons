@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Client;
@@ -10,21 +12,21 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ClientType extends AbstractType
+final class ClientType extends AbstractType
 {
     /**
      * Fonction de création du formulaire client
-     * 
+     *
      * Cette fonction a pour but de créer la mise en place des éléments du formulaire du client, ces données sont son nom ; son prénom ; la date de première saisie (qui est sur le format d'une date) ;
      * son adresse ; son type de véhicule (on a une liste qui permet de faire le choix des véhicules cette liste est établi par le garage); et enfin sa plaque d'immatriculation.
-     * 
-     *  @param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
-     *  @param array $options un tableau qui permet de lister les champs du formulaire.
-     * 
+     *
+     * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
+     * param array $options un tableau qui permet de lister les champs du formulaire.
+     *
      * @return void
      */
     
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom')
@@ -51,7 +53,7 @@ class ClientType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Client::class,

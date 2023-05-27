@@ -1,64 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Admin;
 use App\Entity\Collaborateur;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
+ * @final
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
 {
-   
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $login;
+    private ?string $login = null;
 
     /**
      * @ORM\Column(type="array")
+     * @var string[] $roles
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private ?string $password = null;
 
     /**
      * @ORM\JoinColumn(nullable=true)
      * @ORM\OneToOne(targetEntity=Admin::class, mappedBy="user", cascade={"persist", "remove"})
      * 
      */
-    private $admin;
+    private ?\App\Entity\Admin $admin = null;
 
     /**
      *  @ORM\JoinColumn(nullable=true)
      * @ORM\OneToOne(targetEntity=Collaborateur::class, mappedBy="user", cascade={"persist", "remove"})
      *
      */
-    private $collaborateur;
+    private ?\App\Entity\Collaborateur $collaborateur = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
  /**
      * Fonction qui permet de récuperer le login
-     * 
-     * @return String
      */
     public function getLogin(): ?string
     {
@@ -67,10 +66,6 @@ class User implements UserInterface
 
     /**
      * Fonction qui permet de changer la valeur du login
-     * 
-     * @param String $login
-     * 
-     * @return String $login
      */
     public function setLogin(string $login): self
     {
@@ -100,12 +95,11 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
- /**
+
+    /**
      * Fonction qui permet de changer la valeur de l'array Roles
-     * 
-     * @param Array $roles
-     * 
-     * @return Array $roles
+     *
+     * @param array<string> $roles
      */
     public function setRoles(array $roles): self
     {
@@ -121,12 +115,9 @@ class User implements UserInterface
     {
         return $this->password;
     }
- /**
+
+    /**
      * Fonction qui permet de changer la valeur du mot de passe
-     * 
-     * @param String $password
-     * 
-     * @return String $password
      */
     public function setPassword(string $password): self
     {
@@ -149,29 +140,26 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
- /**
+
+    /**
      * Fonction qui permet de récuperer le champ admin
-     * 
-     * @return Admin
      */
-    public function getAdmin()
+    public function getAdmin(): ?string
     {
-        if($this->admin!=null){
+        if($this->admin != null) {
             return $this->admin->getAdmin();
         }
+
         return null;
     }
+
      /**
      * Fonction qui permet de changer la valeur de admin
-     * 
-     * @param Admin $admin
-     * 
-     * @return Admin $admin
      */
     public function setAdmin(Admin $admin): self
     {
@@ -187,23 +175,19 @@ class User implements UserInterface
 
    /**
      * Fonction qui permet de récuperer l'id d'un collaborateur
-     * 
-     * @return Collaborateur.getCollaborateur()
      */
-    public function getCollaborateur()
+    public function getCollaborateur(): ?Collaborateur
     {
-        if($this->collaborateur!=null){
+        if($this->collaborateur != null){
             return $this->collaborateur;
 
         }
+
         return null;
     }
-      /**
-     * Fonction qui permet de changer la valeur de collaborateur
-     * 
-     * @param Collaborateur $collaborateur
-     * 
-     * @return Collaborateur $collaborateur
+
+    /**
+     * Fonction qui permet de changer la valeur d'un collaborateur
      */
     public function setCollaborateur(Collaborateur $collaborateur): self
     {
@@ -216,19 +200,20 @@ class User implements UserInterface
 
         return $this;
     }
- /**
-     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
-     * 
-     * @return Collaborateur.getCollaborateur()
+
+    /**
+     * Fonction qui permet de récuperer le login d'un utilisateur
      */
-    public function getUserLog(){
+    public function getUserLog(): ?string
+    {
         return $this->login;
     }
-/**
-     * Fonction qui permet de savoir si le user est admin ou non
-     * @return Boolean 
+
+    /**
+     * Fonction qui permet de savoir si l'utilisateur est admin ou non
      */
-    public function isAdmin(){
+    public function isAdmin(): bool
+    {
        $roles = $this->getRoles();
 
        foreach ($roles as $key => $value) {
@@ -236,7 +221,18 @@ class User implements UserInterface
                return true;
            }
        }
+
        return false;
 
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string//?string
+    {
+        return (string) $this->login;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -7,20 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-
-class UserController extends AbstractController
+final class UserController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
-     * Fonction d'afficher la page de connexion
-     * 
-     * @param AuthenticationUtils $authenticationUtils
-     * @param UserRepository $repoUser
-     * @param CollaborateurRepository $repoCollabo
-     * 
-     * @return security/login.html.twig
+     * return security/login.html.twig
      */
+    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
@@ -31,14 +25,8 @@ class UserController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-
-
-
-    /**
-     * @Route("/logout", name="app_logout")
-     * 
-     */
-    public function logout()
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): never
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

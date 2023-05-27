@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -9,31 +11,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @Route("/user/control")
- */
-class UserControlController extends AbstractController
+#[Route(path: '/user/control')]
+final class UserControlController extends AbstractController
 {
-
-    private $encoder;
-
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(private ManagerRegistry $em, private readonly UserPasswordHasherInterface $encoder)
     {
-        $this->encoder = $encoder;
     }
     /**
-     * @Route("/", name="user_control_index", methods={"GET"})
-     * 
      * Fonction qui permet l'affichage de la page index de UserControl
-     * 
+     *
      *  Cette page nous montre le listing des users
-     * 
-     * @param UserRepository $userRepository
-     * 
-     * @return user_control/index.html.twig 
+     *
+     * return user_control/index.html.twig 
      */
+    #[Route(path: '/', name: 'user_control_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user_control/index.html.twig', [
@@ -41,18 +35,12 @@ class UserControlController extends AbstractController
         ]);
     }
 
-
-
     /**
-     * @Route("/new", name="user_control_new", methods={"GET","POST"})
-     * Fonction qui permet l'affichage de la page new de UserControl
+     * Cette page nous permet de créer un nouvel utilisateur
      * 
-     *  Cette page nous permet de créer un nouvel utilisateur
-     * 
-     * @param Request $request
-     * 
-     * @return user_control/new.html.twig 
+     * return user_control/new.html.twig 
      */
+    #[Route(path: '/new', name: 'user_control_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $user = new User();
@@ -60,8 +48,11 @@ class UserControlController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $entityManager = $this->getDoctrine()->getManager();
+            /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+            $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
+            /** @var User $user */
+            $user->setPassword($pw);
+            $entityManager = $this->em->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', "L'utilisateur a bien été ajoutée");
@@ -70,21 +61,18 @@ class UserControlController extends AbstractController
 
         return $this->render('user_control/new.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="user_control_show", methods={"GET"})
-     * 
      * Fonction qui permet l'affichage de la page show de UserControl
-     * 
-     *  Cette page nous permet de voir un utilisateur et ses informations
-     * 
-     * @param User $user
-     * 
-     * @return user_control/show.html.twig 
+     *
+     * Cette page nous permet de voir un utilisateur et ses informations
+     *
+     * return user_control/show.html.twig 
      */
+    #[Route(path: '/{id}', name: 'user_control_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('user_control/show.html.twig', [
@@ -93,51 +81,43 @@ class UserControlController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_control_edit", methods={"GET","POST"})
-     * 
      * Fonction qui permet l'affichage de la page edit de UserControl
-     * 
-     *  Cette page nous permet de modifier les informations d'un utilisateur
-     * 
-     * @param User $user
-     * 
-     * @param Request $request
-     * 
-     * @return user_control/edit.html.twig 
+     *
+     * Cette page nous permet de modifier les informations d'un utilisateur
+     *
+     * return user_control/edit.html.twig 
      */
-     
+    #[Route(path: '/{id}/edit', name: 'user_control_edit', methods: ['GET', 'POST'])] 
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
-            $this->getDoctrine()->getManager()->flush();
+            /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+            $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
+            /** @var User $user */
+            $user->setPassword($pw);
+            $this->em->getManager()->flush();
 
             return $this->redirectToRoute('user_control_index');
         }
 
         return $this->render('user_control/edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="user_control_delete", methods={"POST"})
-       * 
      * Fonction qui permet de supprimer un utilisateur
-     * 
-     * @param User $user
-     * 
-     * @param Request $request
-     * 
-     * @return user_control/user_control_index
+     *
+     * return user_control/user_control_index
      */
+    #[Route(path: '/{id}', name: 'user_control_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), (string)$request->request->get('_token'))) {
+            $entityManager = $this->em->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
         }

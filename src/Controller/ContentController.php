@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Content;
 use App\Form\ContentType;
 use App\Repository\ContentRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+
 use Symfony\Component\Routing\Annotation\Route;
-
-
-use function PHPUnit\Framework\equalTo;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/content")
  */
-class ContentController extends AbstractController
+final class ContentController extends AbstractController
 {
+    public function __construct(private ManagerRegistry $em) {}
+    
     /**
      * @Route("/", name="home", methods={"GET"})
      * Fonction qui permet l'affichage de la page Home qui sera visible en public
@@ -26,7 +30,7 @@ class ContentController extends AbstractController
      * 
      * @param ContentRepository $contentRepository
      * 
-     * @return content/home.html.twig avec le contenu qui doit être visible sur cette page (texte de présentation et d'affiliation)
+     * return content/home.html.twig avec le contenu qui doit être visible sur cette page (texte de présentation et d'affiliation)
      */
     public function home(ContentRepository $contentRepository): Response
     {
@@ -43,7 +47,7 @@ class ContentController extends AbstractController
      * 
      * Fonction qui permet l'affichage de la page erreur 404
      * 
-     * @return layout/error404.twig 
+     * return layout/error404.twig 
      */
     public function error404(): Response
     {
@@ -61,7 +65,7 @@ class ContentController extends AbstractController
      * 
      * @param ContentRepository $contentRepository
      * 
-     * @return layout/contact.twig avec le contenu qui doit être visible sur cette page c'est a dire les infos de contact
+     * return layout/contact.twig avec le contenu qui doit être visible sur cette page c'est a dire les infos de contact
      */
     public function contact(ContentRepository $contentRepository): Response
     {
@@ -76,7 +80,7 @@ class ContentController extends AbstractController
      * Fonction qui permet l'affichage de la page est la page mentions légales du site
      * 
      * 
-     * @return layout/mentions.twig 
+     * return layout/mentions.twig 
      */
     public function mentions(): Response
     {
@@ -90,7 +94,7 @@ class ContentController extends AbstractController
      * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
      * 
      * 
-     * @return layout/politiqueConfidentialite.twig 
+     * return layout/politiqueConfidentialite.twig 
      */
     public function politiqueConfidentialité(): Response
     {
@@ -104,7 +108,7 @@ class ContentController extends AbstractController
      * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
      * 
      * 
-     * @return layout/politiqueConfidentialite.twig 
+     * return layout/politiqueConfidentialite.twig 
      */
     public function planDuSite(): Response
     {
@@ -119,7 +123,7 @@ class ContentController extends AbstractController
      * 
      * Cette page est la page connexion du site
      * 
-     * @return layout/connexion.twig 
+     * return layout/connexion.twig 
      */
     public function connexion(): Response
     {
@@ -137,7 +141,7 @@ class ContentController extends AbstractController
      * 
      * @param ContentRepository $contentRepository
      * 
-     * @return content/index.html.twig avec les données des contenus dans la base de données
+     * return content/index.html.twig avec les données des contenus dans la base de données
      */
     public function index(ContentRepository $contentRepository): Response
     {
@@ -154,10 +158,10 @@ class ContentController extends AbstractController
      * @param Request $request qui est la requete d'ajout d'un contenu
      * 
      * Si l'ajout est validé :
-     * @return content_index qui est la page avec la liste des contenus
+     * return content_index qui est la page avec la liste des contenus
      * 
      * Si l'ajout n'est pas validé :
-     * @return content/new.html.twig avec l'erreur affiché dans le champ en question
+     * return content/new.html.twig avec l'erreur affiché dans le champ en question
      */
     public function new(Request $request): Response
     {
@@ -166,7 +170,7 @@ class ContentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->em->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
             $this->addFlash('success', "Le contenu a bien été ajouté");
@@ -187,7 +191,7 @@ class ContentController extends AbstractController
      * 
      * @param Content $content cette variable permet de savoir quel contenu nous avons choisi
      * 
-     * @return content/show.html.twig qui est la page qui affiche les données du contenu choisi
+     * return content/show.html.twig qui est la page qui affiche les données du contenu choisi
      */
     public function show(Content $content): Response
     {
@@ -206,10 +210,10 @@ class ContentController extends AbstractController
      * @param Content $content qui permet de savoir la contenu choisi
      * 
      * si la modification est validée :
-     * @return content_index qui est donc la liste des contenus avec le contenu qui a bien été modifié
+     * return content_index qui est donc la liste des contenus avec le contenu qui a bien été modifié
      * 
      * si la modification n'est pas validée :
-     * @return content/edit.html.twig avec l'erreur dans le champ en question
+     * return content/edit.html.twig avec l'erreur dans le champ en question
      */
     public function edit(Request $request, Content $content): Response
     {
@@ -217,7 +221,7 @@ class ContentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->getManager()->flush();
             $this->addFlash('success', "Le contenu a bien été modifié");
             return $this->redirectToRoute('content_index');
         }
@@ -238,18 +242,17 @@ class ContentController extends AbstractController
      * 
      * @param Content $content cette variable permet de savoir quel contenu nous avons choisi
      * 
-     * @return content_index avec la liste des contenus sans le contenu précédemment supprimé
+     * return content_index avec la liste des contenus sans le contenu précédemment supprimé
      */
     public function delete(Request $request, Content $content): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $content->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete' . $content->getId(), (string)$request->request->get('_token'))) {
+            $entityManager = $this->em->getManager();
             $entityManager->remove($content);
             $entityManager->flush();
         }
         $this->addFlash('success', "Le contenu a bien été supprimé");
         return $this->redirectToRoute('content_index');
     }
-
 
 }

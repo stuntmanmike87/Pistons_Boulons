@@ -1,22 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Entity\Collaborateur;
 use App\Entity\User;
+use App\Entity\Collaborateur;
 use App\Form\CollaborateurType;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\CollaborateurRepository;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/collaborateur")
  */
-class CollaborateurController extends AbstractController
+final class CollaborateurController extends AbstractController
 {
+    public function __construct(private ManagerRegistry $em) {}
+    
     /**
      * @Route("/", name="collaborateur_index", methods={"GET"})
      */
@@ -47,10 +51,10 @@ class CollaborateurController extends AbstractController
      * @param Request $request qui est la requete d'ajout du collaborateur
      * 
      * Si l'ajout est validé :
-     * @return collaborateur_index qui est la page avec la liste des collaborateurs et donc aussi du collaborateur qui a été ajouté.
+     * return collaborateur_index qui est la page avec la liste des collaborateurs et donc aussi du collaborateur qui a été ajouté.
      * 
      * Si l'ajout n'est pas validé :
-     * @return collaborateur/new.html.twig avec l'erreur affiché dans le champ en question
+     * return collaborateur/new.html.twig avec l'erreur affiché dans le champ en question
      */
     public function new(Request $request): Response
     {
@@ -60,17 +64,20 @@ class CollaborateurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
   
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->em->getManager();
           
             $collaborateur->setIsActif(true);
             $entityManager->persist($collaborateur);
             $entityManager->flush();
 
+            ///** @var \Symfony\Component\Form\FormInterface $form *////** @var string $login */
             $login = $form['user']->getData();
 
             if($login!=null){
+                /** @var User $user */
                 $user = $collaborateur->getUser();
                 $user->setCollaborateur($collaborateur);
+                /** @var object $user */
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
@@ -96,7 +103,7 @@ class CollaborateurController extends AbstractController
      * 
      * @param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
      * 
-     * @return collaborateur/show.html.twig qui est la page qui affiche les données du collaborateur choisi
+     * return collaborateur/show.html.twig qui est la page qui affiche les données du collaborateur choisi
      */
     public function show(Collaborateur $collaborateur): Response
     {
@@ -117,10 +124,10 @@ class CollaborateurController extends AbstractController
      * @param Collaborateur $collaborateur qui permet de savoir le collaborateur choisi
      * 
      * si la modification est validée :
-     * @return collaborateur_index qui est donc la liste des collaborateurs avec le collaborateur qui a bien été modifié
+     * return collaborateur_index qui est donc la liste des collaborateurs avec le collaborateur qui a bien été modifié
      * 
      * si la modification n'est pas validée :
-     * @return collaborateur/edit.html.twig avec l'erreur dans le champ en question
+     * return collaborateur/edit.html.twig avec l'erreur dans le champ en question
      */
     public function edit(Request $request, Collaborateur $collaborateur): Response
     {
@@ -129,18 +136,21 @@ class CollaborateurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->em->getManager();
 
+            ///** @var \Symfony\Component\Form\FormInterface $form *////** @var string $login */
             $login = $form['user']->getData();
 
             if($login!=null){
+                /** @var User $user */
                 $user = $collaborateur->getUser();
                 $user->setCollaborateur($collaborateur);
+                /** @var object $user */
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->getManager()->flush();
 
             $this->addFlash('success', 'Le collaborateur a bien été modifié');
 
@@ -164,12 +174,12 @@ class CollaborateurController extends AbstractController
      * 
      * @param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
      * 
-     * @return collaborateur_index avec la liste des collaborateurs sans le collaborateur qui a été supprimé
+     * return collaborateur_index avec la liste des collaborateurs sans le collaborateur qui a été supprimé
      */
     public function delete(Request $request, Collaborateur $collaborateur): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$collaborateur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete'.$collaborateur->getId(), (string)$request->request->get('_token'))) {
+            $entityManager = $this->em->getManager();
             $collaborateur->setIsActif(false);
             $entityManager->flush();
         }

@@ -1,55 +1,57 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Repository\ContentRepository;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 
-class FooterService
-    extends AbstractExtension
+final class FooterService extends AbstractExtension
 {
     /**
-     * @var $footerRepository
-     */
-    private $footerRepository;
-    /**
      * Constructeur du service
-     * @param ContentRepository $footerRepository
      */
-    public function __construct(ContentRepository $footerRepository)
+    public function __construct(private readonly ContentRepository $footerRepository)
     {
-        $this->footerRepository = $footerRepository;
     }
+
     /**
      * Fonction permettant de récupérer le contenu de contact_horaires
-     * @return Array 
+     * return array<mixed>
+     * array<array<string>>
      */
-    public function getGarageHoraires()
+    public function getGarageHoraires(): mixed
     {
         return $this->footerRepository->findOneByPosition('contact_horaires');   
     }
+
     /**
      * Fonction permettant de récupérer le contenu de contact_telephone
-     * @return Array 
+     * return array<mixed>
+     * array<array<string>>
      */
-    public function getGarageTelephone()
+    public function getGarageTelephone(): mixed
     {
         return $this->footerRepository->findOneByPosition('contact_telephone');   
     }
-       /**
+
+    /**
      * Fonction permettant de récupérer le contenu de contact_adresse
-     * @return Array 
+     * return array<mixed>
+     * array<array<string>>
      */
-    public function getGarageAdresse()
+    public function getGarageAdresse(): mixed
     {
         return $this->footerRepository->findOneByPosition('contact_adresse'); 
     }
-       /**
+
+    /**
      * Fonction permettant de récupérer le contenu de contact_email
-     * @return Array 
+     * return array<mixed>
+     * array<array<string>>
      */
-    public function getGarageEmail()
+    public function getGarageEmail(): mixed
     {  
         return $this->footerRepository->findOneByPosition('contact_email');   
     }

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Repository\ContentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @final
  * @ORM\Entity(repositoryClass=ContentRepository::class)
  */
 class Content
@@ -17,52 +19,40 @@ class Content
      * @ORM\Column(type="integer")
      * 
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="text")
-     * 
-     * @Assert\NotBlank(message="Le texte ne peut pas être vide.")
      */
-    private $text;
+    #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
+    private ?string $text = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
-     * @Assert\NotBlank(message="La position ne peut pas être vide.")
      */
-    private $position;
-
+    #[Assert\NotBlank(message: 'La position ne peut pas être vide.')]
+    private ?string $position = null;
 
     /**
      * Fonction qui permet de récupérer l'id du contenu
-     * 
-     * @return id
      */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-
-
     /**
      * Fonction qui permet de récupérer le texte du contenu
-     * 
-     * @return text
      */
     public function getText(): ?string
     {
         return $this->text;
     }
 
-
     /**
      * Fonction qui permet de changer la valeur du texte du contenu
-     * 
+     *
      * @param string $text le nom du contenu
-     * 
-     * @return text
      */
     public function setText(string $text): self
     {
@@ -73,8 +63,6 @@ class Content
 
     /**
      * Fonction qui permet de récuperer la valeur de la position du contenu
-     * 
-     * @return position
      */
     public function getPosition(): ?string
     {
@@ -84,10 +72,8 @@ class Content
 
     /**
      * Fonction qui permet de changer la valeur de la position du contenu
-     * 
+     *
      * @param string $position le nom du contenu
-     * 
-     * @return position
      */
     public function setPosition(string $position): self
     {

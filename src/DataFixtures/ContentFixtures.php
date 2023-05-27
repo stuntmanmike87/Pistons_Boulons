@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Content;
@@ -7,13 +9,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ContentFixtures
-extends Fixture
-implements OrderedFixtureInterface
+final class ContentFixtures extends Fixture implements OrderedFixtureInterface
 {
 
-
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $tel = new Content();
         $tel->setText('(+33)6-07-06-07-06')
@@ -47,7 +46,7 @@ implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 2;
     }

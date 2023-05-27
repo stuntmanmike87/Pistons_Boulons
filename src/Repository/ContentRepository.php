@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Content;
@@ -12,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Content[]    findAll()
  * @method Content[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ContentRepository extends ServiceEntityRepository
+final class ContentRepository extends ServiceEntityRepository
 {
      /**
      * Fonction qui est le constructeur de la classe ContentRepository
@@ -30,13 +32,16 @@ class ContentRepository extends ServiceEntityRepository
 
     /**
      * @param $value : correspond au champs Position de la table CONTENT
+     *
      * Cette fonction permet de récuperer tous les enregistrements sur la table CONTENT avec comme condition
      * que la position de l'enregistrement correspond (LIKE) au paramètre placé en entrée.
      * (on trie par ordre croissant sur l'id)
-     * @return Array[] : correspond au tableau des enregistrements de type Content trouvé en fonction du param $value
+     * return Array[] : correspond au tableau des enregistrements 
+     * de type Content trouvé en fonction du param $value
+     *
+     * return array<string>
      */
-
-    public function findByPosition($value)
+    public function findByPosition(mixed $value): mixed
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.position LIKE :val')
@@ -46,15 +51,16 @@ class ContentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
- 
-
      /**
      * @param $value : correspond au champs Position de la table CONTENT
+     *
      * Cette fonction permet de récuperer l'enregistrement sur la table CONTENT avec comme condition
      * que la position de l'enregistrement est équivalente au paramètre placé en entrée
-     * @return Array[] : correspond au tableau de l'enregistrement avec comme position $value
+     * return Array[] : correspond au tableau de l'enregistrement avec comme position $value
+     *
+     * return array<string>
      */
-    public function findOneByPosition($value)
+    public function findOneByPosition(mixed $value): mixed
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.position = :val')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Client;
@@ -12,9 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Client[]    findAll()
  * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClientRepository extends ServiceEntityRepository
+final class ClientRepository extends ServiceEntityRepository
 {
-    
     /**
      * Fonction qui est le constructeur de la classe ClientRepository
      * 
@@ -30,9 +31,9 @@ class ClientRepository extends ServiceEntityRepository
     }
    /**
      * Cette fonction permet de récuperer tous enregistrements actifs
-     * @return Content[] Returns an array of Client objects
+     * return Content[] Returns an array of Client objects
      */
-    public function findByIsActif()
+    public function findByIsActif(): mixed
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isActif = 1')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
@@ -7,28 +9,28 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures
-    extends Fixture
-    implements OrderedFixtureInterface
+final class UserFixtures extends Fixture implements OrderedFixtureInterface
 {
-    private $encoder;
-
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher)
     {
-        $this->encoder = $encoder;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         // Client administrator account
         $user = new User();
-        $user->setLogin('pistons')
-            ->setPassword($this->encoder->encodePassword($user, 'boulons'))
-            ->setRoles(['ROLE_ADMIN']);
-      
-
+        $login = $user->setLogin('pistons');
+        /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+        $pw = $this->hasher->hashPassword($user, 'boulons');
+        /** @var User $user */
+        $user->setPassword($pw);
+        $user->setRoles(['ROLE_ADMIN']);
+        
+        /* $user->setLogin('pistons')
+            ->setPassword($this->encoder->hashPassword($user, 'boulons'))
+            ->setRoles(['ROLE_ADMIN']); */
 
         // Default admin account
         $admin = new admin();
@@ -45,7 +47,7 @@ class UserFixtures
         $manager->flush();
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 2;
     }

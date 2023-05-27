@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @final
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
 class Client
@@ -16,78 +18,50 @@ class Client
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
-
+    private int $id;
 
     /**
      *@ORM\Column(type="string", length=255)
-     *@Assert\NotBlank(message="Le nom ne peut pas être vide.")
-     * @Assert\Length(
-     *      min = 1,
-     *      max = 50,
-     *      minMessage = "Le nom doit comporter au moins {{ limit }} caractères ",
-     *      maxMessage = "Le nom ne doit pas comporter plus de  {{ limit }} caractères"
-     * )
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Le nom ne peut pas contenir de chiffre"
-     * )
      */
-    private $nom;
+    #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
+    #[Assert\Length(min: 1, max: 50, minMessage: 'Le nom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom ne doit pas comporter plus de  {{ limit }} caractères')]
+    #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le nom ne peut pas contenir de chiffre')]
+    private ?string $nom = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le prénom ne peut pas être vide.")
-     * @Assert\Length(
-     *      min = 1,
-     *      max = 50,
-     *      minMessage = "Le prénom doit comporter au moins {{ limit }} caractères ",
-     *      maxMessage = "Le prénom ne doit pas comporter plus de  {{ limit }} caractères"
-     *  )
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Le prénom ne peut pas contenir de chiffre"
-     * )
      */
-    private $prenom;
+    #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide.')]
+    #[Assert\Length(min: 1, max: 50, minMessage: 'Le prénom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le prénom ne doit pas comporter plus de  {{ limit }} caractères')]
+    #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le prénom ne peut pas contenir de chiffre')]
+    private ?string $prenom = null;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="La date de première saisie ne peut pas être vide.")
-     * @Assert\Range(
-     *      min = "-50 years",
-     *      max = "now",
-     *      maxMessage="La date de première saisie ne peut pas être supérieure à la date du jour.",
-     *      minMessage="La date de première saisie est trop ancienne."
-     * )
      */
-    private $datePremiereSaisie;
+    #[Assert\NotBlank(message: 'La date de première saisie ne peut pas être vide.')]
+    #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]   
+    private ?\DateTimeInterface $datePremiereSaisie = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'adresse ne peut pas être vide.")
      */
-    private $adresse;
+    #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
+    private ?string $adresse = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le type de véhicule ne peut pas être vide.")
      */
-    private $typeVehicule;
+    #[Assert\NotBlank(message: 'Le type de véhicule ne peut pas être vide.')]
+    private ?string $typeVehicule = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La plaque d'immatriculation ne peut pas être vide.")
-     * @Assert\Length(
-     *      min = "9",
-     *      max = "10",
-     *      maxMessage="La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères.",
-     *      minMessage="La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères."
-     * )
      */
-    private $plaqueImmat;
+    #[Assert\NotBlank(message: "La plaque d'immatriculation ne peut pas être vide.")]
+    #[Assert\Length(min: 9, max: 10, maxMessage: "La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères.", minMessage: "La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères.")]
+    private ?string $plaqueImmat = null;
+
     //  * @Assert\Regex(
     //  * pattern="/^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/",
     //  * match=false,
@@ -100,15 +74,12 @@ class Client
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * 
      */
-    private $isActif;
+    private ?bool $isActif = null;
 
     // GETTERS / SETTERS
     /**
      * Fonction qui permet de récupérer l'id du client
-     * 
-     * @return id
      */
     public function getId(): ?int
     {
@@ -117,8 +88,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer le nom du client
-     * 
-     * @return nom
      */
     public function getNom(): ?string
     {
@@ -127,10 +96,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur du nom du client
-     * 
-     * @param string $nom 
-     * 
-     * @return nom
      */
     public function setNom(string $nom): self
     {
@@ -141,8 +106,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer le prénom du client
-     * 
-     * @return prenom
      */
     public function getPrenom(): ?string
     {
@@ -151,10 +114,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur du prénom du client
-     * 
-     * @param string $prenom 
-     * 
-     * @return prénom
      */
     public function setPrenom(string $prenom): self
     {
@@ -165,8 +124,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer la date de première saisie du client
-     * 
-     * @return datePremiereSaisie
      */
     public function getDatePremiereSaisie(): ?\DateTimeInterface
     {
@@ -175,10 +132,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur de la date de première saisie du client
-     * 
-     * @param \DateTimeInterface $datePremiereSaisie
-     * 
-     * @return datePremiereSaisie
      */
     public function setDatePremiereSaisie(\DateTimeInterface $datePremiereSaisie): self
     {
@@ -189,8 +142,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer l'adresse du client
-     * 
-     * @return adresse
      */
     public function getAdresse(): ?string
     {
@@ -199,10 +150,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur de l'adresse du client
-     * 
-     * @param string $adresse
-     * 
-     * @return adresse
      */
     public function setAdresse(string $adresse): self
     {
@@ -213,8 +160,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer le type de véhicule du client
-     * 
-     * @return typeVehicule
      */
     public function getTypeVehicule(): ?string
     {
@@ -223,10 +168,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur du type de véhicule du client
-     * 
-     * @param string $typeVehicule
-     * 
-     * @return typeVehicule
      */
     public function setTypeVehicule(string $typeVehicule): self
     {
@@ -237,8 +178,6 @@ class Client
 
     /**
      * Fonction qui permet de récupérer la plaque d'immatriculation du client
-     * 
-     * @return plaqueImmat
      */
     public function getPlaqueImmat(): ?string
     {
@@ -247,10 +186,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur de la plaque d'immatriculation du client
-     * 
-     * @param string $plaqueImmat
-     * 
-     * @return plaqueImmat
      */
     public function setPlaqueImmat(string $plaqueImmat): self
     {
@@ -258,21 +193,19 @@ class Client
 
         return $this;
     }
+
     /**
      * Fonction qui permet de récupérer si le client est actif ou pas
-     * 
-     * @return isActif
      */
     public function getIsActif(): ?bool
     {
         return $this->isActif;
     }
+
     /**
      * Fonction qui permet de changer la valeur de l'activité du client du client
-     * 
+     *
      * @param bool $isActif
-     * 
-     * @return isActif
      */
     public function setIsActif(?bool $isActif): self
     {
@@ -280,21 +213,19 @@ class Client
 
         return $this;
     }
+
     /**
      * Fonction qui permet de récupérer le client avec son nom , son prénom et sa plaque d'immatriculation
-     * 
-     * @return String
      */
-    public function getClient()
+    public function getClient(): string
     {
         return $this->nom . ' ' . $this->prenom . ' - Véhicule : ' . $this->typeVehicule . " - Immatriculation : " . $this->plaqueImmat;
     }
+
     /**
      * Fonction qui permet de récupérer le client avec son nom , son prénom
-     * 
-     * @return String
      */
-    public function getIdentiteClient()
+    public function getIdentiteClient(): string
     {
         return $this->nom . ' ' . $this->prenom;
     }

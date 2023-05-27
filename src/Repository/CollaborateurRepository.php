@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Collaborateur;
@@ -13,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Collaborateur[]    findAll()
  * @method Collaborateur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CollaborateurRepository extends ServiceEntityRepository
+final class CollaborateurRepository extends ServiceEntityRepository
 {
       /**
      * Fonction qui est le constructeur de la classe CollaborateurRepository
@@ -31,9 +33,9 @@ class CollaborateurRepository extends ServiceEntityRepository
 
     /**
      * Cette fonction permet de récuperer tous enregistrements actifs
-     * @return Collaborateur[] Returns an array of Collaborateur objects
+     * return Collaborateur[] Returns an array of Collaborateur objects
      */
-    public function findByIsActif()
+    public function findByIsActif(): mixed
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isActif = 1')
@@ -45,9 +47,9 @@ class CollaborateurRepository extends ServiceEntityRepository
 
     /**
      * Fonction permettant de lister les collaborateurs qui se sont connectés par ordre décroissant 
-     * @return Collaborateur[] Returns an array of Collaborateur objects
+     * return Collaborateur[] Returns an array of Collaborateur objects
      */
-    public function findByDerniereConnexion()
+    public function findByDerniereConnexion(): mixed
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isActif = 1')
@@ -56,7 +58,6 @@ class CollaborateurRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
 
     /*
     public function findOneBySomeField($value): ?Collaborateur
