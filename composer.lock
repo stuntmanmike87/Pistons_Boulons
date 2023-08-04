@@ -2145,16 +2145,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.23.0",
+            "version": "1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "a2b24135c35852b348894320d47b3902a94bc494"
+                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a2b24135c35852b348894320d47b3902a94bc494",
-                "reference": "a2b24135c35852b348894320d47b3902a94bc494",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/846ae76eef31c6d7790fac9bc399ecee45160b26",
+                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26",
                 "shasum": ""
             },
             "require": {
@@ -2186,9 +2186,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.1"
             },
-            "time": "2023-07-23T22:17:56+00:00"
+            "time": "2023-08-03T16:32:59+00:00"
         },
         {
             "name": "psr/cache",
@@ -8297,16 +8297,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.17.7",
+            "version": "0.17.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "0e76101aa329911b7fec43106aac5843a978b209"
+                "reference": "f4c0627d5e157272cf4783099730ef7241fddb14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/0e76101aa329911b7fec43106aac5843a978b209",
-                "reference": "0e76101aa329911b7fec43106aac5843a978b209",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/f4c0627d5e157272cf4783099730ef7241fddb14",
+                "reference": "f4c0627d5e157272cf4783099730ef7241fddb14",
                 "shasum": ""
             },
             "require": {
@@ -8346,7 +8346,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.17.7"
+                "source": "https://github.com/rectorphp/rector/tree/0.17.10"
             },
             "funding": [
                 {
@@ -8354,7 +8354,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-23T20:44:23+00:00"
+            "time": "2023-08-03T14:19:51+00:00"
         },
         {
             "name": "symfony/browser-kit",
