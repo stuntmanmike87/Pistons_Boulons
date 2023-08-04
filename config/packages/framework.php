@@ -7,9 +7,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('framework', [
         'secret' => '%env(APP_SECRET)%',
-        'validation' => [
-            'enable_annotations' => true,
-        ],
         'session' => [
             'handler_id' => null,
             'cookie_secure' => 'auto',

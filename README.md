@@ -15,11 +15,11 @@
 Informations sur l'environnement du site
 
 
-_php_ : 7.4
+_php_ : 8.2
 
 _sqlite_ : 3
 
-_apache_ : 2.4.29
+<!-- _apache_ : 2.4.29 -->
 
 -----------------
 
@@ -48,7 +48,7 @@ DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
 
 Mise à jour de l'environnement du site :
 ```
-$ apt update && apt install vim && apt install php7.4-sqlite3
+$ apt update && apt install vim && apt install php8.2-sqlite3
 ```
 
 Edition du fichier ci-dessous pour lancer le site directement sur la page accueil:

@@ -13,7 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 		'password_hashers' => [
 			PasswordAuthenticatedUserInterface::class => 'auto', 
 			User::class => [
-				'algorithm' => 'sodium'
+				'algorithm' => 'auto'
 			]
 		], 
         'providers' => [
