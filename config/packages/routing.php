@@ -6,14 +6,14 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('framework', [
-        'validation' => [
-            'email_validation_mode' => 'html5',
+        'router' => [
+            'utf8' => true,
         ],
     ]);
-    if ($containerConfigurator->env() === 'test') {
+    if ($containerConfigurator->env() === 'prod') {
         $containerConfigurator->extension('framework', [
-            'validation' => [
-                'not_compromised_password' => false,
+            'router' => [
+                'strict_requirements' => null,
             ],
         ]);
     }
