@@ -4,77 +4,61 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\ClientRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @final
- * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\Client has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     *@ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le nom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le nom ne peut pas contenir de chiffre')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $nom = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le prénom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le prénom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le prénom ne peut pas contenir de chiffre')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $prenom = null;
 
-    /**
-     * @ORM\Column(type="date")
-     */
     #[Assert\NotBlank(message: 'La date de première saisie ne peut pas être vide.')]
-    #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]   
-    private ?\DateTimeInterface $datePremiereSaisie = null;
+    #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]
+    #[ORM\Column(type: 'date')]   
+    private ?DateTimeInterface $datePremiereSaisie = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $adresse = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le type de véhicule ne peut pas être vide.')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $typeVehicule = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: "La plaque d'immatriculation ne peut pas être vide.")]
     #[Assert\Length(min: 9, max: 10, maxMessage: "La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères.", minMessage: "La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères.")]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $plaqueImmat = null;
 
     //  * @Assert\Regex(
     //  * pattern="/^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/",
     //  * match=false,
     //  * message="La plaque d'immatriculation n'est pas valide"
-    //  * ) 
-
+    //  * )
     // /[A-Z]{1,2}+\d{1.4}+[A-Z]{1,2}|\d{1,4}+[A-Z]{1,4}+\d{1,2}/
     // |\d{1,4}[A-Z]{1,4}\d{1,2}
     // /^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private ?bool $isActif = null;
 
     // GETTERS / SETTERS
@@ -125,7 +109,7 @@ class Client
     /**
      * Fonction qui permet de récupérer la date de première saisie du client
      */
-    public function getDatePremiereSaisie(): ?\DateTimeInterface
+    public function getDatePremiereSaisie(): ?DateTimeInterface
     {
         return $this->datePremiereSaisie;
     }
@@ -133,7 +117,7 @@ class Client
     /**
      * Fonction qui permet de changer la valeur de la date de première saisie du client
      */
-    public function setDatePremiereSaisie(\DateTimeInterface $datePremiereSaisie): self
+    public function setDatePremiereSaisie(DateTimeInterface $datePremiereSaisie): self
     {
         $this->datePremiereSaisie = $datePremiereSaisie;
 

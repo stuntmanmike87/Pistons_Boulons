@@ -16,12 +16,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 #[Route(path: '/rendez/vous')]
 final class RendezVousController extends AbstractController
 {
-    public function __construct(private ManagerRegistry $em) {}
-    
-    private ?\App\Controller\Month $month = null;
+    public function __construct(private readonly ManagerRegistry $em) {}
+
+    private ?Month $month = null;
 
     /**
      * Fonction qui permet l'affichage de la page index de rendez-vous
@@ -54,7 +55,7 @@ final class RendezVousController extends AbstractController
         $debut =  $this->month->getStartingDay();
         $mois = $debut->format('m');
         $annee = $debut->format('Y');
-        $moisSuivant = (int)mktime(0, 0, 0, $mois+1, 1, intval($annee));
+        $moisSuivant = (int)mktime(0, 0, 0, $mois+1, 1, (int) $annee);
         $dernierJour = date('Y-m-d', $moisSuivant--);
         $fin = DateTime::createFromFormat('d-m-Y', $dernierJour);
         $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut, $fin);
@@ -76,14 +77,14 @@ final class RendezVousController extends AbstractController
         $debut =  $this->month->getStartingDay();
         $mois = $debut->format('m');
         $annee = $debut->format('Y');
-        $moisSuivant = (int)mktime(0, 0, 0, $mois+1, 1, intval($annee));
+        $moisSuivant = (int)mktime(0, 0, 0, $mois+1, 1, (int) $annee);
         $dernierJour = date('Y-m-d', $moisSuivant--);
         $fin = DateTime::createFromFormat('d-m-Y', $dernierJour);
         $liste_events = $rendezVousRepository->findAllByDateRendezVous($debut, $fin);
         return $this->render('rendez_vous/agenda.twig', [
             'controller_name' => 'ContentController',
             'events' => $liste_events,
-            
+
         ]);
     }
 
@@ -92,11 +93,11 @@ final class RendezVousController extends AbstractController
      * dans la base de données
      */
     #[Route(path: '/agenda_quotidien/{day}', name: 'agenda_quotidien', methods: ['GET', 'POST'])]
-    public function agenda_quotidien(\DateTime $day, RendezVousRepository $rendezVousRepository): Response
+    public function agenda_quotidien(DateTime $day, RendezVousRepository $rendezVousRepository): Response
     {
         $date = $day->format('d/m/Y');
-        $demain  = mktime(0, 0, 0, intval($day->format('m')), $day->format('d') +1, intval($day->format('Y')) );//(int)
-        $hier = mktime(0, 0, 0, intval($day->format('m')), $day->format('d') -1, intval($day->format('Y')) );
+        $demain  = mktime(0, 0, 0, (int) $day->format('m'), $day->format('d') +1, (int) $day->format('Y') );//(int)
+        $hier = mktime(0, 0, 0, (int) $day->format('m'), $day->format('d') -1, (int) $day->format('Y') );
         $events = $rendezVousRepository->findByDateRendezVous($day);
         return $this->render('rendez_vous/agenda_quotidien.twig', [
             'controller_name' => 'ContentController',
@@ -115,6 +116,7 @@ final class RendezVousController extends AbstractController
     {
         return $this->month;
     }
+
     /**
      * return rendez_vous/pdf.twig avec les données du rendez-vous dans la base de données
      */
@@ -166,7 +168,7 @@ final class RendezVousController extends AbstractController
 
         return $this->render('rendez_vous/new.html.twig', [
             'rendez_vou' => $rendezVou,
-            'form' => $form(),
+            'form' => $form(),//Trying to invoke Symfony\Component\Form\FormInterface but it might not be a callable.
         ]);
     }
 
@@ -217,7 +219,7 @@ final class RendezVousController extends AbstractController
 
         return $this->render('rendez_vous/edit.html.twig', [
             'rendez_vou' => $rendezVou,
-            'form' => $form(),
+            'form' => $form(),//Trying to invoke Symfony\Component\Form\FormInterface but it might not be a callable.
         ]);
     }
 

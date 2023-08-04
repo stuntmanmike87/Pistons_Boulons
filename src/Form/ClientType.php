@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Client;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +34,7 @@ final class ClientType extends AbstractType
             ->add('prenom')
             ->add('datePremiereSaisie' , DateType::class , [
                 'widget' => 'single_text',
-                'data' => new \DateTime("now")
+                'data' => new DateTime("now")
             ])
             ->add('adresse')
             ->add('typeVehicule' , ChoiceType::class, [

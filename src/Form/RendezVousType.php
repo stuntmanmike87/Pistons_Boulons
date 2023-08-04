@@ -8,12 +8,13 @@ use App\Entity\RendezVous;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RendezVousType extends AbstractType
 {   
@@ -33,7 +34,7 @@ final class RendezVousType extends AbstractType
             ->add('dateRendezVous', DateTimeType::class , [
                 'widget' => 'single_text',
                 'view_timezone' => 'Europe/Paris',
-                'data' => new \DateTime("now"),
+                'data' => new DateTime("now"),
                 'date_format'=>'yyyy-MM-dd  HH:mm',
             ])
             ->add('idClient' , EntityType::class , [

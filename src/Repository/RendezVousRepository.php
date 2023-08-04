@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\RendezVous;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -62,7 +63,7 @@ final class RendezVousRepository extends ServiceEntityRepository
     /** return array<string> */
     public function findByDateRendezVous(mixed $jour): mixed
     {
-        /** @var \DateTime $jour */
+        /** @var DateTime $jour */
         return $this->createQueryBuilder('r')
             ->andWhere("r.dateRendezVous BETWEEN :deb AND :fin")
             ->setParameter('deb', $jour->format("Y-m-d 00:00:00"))

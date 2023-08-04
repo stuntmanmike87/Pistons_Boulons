@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Twig\Extension\AbstractExtension;
-use App\Repository\RendezVousRepository;
 use App\Controller\Month;
 use App\Controller\RendezVousController;
+use App\Repository\RendezVousRepository;
 use DateTime;
+use Twig\Extension\AbstractExtension;
 
-final class AgendaService
-    extends AbstractExtension
+final class AgendaService extends AbstractExtension
 {
     /** @var Month $month */
     private Month $month;
@@ -35,7 +34,7 @@ final class AgendaService
     /**
      * Fonction permettant de récupérer le premier jour du mois
      */
-    public function getStartingDay(): \DateTime
+    public function getStartingDay(): DateTime
     {
         return $this->month->getStartingDay();
     }
@@ -68,7 +67,7 @@ final class AgendaService
      * Fonction permettant de savoir si la date placée en param est dans le mois actuel
      * param DateTime
      */
-    public function withInMonth(\DateTime $date): bool
+    public function withInMonth(DateTime $date): bool
     {
         return $this->month->withinMonth($date);
     }
@@ -103,13 +102,13 @@ final class AgendaService
      *
      * @return array<mixed>
      */
-    public function getEventsBetweenByDay (\DateTime $debut, \DateTime $fin, RendezVousRepository $myRepository): array
+    public function getEventsBetweenByDay (DateTime $debut, DateTime $fin, RendezVousRepository $myRepository): array
     {
         $events = $myRepository->findAllByDateRendezVous($debut, $fin);
         $days = [];
         /** @var array<string> $event *//** @var array<string> $events */
         foreach($events as $event){//Foreach overwrites $events with its value variable.
-            $date = explode(' ', strval($events['dateRendezVous']))[0];
+            $date = explode(' ', (string) $events['dateRendezVous'])[0];
             if (!isset($days[$date])){
                 $days[$date] = [$events];
             }else{

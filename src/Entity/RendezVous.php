@@ -4,52 +4,44 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
+use App\Repository\RendezVousRepository;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @final
- * @ORM\Entity(repositoryClass=RendezVousRepository::class)
  */
+#[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 class RendezVous
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\RendezVous has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Client::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[Assert\NotBlank(message: 'Vous devez choisir un client.')]
-    private ?\App\Entity\Client $idClient = null;
+    #[ORM\ManyToOne(targetEntity: Client::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Client $idClient = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Collaborateur::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[Assert\NotBlank(message: 'Vous devez choisir un collaborateur.')]
-    private ?\App\Entity\Collaborateur $idCollaborateur = null;
+    #[ORM\ManyToOne(targetEntity: Collaborateur::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Collaborateur $idCollaborateur = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Prestation::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[Assert\NotBlank(message: 'Vous devez choisir une prestation.')]
-    private ?\App\Entity\Prestation $idPrestation = null;
+    #[ORM\ManyToOne(targetEntity: Prestation::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Prestation $idPrestation = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
     #[Assert\NotBlank(message: 'La date de rendez-vous ne peut pas être vide.')]
     #[Assert\Range(min: 'now', minMessage: 'La date du rendez-vous ne peut pas être inférieure à la date du jour.')]
-    private ?\DateTimeInterface $dateRendezVous = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?DateTimeInterface $dateRendezVous = null;
 
     /**
      * Fonction qui permet de récupérer l'id du rendez-vous
@@ -116,7 +108,7 @@ class RendezVous
     /**
      * Fonction qui permet de récupérer la date du rendez-vous
      */
-    public function getDateRendezVous(): ?\DateTimeInterface
+    public function getDateRendezVous(): ?DateTimeInterface
     {
         return $this->dateRendezVous;
     }
@@ -124,7 +116,7 @@ class RendezVous
     /**
      * Fonction qui permet de changer la valeur de la date du rendez-vous
      */
-    public function setDateRendezVous(\DateTimeInterface $dateRendezVous): self
+    public function setDateRendezVous(DateTimeInterface $dateRendezVous): self
     {
         $this->dateRendezVous = $dateRendezVous;
 

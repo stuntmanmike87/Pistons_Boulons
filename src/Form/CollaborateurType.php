@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Collaborateur;
 use App\Entity\User;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,12 +30,12 @@ final class CollaborateurType extends AbstractType
             ->add('prenom')
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'data' => new \DateTime("now")
+                'data' => new DateTime("now")
 
             ])
             ->add('dateEntreeEntreprise', DateType::class, [
                 'widget' => 'single_text',
-                'data' => new \DateTime("now")
+                'data' => new DateTime("now")
             ])
             ->add('numSecuriteSocial')
             ->add('typeContrat')

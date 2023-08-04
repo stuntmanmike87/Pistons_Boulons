@@ -4,33 +4,27 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\ContentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @final
- * @ORM\Entity(repositoryClass=ContentRepository::class)
  */
+#[ORM\Entity(repositoryClass: ContentRepository::class)]
 class Content
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * 
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\Content has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
+    #[ORM\Column(type: 'text')]
     private ?string $text = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'La position ne peut pas être vide.')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $position = null;
 
     /**

@@ -4,52 +4,41 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Admin;
 use App\Entity\Collaborateur;
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @final
- * @ORM\Entity(repositoryClass=UserRepository::class)
  */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\User has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $login = null;
 
     /**
-     * @ORM\Column(type="array")
      * @var string[] $roles
      */
+    #[ORM\Column(type: 'array')]
     private array $roles = [];
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    /**
-     * @ORM\JoinColumn(nullable=true)
-     * @ORM\OneToOne(targetEntity=Admin::class, mappedBy="user", cascade={"persist", "remove"})
-     * 
-     */
-    private ?\App\Entity\Admin $admin = null;
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(targetEntity: Admin::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Admin $admin = null;
 
-    /**
-     *  @ORM\JoinColumn(nullable=true)
-     * @ORM\OneToOne(targetEntity=Collaborateur::class, mappedBy="user", cascade={"persist", "remove"})
-     *
-     */
-    private ?\App\Entity\Collaborateur $collaborateur = null;
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Collaborateur $collaborateur = null;
 
     public function getId(): ?int
     {

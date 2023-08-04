@@ -4,27 +4,31 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Entity\Collaborateur;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CollaborateurRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Csrf\CsrfToken;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCredentials;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -69,7 +73,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
-            \Symfony\Component\Security\Http\SecurityRequestAttributes::LAST_USERNAME,
+            SecurityRequestAttributes::LAST_USERNAME,
             $credentials['login']
         );
 
@@ -90,7 +94,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         ///** @var User $user */
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => (string)$credentials['login']]);
 
-        if (!$user instanceof \App\Entity\User) {
+        if (!$user instanceof User) {
             throw new UserNotFoundException("L'identifiant n'a pas été trouvé.");
         }
 
@@ -102,7 +106,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
      */
     public function checkCredentials(array $credentials, UserInterface $user): bool
     {
-        /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+        /** @var PasswordAuthenticatedUserInterface $user */
         return $this->passwordHasher->isPasswordValid($user, $credentials['password']);
     }
 
@@ -124,14 +128,14 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         
         $user = $token->getUser();
          //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
-         $today = new \DateTime('now');
+         $today = new DateTime('now');
          //On pointe sur l'id de l'utilisateur
          //on récupère le collaborateur en fonction de son id d'utilisateur
          $collab = $this->repositoryCollabo->findOneBy([
              'user' => $user,
          ]);
 
-         if($collab instanceof \App\Entity\Collaborateur){
+         if($collab instanceof Collaborateur){
              //on met a jour le chp derniereConnexion  de collabo
              $collab->setDateHeureDerniereConnexion($today);
              $this->entityManager->persist($collab);
@@ -142,7 +146,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('agendaMensuel'));
     }
 
-    protected function getLoginUrl(\Symfony\Component\HttpFoundation\Request $request): string
+    protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }

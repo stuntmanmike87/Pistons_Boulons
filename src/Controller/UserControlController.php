@@ -7,19 +7,21 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[Route(path: '/user/control')]
 final class UserControlController extends AbstractController
 {
-    public function __construct(private ManagerRegistry $em, private readonly UserPasswordHasherInterface $encoder)
+    public function __construct(private readonly ManagerRegistry $em, private readonly UserPasswordHasherInterface $encoder)
     {
     }
+
     /**
      * Fonction qui permet l'affichage de la page index de UserControl
      *
@@ -48,7 +50,7 @@ final class UserControlController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+            /** @var PasswordAuthenticatedUserInterface $user */
             $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
             /** @var User $user */
             $user->setPassword($pw);
@@ -93,7 +95,7 @@ final class UserControlController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface $user */
+            /** @var PasswordAuthenticatedUserInterface $user */
             $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
             /** @var User $user */
             $user->setPassword($pw);

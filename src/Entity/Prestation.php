@@ -4,58 +4,45 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\PrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @final
- * @ORM\Entity(repositoryClass=PrestationRepository::class)
  */
+#[ORM\Entity(repositoryClass: PrestationRepository::class)]
 class Prestation
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\Prestation has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom de la prestation doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom de la prestation ne doit pas comporter plus de  {{ limit }} caractères')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $nom = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le temps de réalisation ne peut pas être vide.')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $tempsRealisation = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
     #[Assert\NotBlank(message: 'Le coût HT ne peut pas être vide.')]
     #[Assert\Range(min: 0, minMessage: 'Le coût HT ne peux pas être égale à zéro.')]
+    #[ORM\Column(type: 'integer')]
     private ?string $coutHT = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Assert\NotBlank(message: 'La description ne peut pas être vide.')]
     #[Assert\Length(min: 3, minMessage: 'La description doit comporter au moins {{ limit }} caractères ')]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank(message: 'Le type de prestation ne peut pas être vide.')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $typePrestation = null;
 
-    /**
-     * @ORM\Column(type="boolean",nullable=true)
-     */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private ?bool $isActive = null;
 
     /**

@@ -4,36 +4,29 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @final
- * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
+#[ORM\Entity(repositoryClass: AdminRepository::class)]
 class Admin
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private readonly int $id;//Class App\Entity\Admin has an uninitialized readonly property $id. Assign it in the constructor.
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $nom = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $prenom = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="admin", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private ?\App\Entity\User $user = null;
+    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'admin', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     /**
      * Fonction GETTER qui permet de récupérer l'id
