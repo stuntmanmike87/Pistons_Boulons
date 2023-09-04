@@ -40,7 +40,7 @@ final class CollaborateurController extends AbstractController
      *
      * Cette page nous montre le formulaire d'ajout de collaborateur
      *
-     * @param Request $request qui est la requete d'ajout du collaborateur
+     * param Request $request qui est la requete d'ajout du collaborateur
      *
      * Si l'ajout est validé :
      * return collaborateur_index qui est la page avec la liste des collaborateurs et donc aussi du collaborateur qui a été ajouté.
@@ -91,7 +91,7 @@ final class CollaborateurController extends AbstractController
      *
      * Cette page nous montre les données d'un collaborateur choisi dans la liste des collaborateurs de la page index de collaborateur
      *
-     * @param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
+     * param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
      * return collaborateur/show.html.twig qui est la page qui affiche les données du collaborateur choisi
      */
     #[Route(path: '/{id}', name: 'collaborateur_show', methods: ['GET'])]
@@ -107,9 +107,9 @@ final class CollaborateurController extends AbstractController
      *
      * Cette page nous montre le formulaire d'un collaborateur choisi dans la liste des collaborateurs de index collaborateur
      *
-     * @param Request $request qui permet de faire la requete de la modification
+     * param Request $request qui permet de faire la requete de la modification
      *
-     * @param Collaborateur $collaborateur qui permet de savoir le collaborateur choisi
+     * param Collaborateur $collaborateur qui permet de savoir le collaborateur choisi
      *
      * si la modification est validée :
      * return collaborateur_index qui est donc la liste des collaborateurs avec le collaborateur qui a bien été modifié
@@ -156,9 +156,9 @@ final class CollaborateurController extends AbstractController
      *
      * Cette fonction est aussi sur la page edit avec le bouton supprimer 
      *
-     * @param Request $request qui permet de faire la requete de la suppression
+     * param Request $request qui permet de faire la requete de la suppression
      *
-     * @param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
+     * param Collaborateur $collaborateur cette variable permet de savoir quel collaborateur nous avons choisi
      * return collaborateur_index avec la liste des collaborateurs sans le collaborateur qui a été supprimé
      */
     #[Route(path: '/{id}', name: 'collaborateur_delete', methods: ['POST'])]

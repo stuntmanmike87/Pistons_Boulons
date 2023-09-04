@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
@@ -20,7 +21,7 @@ class RendezVous
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\RendezVous has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Vous devez choisir un client.')]
@@ -40,7 +41,7 @@ class RendezVous
 
     #[Assert\NotBlank(message: 'La date de rendez-vous ne peut pas être vide.')]
     #[Assert\Range(min: 'now', minMessage: 'La date du rendez-vous ne peut pas être inférieure à la date du jour.')]
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $dateRendezVous = null;
 
     /**
@@ -125,40 +126,32 @@ class RendezVous
 
     /**
      * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
-     *
-     * @return Client.getClient()
      */
-    public function getClient()
+    public function getClient(): mixed
     {
         return $this->getClient();
     }
 
     /**
      * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
-     *
-     * @return Client.getClient()
      */
-    public function getIdentiteClient()
+    public function getIdentiteClient(): mixed
     {
         return $this->getIdentiteClient();
     }
 
     /**
      * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
-     *
-     * @return Collaborateur.getCollaborateur()
      */
-    public function getCollaborateur()
+    public function getCollaborateur(): mixed
     {
         return $this->getCollaborateur();
     }
 
     /**
      * Fonction qui permet de récuperer la donnée d'une prestation qui est son nom 
-     *
-     * @return Prestation.getPrestation()
      */
-    public function getPrestation()
+    public function getPrestation(): mixed
     {
         return $this->getPrestation();
     }

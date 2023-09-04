@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\CollaborateurRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,34 +18,34 @@ class Collaborateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\Collaborateur has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le nom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le nom ne peut pas contenir de chiffre')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $nom = null;
 
     #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le prénom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le prénom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le prénom ne peut pas contenir de chiffre')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $prenom = null;
 
     #[Assert\NotBlank(message: 'La date de naissance ne peut pas être vide.')]
     #[Assert\Range(min: '-1000 years', max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?DateTimeInterface $dateNaissance = null;
 
     #[Assert\NotBlank(message: "La date d'entrée en entreprise ne peut pas être vide.")]
     #[Assert\Range(min: '-50 years', max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?DateTimeInterface $dateEntreeEntreprise = null;
 
     #[Assert\NotBlank(message: 'Le numéro de sécurité sociale ne peut pas être vide.')]
     #[Assert\Length(min: 15, max: 15, exactMessage: 'Le numéro de sécurité sociale est incorrecte, il ne comprend pas 15 caractères.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $numSecuriteSocial = null;
 
     // regex:  '/^                # début de chaîne
@@ -54,17 +55,17 @@ class Collaborateur
     // [0-9]{3}[0-9]{3}[0-9]{2}  # ça non plus je ne sais plus
     // $/                        # fin de chaîne
     #[Assert\NotBlank(message: 'Le type de contrat ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $typeContrat = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $dateHeureDerniereConnexion = null;
 
     #[Assert\NotBlank(message: 'La durée de travail hebdomadaire ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $dureeTravailHebdo = null;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $isActif = null;
 
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'collaborateur', cascade: ['persist', 'remove'])]
@@ -73,8 +74,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer l'identifiant
-     *
-     * @return Int
      */
     public function getId(): ?int
     {
@@ -83,8 +82,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer le nom
-     *
-     * @return String
      */
     public function getNom(): ?string
     {
@@ -103,8 +100,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer le prénom
-     *
-     * @return String
      */
     public function getPrenom(): ?string
     {
@@ -159,8 +154,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer le numéro de sécu sociale
-     *
-     * @return String
      */
     public function getNumSecuriteSocial(): ?string
     {
@@ -179,8 +172,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer le type de contrat
-     *
-     * @return String
      */
     public function getTypeContrat(): ?string
     {
@@ -217,8 +208,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer la durée de travail hebdo
-     *
-     * @return String
      */
     public function getDureeTravailHebdo(): ?string
     {
@@ -263,8 +252,6 @@ class Collaborateur
 
     /**
      * Fonction GETTER qui permet de récupérer l'user
-     *
-     * @return User
      */
     public function getUser(): ?User
     {

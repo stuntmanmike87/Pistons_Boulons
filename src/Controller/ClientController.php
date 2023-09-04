@@ -38,7 +38,7 @@ final class ClientController extends AbstractController
      *
      * Cette page nous montre le formulaire d'ajout de client
      *
-     * @param Request $request qui est la requete d'ajout du client
+     * param Request $request qui est la requete d'ajout du client
      *
      * Si l'ajout est validé :
      * return client_index qui est la page avec la liste des clients et donc aussi du client qui a été ajouté.
@@ -76,7 +76,7 @@ final class ClientController extends AbstractController
      *
      * Cette page nous montre les données d'un client choisi dans la liste des clients de la page index de client
      *
-     * @param Client $client cette variable permet de savoir quel client nous avons choisi
+     * param Client $client cette variable permet de savoir quel client nous avons choisi
      * return client/show.html.twig qui est la page qui affiche les données du client choisi
      */
     #[Route(path: '/{id}', name: 'client_show', methods: ['GET'])]
@@ -92,9 +92,9 @@ final class ClientController extends AbstractController
      *
      * Cette page nous montre le formulaire d'un client choisi dans la liste des clients de index client
      *
-     * @param Request $request qui permet de faire la requete de la modification
+     * param Request $request qui permet de faire la requete de la modification
      *
-     * @param Client $client qui permet de savoir le client choisi
+     * param Client $client qui permet de savoir le client choisi
      *
      * si la modification est validée :
      * return client_index qui est donc la liste des clients avec le client qui a bien été modifié
@@ -127,9 +127,9 @@ final class ClientController extends AbstractController
      *
      * Cette fonction est aussi sur la page edit avec le bouton supprimer 
      *
-     * @param Request $request qui permet de faire la requete de la suppression
+     * param Request $request qui permet de faire la requete de la suppression
      *
-     * @param Client $client cette variable permet de savoir quel client nous avons choisi
+     * param Client $client cette variable permet de savoir quel client nous avons choisi
      * return client_index avec la liste des clients sans le client qui a été supprimé
      */
     #[Route(path: '/{id}', name: 'client_delete', methods: ['POST'])]

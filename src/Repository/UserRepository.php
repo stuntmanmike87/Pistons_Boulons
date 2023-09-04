@@ -20,14 +20,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  */
 final class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-      /**
+    /**
      * Fonction qui est le constructeur de la classe UserRepository
-     * 
+     *
      * Cette fonction permet de contruire l'objet UserRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
-     * 
-     * @param ManagerRegistry $registry 
-     * 
-     * @return void
      */
     public function __construct(ManagerRegistry $registry, private readonly UserRepository $userRepository)
     {//Property App\Repository\UserRepository::$userRepository is never read, only written.

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\ClientRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,37 +18,37 @@ class Client
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\Client has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le nom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le nom ne peut pas contenir de chiffre')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $nom = null;
 
     #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le prénom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le prénom ne doit pas comporter plus de  {{ limit }} caractères')]
     #[Assert\Regex(pattern: '/\d/', match: false, message: 'Le prénom ne peut pas contenir de chiffre')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $prenom = null;
 
     #[Assert\NotBlank(message: 'La date de première saisie ne peut pas être vide.')]
     #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]
-    #[ORM\Column(type: 'date')]   
+    #[ORM\Column(type: Types::DATE_MUTABLE)]   
     private ?DateTimeInterface $datePremiereSaisie = null;
 
     #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $adresse = null;
 
     #[Assert\NotBlank(message: 'Le type de véhicule ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $typeVehicule = null;
 
     #[Assert\NotBlank(message: "La plaque d'immatriculation ne peut pas être vide.")]
     #[Assert\Length(min: 9, max: 10, maxMessage: "La plaque d'immatriculation ne peut être pas supérieur à {{ limit }} caractères.", minMessage: "La plaque d'immatriculation ne peut être pas inférieur à {{ limit }} caractères.")]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $plaqueImmat = null;
 
     //  * @Assert\Regex(
@@ -58,7 +59,7 @@ class Client
     // /[A-Z]{1,2}+\d{1.4}+[A-Z]{1,2}|\d{1,4}+[A-Z]{1,4}+\d{1,2}/
     // |\d{1,4}[A-Z]{1,4}\d{1,2}
     // /^[A-Z]{2}[-]\d{3}[-][A-Z]{2}$/
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $isActif = null;
 
     // GETTERS / SETTERS
@@ -188,8 +189,6 @@ class Client
 
     /**
      * Fonction qui permet de changer la valeur de l'activité du client du client
-     *
-     * @param bool $isActif
      */
     public function setIsActif(?bool $isActif): self
     {

@@ -46,10 +46,7 @@ final class RendezVousController extends AbstractController
      * dans la base de données
      */
     #[Route(path: '/agenda', name: 'agendaMensuel')]
-    public function agendaMensuel(
-        RendezVousRepository $rendezVousRepository,
-        CollaborateurRepository $repoCollabo
-    ): Response
+    public function agendaMensuel(RendezVousRepository $rendezVousRepository, CollaborateurRepository $repoCollabo): Response
     {
         $this->month = new Month();
         $debut =  $this->month->getStartingDay();
@@ -177,7 +174,7 @@ final class RendezVousController extends AbstractController
      *
      * Cette page nous montre les données d'un rendez-vous choisi dans la liste des rendez-vous de la page index de rendez-vous
      *
-     * @param RendezVous $rendezVou cette variable permet de savoir quel rendez-vous nous avons choisi
+     * param RendezVous $rendezVou cette variable permet de savoir quel rendez-vous nous avons choisi
      *
      * return rendez_vous/show.html.twig qui est la page qui affiche les données du rendez-vous choisi
      */
@@ -195,9 +192,9 @@ final class RendezVousController extends AbstractController
      *
      * Cette page nous montre le formulaire d'un rendez-vous choisi dans la liste des rendez-vous de index rendez-vous
      *
-     * @param Request $request qui permet de faire la requete de la modification
+     * param Request $request qui permet de faire la requete de la modification
      *
-     * @param RendezVous $rendezVou qui permet de savoir le rendez-vous choisi
+     * param RendezVous $rendezVou qui permet de savoir le rendez-vous choisi
      *
      * si la modification est validée :
      * return rendez_vous_index qui est donc la liste des clients avec le client qui a bien été modifié
@@ -228,9 +225,9 @@ final class RendezVousController extends AbstractController
      *
      * Cette fonction est aussi sur la page edit avec le bouton supprimer 
      *
-     * @param Request $request qui permet de faire la requete de la suppression
+     * param Request $request qui permet de faire la requete de la suppression
      *
-     * @param RendezVous $rendezVou cette variable permet de savoir quel client nous avons choisi
+     * param RendezVous $rendezVou cette variable permet de savoir quel client nous avons choisi
      *
      * return rendez_vous_index avec la liste des rendez-vous sans le rendez-vous qui a été supprimé
      */

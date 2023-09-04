@@ -8,7 +8,6 @@ use App\Entity\Collaborateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Collaborateur|null find($id, $lockMode = null, $lockVersion = null)
  * @method Collaborateur|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,12 +18,8 @@ final class CollaborateurRepository extends ServiceEntityRepository
 {
       /**
      * Fonction qui est le constructeur de la classe CollaborateurRepository
-     * 
+     *
      * Cette fonction permet de contruire l'objet CollaborateurRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
-     * 
-     * @param ManagerRegistry $registry 
-     * 
-     * @return void
      */
     public function __construct(ManagerRegistry $registry)
     {

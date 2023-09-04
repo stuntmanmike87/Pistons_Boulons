@@ -26,8 +26,8 @@ final class Month {
 
     /**
      * Cette fonction permet de créer une occurence d'un mois 
-     * @param int $month : correspond au mois
-     * @param int $year  : correspond à l'année
+     * param int $month : correspond au mois
+     * param int $year  : correspond à l'année
      */
     public function __construct(?int $month = null, ?int $year = null)
     {
@@ -45,7 +45,6 @@ final class Month {
 
     /**
      * Cette fonction permet de visualiser notre occurence
-     * @return String
      */
     public function toString(): string
     {
@@ -54,7 +53,6 @@ final class Month {
 
     /**
      * Cette fonction permet de connaitre le premier jour du mois en question
-     * @return DateTime
      */
     public function getStartingDay(): DateTime
     {
@@ -63,7 +61,6 @@ final class Month {
 
    /**
      * Cette fonction permet de connaitre le nombre de semaines dans le mois
-     *  @return Int
      */
     public function getWeeks(): int
     {
@@ -80,8 +77,7 @@ final class Month {
 
      /**
      * Cette fonction permet de savoir si le jour placé en paramètre est dans le mois actuel
-     * @param DateTime $date : date 
-     * @return bool
+     * param DateTime $date : date 
      */
     public function withinMonth (DateTime $date): bool
     {
@@ -90,7 +86,6 @@ final class Month {
 
      /**
      * Cette fonction créer le mois suivant 
-     * @return Month
      */
     public function nextMonth() :Month
     {
@@ -107,7 +102,6 @@ final class Month {
 
     /**
      * Cette fonction créer le mois précedent 
-     * @return Month
      */
     public function previousMonth(): Month
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\PrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,33 +17,33 @@ class Prestation
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\Prestation has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom de la prestation doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom de la prestation ne doit pas comporter plus de  {{ limit }} caractères')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $nom = null;
 
     #[Assert\NotBlank(message: 'Le temps de réalisation ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $tempsRealisation = null;
 
     #[Assert\NotBlank(message: 'Le coût HT ne peut pas être vide.')]
     #[Assert\Range(min: 0, minMessage: 'Le coût HT ne peux pas être égale à zéro.')]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?string $coutHT = null;
 
     #[Assert\NotBlank(message: 'La description ne peut pas être vide.')]
     #[Assert\Length(min: 3, minMessage: 'La description doit comporter au moins {{ limit }} caractères ')]
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[Assert\NotBlank(message: 'Le type de prestation ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $typePrestation = null;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $isActive = null;
 
     /**
@@ -73,8 +74,6 @@ class Prestation
 
     /**
      * Fonction qui permet de récupérer le temps de réalisation de la prestation
-     *
-     * @return string $tempsRealisation
      */
     public function getTempsRealisation(): ?string
     {
@@ -93,8 +92,6 @@ class Prestation
 
     /**
      * Fonction qui permet de récupérer le cout HT de la prestation
-     *
-     * @return string $coutHT
      */
     public function getCoutHT(): ?string
     {
@@ -113,8 +110,6 @@ class Prestation
 
     /**
      * Fonction qui permet de récupérer la description de la prestation
-     *
-     * @return string $description
      */
     public function getDescription(): ?string
     {
@@ -133,8 +128,6 @@ class Prestation
 
     /**
      * Fonction qui permet de récupérer le type de prestation de la prestation
-     *
-     * @return string $typePrestation
      */
     public function getTypePrestation(): ?string
     {

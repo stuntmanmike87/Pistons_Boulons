@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-use Symfony\Component\HttpKernel\Kernel;
+use App\Kernel;
+
+//require __DIR__ . '/bootstrap.php';
 
 $appKernel = new Kernel('tests', false);
 $appKernel->boot();

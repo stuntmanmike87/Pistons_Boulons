@@ -21,10 +21,6 @@ final class RendezVousRepository extends ServiceEntityRepository
      * Fonction qui est le constructeur de la classe RendezVousRepository
      *
      * Cette fonction permet de contruire l'objet RendezVousRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
-     *
-     * @param ManagerRegistry $registry 
-     *
-     * @return void
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,8 +29,7 @@ final class RendezVousRepository extends ServiceEntityRepository
 
     /**
      * Cette Fonction permet de récupérer les rendez vous entre deux dates
-     * @param \DateTime $debut 
-     * @param \DateTime $fin
+     *
      * return RendezVous[] Returns an array of RendezVous objects
      */
 

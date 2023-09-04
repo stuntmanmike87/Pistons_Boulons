@@ -65,7 +65,6 @@ final class AgendaService extends AbstractExtension
 
     /**
      * Fonction permettant de savoir si la date placée en param est dans le mois actuel
-     * param DateTime
      */
     public function withInMonth(DateTime $date): bool
     {
@@ -82,8 +81,6 @@ final class AgendaService extends AbstractExtension
 
     /**
      * Fonction permettant de savoir si la date placée en param est dans le mois actuelle
-     * @param Int $month
-     * @param Int $year
      */
     public function setMonth(?int $month = null ,?int $year = null): void
     {

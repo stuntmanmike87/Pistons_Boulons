@@ -19,8 +19,6 @@ final class ContentType extends AbstractType
      *
      * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
      * param array $options un tableau qui permet de lister les champs du formulaire.
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

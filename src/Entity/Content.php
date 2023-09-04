@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\ContentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,15 +17,15 @@ class Content
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\Content has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
     #[Assert\NotBlank(message: 'La position ne peut pas être vide.')]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $position = null;
 
     /**
@@ -46,7 +47,7 @@ class Content
     /**
      * Fonction qui permet de changer la valeur du texte du contenu
      *
-     * @param string $text le nom du contenu
+     * param string $text le nom du contenu
      */
     public function setText(string $text): self
     {
@@ -67,7 +68,7 @@ class Content
     /**
      * Fonction qui permet de changer la valeur de la position du contenu
      *
-     * @param string $position le nom du contenu
+     * param string $position le nom du contenu
      */
     public function setPosition(string $position): self
     {

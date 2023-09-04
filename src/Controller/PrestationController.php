@@ -72,7 +72,7 @@ final class PrestationController extends AbstractController
     /**
      * Cette page nous montre le formulaire d'ajout d'une prestation
      *
-     * @param Request $request qui est la requete d'ajout de la prestation
+     * param Request $request qui est la requete d'ajout de la prestation
      *
      * Si l'ajout est validé :
      * return prestation_index qui est la page avec la liste des prestations
@@ -109,7 +109,7 @@ final class PrestationController extends AbstractController
      *
      * Cette page nous montre les données de la prestation choisie dans la liste des prestations de la page index de prestation
      *
-     * @param Prestation $prestation cette variable permet de savoir quelle prestation nous avons choisie
+     * param Prestation $prestation cette variable permet de savoir quelle prestation nous avons choisie
      * return prestation/show.html.twig qui est la page qui affiche les données de la prestation choisie
      */
     #[Route(path: '/{id}', name: 'prestation_show', methods: ['GET'])]
@@ -123,9 +123,9 @@ final class PrestationController extends AbstractController
     /**
      * Cette page nous montre le formulaire d'une prestation choisie dans la liste des prestations de index prestation
      *
-     * @param Request $request qui permet de faire la requete de la modification
+     * param Request $request qui permet de faire la requete de la modification
      *
-     * @param Prestation $prestation qui permet de savoir la prestation choisie
+     * param Prestation $prestation qui permet de savoir la prestation choisie
      *
      * si la modification est validée :
      * return prestation_index qui est donc la liste des prestations avec la prestation qui a bien été modifiée
@@ -154,9 +154,9 @@ final class PrestationController extends AbstractController
     /**
      * Cette fonction est présente sur la page edit avec le bouton supprimer 
      *
-     * @param Request $request qui permet de faire la requete de la suppression
+     * param Request $request qui permet de faire la requete de la suppression
      *
-     * @param Prestation $prestation cette variable permet de savoir quelle prestation nous avons choisie
+     * param Prestation $prestation cette variable permet de savoir quelle prestation nous avons choisie
      * return prestation_index avec la liste des prestations sans la prestation précédemment supprimé
      */
     #[Route(path: '/{id}', name: 'prestation_delete', methods: ['POST'])]

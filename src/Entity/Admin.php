@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,13 +16,13 @@ class Admin
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;//Class App\Entity\Admin has an uninitialized readonly property $id. Assign it in the constructor.
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $prenom = null;
 
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'admin', cascade: ['persist', 'remove'])]
@@ -30,8 +31,6 @@ class Admin
 
     /**
      * Fonction GETTER qui permet de récupérer l'id
-     *
-     * @return Int 
      */
     public function getId(): ?int
     {
@@ -40,8 +39,6 @@ class Admin
 
     /**
      * Fonction GETTER qui permet de récupérer le nom
-     *
-     * @return String 
      */
     public function getNom(): ?string
     {
@@ -60,8 +57,6 @@ class Admin
 
    /**
      * Fonction GETTER qui permet de récupérer le prénom
-     *
-     * @return String 
      */
     public function getPrenom(): ?string
     {
@@ -80,8 +75,6 @@ class Admin
 
    /**
      * Fonction GETTER qui permet de récupérer le User
-     *
-     * @return User
      */
     public function getUser(): ?User
     {

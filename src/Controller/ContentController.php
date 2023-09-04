@@ -19,9 +19,7 @@ final class ContentController extends AbstractController
     public function __construct(private readonly ManagerRegistry $em) {}
 
     /**
-     *
      * Cette page est la page d'accueil du site
-     *
      *
      * return content/home.html.twig avec le contenu qui doit être visible sur cette page (texte de présentation et d'affiliation)
      */
@@ -135,7 +133,7 @@ final class ContentController extends AbstractController
     /**
      * Cette page nous montre le formulaire d'ajout d'un contenu
      *
-     * @param Request $request qui est la requete d'ajout d'un contenu
+     * param Request $request qui est la requete d'ajout d'un contenu
      *
      * Si l'ajout est validé :
      * return content_index qui est la page avec la liste des contenus
@@ -168,7 +166,7 @@ final class ContentController extends AbstractController
      *
      * Cette page nous montre les données du contenu choisi dans la liste des contenus de la page index de content
      *
-     * @param Content $content cette variable permet de savoir quel contenu nous avons choisi
+     * param Content $content cette variable permet de savoir quel contenu nous avons choisi
      * return content/show.html.twig qui est la page qui affiche les données du contenu choisi
      */
     #[Route(path: '/{id}', name: 'content_show', methods: ['GET'])]
@@ -182,9 +180,9 @@ final class ContentController extends AbstractController
     /**
      * Cette page nous montre le formulaire d'un contenu choisi dans la liste des contenu de index content
      *
-     * @param Request $request qui permet de faire la requete de la modification
+     * param Request $request qui permet de faire la requete de la modification
      *
-     * @param Content $content qui permet de savoir la contenu choisi
+     * param Content $content qui permet de savoir la contenu choisi
      *
      * si la modification est validée :
      * return content_index qui est donc la liste des contenus avec le contenu qui a bien été modifié
@@ -212,9 +210,9 @@ final class ContentController extends AbstractController
     /**
      * Cette fonction est présente sur la page edit avec le bouton supprimer 
      *
-     * @param Request $request qui permet de faire la requete de la suppression
+     * param Request $request qui permet de faire la requete de la suppression
      *
-     * @param Content $content cette variable permet de savoir quel contenu nous avons choisi
+     * param Content $content cette variable permet de savoir quel contenu nous avons choisi
      * return content_index avec la liste des contenus sans le contenu précédemment supprimé
      */
     #[Route(path: '/{id}', name: 'content_delete', methods: ['POST'])]
