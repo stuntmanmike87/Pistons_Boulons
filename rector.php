@@ -11,7 +11,7 @@ use Rector\Symfony\Set\SymfonySetList;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\PHPUnit\Set\PHPUnitLevelSetList;
-use Rector\CodingStyle\Rector\ClassConst\VarConstantCommentRector;
+//use Rector\CodingStyle\Rector\ClassConst\VarConstantCommentRector;
 
 /**
  * @see \Rector\Config\RectorConfig::symfonyContainerXml()
@@ -47,11 +47,17 @@ return static function (RectorConfig $rectorConfig): void {
     // symfony rules
     /* $rectorConfig->symfonyContainerPhp(
         __DIR__ . '/var/cache/website/dev/App_KernelDevDebugContainer.xml'
-    );
+    ); */
 
     $rectorConfig->symfonyContainerXml(
         __DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml'
-    ); */
+    );
+
+    $rectorConfig->symfonyContainerXml(
+        __DIR__ . '/var/cache/test/App_KernelTestDebugContainer.xml'
+    );
+
+    $rectorConfig->symfonyContainerPhp(__DIR__ . '/tests/symfony-container.php');
 
     /* $rectorConfig->import(SymfonySetList::SYMFONY_63);
 
@@ -85,9 +91,9 @@ return static function (RectorConfig $rectorConfig): void {
             PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
         ]);
 
-    $rectorConfig->skip([
+    /* $rectorConfig->skip([
         VarConstantCommentRector::class,
-    ]);
+    ]); */
 
     /* $rectorConfig->ruleWithConfiguration(ChangeFileLoaderInExtensionAndKernelRector::class, [
         ChangeFileLoaderInExtensionAndKernelRector::FROM => 'yaml',
