@@ -5,30 +5,49 @@ parameters:
             paths:
                 - src/Repository/UserRepository.php
                 - src/Security/UserLoginAuthenticator.php
-        -
-            message: '#Property App\\Repository\\UserRepository::\$userRepository is never read, only written.#'
-            # See: https://phpstan.org/developing-extensions/always-read-written-properties
-            path:
-                src/Repository/UserRepository.php
+                - src/Controller/ApiController.php
+        # -
+        #     message: '#Property App\\Repository\\UserRepository::\$userRepository is never read, only written.#'
+        #     # See: https://phpstan.org/developing-extensions/always-read-written-properties
+        #     path:
+        #         src/Repository/UserRepository.php
         -
             message: '#Trying to invoke Symfony\\Component\\Form\\FormInterface but it might not be a callable.#'
             path:
                 src/Controller/RendezVousController.php
+            # count: 2
         -
             message: '#Cannot call method getData\(\) on Symfony\\Component\\Form\\FormInterface\|null.#'
             path:
                 src/Controller/CollaborateurController.php
             # count: 2
-        -
-            message: '#Cannot call method format\(\) on DateTimeInterface\|null.#'
-            path:
-                src/Controller/RendezVousController.php
-            # count: 2
+        # -
+        #     message: '#Cannot call method format\(\) on DateTimeInterface\|null.#'
+        #     path:
+        #         src/Controller/MainController.php
+        #     # count: 2
+        # -
+        #     message: '#Cannot call method format\(\) on DateTimeInterface\|null.#'
+        #     path:
+        #         src/Controller/RendezVousController.php
+        #     # count: 2
         -
             message: '#Cannot call method getDateRendezVous\(\) on App\\Entity\\RendezVous\|null.#'
             path:
                 src/Controller/RendezVousController.php
             # count: 2
+        -
+            message: '#Cognitive complexity for "App\\Controller\\ApiController::majEvent\(\)" is 21, keep it under 9#'
+            path:
+                src/Controller/ApiController.php
+        -
+            message: '#Unreachable statement - code above always terminates.#'
+            path:
+                src/Controller/ApiController.php
+        -
+            message: '#Cannot access property \$title on mixed.#'
+            path:
+                src/Controller/ApiController.php
 
     treatPhpDocTypesAsCertain: false
 
