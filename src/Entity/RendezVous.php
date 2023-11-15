@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
 use App\Repository\RendezVousRepository;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 

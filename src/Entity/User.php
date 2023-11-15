@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use App\Entity\Admin;
 use App\Entity\Collaborateur;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-/**
- * @final
- */
+
+/** @final */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
@@ -24,10 +23,8 @@ class User implements UserInterface
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private ?string $login = null;
 
-    /**
-     * @var string[] $roles
-     */
-    #[ORM\Column(type: Types::ARRAY)]
+    /** @var string[] $roles */
+    #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
     #[ORM\Column(type: Types::STRING)]
