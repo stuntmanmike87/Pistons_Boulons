@@ -82,7 +82,7 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
 
             $client->setNom('testnom'.$i);
             $client->setPrenom('testprenom'.$i);
-            $client->setDatePremiereSaisie($faker->date_create_from_format('Y-m-d H:i:s' , '2021-09-12 09:30:00'));
+            $client->setDatePremiereSaisie(date_create_from_format('Y-m-d H:i:s' , '2021-09-12 09:30:00'));
             $client->setAdresse('testadresse'.$i);
             $client->setTypeVehicule('testtypevehicule'.$i);
             $client->setPlaqueImmat('testplaqueimmat'.$i);
