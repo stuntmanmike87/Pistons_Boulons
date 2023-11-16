@@ -25,7 +25,7 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
      *
      * Cette fonction permet de contruire l'objet UserRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
-    public function __construct(ManagerRegistry $registry, private readonly UserRepository $userRepository)
+    public function __construct(ManagerRegistry $registry/* , private readonly UserRepository $userRepository */)
     {//Property App\Repository\UserRepository::$userRepository is never read, only written.
         parent::__construct($registry, User::class);
     }
