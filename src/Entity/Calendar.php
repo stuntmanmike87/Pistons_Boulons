@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use DateTimeInterface;
 use App\Repository\CalendarRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,31 +17,31 @@ class Calendar
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(type: Types::STRING, length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $start = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $end = null;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $all_day = null;
 
-    #[ORM\Column(type: 'string', length: 7)]
+    #[ORM\Column(type: Types::STRING, length: 7)]
     private ?string $background_color = null;
 
-    #[ORM\Column(type: 'string', length: 7)]
+    #[ORM\Column(type: Types::STRING, length: 7)]
     private ?string $border_color = null;
 
-    #[ORM\Column(type: 'string', length: 7)]
+    #[ORM\Column(type: Types::STRING, length: 7)]
     private ?string $text_color = null;
 
     public function getId(): ?int
