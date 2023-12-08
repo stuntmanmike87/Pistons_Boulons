@@ -25,7 +25,25 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'provider' => 'users_in_memory',
             ],
         ],
-        'access_control' => null,
+        //'access_control' => null,
+        //'access_control' => [
+            //[
+                //'path' => '^/...',
+                //'roles' => 'ROLE_USER'
+            //],
+            //[
+                //'path' => '^/user/id',
+                //'roles' => 'ROLE_USER'
+            //],
+            //[
+                //'path' => '^/user/id/edit',
+                //'roles' => 'ROLE_USER'
+            //]
+            //[
+                //'path' => '^/...',
+                //'roles' => 'ROLE_COLLABORATEUR'
+            //]
+        //],
     ]);
     if ($containerConfigurator->env() === 'test') {
         $containerConfigurator->extension('security', [
