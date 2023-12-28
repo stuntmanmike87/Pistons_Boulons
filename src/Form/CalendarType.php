@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use Override;
 use App\Entity\Calendar;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -13,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CalendarType extends AbstractType
 {
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -31,6 +33,7 @@ final class CalendarType extends AbstractType
         ;
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use Override;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
 use App\Entity\Prestation;
@@ -15,6 +16,7 @@ use Faker;
 
 final class RendezVousFixtures extends Fixture implements OrderedFixtureInterface
 {
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $clientExample = new Client();

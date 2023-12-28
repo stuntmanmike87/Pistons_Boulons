@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use Override;
 use App\Entity\Content;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -12,6 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 final class ContentFixtures extends Fixture implements OrderedFixtureInterface
 {
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $tel = new Content();

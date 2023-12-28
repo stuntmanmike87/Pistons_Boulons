@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use Override;
 use App\Entity\Prestation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 
 final class PrestationsFixtures extends Fixture implements OrderedFixtureInterface
 {
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $presta1 = new Prestation();

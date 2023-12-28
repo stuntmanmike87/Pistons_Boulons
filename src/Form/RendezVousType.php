@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use Override;
 use App\Entity\RendezVous;
 use App\Entity\Client;
 use App\Entity\Collaborateur;
@@ -26,6 +27,7 @@ final class RendezVousType extends AbstractType
      * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
      * param array $options un tableau qui permet de lister les champs du formulaire.
      */
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -62,6 +64,7 @@ final class RendezVousType extends AbstractType
         ;
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

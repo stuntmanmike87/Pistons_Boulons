@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use Override;
 use App\Entity\Collaborateur;
 use App\Entity\User;
 use App\Repository\CollaborateurRepository;
@@ -34,7 +35,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
+    public const string LOGIN_ROUTE = 'app_login';
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -45,12 +46,14 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
     )
     {}
 
+    #[Override]
     public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
+    #[Override]
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email');
@@ -119,6 +122,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         return $credentials['password'];
     }
 
+    #[Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName/* , $providerKey */): ?Response
     {
         $targetPath = $this->getTargetPath($request->getSession(), $firewallName/* $providerKey */);
@@ -146,6 +150,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('agendaMensuel'));
     }
 
+    #[Override]
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

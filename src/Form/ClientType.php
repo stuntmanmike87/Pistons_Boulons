@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use Override;
 use App\Entity\Client;
 use DateTime;
 use Symfony\Component\Form\AbstractType;
@@ -25,6 +26,7 @@ final class ClientType extends AbstractType
      * param array $options un tableau qui permet de lister les champs du formulaire.
      */
     
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -52,6 +54,7 @@ final class ClientType extends AbstractType
         ;
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

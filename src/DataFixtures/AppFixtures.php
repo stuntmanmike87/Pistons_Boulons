@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\DataFixtures;//UserFixtures
-
+use Override;
 use App\Entity\Admin;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,6 +18,7 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
     {
     }
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         // Client administrator account

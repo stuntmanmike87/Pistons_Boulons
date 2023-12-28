@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use Override;
 use App\Entity\Client;
 use App\Repository\ClientRepository;
 use Zenstruck\Foundry\ModelFactory;
@@ -62,6 +63,7 @@ final class ClientFactory extends ModelFactory
      *
      * @todo add your default values here
      */
+    #[Override]
     protected function getDefaults(): array
     {
         return [
@@ -77,6 +79,7 @@ final class ClientFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
+    #[Override]
     protected function initialize(): self
     {
         return $this
@@ -84,6 +87,7 @@ final class ClientFactory extends ModelFactory
         ;
     }
 
+    #[Override]
     protected static function getClass(): string
     {
         return Client::class;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use Override;
 use Faker\Factory;
 use App\Entity\Client;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -63,6 +64,7 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
     /**
      * Fonction de chargement des fixtures en base de données
      */
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $this->generateClients(10, $manager);
