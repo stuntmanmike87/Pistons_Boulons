@@ -8,7 +8,6 @@ use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Symfony\Set\SymfonySetList;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Set\ValueObject\LevelSetList;
-use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 
 /**
  * @see \Rector\Config\RectorConfig::symfonyContainerXml()
@@ -75,7 +74,6 @@ return static function (RectorConfig $rectorConfig): void {
             //PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
             PHPUnitSetList::PHPUNIT_100,
             PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-            PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
         ]);
 
 };
