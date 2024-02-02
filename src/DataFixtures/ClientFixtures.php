@@ -56,6 +56,7 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
+    #[Override]
     public function getOrder(): int
     {
         return 2;

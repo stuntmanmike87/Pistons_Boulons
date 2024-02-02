@@ -49,6 +49,7 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
+    #[Override]
     public function getOrder(): int
     {
         return 2;

@@ -38,6 +38,7 @@ final class RendezVousFixtures extends Fixture implements OrderedFixtureInterfac
         $manager->flush();
     }
 
+    #[Override]
     public function getOrder(): int
     {
         return 2;

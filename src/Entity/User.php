@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Override;
 use App\Entity\Admin;
 use App\Entity\Collaborateur;
 use App\Repository\UserRepository;
@@ -74,6 +75,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -127,6 +129,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    #[Override]
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -218,6 +221,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
+    #[Override]
     public function getUserIdentifier(): string//?string
     {
         return (string) $this->login;

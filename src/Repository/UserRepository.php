@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use Override;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,7 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
+    #[Override]
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newEncodedPassword): void
     //public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {

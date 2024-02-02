@@ -84,6 +84,7 @@ final class PrestationsFixtures extends Fixture implements OrderedFixtureInterfa
         $manager->flush();
     }
 
+    #[Override]
     public function getOrder(): int
     {
         return 2;
