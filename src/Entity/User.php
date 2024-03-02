@@ -12,14 +12,19 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/** @final */
+/**
+ * @final
+ */
+//#[\AllowDynamicProperties]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
+    //** @property int $id */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\User has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id;
+    //Class App\Entity\User has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private ?string $login = null;

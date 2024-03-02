@@ -32,7 +32,7 @@ class Prestation
     #[Assert\NotBlank(message: 'Le coût HT ne peut pas être vide.')]
     #[Assert\Range(min: 0, minMessage: 'Le coût HT ne peux pas être égale à zéro.')]
     #[ORM\Column(type: Types::INTEGER)]
-    private ?string $coutHT = null;
+    private ?int $coutHT = null;
 
     #[Assert\NotBlank(message: 'La description ne peut pas être vide.')]
     #[Assert\Length(min: 3, minMessage: 'La description doit comporter au moins {{ limit }} caractères ')]
@@ -93,7 +93,7 @@ class Prestation
     /**
      * Fonction qui permet de récupérer le cout HT de la prestation
      */
-    public function getCoutHT(): ?string
+    public function getCoutHT(): ?int
     {
         return $this->coutHT;
     }
@@ -101,7 +101,7 @@ class Prestation
     /**
      * Fonction qui permet de changer la valeur du cout HT de la prestation
      */
-    public function setCoutHT(string $coutHT): self
+    public function setCoutHT(int $coutHT): self
     {
         $this->coutHT = $coutHT;
 
