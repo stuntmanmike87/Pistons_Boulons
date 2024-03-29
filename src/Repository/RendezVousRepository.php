@@ -56,7 +56,7 @@ final class RendezVousRepository extends ServiceEntityRepository
 
     // SELECT * FROM RendezVous WHERE dateRendezVous BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND  '{$end->format('Y-m-d 23:59:59')}'
     /** return array<string> */
-    public function findByDateRendezVous(DateTime $jour): mixed
+    public function findByDateRendezVous(\DateTime $jour): mixed
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.dateRendezVous BETWEEN :deb AND :fin')

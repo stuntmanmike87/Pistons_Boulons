@@ -31,7 +31,7 @@ final class ApiController extends AbstractController
         // On récupère les données
         $donnees = json_decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
-        if (// empty() is forbidden to use
+        if (// isset() is forbidden to use
             isset($donnees->title) && (null !== $donnees->title)
             && isset($donnees->start) && (null !== $donnees->start)
             && isset($donnees->description) && (null !== $donnees->description)

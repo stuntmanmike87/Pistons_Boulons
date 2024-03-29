@@ -136,7 +136,7 @@ final class RendezVousController extends AbstractController
         /** @var RendezVous $rv */
         $rv = $rendezVousRepository->findOneBy(['id' => $id]);
         /** @var \DateTimeInterface $date_rdv */
-        $date_rdv = $rv->getDateRendezVous();// "RDV du ". //
+        $date_rdv = $rv->getDateRendezVous(); // "RDV du ". //
         $titre = $date_rdv->format('d-m-Y').' à '.$date_rdv->format('H:i');
 
         return $this->render('rendez_vous/pdf.twig', [

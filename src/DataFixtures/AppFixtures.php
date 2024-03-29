@@ -10,7 +10,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 final class AppFixtures extends Fixture implements OrderedFixtureInterface
 {
@@ -25,10 +24,8 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
         $user = new User();
 
         $user->setLogin('pistons');
-        /** @var PasswordAuthenticatedUserInterface $user */
-        $pw = $this->hasher->hashPassword($user, 'boulons');
-        /** @var User $user */
-        $user->setPassword($pw);
+        $hashedPassword = $this->hasher->hashPassword($user, 'boulons');
+        $user->setPassword($hashedPassword);
         $user->setRoles(['ROLE_ADMIN']);
 
         /* $user->setLogin('pistons')

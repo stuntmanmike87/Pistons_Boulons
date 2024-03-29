@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[Route(path: '/user/control')]
 final class UserControlController extends AbstractController
@@ -50,10 +49,8 @@ final class UserControlController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PasswordAuthenticatedUserInterface $user */
-            $pw = $this->encoder->hashPassword($user, (string) $user->getPassword());
-            /** @var User $user */
-            $user->setPassword($pw);
+            $hashedPassword = $this->encoder->hashPassword($user, (string) $user->getPassword());
+            $user->setPassword($hashedPassword);
             $entityManager = $this->em->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -96,10 +93,8 @@ final class UserControlController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PasswordAuthenticatedUserInterface $user */
-            $pw = $this->encoder->hashPassword($user, (string) $user->getPassword());
-            /** @var User $user */
-            $user->setPassword($pw);
+            $hashedPassword = $this->encoder->hashPassword($user, (string) $user->getPassword());
+            $user->setPassword($hashedPassword);
             $this->em->getManager()->flush();
 
             return $this->redirectToRoute('user_control_index');

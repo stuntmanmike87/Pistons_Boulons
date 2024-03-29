@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Calendar;
 use App\Repository\CalendarRepository;
-use DateTimeInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,8 +28,8 @@ final class MainController extends AbstractController
         foreach ($events as $event) {
             $rdvs[] = [
                 'id' => $event->getId(),
-                'start' => $start->format('Y-m-d H:i:s'),// $event->getStart()
-                'end' => $end->format('Y-m-d H:i:s'),// $event->getEnd()
+                'start' => $start->format('Y-m-d H:i:s'), // $event->getStart()
+                'end' => $end->format('Y-m-d H:i:s'), // $event->getEnd()
                 'title' => $event->getTitle(),
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
