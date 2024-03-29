@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use Override;
 use App\Entity\Collaborateur;
 use App\Entity\User;
 use App\Repository\CollaborateurRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,31 +41,31 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly CollaborateurRepository $repositoryCollabo
-    )
-    {}
+    ) {
+    }
 
-    #[Override]
+    #[\Override]
     public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
-    #[Override]
+    #[\Override]
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email');
         $password = $request->request->get('password');
 
         return new Passport(
-            new UserBadge((string)$email),
-            new CustomCredentials(static function ($credentials, User $user) : never {
-                //dump($credentials, $user);
+            new UserBadge((string) $email),
+            new CustomCredentials(static function ($credentials, User $user): never {
+                // dump($credentials, $user);
                 throw new CustomUserMessageAuthenticationException("Erreur d'authentification");
             }, $password)
         );
     }
-    
+
     public function getCredentials(Request $request): mixed
     {
         $credentials = [
@@ -94,8 +92,8 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        ///** @var User $user */
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => (string)$credentials['login']]);
+        // /** @var User $user */
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['login' => (string) $credentials['login']]);
 
         if (!$user instanceof User) {
             throw new UserNotFoundException("L'identifiant n'a pas été trouvé.");
@@ -107,14 +105,15 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * @param array<string> $credentials
      */
-    public function checkCredentials(array $credentials, UserInterface $user): bool
+    public function checkCredentials(array $credentials, PasswordAuthenticatedUserInterface $user): bool
     {
-        /** @var PasswordAuthenticatedUserInterface $user */
+        // ** @var PasswordAuthenticatedUserInterface $user */
         return $this->passwordHasher->isPasswordValid($user, $credentials['password']);
     }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
      * @param array<string> $credentials
      */
     public function getPassword(array $credentials): ?string
@@ -122,35 +121,35 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
         return $credentials['password'];
     }
 
-    #[Override]
+    #[\Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName/* , $providerKey */): ?Response
     {
         $targetPath = $this->getTargetPath($request->getSession(), $firewallName/* $providerKey */);
-        if ($targetPath !== null) {
+        if (null !== $targetPath) {
             return new RedirectResponse($targetPath);
         }
-        
-        $user = $token->getUser();
-         //on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
-         $today = new DateTime('now');
-         //On pointe sur l'id de l'utilisateur
-         //on récupère le collaborateur en fonction de son id d'utilisateur
-         $collab = $this->repositoryCollabo->findOneBy([
-             'user' => $user,
-         ]);
 
-         if($collab instanceof Collaborateur){
-             //on met a jour le chp derniereConnexion  de collabo
-             $collab->setDateHeureDerniereConnexion($today);
-             $this->entityManager->persist($collab);
-             $this->entityManager->flush();
-         }
+        $user = $token->getUser();
+        // on géneère la date du jour en mode date time pour modifier le champ derniere connexion du collabo
+        $today = new \DateTime('now');
+        // On pointe sur l'id de l'utilisateur
+        // on récupère le collaborateur en fonction de son id d'utilisateur
+        $collab = $this->repositoryCollabo->findOneBy([
+            'user' => $user,
+        ]);
+
+        if ($collab instanceof Collaborateur) {
+            // on met a jour le chp derniereConnexion  de collabo
+            $collab->setDateHeureDerniereConnexion($today);
+            $this->entityManager->persist($collab);
+            $this->entityManager->flush();
+        }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         return new RedirectResponse($this->urlGenerator->generate('agendaMensuel'));
     }
 
-    #[Override]
+    #[\Override]
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

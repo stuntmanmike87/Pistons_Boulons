@@ -16,11 +16,6 @@ parameters:
             path:
                 src/Controller/RendezVousController.php
             # count: 2
-        -
-            message: '#Cannot call method getData\(\) on Symfony\\Component\\Form\\FormInterface\|null.#'
-            path:
-                src/Controller/CollaborateurController.php
-            # count: 2
         # -
         #     message: '#Cannot call method format\(\) on DateTimeInterface\|null.#'
         #     path:
@@ -31,11 +26,6 @@ parameters:
         #     path:
         #         src/Controller/RendezVousController.php
         #     # count: 2
-        -
-            message: '#Cannot call method getDateRendezVous\(\) on App\\Entity\\RendezVous\|null.#'
-            path:
-                src/Controller/RendezVousController.php
-            # count: 2
         -
             message: '#Cognitive complexity for "App\\Controller\\ApiController::majEvent\(\)" is 21, keep it under 9#'
             path:
