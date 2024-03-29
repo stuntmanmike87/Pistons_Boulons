@@ -16,19 +16,19 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/content')]
 final class ContentController extends AbstractController
 {
-    public function __construct(private readonly ManagerRegistry $em) {}
+    public function __construct(private readonly ManagerRegistry $em)
+    {
+    }
 
     /**
-     * Cette page est la page d'accueil du site
+     * Cette page est la page d'accueil du site.
      *
      * return content/home.html.twig avec le contenu qui doit être visible sur cette page (texte de présentation et d'affiliation)
      */
     #[Route(path: '/', name: 'home', methods: ['GET'])]
     public function home(ContentRepository $contentRepository): Response
     {
-
         return $this->render('content/home.html.twig', [
-
             'controller_name' => 'ContentController',
             'contenu_accueil' => $contentRepository->findByPosition('texte'),
         ]);
@@ -36,18 +36,18 @@ final class ContentController extends AbstractController
 
     /**
      * Fonction qui permet l'affichage de la page erreur 404
-     * return layout/error404.twig 
+     * return layout/error404.twig.
      */
     #[Route(path: '/error404', name: 'error404', methods: ['GET'])]
     public function error404(): Response
     {
         return $this->render('layout/error404.twig', [
-            'controller_name' => 'ContentController'
+            'controller_name' => 'ContentController',
         ]);
     }
 
     /**
-     * Fonction qui permet l'affichage de la page Contact qui sera visible en public
+     * Fonction qui permet l'affichage de la page Contact qui sera visible en public.
      *
      * Cette page est la page contact du site
      *
@@ -63,9 +63,9 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page est la page mentions légales du site
+     * Fonction qui permet l'affichage de la page est la page mentions légales du site.
      *
-     * return layout/mentions.twig 
+     * return layout/mentions.twig
      */
     #[Route(path: '/mentions', name: 'mentions_legales', methods: ['GET'])]
     public function mentions(): Response
@@ -76,9 +76,9 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
+     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public.
      *
-     * return layout/politiqueConfidentialite.twig 
+     * return layout/politiqueConfidentialite.twig
      */
     #[Route(path: '/politique_conf', name: 'politique_conf', methods: ['GET'])]
     public function politiqueConfidentialité(): Response
@@ -89,9 +89,9 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public
+     * Fonction qui permet l'affichage de la page de la politique de confidentialité qui sera visible en public.
      *
-     * return layout/politiqueConfidentialite.twig 
+     * return layout/politiqueConfidentialite.twig
      */
     #[Route(path: '/plan_du_site', name: 'plan_site', methods: ['GET'])]
     public function planDuSite(): Response
@@ -101,11 +101,11 @@ final class ContentController extends AbstractController
         ]);
     }
 
-    /** 
-     * Fonction qui permet l'affichage de la page Connexion qui sera visible en public
+    /**
+     * Fonction qui permet l'affichage de la page Connexion qui sera visible en public.
      *
      * Cette page est la page connexion du site
-     * return layout/connexion.twig 
+     * return layout/connexion.twig
      */
     #[Route(path: '/connexion', name: 'connexion', methods: ['GET'])]
     public function connexion(): Response
@@ -116,7 +116,7 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page index de Content
+     * Fonction qui permet l'affichage de la page index de Content.
      *
      * Cette page nous montre le listing des contenus
      *
@@ -131,7 +131,7 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Cette page nous montre le formulaire d'ajout d'un contenu
+     * Cette page nous montre le formulaire d'ajout d'un contenu.
      *
      * param Request $request qui est la requete d'ajout d'un contenu
      *
@@ -151,7 +151,8 @@ final class ContentController extends AbstractController
             $entityManager = $this->em->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
-            $this->addFlash('success', "Le contenu a bien été ajouté");
+            $this->addFlash('success', 'Le contenu a bien été ajouté');
+
             return $this->redirectToRoute('content_index');
         }
 
@@ -162,7 +163,7 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page show de conteut
+     * Fonction qui permet l'affichage de la page show de conteut.
      *
      * Cette page nous montre les données du contenu choisi dans la liste des contenus de la page index de content
      *
@@ -178,7 +179,7 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Cette page nous montre le formulaire d'un contenu choisi dans la liste des contenu de index content
+     * Cette page nous montre le formulaire d'un contenu choisi dans la liste des contenu de index content.
      *
      * param Request $request qui permet de faire la requete de la modification
      *
@@ -197,7 +198,8 @@ final class ContentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->getManager()->flush();
-            $this->addFlash('success', "Le contenu a bien été modifié");
+            $this->addFlash('success', 'Le contenu a bien été modifié');
+
             return $this->redirectToRoute('content_index');
         }
 
@@ -208,7 +210,7 @@ final class ContentController extends AbstractController
     }
 
     /**
-     * Cette fonction est présente sur la page edit avec le bouton supprimer 
+     * Cette fonction est présente sur la page edit avec le bouton supprimer.
      *
      * param Request $request qui permet de faire la requete de la suppression
      *
@@ -218,14 +220,14 @@ final class ContentController extends AbstractController
     #[Route(path: '/{id}', name: 'content_delete', methods: ['POST'])]
     public function delete(Request $request, Content $content): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $content->getId(), (string)$request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$content->getId(), (string) $request->request->get('_token'))) {
             $entityManager = $this->em->getManager();
             $entityManager->remove($content);
             $entityManager->flush();
         }
 
-        $this->addFlash('success', "Le contenu a bien été supprimé");
+        $this->addFlash('success', 'Le contenu a bien été supprimé');
+
         return $this->redirectToRoute('content_index');
     }
-
 }

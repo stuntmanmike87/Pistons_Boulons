@@ -23,11 +23,11 @@ final class UserControlController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page index de UserControl
+     * Fonction qui permet l'affichage de la page index de UserControl.
      *
      *  Cette page nous montre le listing des users
      *
-     * return user_control/index.html.twig 
+     * return user_control/index.html.twig
      */
     #[Route(path: '/', name: 'user_control_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -38,9 +38,9 @@ final class UserControlController extends AbstractController
     }
 
     /**
-     * Cette page nous permet de créer un nouvel utilisateur
-     * 
-     * return user_control/new.html.twig 
+     * Cette page nous permet de créer un nouvel utilisateur.
+     *
+     * return user_control/new.html.twig
      */
     #[Route(path: '/new', name: 'user_control_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
@@ -51,13 +51,14 @@ final class UserControlController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var PasswordAuthenticatedUserInterface $user */
-            $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
+            $pw = $this->encoder->hashPassword($user, (string) $user->getPassword());
             /** @var User $user */
             $user->setPassword($pw);
             $entityManager = $this->em->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', "L'utilisateur a bien été ajoutée");
+
             return $this->redirectToRoute('user_control_index');
         }
 
@@ -68,11 +69,11 @@ final class UserControlController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page show de UserControl
+     * Fonction qui permet l'affichage de la page show de UserControl.
      *
      * Cette page nous permet de voir un utilisateur et ses informations
      *
-     * return user_control/show.html.twig 
+     * return user_control/show.html.twig
      */
     #[Route(path: '/{id}', name: 'user_control_show', methods: ['GET'])]
     public function show(User $user): Response
@@ -83,20 +84,20 @@ final class UserControlController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page edit de UserControl
+     * Fonction qui permet l'affichage de la page edit de UserControl.
      *
      * Cette page nous permet de modifier les informations d'un utilisateur
      *
-     * return user_control/edit.html.twig 
+     * return user_control/edit.html.twig
      */
-    #[Route(path: '/{id}/edit', name: 'user_control_edit', methods: ['GET', 'POST'])] 
+    #[Route(path: '/{id}/edit', name: 'user_control_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var PasswordAuthenticatedUserInterface $user */
-            $pw = $this->encoder->hashPassword($user, (string)$user->getPassword());
+            $pw = $this->encoder->hashPassword($user, (string) $user->getPassword());
             /** @var User $user */
             $user->setPassword($pw);
             $this->em->getManager()->flush();
@@ -111,14 +112,14 @@ final class UserControlController extends AbstractController
     }
 
     /**
-     * Fonction qui permet de supprimer un utilisateur
+     * Fonction qui permet de supprimer un utilisateur.
      *
      * return user_control/user_control_index
      */
     #[Route(path: '/{id}', name: 'user_control_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), (string)$request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), (string) $request->request->get('_token'))) {
             $entityManager = $this->em->getManager();
             $entityManager->remove($user);
             $entityManager->flush();

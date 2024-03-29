@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Override;
-use App\Entity\Admin;
-use App\Entity\Collaborateur;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,16 +12,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @final
  */
-//#[\AllowDynamicProperties]
+// #[\AllowDynamicProperties]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
-    //** @property int $id */
+    // ** @property int $id */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
     private readonly int $id;
-    //Class App\Entity\User has an uninitialized readonly property $id. Assign it in the constructor.
+
+    // Class App\Entity\User has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private ?string $login = null;
@@ -49,8 +47,8 @@ class User implements UserInterface
         return $this->id;
     }
 
- /**
-     * Fonction qui permet de récuperer le login
+    /**
+     * Fonction qui permet de récuperer le login.
      */
     public function getLogin(): ?string
     {
@@ -58,7 +56,7 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de changer la valeur du login
+     * Fonction qui permet de changer la valeur du login.
      */
     public function setLogin(string $login): self
     {
@@ -80,7 +78,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    #[Override]
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -91,7 +89,7 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'array Roles
+     * Fonction qui permet de changer la valeur de l'array Roles.
      *
      * @param array<string> $roles
      */
@@ -111,7 +109,7 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de changer la valeur du mot de passe
+     * Fonction qui permet de changer la valeur du mot de passe.
      */
     public function setPassword(string $password): self
     {
@@ -134,7 +132,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    #[Override]
+    #[\Override]
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -142,19 +140,19 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de récuperer le champ admin
+     * Fonction qui permet de récuperer le champ admin.
      */
     public function getAdmin(): ?string
     {
-        if($this->admin != null) {
+        if (null != $this->admin) {
             return $this->admin->getAdmin();
         }
 
         return null;
     }
 
-     /**
-     * Fonction qui permet de changer la valeur de admin
+    /**
+     * Fonction qui permet de changer la valeur de admin.
      */
     public function setAdmin(Admin $admin): self
     {
@@ -168,21 +166,20 @@ class User implements UserInterface
         return $this;
     }
 
-   /**
-     * Fonction qui permet de récuperer l'id d'un collaborateur
+    /**
+     * Fonction qui permet de récuperer l'id d'un collaborateur.
      */
     public function getCollaborateur(): ?Collaborateur
     {
-        if($this->collaborateur != null){
+        if (null != $this->collaborateur) {
             return $this->collaborateur;
-
         }
 
         return null;
     }
 
     /**
-     * Fonction qui permet de changer la valeur d'un collaborateur
+     * Fonction qui permet de changer la valeur d'un collaborateur.
      */
     public function setCollaborateur(Collaborateur $collaborateur): self
     {
@@ -197,7 +194,7 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de récuperer le login d'un utilisateur
+     * Fonction qui permet de récuperer le login d'un utilisateur.
      */
     public function getUserLog(): ?string
     {
@@ -205,20 +202,19 @@ class User implements UserInterface
     }
 
     /**
-     * Fonction qui permet de savoir si l'utilisateur est admin ou non
+     * Fonction qui permet de savoir si l'utilisateur est admin ou non.
      */
     public function isAdmin(): bool
     {
-       $roles = $this->getRoles();
+        $roles = $this->getRoles();
 
-       foreach ($roles as $key => $value) {
-           if($value=="ROLE_ADMIN"){
-               return true;
-           }
-       }
+        foreach ($roles as $key => $value) {
+            if ('ROLE_ADMIN' == $value) {
+                return true;
+            }
+        }
 
-       return false;
-
+        return false;
     }
 
     /**
@@ -226,8 +222,8 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    #[Override]
-    public function getUserIdentifier(): string//?string
+    #[\Override]
+    public function getUserIdentifier(): string// ?string
     {
         return (string) $this->login;
     }

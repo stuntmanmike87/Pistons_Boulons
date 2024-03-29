@@ -16,8 +16,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/calendar')]
 final class CalendarController extends AbstractController
 {
-    public function __construct(private readonly ManagerRegistry $em) {}
-    
+    public function __construct(private readonly ManagerRegistry $em)
+    {
+    }
+
     #[Route(path: '/', name: 'calendar_index', methods: ['GET'])]
     public function index(CalendarRepository $calendarRepository): Response
     {
@@ -26,7 +28,7 @@ final class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/new', name: 'calendar_new', methods: ['GET','POST'])]
+    #[Route(path: '/new', name: 'calendar_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $calendar = new Calendar();
@@ -55,7 +57,7 @@ final class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/{id}/edit', name: 'calendar_edit', methods: ['GET','POST'])]
+    #[Route(path: '/{id}/edit', name: 'calendar_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Calendar $calendar): Response
     {
         $form = $this->createForm(CalendarType::class, $calendar);

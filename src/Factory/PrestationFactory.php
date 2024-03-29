@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use Override;
 use App\Entity\Prestation;
 use App\Repository\PrestationRepository;
 use Zenstruck\Foundry\ModelFactory;
@@ -63,7 +62,7 @@ final class PrestationFactory extends ModelFactory
      *
      * @todo add your default values here
      */
-    #[Override]
+    #[\Override]
     protected function getDefaults(): array
     {
         return [
@@ -78,7 +77,7 @@ final class PrestationFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
-    #[Override]
+    #[\Override]
     protected function initialize(): self
     {
         return $this
@@ -86,7 +85,7 @@ final class PrestationFactory extends ModelFactory
         ;
     }
 
-    #[Override]
+    #[\Override]
     protected static function getClass(): string
     {
         return Prestation::class;

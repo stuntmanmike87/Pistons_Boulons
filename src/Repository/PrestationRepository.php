@@ -17,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
 final class PrestationRepository extends ServiceEntityRepository
 {
     /**
-     * Fonction qui est le constructeur de la classe PrestationRepository
+     * Fonction qui est le constructeur de la classe PrestationRepository.
      *
      * Cette fonction permet de contruire l'objet PrestationRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
@@ -28,7 +28,7 @@ final class PrestationRepository extends ServiceEntityRepository
 
     /**
      * Cette fonction permet de récuperer tous enregistrements actifs
-     * return Content[] Returns an array of Collaborateur objects
+     * return Content[] Returns an array of Collaborateur objects.
      *
      * return array<mixed>
      */
@@ -43,7 +43,7 @@ final class PrestationRepository extends ServiceEntityRepository
 
     /**
      * Cette fonction permet de récuperer tous les types de prestations sur la table PRESTATION avec comme condition
-     * que l'enregistrement soit actif
+     * que l'enregistrement soit actif.
      *
      * return Array[] : retourne un tableau avec les types de prestations distincts
      *
@@ -61,7 +61,7 @@ final class PrestationRepository extends ServiceEntityRepository
     }
 
     /**
-     * param $type : correspond au type de prestation présent dans le champ typePrestation
+     * param $type : correspond au type de prestation présent dans le champ typePrestation.
      *
      * Cette fonction permet de récuperer toutes de prestations sur la table PRESTATION avec comme condition
      * que l'enregistrement soit actif et que le type de prestation correspond avec  celui placé en paramètre ($type)

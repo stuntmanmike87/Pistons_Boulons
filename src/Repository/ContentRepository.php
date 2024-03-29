@@ -16,8 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class ContentRepository extends ServiceEntityRepository
 {
-     /**
-     * Fonction qui est le constructeur de la classe ContentRepository
+    /**
+     * Fonction qui est le constructeur de la classe ContentRepository.
      *
      * Cette fonction permet de contruire l'objet ContentRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
@@ -27,12 +27,12 @@ final class ContentRepository extends ServiceEntityRepository
     }
 
     /**
-     * param $value : correspond au champs Position de la table CONTENT
+     * param $value : correspond au champs Position de la table CONTENT.
      *
      * Cette fonction permet de récuperer tous les enregistrements sur la table CONTENT avec comme condition
      * que la position de l'enregistrement correspond (LIKE) au paramètre placé en entrée.
      * (on trie par ordre croissant sur l'id)
-     * return Array[] : correspond au tableau des enregistrements 
+     * return Array[] : correspond au tableau des enregistrements
      * de type Content trouvé en fonction du param $value
      *
      * return array<string>
@@ -47,8 +47,8 @@ final class ContentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-     /**
-     * param $value : correspond au champs Position de la table CONTENT
+    /**
+     * param $value : correspond au champs Position de la table CONTENT.
      *
      * Cette fonction permet de récuperer l'enregistrement sur la table CONTENT avec comme condition
      * que la position de l'enregistrement est équivalente au paramètre placé en entrée
@@ -65,5 +65,4 @@ final class ContentRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
 }

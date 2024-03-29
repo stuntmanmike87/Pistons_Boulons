@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use Override;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-//use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+
+// use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,12 +22,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 final class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     /**
-     * Fonction qui est le constructeur de la classe UserRepository
+     * Fonction qui est le constructeur de la classe UserRepository.
      *
      * Cette fonction permet de contruire l'objet UserRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry/* , private readonly UserRepository $userRepository */)
-    {//Property App\Repository\UserRepository::$userRepository is never read, only written.
+    {// Property App\Repository\UserRepository::$userRepository is never read, only written.
         parent::__construct($registry, User::class);
     }
 
@@ -39,9 +39,9 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
-    #[Override]
+    #[\Override]
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newEncodedPassword): void
-    //public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    // public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
@@ -49,8 +49,8 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
 
         $user->setPassword($newEncodedPassword);
         $em = $this->getEntityManager();
-        $em->persist($user);//$this->_em->persist($user);
-        $em->flush();//$this->_em->flush();
+        $em->persist($user); // $this->_em->persist($user);
+        $em->flush(); // $this->_em->flush();
     }
 
     // /**

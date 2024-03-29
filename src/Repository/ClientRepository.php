@@ -17,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
 final class ClientRepository extends ServiceEntityRepository
 {
     /**
-     * Fonction qui est le constructeur de la classe ClientRepository
+     * Fonction qui est le constructeur de la classe ClientRepository.
      *
      * Cette fonction permet de contruire l'objet ClientRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
@@ -26,9 +26,9 @@ final class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
-   /**
+    /**
      * Cette fonction permet de récuperer tous enregistrements actifs
-     * return Content[] Returns an array of Client objects
+     * return Content[] Returns an array of Client objects.
      */
     public function findByIsActif(): mixed
     {

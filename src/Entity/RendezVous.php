@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Client;
-use App\Entity\Collaborateur;
-use App\Entity\Prestation;
 use App\Repository\RendezVousRepository;
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,7 +18,7 @@ class RendezVous
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\RendezVous has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id; // Class App\Entity\RendezVous has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Vous devez choisir un client.')]
     #[ORM\ManyToOne(targetEntity: Client::class)]
@@ -42,10 +38,10 @@ class RendezVous
     #[Assert\NotBlank(message: 'La date de rendez-vous ne peut pas être vide.')]
     #[Assert\Range(min: 'now', minMessage: 'La date du rendez-vous ne peut pas être inférieure à la date du jour.')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?DateTimeInterface $dateRendezVous = null;
+    private ?\DateTimeInterface $dateRendezVous = null;
 
     /**
-     * Fonction qui permet de récupérer l'id du rendez-vous
+     * Fonction qui permet de récupérer l'id du rendez-vous.
      */
     public function getId(): ?int
     {
@@ -53,7 +49,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récupérer l'id du client
+     * Fonction qui permet de récupérer l'id du client.
      */
     public function getIdClient(): ?Client
     {
@@ -61,7 +57,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'id du client
+     * Fonction qui permet de changer la valeur de l'id du client.
      */
     public function setIdClient(?Client $idClient): self
     {
@@ -71,7 +67,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récupérer l'id du collaborateur
+     * Fonction qui permet de récupérer l'id du collaborateur.
      */
     public function getIdCollaborateur(): ?Collaborateur
     {
@@ -79,7 +75,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'id du collaborateur
+     * Fonction qui permet de changer la valeur de l'id du collaborateur.
      */
     public function setIdCollaborateur(?Collaborateur $idCollaborateur): self
     {
@@ -89,7 +85,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récupérer l'id de prestation
+     * Fonction qui permet de récupérer l'id de prestation.
      */
     public function getIdPrestation(): ?Prestation
     {
@@ -97,7 +93,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'id de la prestation
+     * Fonction qui permet de changer la valeur de l'id de la prestation.
      */
     public function setIdPrestation(?Prestation $idPrestation): self
     {
@@ -107,17 +103,17 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récupérer la date du rendez-vous
+     * Fonction qui permet de récupérer la date du rendez-vous.
      */
-    public function getDateRendezVous(): ?DateTimeInterface
+    public function getDateRendezVous(): ?\DateTimeInterface
     {
         return $this->dateRendezVous;
     }
 
     /**
-     * Fonction qui permet de changer la valeur de la date du rendez-vous
+     * Fonction qui permet de changer la valeur de la date du rendez-vous.
      */
-    public function setDateRendezVous(DateTimeInterface $dateRendezVous): self
+    public function setDateRendezVous(\DateTimeInterface $dateRendezVous): self
     {
         $this->dateRendezVous = $dateRendezVous;
 
@@ -125,7 +121,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
+     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation.
      */
     public function getClient(): mixed
     {
@@ -133,7 +129,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation
+     * Fonction qui permet de récuperer les données d'un client qui sont son nom , son prénom et sa plaque d'immatriculation.
      */
     public function getIdentiteClient(): mixed
     {
@@ -141,7 +137,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom
+     * Fonction qui permet de récuperer les données d'un collaborateur qui sont son nom et son prénom.
      */
     public function getCollaborateur(): mixed
     {
@@ -149,7 +145,7 @@ class RendezVous
     }
 
     /**
-     * Fonction qui permet de récuperer la donnée d'une prestation qui est son nom 
+     * Fonction qui permet de récuperer la donnée d'une prestation qui est son nom.
      */
     public function getPrestation(): mixed
     {

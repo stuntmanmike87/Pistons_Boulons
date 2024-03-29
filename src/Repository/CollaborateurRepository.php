@@ -16,8 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class CollaborateurRepository extends ServiceEntityRepository
 {
-      /**
-     * Fonction qui est le constructeur de la classe CollaborateurRepository
+    /**
+     * Fonction qui est le constructeur de la classe CollaborateurRepository.
      *
      * Cette fonction permet de contruire l'objet CollaborateurRepository en reprenant les fonctions de sa classe parent qui est ServiceEntityRepository
      */
@@ -28,7 +28,7 @@ final class CollaborateurRepository extends ServiceEntityRepository
 
     /**
      * Cette fonction permet de récuperer tous enregistrements actifs
-     * return Collaborateur[] Returns an array of Collaborateur objects
+     * return Collaborateur[] Returns an array of Collaborateur objects.
      */
     public function findByIsActif(): mixed
     {
@@ -41,8 +41,8 @@ final class CollaborateurRepository extends ServiceEntityRepository
     }
 
     /**
-     * Fonction permettant de lister les collaborateurs qui se sont connectés par ordre décroissant 
-     * return Collaborateur[] Returns an array of Collaborateur objects
+     * Fonction permettant de lister les collaborateurs qui se sont connectés par ordre décroissant
+     * return Collaborateur[] Returns an array of Collaborateur objects.
      */
     public function findByDerniereConnexion(): mixed
     {

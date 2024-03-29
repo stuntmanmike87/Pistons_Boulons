@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;//UserFixtures
-use Override;
+namespace App\DataFixtures; // UserFixtures
+
 use App\Entity\Admin;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,24 +18,26 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
     {
     }
 
-    #[Override]
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         // Client administrator account
         $user = new User();
-        $login = $user->setLogin('pistons');
+
+        $user->setLogin('pistons');
         /** @var PasswordAuthenticatedUserInterface $user */
         $pw = $this->hasher->hashPassword($user, 'boulons');
         /** @var User $user */
         $user->setPassword($pw);
         $user->setRoles(['ROLE_ADMIN']);
-        
+
         /* $user->setLogin('pistons')
             ->setPassword($this->encoder->hashPassword($user, 'boulons'))
             ->setRoles(['ROLE_ADMIN']); */
 
         // Default admin account
-        $admin = new admin();
+        $admin = new Admin();
+
         $admin->setNom('Pistons');
         $admin->setPrenom('Boulons')
               ->setUser($user);
@@ -49,7 +51,7 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    #[Override]
+    #[\Override]
     public function getOrder(): int
     {
         return 2;

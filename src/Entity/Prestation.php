@@ -18,7 +18,7 @@ class Prestation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\Prestation has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id; // Class App\Entity\Prestation has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 3, max: 50, minMessage: 'Le nom de la prestation doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom de la prestation ne doit pas comporter plus de  {{ limit }} caractères')]
@@ -47,7 +47,7 @@ class Prestation
     private ?bool $isActive = null;
 
     /**
-     * Fonction qui permet de récupérer l'id de la prestation
+     * Fonction qui permet de récupérer l'id de la prestation.
      */
     public function getId(): ?int
     {
@@ -55,7 +55,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer le nom de la prestation
+     * Fonction qui permet de récupérer le nom de la prestation.
      */
     public function getNom(): ?string
     {
@@ -63,7 +63,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur du nom de la prestation
+     * Fonction qui permet de changer la valeur du nom de la prestation.
      */
     public function setNom(string $nom): self
     {
@@ -73,7 +73,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer le temps de réalisation de la prestation
+     * Fonction qui permet de récupérer le temps de réalisation de la prestation.
      */
     public function getTempsRealisation(): ?string
     {
@@ -81,7 +81,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur du tps de réalisation de la prestation
+     * Fonction qui permet de changer la valeur du tps de réalisation de la prestation.
      */
     public function setTempsRealisation(string $tempsRealisation): self
     {
@@ -91,7 +91,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer le cout HT de la prestation
+     * Fonction qui permet de récupérer le cout HT de la prestation.
      */
     public function getCoutHT(): ?int
     {
@@ -99,7 +99,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur du cout HT de la prestation
+     * Fonction qui permet de changer la valeur du cout HT de la prestation.
      */
     public function setCoutHT(int $coutHT): self
     {
@@ -109,7 +109,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer la description de la prestation
+     * Fonction qui permet de récupérer la description de la prestation.
      */
     public function getDescription(): ?string
     {
@@ -117,7 +117,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur de la description de la prestation
+     * Fonction qui permet de changer la valeur de la description de la prestation.
      */
     public function setDescription(string $description): self
     {
@@ -127,7 +127,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer le type de prestation de la prestation
+     * Fonction qui permet de récupérer le type de prestation de la prestation.
      */
     public function getTypePrestation(): ?string
     {
@@ -135,7 +135,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur du type de prestation de la prestation
+     * Fonction qui permet de changer la valeur du type de prestation de la prestation.
      */
     public function setTypePrestation(string $typePrestation): self
     {
@@ -145,7 +145,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de récupérer le boolean estActif de la prestation
+     * Fonction qui permet de récupérer le boolean estActif de la prestation.
      */
     public function getIsActive(): ?bool
     {
@@ -153,7 +153,7 @@ class Prestation
     }
 
     /**
-     * Fonction qui permet de changer la valeur du boolean estActif de la prestation
+     * Fonction qui permet de changer la valeur du boolean estActif de la prestation.
      */
     public function setIsActive(bool $isActive): self
     {
@@ -163,7 +163,7 @@ class Prestation
     }
 
     /**
-     * Fonction GETTER permettant de retourner des information sur la prestation  
+     * Fonction GETTER permettant de retourner des information sur la prestation.
      */
     public function getPrestation(): ?string
     {

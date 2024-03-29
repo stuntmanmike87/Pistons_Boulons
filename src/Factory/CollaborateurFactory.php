@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use Override;
 use App\Entity\Collaborateur;
 use App\Repository\CollaborateurRepository;
 use Zenstruck\Foundry\ModelFactory;
@@ -63,7 +62,7 @@ final class CollaborateurFactory extends ModelFactory
      *
      * @todo add your default values here
      */
-    #[Override]
+    #[\Override]
     protected function getDefaults(): array
     {
         return [
@@ -80,7 +79,7 @@ final class CollaborateurFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
-    #[Override]
+    #[\Override]
     protected function initialize(): self
     {
         return $this
@@ -88,7 +87,7 @@ final class CollaborateurFactory extends ModelFactory
         ;
     }
 
-    #[Override]
+    #[\Override]
     protected static function getClass(): string
     {
         return Collaborateur::class;

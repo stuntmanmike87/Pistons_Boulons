@@ -18,7 +18,7 @@ class Content
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\Content has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id; // Class App\Entity\Content has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
     #[ORM\Column(type: Types::TEXT)]
@@ -29,7 +29,7 @@ class Content
     private ?string $position = null;
 
     /**
-     * Fonction qui permet de récupérer l'id du contenu
+     * Fonction qui permet de récupérer l'id du contenu.
      */
     public function getId(): ?int
     {
@@ -37,7 +37,7 @@ class Content
     }
 
     /**
-     * Fonction qui permet de récupérer le texte du contenu
+     * Fonction qui permet de récupérer le texte du contenu.
      */
     public function getText(): ?string
     {
@@ -45,7 +45,7 @@ class Content
     }
 
     /**
-     * Fonction qui permet de changer la valeur du texte du contenu
+     * Fonction qui permet de changer la valeur du texte du contenu.
      *
      * param string $text le nom du contenu
      */
@@ -57,16 +57,15 @@ class Content
     }
 
     /**
-     * Fonction qui permet de récuperer la valeur de la position du contenu
+     * Fonction qui permet de récuperer la valeur de la position du contenu.
      */
     public function getPosition(): ?string
     {
         return $this->position;
     }
 
-
     /**
-     * Fonction qui permet de changer la valeur de la position du contenu
+     * Fonction qui permet de changer la valeur de la position du contenu.
      *
      * param string $position le nom du contenu
      */

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use Override;
 use App\Entity\Collaborateur;
 use App\Entity\User;
-use DateTime;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CollaborateurType extends AbstractType
 {
@@ -22,7 +20,7 @@ final class CollaborateurType extends AbstractType
      * param FormBuilderInterace $builder une variable qui permet la création d'un formulaire
      * param array $options un tableau qui permet de lister les champs du formulaire.
      */
-    #[Override]
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -30,34 +28,33 @@ final class CollaborateurType extends AbstractType
             ->add('prenom')
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'data' => new DateTime("now")
-
+                'data' => new \DateTime('now'),
             ])
             ->add('dateEntreeEntreprise', DateType::class, [
                 'widget' => 'single_text',
-                'data' => new DateTime("now")
+                'data' => new \DateTime('now'),
             ])
             ->add('numSecuriteSocial')
             ->add('typeContrat')
             ->add('dureeTravailHebdo', TextType::class, [
                 'attr' => [
-                    'placeholder' => ''
-                ]
-                ])
+                    'placeholder' => '',
+                ],
+            ])
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'placeholder' => 'Choisir un identifiant',
                 'required' => false,
-                'query_builder' => static fn($er) => $er->createQueryBuilder('us')
-                    ->andWhere("us.admin is null")
-                    ->andWhere("us.collaborateur is null")
+                'query_builder' => static fn ($er) => $er->createQueryBuilder('us')
+                    ->andWhere('us.admin is null')
+                    ->andWhere('us.collaborateur is null')
                     ->orderBy('us.login', 'ASC'),
                 'choice_label' => 'userlog',
-                'empty_data' => null
+                'empty_data' => null,
             ]);
     }
 
-    #[Override]
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

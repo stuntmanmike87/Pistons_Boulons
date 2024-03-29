@@ -16,10 +16,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/client')]
 final class ClientController extends AbstractController
 {
-    public function __construct(private readonly ManagerRegistry $em) {}
-    
+    public function __construct(private readonly ManagerRegistry $em)
+    {
+    }
+
     /**
-     * Fonction qui permet l'affichage de la page index de client
+     * Fonction qui permet l'affichage de la page index de client.
      *
      * Cette page nous montre le listing des clients
      *
@@ -34,7 +36,7 @@ final class ClientController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page new de client
+     * Fonction qui permet l'affichage de la page new de client.
      *
      * Cette page nous montre le formulaire d'ajout de client
      *
@@ -58,7 +60,6 @@ final class ClientController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
-            
             $this->addFlash('success', 'Le client a bien été ajouté');
 
             return $this->redirectToRoute('client_index');
@@ -69,10 +70,9 @@ final class ClientController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
- 
 
     /**
-     * Fonction qui permet l'affichage de la page show de client
+     * Fonction qui permet l'affichage de la page show de client.
      *
      * Cette page nous montre les données d'un client choisi dans la liste des clients de la page index de client
      *
@@ -88,7 +88,7 @@ final class ClientController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page edit de client
+     * Fonction qui permet l'affichage de la page edit de client.
      *
      * Cette page nous montre le formulaire d'un client choisi dans la liste des clients de index client
      *
@@ -110,7 +110,6 @@ final class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->getManager()->flush();
 
-
             $this->addFlash('success', 'Le client a bien été modifié');
 
             return $this->redirectToRoute('client_index');
@@ -123,9 +122,9 @@ final class ClientController extends AbstractController
     }
 
     /**
-     * Fonction qui permet le delete de client
+     * Fonction qui permet le delete de client.
      *
-     * Cette fonction est aussi sur la page edit avec le bouton supprimer 
+     * Cette fonction est aussi sur la page edit avec le bouton supprimer
      *
      * param Request $request qui permet de faire la requete de la suppression
      *
@@ -135,13 +134,14 @@ final class ClientController extends AbstractController
     #[Route(path: '/{id}', name: 'client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), (string)$request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$client->getId(), (string) $request->request->get('_token'))) {
             $entityManager = $this->em->getManager();
             $client->setIsActif(false);
             $entityManager->flush();
         }
 
         $this->addFlash('success', 'Le client a bien été effacé');
+
         return $this->redirectToRoute('client_index');
     }
 }

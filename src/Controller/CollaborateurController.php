@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Collaborateur;
+use App\Entity\User;
 use App\Form\CollaborateurType;
 use App\Repository\CollaborateurRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,8 +18,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/collaborateur')]
 final class CollaborateurController extends AbstractController
 {
-    public function __construct(private readonly ManagerRegistry $em) {}
-    
+    public function __construct(private readonly ManagerRegistry $em)
+    {
+    }
+
     #[Route(path: '/', name: 'collaborateur_index', methods: ['GET'])]
     public function index(CollaborateurRepository $collaborateurRepository): Response
     {
@@ -27,7 +30,7 @@ final class CollaborateurController extends AbstractController
         ]);
     }
 
-     #[Route(path: '/lastConnexion', name: 'collaborateur_derniere_connexion', methods: ['GET'])]
+    #[Route(path: '/lastConnexion', name: 'collaborateur_derniere_connexion', methods: ['GET'])]
     public function derniereConnexion(CollaborateurRepository $collaborateurRepository): Response
     {
         return $this->render('collaborateur/derniere_connexion.html.twig', [
@@ -36,7 +39,7 @@ final class CollaborateurController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page new de collaborateur
+     * Fonction qui permet l'affichage de la page new de collaborateur.
      *
      * Cette page nous montre le formulaire d'ajout de collaborateur
      *
@@ -55,26 +58,25 @@ final class CollaborateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-  
             $entityManager = $this->em->getManager();
-          
+
             $collaborateur->setIsActif(true);
             $entityManager->persist($collaborateur);
             $entityManager->flush();
 
-            ///** @var \Symfony\Component\Form\FormInterface $form *////** @var string $login */
-            $login = $form['user']->getData();//Cannot call method getData() on Symfony\Component\Form\FormInterface|null.
+            /** @var FormInterface $f_user */
+            $f_user = $form['user'];
+            $login = $f_user->getData();
 
-            if($login != null){
+            if (null != $login) {
                 /** @var User $user */
                 $user = $collaborateur->getUser();
                 $user->setCollaborateur($collaborateur);
-                /** @var object $user */
+                /* @var object $user */
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
-            
-            
+
             $this->addFlash('success', 'Le collaborateur a bien été ajouté');
 
             return $this->redirectToRoute('collaborateur_index');
@@ -87,7 +89,7 @@ final class CollaborateurController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page show de collaborateur
+     * Fonction qui permet l'affichage de la page show de collaborateur.
      *
      * Cette page nous montre les données d'un collaborateur choisi dans la liste des collaborateurs de la page index de collaborateur
      *
@@ -103,7 +105,7 @@ final class CollaborateurController extends AbstractController
     }
 
     /**
-     * Fonction qui permet l'affichage de la page edit de collaborateur
+     * Fonction qui permet l'affichage de la page edit de collaborateur.
      *
      * Cette page nous montre le formulaire d'un collaborateur choisi dans la liste des collaborateurs de index collaborateur
      *
@@ -123,17 +125,17 @@ final class CollaborateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->em->getManager();
 
-            ///** @var \Symfony\Component\Form\FormInterface $form *////** @var string $login */
-            $login = $form['user']->getData();//Cannot call method getData() on Symfony\Component\Form\FormInterface|null.
+            /** @var FormInterface $f_user */
+            $f_user = $form['user'];
+            $login = $f_user->getData();
 
-            if($login != null){
+            if (null != $login) {
                 /** @var User $user */
                 $user = $collaborateur->getUser();
                 $user->setCollaborateur($collaborateur);
-                /** @var object $user */
+                // ** @var object $user */
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
@@ -152,9 +154,9 @@ final class CollaborateurController extends AbstractController
     }
 
     /**
-     * Fonction qui permet le delete de collaborateur
+     * Fonction qui permet le delete de collaborateur.
      *
-     * Cette fonction est aussi sur la page edit avec le bouton supprimer 
+     * Cette fonction est aussi sur la page edit avec le bouton supprimer
      *
      * param Request $request qui permet de faire la requete de la suppression
      *
@@ -164,7 +166,7 @@ final class CollaborateurController extends AbstractController
     #[Route(path: '/{id}', name: 'collaborateur_delete', methods: ['POST'])]
     public function delete(Request $request, Collaborateur $collaborateur): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$collaborateur->getId(), (string)$request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$collaborateur->getId(), (string) $request->request->get('_token'))) {
             $entityManager = $this->em->getManager();
             $collaborateur->setIsActif(false);
             $entityManager->flush();

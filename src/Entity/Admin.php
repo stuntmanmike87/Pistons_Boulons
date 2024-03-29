@@ -17,7 +17,7 @@ class Admin
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\Admin has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id; // Class App\Entity\Admin has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $nom = null;
@@ -30,7 +30,7 @@ class Admin
     private ?User $user = null;
 
     /**
-     * Fonction GETTER qui permet de récupérer l'id
+     * Fonction GETTER qui permet de récupérer l'id.
      */
     public function getId(): ?int
     {
@@ -38,7 +38,7 @@ class Admin
     }
 
     /**
-     * Fonction GETTER qui permet de récupérer le nom
+     * Fonction GETTER qui permet de récupérer le nom.
      */
     public function getNom(): ?string
     {
@@ -46,7 +46,7 @@ class Admin
     }
 
     /**
-     * Fonction SETTER qui permet de changer la valeur du nom
+     * Fonction SETTER qui permet de changer la valeur du nom.
      */
     public function setNom(string $nom): self
     {
@@ -55,8 +55,8 @@ class Admin
         return $this;
     }
 
-   /**
-     * Fonction GETTER qui permet de récupérer le prénom
+    /**
+     * Fonction GETTER qui permet de récupérer le prénom.
      */
     public function getPrenom(): ?string
     {
@@ -64,7 +64,7 @@ class Admin
     }
 
     /**
-     * Fonction SETTER qui permet de changer la valeur du prénom
+     * Fonction SETTER qui permet de changer la valeur du prénom.
      */
     public function setPrenom(string $prenom): self
     {
@@ -73,8 +73,8 @@ class Admin
         return $this;
     }
 
-   /**
-     * Fonction GETTER qui permet de récupérer le User
+    /**
+     * Fonction GETTER qui permet de récupérer le User.
      */
     public function getUser(): ?User
     {
@@ -82,7 +82,7 @@ class Admin
     }
 
     /**
-     * Fonction SETTER qui permet de changer la valeur de user
+     * Fonction SETTER qui permet de changer la valeur de user.
      */
     public function setUser(User $user): self
     {
@@ -92,9 +92,10 @@ class Admin
     }
 
     /**
-     * Fonction qui permet de récupérer le nom et prénom de l'admin
+     * Fonction qui permet de récupérer le nom et prénom de l'admin.
      */
-    public function getAdmin(): string{
-        return $this->nom .' '. $this->prenom;
+    public function getAdmin(): string
+    {
+        return $this->nom.' '.$this->prenom;
     }
 }

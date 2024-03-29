@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,7 +18,7 @@ class Client
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id;//Class App\Entity\Client has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id; // Class App\Entity\Client has an uninitialized readonly property $id. Assign it in the constructor.
 
     #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
     #[Assert\Length(min: 1, max: 50, minMessage: 'Le nom doit comporter au moins {{ limit }} caractères ', maxMessage: 'Le nom ne doit pas comporter plus de  {{ limit }} caractères')]
@@ -35,8 +34,8 @@ class Client
 
     #[Assert\NotBlank(message: 'La date de première saisie ne peut pas être vide.')]
     #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]   
-    private ?DateTimeInterface $datePremiereSaisie = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $datePremiereSaisie = null;
 
     #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
     #[ORM\Column(type: Types::STRING, length: 255)]
@@ -64,7 +63,7 @@ class Client
 
     // GETTERS / SETTERS
     /**
-     * Fonction qui permet de récupérer l'id du client
+     * Fonction qui permet de récupérer l'id du client.
      */
     public function getId(): ?int
     {
@@ -72,7 +71,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer le nom du client
+     * Fonction qui permet de récupérer le nom du client.
      */
     public function getNom(): ?string
     {
@@ -80,7 +79,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur du nom du client
+     * Fonction qui permet de changer la valeur du nom du client.
      */
     public function setNom(string $nom): self
     {
@@ -90,7 +89,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer le prénom du client
+     * Fonction qui permet de récupérer le prénom du client.
      */
     public function getPrenom(): ?string
     {
@@ -98,7 +97,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur du prénom du client
+     * Fonction qui permet de changer la valeur du prénom du client.
      */
     public function setPrenom(string $prenom): self
     {
@@ -108,17 +107,17 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer la date de première saisie du client
+     * Fonction qui permet de récupérer la date de première saisie du client.
      */
-    public function getDatePremiereSaisie(): ?DateTimeInterface
+    public function getDatePremiereSaisie(): ?\DateTimeInterface
     {
         return $this->datePremiereSaisie;
     }
 
     /**
-     * Fonction qui permet de changer la valeur de la date de première saisie du client
+     * Fonction qui permet de changer la valeur de la date de première saisie du client.
      */
-    public function setDatePremiereSaisie(DateTimeInterface $datePremiereSaisie): self
+    public function setDatePremiereSaisie(\DateTimeInterface $datePremiereSaisie): self
     {
         $this->datePremiereSaisie = $datePremiereSaisie;
 
@@ -126,7 +125,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer l'adresse du client
+     * Fonction qui permet de récupérer l'adresse du client.
      */
     public function getAdresse(): ?string
     {
@@ -134,7 +133,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'adresse du client
+     * Fonction qui permet de changer la valeur de l'adresse du client.
      */
     public function setAdresse(string $adresse): self
     {
@@ -144,7 +143,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer le type de véhicule du client
+     * Fonction qui permet de récupérer le type de véhicule du client.
      */
     public function getTypeVehicule(): ?string
     {
@@ -152,7 +151,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur du type de véhicule du client
+     * Fonction qui permet de changer la valeur du type de véhicule du client.
      */
     public function setTypeVehicule(string $typeVehicule): self
     {
@@ -162,7 +161,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer la plaque d'immatriculation du client
+     * Fonction qui permet de récupérer la plaque d'immatriculation du client.
      */
     public function getPlaqueImmat(): ?string
     {
@@ -170,7 +169,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur de la plaque d'immatriculation du client
+     * Fonction qui permet de changer la valeur de la plaque d'immatriculation du client.
      */
     public function setPlaqueImmat(string $plaqueImmat): self
     {
@@ -180,7 +179,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer si le client est actif ou pas
+     * Fonction qui permet de récupérer si le client est actif ou pas.
      */
     public function getIsActif(): ?bool
     {
@@ -188,7 +187,7 @@ class Client
     }
 
     /**
-     * Fonction qui permet de changer la valeur de l'activité du client du client
+     * Fonction qui permet de changer la valeur de l'activité du client du client.
      */
     public function setIsActif(?bool $isActif): self
     {
@@ -198,18 +197,18 @@ class Client
     }
 
     /**
-     * Fonction qui permet de récupérer le client avec son nom , son prénom et sa plaque d'immatriculation
+     * Fonction qui permet de récupérer le client avec son nom , son prénom et sa plaque d'immatriculation.
      */
     public function getClient(): string
     {
-        return $this->nom . ' ' . $this->prenom . ' - Véhicule : ' . $this->typeVehicule . " - Immatriculation : " . $this->plaqueImmat;
+        return $this->nom.' '.$this->prenom.' - Véhicule : '.$this->typeVehicule.' - Immatriculation : '.$this->plaqueImmat;
     }
 
     /**
-     * Fonction qui permet de récupérer le client avec son nom , son prénom
+     * Fonction qui permet de récupérer le client avec son nom , son prénom.
      */
     public function getIdentiteClient(): string
     {
-        return $this->nom . ' ' . $this->prenom;
+        return $this->nom.' '.$this->prenom;
     }
 }
