@@ -7,6 +7,7 @@ namespace App\Security;
 use App\Entity\Collaborateur;
 use App\Entity\User;
 use App\Repository\CollaborateurRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,13 +35,17 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public const string LOGIN_ROUTE = 'app_login';
 
+    // private readonly UserRepository $userRepository;
+
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly CollaborateurRepository $repositoryCollabo
+        private readonly CollaborateurRepository $repositoryCollabo,
+        private readonly UserRepository $userRepository
     ) {
+        // $this->userRepository = $userRepository;
     }
 
     #[\Override]
@@ -48,20 +53,27 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
+        // return ($request->getPathInfo() === '/login' && $request->isMethod('POST'));
     }
 
     #[\Override]
-    public function authenticate(Request $request): Passport
+    public function authenticate(Request $request): Passport // PassportInterface
     {
         $email = $request->request->get('email');
         $password = $request->request->get('password');
 
         return new Passport(
-            new UserBadge((string) $email),
-            new CustomCredentials(static function ($credentials, User $user): never {
-                // dump($credentials, $user);
-                throw new CustomUserMessageAuthenticationException("Erreur d'authentification");
-            }, $password)
+            new UserBadge((string) $email, function ($userIdentifier) {
+                // optionally pass a callback to load the User manually
+                $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
+                if (!$user) {
+                    throw new UserNotFoundException();
+                    // throw new CustomUserMessageAuthenticationException("Erreur d'authentification");
+                }
+
+                return $user;
+            }),
+            new CustomCredentials(static fn ($credentials, User $user) => 'tada' === $credentials, $password)
         );
     }
 

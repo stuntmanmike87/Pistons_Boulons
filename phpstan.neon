@@ -11,11 +11,6 @@ parameters:
         #     # See: https://phpstan.org/developing-extensions/always-read-written-properties
         #     path:
         #         src/Repository/UserRepository.php
-        -
-            message: '#Trying to invoke Symfony\\Component\\Form\\FormInterface but it might not be a callable.#'
-            path:
-                src/Controller/RendezVousController.php
-            # count: 2
         # -
         #     message: '#Cannot call method format\(\) on DateTimeInterface\|null.#'
         #     path:
@@ -27,27 +22,11 @@ parameters:
         #         src/Controller/RendezVousController.php
         #     # count: 2
         -
-            message: '#Cognitive complexity for "App\\Controller\\ApiController::majEvent\(\)" is 21, keep it under 9#'
-            path:
-                src/Controller/ApiController.php
-        -
-            message: '#Unreachable statement - code above always terminates.#'
-            path:
-                src/Controller/ApiController.php
-        -
-            message: '#Cannot access property \$title on mixed.#'
-            path:
-                src/Controller/ApiController.php
-        -
             message: '#Class App\\Entity\\User has an uninitialized readonly property \$id. Assign it in the constructor.#'
-            # message: '#Class [a-zA-Z0-9\\_]+ has an uninitialized readonly property \$id. Assign it in the constructor.#'
             path: src/Entity/User.php
-            # path: src/Entity/*
         -
             message: '#Property App\\Entity\\User::\$id is never written, only read.#'
-            # message: '#Property [a-zA-Z0-9\\_]+::\$id is never written, only read.#'
             path: src/Entity/User.php
-            # path: src/Entity/*
 
     doctrine:
         objectManagerLoader: tests/object-manager.php

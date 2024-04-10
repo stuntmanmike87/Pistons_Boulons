@@ -24,6 +24,7 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
         $user = new User();
 
         $user->setLogin('pistons');
+
         $hashedPassword = $this->hasher->hashPassword($user, 'boulons');
         $user->setPassword($hashedPassword);
         $user->setRoles(['ROLE_ADMIN']);

@@ -179,8 +179,7 @@ final class RendezVousController extends AbstractController
 
         return $this->render('rendez_vous/new.html.twig', [
             'rendez_vou' => $rendezVou,
-            'form' => $form(),
-            // Trying to invoke Symfony\Component\Form\FormInterface but it might not be a callable.
+            'form' => $form,
         ]);
     }
 
@@ -239,8 +238,7 @@ final class RendezVousController extends AbstractController
 
         return $this->render('rendez_vous/edit.html.twig', [
             'rendez_vou' => $rendezVou,
-            'form' => $form(),
-            // Trying to invoke Symfony\Component\Form\FormInterface but it might not be a callable.
+            'form' => $form,
         ]);
     }
 
