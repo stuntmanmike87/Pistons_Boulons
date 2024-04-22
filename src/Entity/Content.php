@@ -9,16 +9,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @final
- */
+/** @final */
 #[ORM\Entity(repositoryClass: ContentRepository::class)]
 class Content
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id; // Class App\Entity\Content has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id;
 
     #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
     #[ORM\Column(type: Types::TEXT)]

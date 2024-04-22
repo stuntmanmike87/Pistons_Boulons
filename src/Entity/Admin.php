@@ -7,19 +7,21 @@ namespace App\Entity;
 use App\Repository\AdminRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @final
- */
+/** @final */
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 class Admin
 {
+    // final public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private readonly int $id; // Class App\Entity\Admin has an uninitialized readonly property $id. Assign it in the constructor.
+    private readonly int $id;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]

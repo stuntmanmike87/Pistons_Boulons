@@ -8,9 +8,7 @@ use App\Repository\CalendarRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @final
- */
+/** @final */
 #[ORM\Entity(repositoryClass: CalendarRepository::class)]
 class Calendar
 {
