@@ -71,6 +71,9 @@
             "ref": "d74d4d719d5f53856c9c13544aa22d44144b1819"
         }
     },
+    "pontedilana/weasyprint-bundle": {
+        "version": "2.1.0"
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {
