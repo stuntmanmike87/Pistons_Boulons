@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -66,7 +65,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge((string) $email, function ($userIdentifier) {
                 // optionally pass a callback to load the User manually
                 $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
-                if (!$user) {
+                if (null == $user) {
                     throw new UserNotFoundException();
                     // throw new CustomUserMessageAuthenticationException("Erreur d'authentification");
                 }

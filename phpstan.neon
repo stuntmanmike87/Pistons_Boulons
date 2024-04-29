@@ -27,10 +27,13 @@ parameters:
         -
             message: '#Property App\\Entity\\User::\$id is never written, only read.#'
             path: src/Entity/User.php
+        -
+            message: '#Foreach overwrites \$event with its value variable.#'
+            path: src/Controller/MainController.php
 
-    doctrine:
-        objectManagerLoader: tests/object-manager.php
-        allowNullablePropertyForRequiredField: true
+    # doctrine:
+    #     objectManagerLoader: tests/object-manager.php
+    #     allowNullablePropertyForRequiredField: true
     
     treatPhpDocTypesAsCertain: false
 
