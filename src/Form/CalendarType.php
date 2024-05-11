@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class CalendarType extends AbstractType
 {
     #[\Override]
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title')
