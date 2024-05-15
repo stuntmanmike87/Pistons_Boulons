@@ -1,0 +1,21 @@
+parameters:
+    ignoreErrors:
+        -
+            message: '#Foreach overwrites \$event with its value variable.#'
+            path:
+                src/Controller/MainController.php
+        -
+            message: '#Class App\\Entity\\User has an uninitialized readonly property \$id. Assign it in the constructor.#'
+            path: src/Entity/User.php
+        -
+            message: '#Property App\\Entity\\User::\$id is never written, only read.#'
+            path: src/Entity/User.php
+        # -
+        #     identifier: missingType.generics
+        -
+            message: '#Method App\\Security\\UserLoginAuthenticator::getUser\(\) has parameter \$userProvider with generic interface Symfony\\Component\\Security\\Core\\User\\UserProviderInterface but does not specify its types: TUser#'
+            path: src/Security/UserLoginAuthenticator.php
+    
+    # checkGenericClassInNonGenericObjectType: false
+    
+    treatPhpDocTypesAsCertain: false

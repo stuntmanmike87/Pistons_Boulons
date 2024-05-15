@@ -13,6 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Collaborateur|null findOneBy(array $criteria, array $orderBy = null)
  * @method Collaborateur[]    findAll()
  * @method Collaborateur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @extends ServiceEntityRepository<Collaborateur>
  */
 final class CollaborateurRepository extends ServiceEntityRepository
 {

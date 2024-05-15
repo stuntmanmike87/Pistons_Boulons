@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RendezVous|null findOneBy(array $criteria, array $orderBy = null)
  * @method RendezVous[]    findAll()
  * @method RendezVous[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @extends ServiceEntityRepository<RendezVous>
  */
 final class RendezVousRepository extends ServiceEntityRepository
 {
