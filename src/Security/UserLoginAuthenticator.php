@@ -93,6 +93,7 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
 
     /**
      * @param array<string> $credentials
+     * @param UserProviderInterface<User> $userProvider
      */
     public function getUser(array $credentials, UserProviderInterface $userProvider): User
     {
