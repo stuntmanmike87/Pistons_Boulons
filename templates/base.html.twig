@@ -30,14 +30,18 @@
 		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 
 		<!-- Scripts JS -->
-		{% block script %}
+		{# {% block script %}
 			<script src={{ asset('js/jquery.min.js') }} defer></script>
 			<script src={{ asset('js/jquery.dropotron.min.js') }} defer></script>
 			<script src={{ asset('js/browser.min.js') }} defer></script>
 			<script src={{ asset('js/breakpoints.min.js') }} defer></script>
 			<script src={{ asset('js/util.js') }} defer></script>
 			<script src={{ asset('js/main_tp.js') }} defer></script>
-		{% endblock %}
+		{% endblock %} #}
+
+		{% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
 	</head>
 
 	<body class="is-preload homepage">

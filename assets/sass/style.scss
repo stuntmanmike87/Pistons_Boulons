@@ -264,7 +264,6 @@ input[type="reset"],
 button,
 .button {
 	@include vendor("transition", "background-color .25s ease-in-out");
-	-webkit-appearance: none;
 	position: relative;
 	display: inline-block;
 	background: $couleur_bleu;
