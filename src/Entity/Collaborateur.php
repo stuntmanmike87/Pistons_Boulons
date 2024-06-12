@@ -67,7 +67,7 @@ class Collaborateur
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $isActif = null;
 
-    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'collaborateur', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'collaborateur', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 

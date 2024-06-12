@@ -17,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['login'], message: 'There is already an account with this login')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    // final public const ROLE_USER = 'ROLE_ADMIN';
+
     // final public const ROLE_USER = 'ROLE_USER';
 
     #[ORM\Id]
@@ -37,11 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\JoinColumn(nullable: true)]
-    #[ORM\OneToOne(targetEntity: Admin::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Admin $admin = null;
-
-    #[ORM\JoinColumn(nullable: true)]
-    #[ORM\OneToOne(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Collaborateur $collaborateur = null;
 
     public function getId(): ?int
@@ -139,33 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * Fonction qui permet de récuperer le champ admin.
-     */
-    public function getAdmin(): ?string
-    {
-        if (null != $this->admin) {
-            return $this->admin->getAdmin();
-        }
-
-        return null;
-    }
-
-    /**
-     * Fonction qui permet de changer la valeur de admin.
-     */
-    public function setAdmin(Admin $admin): self
-    {
-        // set the owning side of the relation if necessary
-        if ($admin->getUser() !== $this) {
-            $admin->setUser($this);
-        }
-
-        $this->admin = $admin;
-
-        return $this;
     }
 
     /**
