@@ -58,13 +58,13 @@ final class UserLoginAuthenticator extends AbstractLoginFormAuthenticator
     #[\Override]
     public function authenticate(Request $request): Passport // PassportInterface
     {
-        $email = $request->request->get('email');
+        $login = $request->request->get('login');
         $password = $request->request->get('password');
 
         return new Passport(
-            new UserBadge((string) $email, function ($userIdentifier) {
+            new UserBadge((string) $login, function ($userIdentifier) {
                 // optionally pass a callback to load the User manually
-                $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
+                $user = $this->userRepository->findOneBy(['login' => $userIdentifier]);
                 if (null == $user) {
                     throw new UserNotFoundException();
                     // throw new CustomUserMessageAuthenticationException("Erreur d'authentification");
