@@ -2,13 +2,13 @@
 
 namespace App\Factory;
 
-use App\Entity\RendezVous;
+use App\Entity\Calendar;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<RendezVous>
+ * @extends PersistentProxyObjectFactory<Calendar>
  */
-final class RendezVousFactory extends PersistentProxyObjectFactory
+final class CalendarFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,7 +22,7 @@ final class RendezVousFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return RendezVous::class;
+        return Calendar::class;
     }
 
     /**
@@ -33,10 +33,14 @@ final class RendezVousFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'dateRendezVous' => self::faker()->dateTime(),
-            'idClient' => ClientFactory::new(),
-            'idCollaborateur' => CollaborateurFactory::new(),
-            'idPrestation' => PrestationFactory::new(),
+            'all_day' => self::faker()->boolean(),
+            'background_color' => self::faker()->text(7),
+            'border_color' => self::faker()->text(7),
+            'description' => self::faker()->text(),
+            'end' => self::faker()->dateTime(),
+            'start' => self::faker()->dateTime(),
+            'text_color' => self::faker()->text(7),
+            'title' => self::faker()->text(100),
         ];
     }
 
@@ -46,7 +50,7 @@ final class RendezVousFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(RendezVous $rendezVous): void {})
+            // ->afterInstantiate(function(Calendar $calendar): void {})
         ;
     }
 }
