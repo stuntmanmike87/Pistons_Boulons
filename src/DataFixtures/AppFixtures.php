@@ -16,7 +16,10 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
     {
     }
 
-    #[\Override]
+    /**
+     * Fonction de chargement des fixtures en base de données.
+     */
+    // #[\Override]
     public function load(ObjectManager $manager): void
     {
         // Client administrator account
@@ -28,15 +31,11 @@ final class AppFixtures extends Fixture implements OrderedFixtureInterface
         $user->setPassword($hashedPassword);
         $user->setRoles(['ROLE_ADMIN']);
 
-        /* $user->setLogin('pistons')
-            ->setPassword($this->encoder->hashPassword($user, 'boulons'))
-            ->setRoles(['ROLE_ADMIN']); */
-
         // Flush to DB
         $manager->flush();
     }
 
-    #[\Override]
+    // #[\Override]
     public function getOrder(): int
     {
         return 2;

@@ -8,12 +8,14 @@ use App\Entity\Client;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 final class ClientFixtures extends Fixture implements OrderedFixtureInterface
 {
-    public function loadg(ObjectManager $manager): void
+     // #[\Override]
+     public function load(ObjectManager $manager): void
     {
+        // $this->loadClients($manager);
+
         $client1 = new Client();
         $client1
         ->setNom('Dubert')
@@ -25,46 +27,19 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
         ->setIsActif(true)
         ;
 
-        $client2 = new Client();
-        $client2
-        ->setNom('Client 2 : ....')
-        ->setPrenom('')
-        ->setDatePremiereSaisie(date_create_from_format('Y-m-d H:i:s', '2021-09-12 10:00:00'))
-        ->setAdresse('')
-        ->setTypeVehicule('')
-        ->setPlaqueImmat('')
-        ->setIsActif(false)
-        ;
-
-        $client3 = new Client();
-        $client3->setNom('Client 3 : ....')
-        ->setPrenom('')
-        ->setDatePremiereSaisie(date_create_from_format('Y-m-d H:i:s', '2021-10-05 16:00:00'))
-        ->setAdresse('')
-        ->setTypeVehicule('')
-        ->setPlaqueImmat('')
-        ->setIsActif(false)
-        ;
-
         $manager->persist($client1);
-        $manager->persist($client2);
-        $manager->persist($client3);
 
         // Flush to DB
         $manager->flush();
     }
 
-    #[\Override]
+    // #[\Override]
     public function getOrder(): int
     {
         return 2;
     }
 
-    /**
-     * Fonction de chargement des fixtures en base de données.
-     */
-    #[\Override]
-    public function load(ObjectManager $manager): void
+    public function loadClients(ObjectManager $manager): void
     {
         $this->generateClients(10, $manager);
 
@@ -73,8 +48,6 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
 
     private function generateClients(int $number, ObjectManager $manager): void
     {
-        // $faker = Factory::create('fr_FR');
-
         for ($i = 0; $i < $number; ++$i) {
             $client = new Client();
 
