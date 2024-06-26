@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -38,9 +40,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING)]
     private ?string $password = null;
 
+    /** @var Collection<int, Collaborateur> */
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\OneToMany(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Collaborateur $collaborateur = null;
+    private ?Collaborateur $collaborateur;
+
+    public function __construct()
+    {
+        $this->collaborateur = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
