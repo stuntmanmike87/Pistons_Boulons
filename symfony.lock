@@ -1,13 +1,4 @@
 {
-    "doctrine/annotations": {
-        "version": "2.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.10",
-            "ref": "64d8583af5ea57b7afa4aba4b159907f3a148b05"
-        }
-    },
     "doctrine/doctrine-bundle": {
         "version": "2.12",
         "recipe": {
@@ -280,9 +271,6 @@
     },
     "symfonycasts/sass-bundle": {
         "version": "v0.7.0"
-    },
-    "symfonycasts/verify-email-bundle": {
-        "version": "v1.17.0"
     },
     "twig/extra-bundle": {
         "version": "v3.10.0"
