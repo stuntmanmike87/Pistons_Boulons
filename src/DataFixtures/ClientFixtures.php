@@ -11,8 +11,8 @@ use Doctrine\Persistence\ObjectManager;
 
 final class ClientFixtures extends Fixture implements OrderedFixtureInterface
 {
-     // #[\Override]
-     public function load(ObjectManager $manager): void
+    // #[\Override]
+    public function load(ObjectManager $manager): void
     {
         // $this->loadClients($manager);
 
