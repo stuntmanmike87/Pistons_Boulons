@@ -4,5 +4,12 @@ parameters:
             message: '#Foreach overwrites \$event with its value variable.#'
             path:
                 src/Controller/MainController.php
+        # -
+        #     identifier: property.uninitializedReadonly
+        # -
+        #     identifier: property.onlyRead
+
+    doctrine:
+        allowNullablePropertyForRequiredField: true
 
     treatPhpDocTypesAsCertain: false
