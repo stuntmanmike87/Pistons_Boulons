@@ -19,6 +19,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     // final public const ROLE_USER = 'ROLE_ADMIN';
 
+    // final public const ROLE_USER = 'ROLE_COLLABORATEUR';
+
     // final public const ROLE_USER = 'ROLE_USER';
 
     #[ORM\Id]
@@ -38,9 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING)]
     private ?string $password = null;
 
-    #[ORM\JoinColumn(nullable: true)]
-    #[ORM\OneToMany(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private Collaborateur $collaborateur;
+    #[ORM\OneToOne(targetEntity: Collaborateur::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Collaborateur $collaborateur = null;
 
     public function getId(): ?int
     {

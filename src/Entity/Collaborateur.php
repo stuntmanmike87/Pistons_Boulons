@@ -33,12 +33,12 @@ class Collaborateur
     private ?string $prenom = null;
 
     #[Assert\NotBlank(message: 'La date de naissance ne peut pas être vide.')]
-    #[Assert\Range(min: '-1000 years', max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
+    #[Assert\Range(/* min: '-1000 years',  */max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[Assert\NotBlank(message: "La date d'entrée en entreprise ne peut pas être vide.")]
-    #[Assert\Range(min: '-50 years', max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
+    #[Assert\Range(/* min: '-50 years',  */max: 'now', maxMessage: "La date d'entrée en entreprise ne peut pas être supérieure à la date du jour.", minMessage: 'La date de première saisie est trop ancienne.')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateEntreeEntreprise = null;
 
@@ -67,8 +67,7 @@ class Collaborateur
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $isActif = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'collaborateur', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'collaborateur', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     /**

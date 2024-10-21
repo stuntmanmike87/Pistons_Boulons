@@ -46,8 +46,8 @@ final class CollaborateurType extends AbstractType
                 'placeholder' => 'Choisir un identifiant',
                 'required' => false,
                 'query_builder' => static fn ($er) => $er->createQueryBuilder('us')
-                    ->andWhere('us.admin is null')
-                    ->andWhere('us.collaborateur is null')
+                    // ->andWhere('us.admin is null')
+                    // ->andWhere('us.collaborateur is null')
                     ->orderBy('us.login', 'ASC'),
                 'choice_label' => 'userlog',
                 'empty_data' => null,

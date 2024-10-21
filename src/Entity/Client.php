@@ -31,7 +31,7 @@ class Client
     private ?string $prenom = null;
 
     #[Assert\NotBlank(message: 'La date de première saisie ne peut pas être vide.')]
-    #[Assert\Range(min: '-50 years', max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]
+    #[Assert\Range(/* min: '-50 years',  */max: 'now', maxMessage: 'La date de première saisie ne peut pas être supérieure à la date du jour.', minMessage: 'La date de première saisie est trop ancienne.')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datePremiereSaisie = null;
 
