@@ -1,5 +1,7 @@
 /* Icons */
 
+@import "mixins";
+
 .icon {
 	@include icon;
 	position: relative;

@@ -1,27 +1,26 @@
-@import "libs/vars";
-@import "libs/functions";
-@import "libs/mixins";
-@import "libs/vendor";
-@import "libs/breakpoints";
-@import "libs/html-grid";
-@import url("fontawesome-all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Oleo+Script:400|Open+Sans:300,300italic,600,600italic,800");
-
-@import "libs/reset"; 
- 
-@import "libs/error";
 @import "libs/banners";
 @import "libs/box";
+@import "libs/breakpoints";
 @import "libs/calendar";
-@import "libs/cookies"; 
+@import "libs/cookies";
+@import "libs/error";
 @import "libs/forms";
+@import "libs/functions";
 @import "libs/html-elements";
+@import "libs/html-grid";
 @import "libs/icons";
 @import "libs/images";
 @import "libs/lists";
+@import "libs/mixins";
+@import "libs/reset";
 @import "libs/sections";
 @import "libs/tables";
+@import "libs/vars";
+@import "libs/vendor";
 @import "libs/wrappers";
+@import url("fontawesome-all.min.css");
+@import url("https://fonts.googleapis.com/css?family=Oleo+Script:400|Open+Sans:300,300italic,600,600italic,800");
+
 /*
 	Verti by HTML5 UP
 	html5up.net | @ajlkn

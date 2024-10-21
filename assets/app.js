@@ -5,11 +5,11 @@
  * which should already be in your base.html.twig.
  */
 // import './styles/app.css';
-import './styles/main.css';
 import './styles/app.css';
+import './styles/app.scss';
 import './styles/fontawesome-all.min.css';
+import './styles/main.css';
 import './styles/style-min.css';
-import './sass/style.scss';
 
 import './js/breakpoints.min.js';
 import './js/browser.min.js';

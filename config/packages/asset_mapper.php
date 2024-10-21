@@ -10,6 +10,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'paths' => [
                 'assets/',
             ],
+            'excluded_patterns' => [
+                '*/assets/styles/_*.scss',
+                '*/assets/styles/**/_*.scss',
+            ],
         ],
     ]);
 };

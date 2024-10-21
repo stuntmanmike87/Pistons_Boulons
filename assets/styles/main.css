@@ -102,6 +102,6 @@ background:#eee;
 padding:4px;
 text-align:right;
 }
-.tb_edit td, .tb_edit th, .tb_new th, .tb_new td, tb_delete td, .tb_delete th, .tb_show th, .tb_show td{
+.tb_edit td, .tb_edit th, .tb_new th, .tb_new td, .tb_delete td, .tb_delete th, .tb_show th, .tb_show td{
 padding:4px;
 }
