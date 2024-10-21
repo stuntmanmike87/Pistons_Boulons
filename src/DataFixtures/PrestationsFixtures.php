@@ -77,6 +77,8 @@ final class PrestationsFixtures extends Fixture implements OrderedFixtureInterfa
             ->setTypePrestation('Révision')
             ->setIsActive(true);
 
+        $this->addReference('presta1', $presta1);
+
         $manager->persist($presta1);
         $manager->persist($presta2);
         $manager->persist($presta3);

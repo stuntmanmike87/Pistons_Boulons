@@ -27,6 +27,8 @@ final class ClientFixtures extends Fixture implements OrderedFixtureInterface
         ->setIsActif(true)
         ;
 
+        $this->addReference('client1', $client1);
+
         $manager->persist($client1);
 
         // Flush to DB
