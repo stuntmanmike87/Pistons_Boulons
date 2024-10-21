@@ -1,0 +1,6 @@
+# config/packages/weasyprint.yaml
+weasyprint:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/weasyprint
+        options:    []
